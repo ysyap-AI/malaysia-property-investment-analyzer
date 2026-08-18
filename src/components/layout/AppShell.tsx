@@ -1,11 +1,11 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, type LinkProps } from "@tanstack/react-router";
 import { Building2, LayoutDashboard, FilePlus2, Table2, SlidersHorizontal, Menu } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-const NAV = [
+const NAV: { to: LinkProps["to"]; label: string; icon: typeof LayoutDashboard }[] = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/analysis/new", label: "New Analysis", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
