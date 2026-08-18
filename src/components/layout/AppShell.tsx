@@ -6,19 +6,19 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/analysis/new", label: "New Analysis", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
   { to: "/settings", label: "Settings", icon: SlidersHorizontal },
-] as const;
+];
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <nav className="flex flex-col gap-1">
-      {NAV.map(({ to, label, icon: Icon, exact }) => {
-        const active = "exact" in { exact } && exact ? pathname === to : pathname.startsWith(to) && to !== "/";
+      {NAV.map(({ to, label, icon: Icon }) => {
+        const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
         return (
           <Link
             key={to}
