@@ -27,7 +27,7 @@ export function PropertiesTable({
       </CardHeader>
       <CardContent className="px-0">
         <div className="overflow-x-auto">
-          <Table>
+          <Table className="min-w-[900px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Property</TableHead>
@@ -43,9 +43,9 @@ export function PropertiesTable({
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell className="font-medium text-foreground">{row.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{row.location}</TableCell>
-                  <TableCell className="text-muted-foreground">{row.propertyType}</TableCell>
+                  <TableCell className="font-medium whitespace-nowrap text-foreground">{row.name}</TableCell>
+                  <TableCell className="whitespace-nowrap text-muted-foreground">{row.location}</TableCell>
+                  <TableCell className="whitespace-nowrap text-muted-foreground">{row.propertyType}</TableCell>
                   <TableCell className="text-right">{row.askingPrice}</TableCell>
                   <TableCell className="text-right text-muted-foreground">
                     {row.netYield ?? "—"}

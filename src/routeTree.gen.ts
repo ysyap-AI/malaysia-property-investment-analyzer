@@ -10,11 +10,42 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as AnalysisNewRouteImport } from './routes/analysis/new'
 import { Route as PropertiesIndexRouteImport } from './routes/properties/index'
+import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalysisNewRoute = AnalysisNewRouteImport.update({
+  id: '/analysis/new',
+  path: '/analysis/new',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
@@ -22,30 +53,84 @@ const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
   path: '/properties/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PropertiesIdRoute = PropertiesIdRouteImport.update({
+  id: '/properties/$id',
+  path: '/properties/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
+  '/analysis/new': typeof AnalysisNewRoute
+  '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
+  '/analysis/new': typeof AnalysisNewRoute
+  '/properties/$id': typeof PropertiesIdRoute
   '/properties': typeof PropertiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
+  '/analysis/new': typeof AnalysisNewRoute
+  '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/properties/'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/settings'
+    | '/signup'
+    | '/analysis/new'
+    | '/properties/$id'
+    | '/properties/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/properties'
-  id: '__root__' | '/' | '/properties/'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/settings'
+    | '/signup'
+    | '/analysis/new'
+    | '/properties/$id'
+    | '/properties'
+  id:
+    | '__root__'
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/settings'
+    | '/signup'
+    | '/analysis/new'
+    | '/properties/$id'
+    | '/properties/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  LoginRoute: typeof LoginRoute
+  SettingsRoute: typeof SettingsRoute
+  SignupRoute: typeof SignupRoute
+  AnalysisNewRoute: typeof AnalysisNewRoute
+  PropertiesIdRoute: typeof PropertiesIdRoute
   PropertiesIndexRoute: typeof PropertiesIndexRoute
 }
 
@@ -58,6 +143,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analysis/new': {
+      id: '/analysis/new'
+      path: '/analysis/new'
+      fullPath: '/analysis/new'
+      preLoaderRoute: typeof AnalysisNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/properties/': {
       id: '/properties/'
       path: '/properties'
@@ -65,11 +185,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/properties/$id': {
+      id: '/properties/$id'
+      path: '/properties/$id'
+      fullPath: '/properties/$id'
+      preLoaderRoute: typeof PropertiesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  LoginRoute: LoginRoute,
+  SettingsRoute: SettingsRoute,
+  SignupRoute: SignupRoute,
+  AnalysisNewRoute: AnalysisNewRoute,
+  PropertiesIdRoute: PropertiesIdRoute,
   PropertiesIndexRoute: PropertiesIndexRoute,
 }
 export const routeTree = rootRouteImport
