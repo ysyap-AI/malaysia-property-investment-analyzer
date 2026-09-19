@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { placeholderProperties } from "@/lib/placeholder-data";
 
-export const Route = createFileRoute("/properties/")({
+export const Route = createFileRoute("/_authenticated/properties/")({
   head: () => ({
     meta: [
       { title: "Properties — Malaysia Property Investment Analyzer" },
