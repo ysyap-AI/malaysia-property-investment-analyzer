@@ -14,13 +14,330 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      acquisition_costs: {
+        Row: {
+          agent_fee: number | null
+          created_at: string
+          furnishing_cost: number | null
+          id: string
+          legal_fees: number | null
+          other_costs: number | null
+          property_id: string
+          renovation_cost: number | null
+          stamp_duty: number | null
+          updated_at: string
+          valuation_fee: number | null
+        }
+        Insert: {
+          agent_fee?: number | null
+          created_at?: string
+          furnishing_cost?: number | null
+          id?: string
+          legal_fees?: number | null
+          other_costs?: number | null
+          property_id: string
+          renovation_cost?: number | null
+          stamp_duty?: number | null
+          updated_at?: string
+          valuation_fee?: number | null
+        }
+        Update: {
+          agent_fee?: number | null
+          created_at?: string
+          furnishing_cost?: number | null
+          id?: string
+          legal_fees?: number | null
+          other_costs?: number | null
+          property_id?: string
+          renovation_cost?: number | null
+          stamp_duty?: number | null
+          updated_at?: string
+          valuation_fee?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "acquisition_costs_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: true
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      financing: {
+        Row: {
+          created_at: string
+          deposit_amount: number | null
+          deposit_percent: number | null
+          id: string
+          interest_rate_percent: number | null
+          loan_amount: number | null
+          loan_tenure_years: number | null
+          loan_type: string | null
+          property_id: string
+          purchase_price: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          deposit_amount?: number | null
+          deposit_percent?: number | null
+          id?: string
+          interest_rate_percent?: number | null
+          loan_amount?: number | null
+          loan_tenure_years?: number | null
+          loan_type?: string | null
+          property_id: string
+          purchase_price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          deposit_amount?: number | null
+          deposit_percent?: number | null
+          id?: string
+          interest_rate_percent?: number | null
+          loan_amount?: number | null
+          loan_tenure_years?: number | null
+          loan_type?: string | null
+          property_id?: string
+          purchase_price?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "financing_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: true
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      investment_criteria: {
+        Row: {
+          config_version: string | null
+          created_at: string
+          id: string
+          max_break_even_occupancy_percent: number | null
+          min_cash_on_cash_percent: number | null
+          min_gross_yield_percent: number | null
+          min_net_yield_percent: number | null
+          updated_at: string
+          user_id: string
+          weight_cash_flow: number | null
+          weight_data_confidence: number | null
+          weight_risk: number | null
+          weight_yield: number | null
+        }
+        Insert: {
+          config_version?: string | null
+          created_at?: string
+          id?: string
+          max_break_even_occupancy_percent?: number | null
+          min_cash_on_cash_percent?: number | null
+          min_gross_yield_percent?: number | null
+          min_net_yield_percent?: number | null
+          updated_at?: string
+          user_id: string
+          weight_cash_flow?: number | null
+          weight_data_confidence?: number | null
+          weight_risk?: number | null
+          weight_yield?: number | null
+        }
+        Update: {
+          config_version?: string | null
+          created_at?: string
+          id?: string
+          max_break_even_occupancy_percent?: number | null
+          min_cash_on_cash_percent?: number | null
+          min_gross_yield_percent?: number | null
+          min_net_yield_percent?: number | null
+          updated_at?: string
+          user_id?: string
+          weight_cash_flow?: number | null
+          weight_data_confidence?: number | null
+          weight_risk?: number | null
+          weight_yield?: number | null
+        }
+        Relationships: []
+      }
+      operating_expenses: {
+        Row: {
+          assessment_annual: number | null
+          created_at: string
+          id: string
+          insurance_annual: number | null
+          maintenance_monthly: number | null
+          management_fee_monthly: number | null
+          other_monthly: number | null
+          property_id: string
+          quit_rent_annual: number | null
+          sinking_fund_monthly: number | null
+          updated_at: string
+          utilities_monthly: number | null
+        }
+        Insert: {
+          assessment_annual?: number | null
+          created_at?: string
+          id?: string
+          insurance_annual?: number | null
+          maintenance_monthly?: number | null
+          management_fee_monthly?: number | null
+          other_monthly?: number | null
+          property_id: string
+          quit_rent_annual?: number | null
+          sinking_fund_monthly?: number | null
+          updated_at?: string
+          utilities_monthly?: number | null
+        }
+        Update: {
+          assessment_annual?: number | null
+          created_at?: string
+          id?: string
+          insurance_annual?: number | null
+          maintenance_monthly?: number | null
+          management_fee_monthly?: number | null
+          other_monthly?: number | null
+          property_id?: string
+          quit_rent_annual?: number | null
+          sinking_fund_monthly?: number | null
+          updated_at?: string
+          utilities_monthly?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operating_expenses_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: true
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          contact_email: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string | null
+          asking_price: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          built_up_sqft: number | null
+          created_at: string
+          id: string
+          listing_url: string | null
+          name: string
+          notes: string | null
+          property_type: string | null
+          state: string | null
+          tenure: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          asking_price?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          built_up_sqft?: number | null
+          created_at?: string
+          id?: string
+          listing_url?: string | null
+          name: string
+          notes?: string | null
+          property_type?: string | null
+          state?: string | null
+          tenure?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          asking_price?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          built_up_sqft?: number | null
+          created_at?: string
+          id?: string
+          listing_url?: string | null
+          name?: string
+          notes?: string | null
+          property_type?: string | null
+          state?: string | null
+          tenure?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scenario_configs: {
+        Row: {
+          config_version: string | null
+          created_at: string
+          expense_adjustment_percent: number | null
+          id: string
+          interest_rate_adjustment_percent: number | null
+          rent_adjustment_percent: number | null
+          scenario_name: string
+          updated_at: string
+          user_id: string
+          vacancy_rate_percent: number | null
+        }
+        Insert: {
+          config_version?: string | null
+          created_at?: string
+          expense_adjustment_percent?: number | null
+          id?: string
+          interest_rate_adjustment_percent?: number | null
+          rent_adjustment_percent?: number | null
+          scenario_name: string
+          updated_at?: string
+          user_id: string
+          vacancy_rate_percent?: number | null
+        }
+        Update: {
+          config_version?: string | null
+          created_at?: string
+          expense_adjustment_percent?: number | null
+          id?: string
+          interest_rate_adjustment_percent?: number | null
+          rent_adjustment_percent?: number | null
+          scenario_name?: string
+          updated_at?: string
+          user_id?: string
+          vacancy_rate_percent?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      owns_property: { Args: { _property_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
