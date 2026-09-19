@@ -9,20 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as AnalysisNewRouteImport } from './routes/analysis/new'
-import { Route as PropertiesIndexRouteImport } from './routes/properties/index'
-import { Route as PropertiesIdRouteImport } from './routes/properties/$id'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedAnalysisNewRouteImport } from './routes/_authenticated/analysis/new'
+import { Route as AuthenticatedPropertiesIndexRouteImport } from './routes/_authenticated/properties/index'
+import { Route as AuthenticatedPropertiesIdRouteImport } from './routes/_authenticated/properties/$id'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -33,116 +27,105 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AnalysisNewRoute = AnalysisNewRouteImport.update({
-  id: '/analysis/new',
-  path: '/analysis/new',
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/_authenticated/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PropertiesIndexRoute = PropertiesIndexRouteImport.update({
-  id: '/properties/',
-  path: '/properties/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PropertiesIdRoute = PropertiesIdRouteImport.update({
-  id: '/properties/$id',
-  path: '/properties/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedAnalysisNewRoute =
+  AuthenticatedAnalysisNewRouteImport.update({
+    id: '/_authenticated/analysis/new',
+    path: '/analysis/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedPropertiesIndexRoute =
+  AuthenticatedPropertiesIndexRouteImport.update({
+    id: '/_authenticated/properties/',
+    path: '/properties/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedPropertiesIdRoute =
+  AuthenticatedPropertiesIdRouteImport.update({
+    id: '/_authenticated/properties/$id',
+    path: '/properties/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/analysis/new': typeof AnalysisNewRoute
-  '/properties/$id': typeof PropertiesIdRoute
-  '/properties/': typeof PropertiesIndexRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/analysis/new': typeof AuthenticatedAnalysisNewRoute
+  '/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/properties/': typeof AuthenticatedPropertiesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/analysis/new': typeof AnalysisNewRoute
-  '/properties/$id': typeof PropertiesIdRoute
-  '/properties': typeof PropertiesIndexRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/analysis/new': typeof AuthenticatedAnalysisNewRoute
+  '/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/properties': typeof AuthenticatedPropertiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/analysis/new': typeof AnalysisNewRoute
-  '/properties/$id': typeof PropertiesIdRoute
-  '/properties/': typeof PropertiesIndexRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/analysis/new': typeof AuthenticatedAnalysisNewRoute
+  '/_authenticated/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/_authenticated/properties/': typeof AuthenticatedPropertiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/forgot-password'
     | '/login'
-    | '/settings'
     | '/signup'
+    | '/settings'
     | '/analysis/new'
     | '/properties/$id'
     | '/properties/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/forgot-password'
     | '/login'
-    | '/settings'
     | '/signup'
+    | '/settings'
     | '/analysis/new'
     | '/properties/$id'
     | '/properties'
   id:
     | '__root__'
-    | '/'
     | '/forgot-password'
     | '/login'
-    | '/settings'
     | '/signup'
-    | '/analysis/new'
-    | '/properties/$id'
-    | '/properties/'
+    | '/_authenticated/settings'
+    | '/_authenticated/analysis/new'
+    | '/_authenticated/properties/$id'
+    | '/_authenticated/properties/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
-  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
-  AnalysisNewRoute: typeof AnalysisNewRoute
-  PropertiesIdRoute: typeof PropertiesIdRoute
-  PropertiesIndexRoute: typeof PropertiesIndexRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedAnalysisNewRoute: typeof AuthenticatedAnalysisNewRoute
+  AuthenticatedPropertiesIdRoute: typeof AuthenticatedPropertiesIdRoute
+  AuthenticatedPropertiesIndexRoute: typeof AuthenticatedPropertiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -157,13 +140,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -171,39 +147,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/analysis/new': {
-      id: '/analysis/new'
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/analysis/new': {
+      id: '/_authenticated/analysis/new'
       path: '/analysis/new'
       fullPath: '/analysis/new'
-      preLoaderRoute: typeof AnalysisNewRouteImport
+      preLoaderRoute: typeof AuthenticatedAnalysisNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/properties/': {
-      id: '/properties/'
+    '/_authenticated/properties/': {
+      id: '/_authenticated/properties/'
       path: '/properties'
       fullPath: '/properties/'
-      preLoaderRoute: typeof PropertiesIndexRouteImport
+      preLoaderRoute: typeof AuthenticatedPropertiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/properties/$id': {
-      id: '/properties/$id'
+    '/_authenticated/properties/$id': {
+      id: '/_authenticated/properties/$id'
       path: '/properties/$id'
       fullPath: '/properties/$id'
-      preLoaderRoute: typeof PropertiesIdRouteImport
+      preLoaderRoute: typeof AuthenticatedPropertiesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
-  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
-  AnalysisNewRoute: AnalysisNewRoute,
-  PropertiesIdRoute: PropertiesIdRoute,
-  PropertiesIndexRoute: PropertiesIndexRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedAnalysisNewRoute: AuthenticatedAnalysisNewRoute,
+  AuthenticatedPropertiesIdRoute: AuthenticatedPropertiesIdRoute,
+  AuthenticatedPropertiesIndexRoute: AuthenticatedPropertiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

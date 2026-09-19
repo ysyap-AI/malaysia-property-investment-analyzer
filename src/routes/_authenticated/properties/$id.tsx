@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { findPlaceholderProperty } from "@/lib/placeholder-data";
 
-export const Route = createFileRoute("/properties/$id")({
+export const Route = createFileRoute("/_authenticated/properties/$id")({
   head: () => ({
     meta: [
       { title: "Property Details — Malaysia Property Investment Analyzer" },

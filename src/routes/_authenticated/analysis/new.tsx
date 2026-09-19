@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
-export const Route = createFileRoute("/analysis/new")({
+export const Route = createFileRoute("/_authenticated/analysis/new")({
   head: () => ({
     meta: [
       { title: "New Property Analysis — Malaysia Property Investment Analyzer" },
