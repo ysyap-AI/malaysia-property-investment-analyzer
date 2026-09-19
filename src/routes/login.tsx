@@ -1,9 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
 
 import { AuthLayout } from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -24,10 +27,28 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setBusy(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Signed in");
+    navigate({ to: "/dashboard" });
+  }
+
   return (
     <AuthLayout
       title="Sign in"
-      description="Accounts are not connected yet — this screen is the shell only."
+      description="Use the email address and password for your account."
       footer={
         <div className="flex flex-col gap-1">
           <span>
@@ -42,25 +63,32 @@ function LoginPage() {
         </div>
       }
     >
-      <form
-        className="space-y-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="you@example.com" autoComplete="email" />
+          <Input
+            id="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" autoComplete="current-password" />
+          <Input
+            id="password"
+            type="password"
+            required
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <Button type="submit" className="w-full" disabled>
-          Sign in (not enabled yet)
-        </Button>
-        <Button asChild variant="outline" className="w-full">
-          <Link to="/">Continue to dashboard preview</Link>
+        <Button type="submit" className="w-full" disabled={busy}>
+          {busy ? "Signing in…" : "Sign in"}
         </Button>
       </form>
     </AuthLayout>
