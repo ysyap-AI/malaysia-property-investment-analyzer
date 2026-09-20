@@ -130,6 +130,14 @@ export function AppShell({
         {open ? (
           <div className="border-b border-border bg-sidebar px-4 py-3 lg:hidden">
             <NavLinks onNavigate={() => setOpen(false)} />
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3 w-full justify-start"
+              onClick={handleSignOut}
+            >
+              <LogOut className="size-4" /> Sign out
+            </Button>
           </div>
         ) : null}
 
