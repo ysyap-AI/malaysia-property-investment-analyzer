@@ -29,22 +29,25 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function DashboardPage() {
+  const { data } = useQuery({ queryKey: propertyKeys.all, queryFn: listProperties });
+  const properties = data ?? [];
+
   return (
     <AppShell
       title="Dashboard"
       description="Portfolio overview. Calculation modules are not implemented yet, so figures below are placeholders."
       actions={
         <Button asChild>
-          <Link to="/analysis/new">
-            <FilePlus2 className="size-4" /> New Analysis
+          <Link to="/properties/new">
+            <FilePlus2 className="size-4" /> New Property
           </Link>
         </Button>
       }
     >
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard
-          label="Properties Analyzed"
-          value={String(placeholderProperties.length)}
+          label="Properties Saved"
+          value={String(properties.length)}
           status="user-entered"
           icon={<Building2 className="size-4" />}
         />
