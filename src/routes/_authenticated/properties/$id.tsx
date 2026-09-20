@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import { PlaceholderSection } from "@/components/common/PlaceholderSection";
 import { StatusBadge } from "@/components/common/StatusBadge";
+import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPanel";
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
 import {
   AnalysisStatusBadge,
@@ -188,11 +189,11 @@ function PropertyDetailsPage() {
               </Block>
             </TabsContent>
 
-            <TabsContent value="financials" className="mt-4">
+            <TabsContent value="financials" className="mt-4 space-y-6">
+              <AcquisitionCostsPanel propertyId={id} />
               <PlaceholderSection
-                title="Financial Analysis"
+                title="Still to come"
                 items={[
-                  "Acquisition cost breakdown",
                   "Loan instalment schedule",
                   "Net operating income",
                   "Cash-on-cash return",
