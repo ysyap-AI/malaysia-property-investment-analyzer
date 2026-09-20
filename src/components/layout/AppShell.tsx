@@ -89,7 +89,20 @@ export function AppShell({
           </span>
         </Link>
         <NavLinks />
-        <p className="mt-auto px-2 text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+        <div className="mt-auto space-y-3 px-2">
+          {user?.email ? (
+            <p className="truncate text-xs text-sidebar-foreground/70">{user.email}</p>
+          ) : null}
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full justify-start"
+            onClick={handleSignOut}
+          >
+            <LogOut className="size-4" /> Sign out
+          </Button>
+          <p className="text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
