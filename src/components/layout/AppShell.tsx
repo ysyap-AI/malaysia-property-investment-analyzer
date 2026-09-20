@@ -1,15 +1,28 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { Building2, LayoutDashboard, FilePlus2, Table2, SlidersHorizontal, Menu } from "lucide-react";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  Building2,
+  LayoutDashboard,
+  FilePlus2,
+  Table2,
+  SlidersHorizontal,
+  Menu,
+  UserRound,
+  LogOut,
+} from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/analysis/new", label: "New Analysis", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
   { to: "/settings", label: "Settings", icon: SlidersHorizontal },
+  { to: "/profile", label: "Profile", icon: UserRound },
 ] as const;
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -18,7 +31,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="flex flex-col gap-1">
       {NAV.map(({ to, label, icon: Icon }) => {
-        const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
+        const active = pathname.startsWith(to);
         return (
           <Link
             key={to}
