@@ -30,7 +30,7 @@ export const Route = createFileRoute("/_authenticated/properties/$id")({
 });
 
 function PropertyDetailsPage() {
-  const { id } = useParams({ from: "/properties/$id" });
+  const { id } = useParams({ from: "/_authenticated/properties/$id" });
   const property = findPlaceholderProperty(id);
 
   return (

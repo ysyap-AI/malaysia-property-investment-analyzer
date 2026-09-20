@@ -1,15 +1,28 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { Building2, LayoutDashboard, FilePlus2, Table2, SlidersHorizontal, Menu } from "lucide-react";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  Building2,
+  LayoutDashboard,
+  FilePlus2,
+  Table2,
+  SlidersHorizontal,
+  Menu,
+  UserRound,
+  LogOut,
+} from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/analysis/new", label: "New Analysis", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
   { to: "/settings", label: "Settings", icon: SlidersHorizontal },
+  { to: "/profile", label: "Profile", icon: UserRound },
 ] as const;
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
@@ -18,7 +31,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="flex flex-col gap-1">
       {NAV.map(({ to, label, icon: Icon }) => {
-        const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
+        const active = pathname.startsWith(to);
         return (
           <Link
             key={to}
@@ -52,11 +65,21 @@ export function AppShell({
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/login", replace: true });
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar px-4 py-6 lg:flex">
-        <Link to="/" className="mb-8 flex items-center gap-2 px-2">
+        <Link to="/dashboard" className="mb-8 flex items-center gap-2 px-2">
           <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Building2 className="size-5" />
           </span>
@@ -66,7 +89,20 @@ export function AppShell({
           </span>
         </Link>
         <NavLinks />
-        <p className="mt-auto px-2 text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+        <div className="mt-auto space-y-3 px-2">
+          {user?.email ? (
+            <p className="truncate text-xs text-sidebar-foreground/70">{user.email}</p>
+          ) : null}
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full justify-start"
+            onClick={handleSignOut}
+          >
+            <LogOut className="size-4" /> Sign out
+          </Button>
+          <p className="text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+        </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -94,6 +130,14 @@ export function AppShell({
         {open ? (
           <div className="border-b border-border bg-sidebar px-4 py-3 lg:hidden">
             <NavLinks onNavigate={() => setOpen(false)} />
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3 w-full justify-start"
+              onClick={handleSignOut}
+            >
+              <LogOut className="size-4" /> Sign out
+            </Button>
           </div>
         ) : null}
 
