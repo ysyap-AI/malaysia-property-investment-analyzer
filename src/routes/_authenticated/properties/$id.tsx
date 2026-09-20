@@ -9,6 +9,7 @@ import { PlaceholderSection } from "@/components/common/PlaceholderSection";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPanel";
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
+import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
 import {
   AnalysisStatusBadge,
   PropertyStatusBadge,
@@ -191,6 +192,7 @@ function PropertyDetailsPage() {
 
             <TabsContent value="financials" className="mt-4 space-y-6">
               <AcquisitionCostsPanel propertyId={id} />
+              <OperatingExpensesPanel propertyId={id} />
               <PlaceholderSection
                 title="Still to come"
                 items={[
