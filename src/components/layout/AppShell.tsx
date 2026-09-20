@@ -27,11 +27,14 @@ const NAV = [
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const activePath = NAV.filter(
+    ({ to }) => pathname === to || pathname.startsWith(`${to}/`),
+  ).sort((a, b) => b.to.length - a.to.length)[0]?.to;
 
   return (
     <nav className="flex flex-col gap-1">
       {NAV.map(({ to, label, icon: Icon }) => {
-        const active = pathname.startsWith(to);
+        const active = activePath === to;
         return (
           <Link
             key={to}
