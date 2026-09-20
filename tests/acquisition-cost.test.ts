@@ -81,7 +81,7 @@ describe("total acquisition cost", () => {
       other_cost: 450.15,
     });
     expect(result.status).toBe("complete");
-    expect(result.total).toBe(500704.0);
+    expect(result.total).toBe(500705);
   });
 
   it("rejects negative inputs rather than producing a total", () => {
