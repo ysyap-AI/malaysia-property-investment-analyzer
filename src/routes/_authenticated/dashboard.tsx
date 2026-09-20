@@ -72,7 +72,7 @@ function DashboardPage() {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <PropertiesTable rows={placeholderProperties.slice(0, 4)} caption="Recent analyses" />
+          <PropertiesTable rows={properties.slice(0, 5)} caption="Recent properties" />
         </div>
         <PlaceholderSection
           title="Portfolio Insights"
