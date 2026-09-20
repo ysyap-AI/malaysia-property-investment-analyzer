@@ -21,6 +21,8 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAnalysisNewRouteImport } from './routes/_authenticated/analysis/new'
 import { Route as AuthenticatedPropertiesIndexRouteImport } from './routes/_authenticated/properties/index'
 import { Route as AuthenticatedPropertiesIdRouteImport } from './routes/_authenticated/properties/$id'
+import { Route as AuthenticatedPropertiesNewRouteImport } from './routes/_authenticated/properties/new'
+import { Route as AuthenticatedPropertiesIdEditRouteImport } from './routes/_authenticated/properties/$id.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -84,6 +86,18 @@ const AuthenticatedPropertiesIdRoute =
     path: '/properties/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPropertiesNewRoute =
+  AuthenticatedPropertiesNewRouteImport.update({
+    id: '/properties/new',
+    path: '/properties/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPropertiesIdEditRoute =
+  AuthenticatedPropertiesIdEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => AuthenticatedPropertiesIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,8 +109,10 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/analysis/new': typeof AuthenticatedAnalysisNewRoute
-  '/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/properties/$id': typeof AuthenticatedPropertiesIdRouteWithChildren
+  '/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/properties/': typeof AuthenticatedPropertiesIndexRoute
+  '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -108,8 +124,10 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/analysis/new': typeof AuthenticatedAnalysisNewRoute
-  '/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/properties/$id': typeof AuthenticatedPropertiesIdRouteWithChildren
+  '/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/properties': typeof AuthenticatedPropertiesIndexRoute
+  '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -123,8 +141,10 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/analysis/new': typeof AuthenticatedAnalysisNewRoute
-  '/_authenticated/properties/$id': typeof AuthenticatedPropertiesIdRoute
+  '/_authenticated/properties/$id': typeof AuthenticatedPropertiesIdRouteWithChildren
+  '/_authenticated/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/_authenticated/properties/': typeof AuthenticatedPropertiesIndexRoute
+  '/_authenticated/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,7 +159,9 @@ export interface FileRouteTypes {
     | '/settings'
     | '/analysis/new'
     | '/properties/$id'
+    | '/properties/new'
     | '/properties/'
+    | '/properties/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -152,7 +174,9 @@ export interface FileRouteTypes {
     | '/settings'
     | '/analysis/new'
     | '/properties/$id'
+    | '/properties/new'
     | '/properties'
+    | '/properties/$id/edit'
   id:
     | '__root__'
     | '/'
@@ -166,7 +190,9 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/analysis/new'
     | '/_authenticated/properties/$id'
+    | '/_authenticated/properties/new'
     | '/_authenticated/properties/'
+    | '/_authenticated/properties/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -264,15 +290,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPropertiesIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/properties/new': {
+      id: '/_authenticated/properties/new'
+      path: '/properties/new'
+      fullPath: '/properties/new'
+      preLoaderRoute: typeof AuthenticatedPropertiesNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/properties/$id/edit': {
+      id: '/_authenticated/properties/$id/edit'
+      path: '/edit'
+      fullPath: '/properties/$id/edit'
+      preLoaderRoute: typeof AuthenticatedPropertiesIdEditRouteImport
+      parentRoute: typeof AuthenticatedPropertiesIdRoute
+    }
   }
 }
+
+interface AuthenticatedPropertiesIdRouteChildren {
+  AuthenticatedPropertiesIdEditRoute: typeof AuthenticatedPropertiesIdEditRoute
+}
+
+const AuthenticatedPropertiesIdRouteChildren: AuthenticatedPropertiesIdRouteChildren =
+  {
+    AuthenticatedPropertiesIdEditRoute: AuthenticatedPropertiesIdEditRoute,
+  }
+
+const AuthenticatedPropertiesIdRouteWithChildren =
+  AuthenticatedPropertiesIdRoute._addFileChildren(
+    AuthenticatedPropertiesIdRouteChildren,
+  )
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedAnalysisNewRoute: typeof AuthenticatedAnalysisNewRoute
-  AuthenticatedPropertiesIdRoute: typeof AuthenticatedPropertiesIdRoute
+  AuthenticatedPropertiesIdRoute: typeof AuthenticatedPropertiesIdRouteWithChildren
+  AuthenticatedPropertiesNewRoute: typeof AuthenticatedPropertiesNewRoute
   AuthenticatedPropertiesIndexRoute: typeof AuthenticatedPropertiesIndexRoute
 }
 
@@ -281,7 +336,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedAnalysisNewRoute: AuthenticatedAnalysisNewRoute,
-  AuthenticatedPropertiesIdRoute: AuthenticatedPropertiesIdRoute,
+  AuthenticatedPropertiesIdRoute: AuthenticatedPropertiesIdRouteWithChildren,
+  AuthenticatedPropertiesNewRoute: AuthenticatedPropertiesNewRoute,
   AuthenticatedPropertiesIndexRoute: AuthenticatedPropertiesIndexRoute,
 }
 
