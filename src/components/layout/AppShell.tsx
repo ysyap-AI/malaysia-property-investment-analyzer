@@ -19,7 +19,7 @@ import { supabase } from "@/integrations/supabase/external-client";
 
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/analysis/new", label: "New Analysis", icon: FilePlus2 },
+  { to: "/properties/new", label: "New Analysis", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
   { to: "/settings", label: "Settings", icon: SlidersHorizontal },
   { to: "/profile", label: "Profile", icon: UserRound },

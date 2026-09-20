@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Building2, FilePlus2, ShieldAlert, Wallet } from "lucide-react";
 
 import { AppShell } from "@/components/layout/AppShell";
@@ -6,7 +7,7 @@ import { MetricCard } from "@/components/common/MetricCard";
 import { PlaceholderSection } from "@/components/common/PlaceholderSection";
 import { PropertiesTable } from "@/components/property/PropertiesTable";
 import { Button } from "@/components/ui/button";
-import { placeholderProperties } from "@/lib/placeholder-data";
+import { listProperties, propertyKeys } from "@/lib/property/property-api";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -28,22 +29,25 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function DashboardPage() {
+  const { data } = useQuery({ queryKey: propertyKeys.all, queryFn: listProperties });
+  const properties = data ?? [];
+
   return (
     <AppShell
       title="Dashboard"
       description="Portfolio overview. Calculation modules are not implemented yet, so figures below are placeholders."
       actions={
         <Button asChild>
-          <Link to="/analysis/new">
-            <FilePlus2 className="size-4" /> New Analysis
+          <Link to="/properties/new">
+            <FilePlus2 className="size-4" /> New Property
           </Link>
         </Button>
       }
     >
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard
-          label="Properties Analyzed"
-          value={String(placeholderProperties.length)}
+          label="Properties Saved"
+          value={String(properties.length)}
           status="user-entered"
           icon={<Building2 className="size-4" />}
         />
@@ -68,7 +72,7 @@ function DashboardPage() {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <PropertiesTable rows={placeholderProperties.slice(0, 4)} caption="Recent analyses" />
+          <PropertiesTable rows={properties.slice(0, 5)} caption="Recent properties" />
         </div>
         <PlaceholderSection
           title="Portfolio Insights"
