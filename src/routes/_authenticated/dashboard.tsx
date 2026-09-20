@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Building2, FilePlus2, ShieldAlert, Wallet } from "lucide-react";
 
 import { AppShell } from "@/components/layout/AppShell";
@@ -6,7 +7,7 @@ import { MetricCard } from "@/components/common/MetricCard";
 import { PlaceholderSection } from "@/components/common/PlaceholderSection";
 import { PropertiesTable } from "@/components/property/PropertiesTable";
 import { Button } from "@/components/ui/button";
-import { placeholderProperties } from "@/lib/placeholder-data";
+import { listProperties, propertyKeys } from "@/lib/property/property-api";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
