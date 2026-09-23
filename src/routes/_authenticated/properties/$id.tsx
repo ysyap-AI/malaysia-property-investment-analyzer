@@ -11,6 +11,8 @@ import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPan
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
 import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
 import { FinancingPanel } from "@/components/property/FinancingPanel";
+import { RedFlagsPanel } from "@/components/property/RedFlagsPanel";
+import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
 import { ScoresPanel } from "@/components/property/ScoresPanel";
 import { ScenariosPanel } from "@/components/property/ScenariosPanel";
 import {
@@ -213,14 +215,7 @@ function PropertyDetailsPage() {
             </TabsContent>
 
             <TabsContent value="risk" className="mt-4">
-              <PlaceholderSection
-                title="Risk Assessment"
-                items={[
-                  "Negative cash flow flag",
-                  "Break-even occupancy flag",
-                  "Over-leverage flag",
-                ]}
-              />
+              <RiskTab propertyId={id} />
             </TabsContent>
           </Tabs>
         </>
@@ -255,4 +250,9 @@ function Row({ label, value }: { label: string; value: string }) {
       <span className="text-right font-medium text-foreground break-words">{value}</span>
     </div>
   );
+}
+
+function RiskTab({ propertyId }: { propertyId: string }) {
+  const { redFlags, isLoading } = usePropertyAnalysis(propertyId);
+  return <RedFlagsPanel report={redFlags} isLoading={isLoading} />;
 }
