@@ -1,0 +1,250 @@
+diff --git a/src/lib/finance/financing.ts b/src/lib/finance/financing.ts
+index 2a82856..255d60f 100644
+--- a/src/lib/finance/financing.ts
++++ b/src/lib/finance/financing.ts
+@@ -3,7 +3,10 @@
+ // Unknown values arrive as `null` and are NEVER treated as zero.
+ 
+ function roundMoney(value: number): number {
+-  return Math.round((value + Number.EPSILON) * 100) / 100;
++  // Shift the decimal exponent before rounding half up to sen. Multiplying
++  // directly by 100 can put a decimal tie (e.g. 10.075) below the halfway point.
++  const [coefficient, exponent = "0"] = value.toString().split("e");
++  return Math.round(Number(`${coefficient}e${Number(exponent) + 2}`)) / 100;
+ }
+ 
+ function isKnown(v: number | null | undefined): v is number {
+@@ -39,7 +42,7 @@ export function calculateDownPayment(
+ /**
+  * Standard amortising-loan instalment:
+  *   M = P × r / (1 − (1 + r)^−n)
+- * where r = annual rate / 12 and n = tenure in years × 12.
++ * where r = annual percentage / 100 / 12 and n = tenure in years × 12.
+  * Zero interest -> P / n. Zero loan -> 0. Any unknown input -> null.
+  */
+ export function calculateMonthlyInstalment(
+@@ -55,10 +58,13 @@ export function calculateMonthlyInstalment(
+   const n = loanTenureYears * 12;
+   const r = (percentToDecimal(annualInterestRatePercent) as number) / 12;
+   if (r === 0) return roundMoney(loanAmount / n);
+-  return roundMoney((loanAmount * r) / (1 - Math.pow(1 + r, -n)));
++  // Algebraically identical to 1 - (1 + r)^(-n), but retains precision when
++  // r is near zero instead of subtracting two nearly equal floating values.
++  const denominator = -Math.expm1(-n * Math.log1p(r));
++  return roundMoney((loanAmount * r) / denominator);
+ }
+ 
+-/** Annual Debt Service = instalment in use × 12. */
++/** Annual Debt Service = sen-rounded instalment in use × 12. */
+ export function calculateAnnualDebtService(
+   monthlyInstalment: number | null | undefined,
+ ): number | null {
+@@ -84,7 +90,7 @@ export function selectInstalment(args: {
+ }): InstalmentSelection {
+   if (args.useUserProvided) {
+     return isKnown(args.userProvided) && args.userProvided >= 0
+-      ? { amount: args.userProvided, source: "user-provided" }
++      ? { amount: roundMoney(args.userProvided), source: "user-provided" }
+       : { amount: null, source: "none" };
+   }
+   return isKnown(args.calculated)
+diff --git a/tests/financing-audit.test.ts b/tests/financing-audit.test.ts
+new file mode 100644
+index 0000000..477d2f4
+--- /dev/null
++++ b/tests/financing-audit.test.ts
+@@ -0,0 +1,194 @@
++import { describe, expect, it } from "vitest";
++
++import {
++  calculateAnnualDebtService,
++  calculateFinancing,
++  calculateMonthlyInstalment,
++  percentToDecimal,
++  type FinancingInputs,
++} from "@/lib/finance/financing";
++import {
++  buildFinancingRow,
++  emptyFinancingForm,
++  financingRecordToForm,
++  financingSchema,
++} from "@/lib/property/financing-fields";
++
++const base: FinancingInputs = {
++  purchase_price: 500000,
++  loan_to_value_percent: null,
++  loan_amount: 450000,
++  annual_interest_rate_percent: 4,
++  loan_tenure_years: 35,
++  user_provided_monthly_instalment: null,
++  use_user_provided_instalment: false,
++};
++
++// Expected amounts were independently obtained with Python Decimal (60 digits)
++// from P / sum((1 + annualPercent / 100 / 12)^(-k), k=1..years*12).
++// Round half up to sen; annual debt service is 12 rounded monthly payments.
++describe("independent financing mathematical audit", () => {
++  it("case 1: RM450,000, 4%, 35 years (420 payments)", () => {
++    expect(percentToDecimal(4)).toBe(0.04);
++    const result = calculateFinancing(base);
++    expect(result.calculatedMonthlyInstalment).toBe(1992.49);
++    expect(result.instalmentInUse).toEqual({ amount: 1992.49, source: "calculated" });
++    expect(result.annualDebtService).toBe(23909.88);
++    expect(result.missingFields).toEqual([]);
++    expect(
++      calculateFinancing({ ...base, loan_to_value_percent: 90, loan_amount: null }),
++    ).toMatchObject({ loanAmount: 450000, calculatedMonthlyInstalment: 1992.49 });
++  });
++
++  it("case 2: RM400,000, 0%, 20 years (240 payments)", () => {
++    const result = calculateFinancing({
++      ...base,
++      loan_amount: 400000,
++      annual_interest_rate_percent: 0,
++      loan_tenure_years: 20,
++    });
++    expect(result.calculatedMonthlyInstalment).toBe(1666.67);
++    expect(result.annualDebtService).toBe(20000.04);
++    expect(result.missingFields).toEqual([]);
++  });
++
++  it.each(["annual_interest_rate_percent", "loan_tenure_years"] as const)(
++    "cases 3/4: missing %s remains unavailable",
++    (field) => {
++      const result = calculateFinancing({ ...base, [field]: null });
++      expect(result.calculatedMonthlyInstalment).toBeNull();
++      expect(result.instalmentInUse).toEqual({ amount: null, source: "none" });
++      expect(result.annualDebtService).toBeNull();
++      expect(result.missingFields).toContain(field);
++    },
++  );
++
++  it("case 5: RM2,200 bank override can be enabled and disabled without replacing the calculation", () => {
++    const input = Object.freeze({ ...base, user_provided_monthly_instalment: 2200 });
++    const off = calculateFinancing(input);
++    const on = calculateFinancing({ ...input, use_user_provided_instalment: true });
++    expect(off.instalmentInUse).toEqual({ amount: 1992.49, source: "calculated" });
++    expect(off.annualDebtService).toBe(23909.88);
++    expect(on.instalmentInUse).toEqual({ amount: 2200, source: "user-provided" });
++    expect(on.annualDebtService).toBe(26400);
++    expect(on.calculatedMonthlyInstalment).toBe(1992.49);
++    expect(calculateFinancing(input)).toEqual(off);
++  });
++
++  it("blank form fields remain missing while explicit zero interest survives parsing", () => {
++    const parsed = financingSchema.parse(emptyFinancingForm);
++    expect(parsed.annual_interest_rate_percent).toBeNull();
++    expect(parsed.loan_tenure_years).toBeNull();
++    expect(
++      financingSchema.parse({ ...emptyFinancingForm, annual_interest_rate_percent: "0" })
++        .annual_interest_rate_percent,
++    ).toBe(0);
++  });
++
++  it("bank and calculated instalments stay separate in the saved row and after reload", () => {
++    const input = financingSchema.parse({
++      ...emptyFinancingForm,
++      loan_amount: "450000",
++      annual_interest_rate_percent: "4",
++      loan_tenure_years: "35",
++      user_provided_monthly_instalment: "2200",
++      use_user_provided_instalment: true,
++    });
++    const row = buildFinancingRow(input, 500000);
++    expect(row.calculated_monthly_instalment).toBe(1992.49);
++    expect(row.user_provided_monthly_instalment).toBe(2200);
++    const reloaded = financingSchema.parse(financingRecordToForm(row));
++    expect(buildFinancingRow(reloaded, 500000)).toEqual(row);
++    expect(calculateFinancing({ ...reloaded, purchase_price: 500000 }).annualDebtService).toBe(
++      26400,
++    );
++  });
++
++  it.each(["annual_interest_rate_percent", "loan_tenure_years"] as const)(
++    "a valid enabled bank quote works with missing %s without inventing a calculation",
++    (field) => {
++      const result = calculateFinancing({
++        ...base,
++        [field]: null,
++        user_provided_monthly_instalment: 2200,
++        use_user_provided_instalment: true,
++      });
++      expect(result.calculatedMonthlyInstalment).toBeNull();
++      expect(result.instalmentInUse).toEqual({ amount: 2200, source: "user-provided" });
++      expect(result.annualDebtService).toBe(26400);
++      expect(result.missingFields).toContain(field);
++    },
++  );
++
++  it.each([null, -1, Number.NaN, Number.POSITIVE_INFINITY])(
++    "an enabled unavailable/invalid bank quote (%s) does not silently fall back",
++    (quote) => {
++      const result = calculateFinancing({
++        ...base,
++        user_provided_monthly_instalment: quote,
++        use_user_provided_instalment: true,
++      });
++      expect(result.instalmentInUse).toEqual({ amount: null, source: "none" });
++      expect(result.annualDebtService).toBeNull();
++      expect(result.calculatedMonthlyInstalment).toBe(1992.49);
++    },
++  );
++
++  it("an explicit zero bank quote is distinct from missing", () => {
++    const result = calculateFinancing({
++      ...base,
++      user_provided_monthly_instalment: 0,
++      use_user_provided_instalment: true,
++    });
++    expect(result.instalmentInUse).toEqual({ amount: 0, source: "user-provided" });
++    expect(result.annualDebtService).toBe(0);
++    expect(result.calculatedMonthlyInstalment).toBe(1992.49);
++  });
++
++  it("rounds a half-sen instalment up (RM2,418 / 240 = RM10.075)", () => {
++    expect(calculateMonthlyInstalment(2418, 0, 20)).toBe(10.08);
++    expect(calculateAnnualDebtService(calculateMonthlyInstalment(2418, 0, 20))).toBe(120.96);
++  });
++
++  it.each([0.000000000001, 0.00000000000001])(
++    "retains accuracy for a very small positive annual percentage (%s)",
++    (rate) => {
++      expect(calculateMonthlyInstalment(450000, rate, 35)).toBe(1071.43);
++    },
++  );
++
++  it("uses the displayed sen-rounded bank instalment for annual debt service", () => {
++    const input = Object.freeze({
++      ...base,
++      user_provided_monthly_instalment: 2200.005,
++      use_user_provided_instalment: true,
++    });
++    const result = calculateFinancing(input);
++    expect(result.instalmentInUse).toEqual({ amount: 2200.01, source: "user-provided" });
++    expect(result.annualDebtService).toBe(26400.12);
++    expect(result.calculatedMonthlyInstalment).toBe(1992.49);
++    const row = buildFinancingRow(
++      {
++        ...financingSchema.parse(emptyFinancingForm),
++        ...input,
++      },
++      500000,
++    );
++    expect(row.user_provided_monthly_instalment).toBe(2200.005);
++    expect(row.calculated_monthly_instalment).toBe(1992.49);
++  });
++
++  it.each([
++    [null, 4, 35],
++    [450000, undefined, 35],
++    [450000, 4, undefined],
++    [-1, 4, 35],
++    [450000, -1, 35],
++    [450000, 4, 0],
++    [450000, 4, -1],
++    [Number.POSITIVE_INFINITY, 4, 35],
++    [450000, Number.NaN, 35],
++  ])("rejects invalid/missing loan arguments (%s, %s, %s)", (principal, rate, years) => {
++    expect(calculateMonthlyInstalment(principal, rate, years)).toBeNull();
++  });
++});

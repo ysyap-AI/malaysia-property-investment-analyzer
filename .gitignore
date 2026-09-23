@@ -16,6 +16,11 @@ dist-ssr
 .nitro
 *.local
 
+# Local credentials (examples must contain placeholders only)
+.env
+.env.*
+!.env.example
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars

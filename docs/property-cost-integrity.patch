@@ -1,0 +1,868 @@
+diff --git a/src/lib/finance/acquisition.ts b/src/lib/finance/acquisition.ts
+index 1b35d2d..af018af 100644
+--- a/src/lib/finance/acquisition.ts
++++ b/src/lib/finance/acquisition.ts
+@@ -91,7 +91,8 @@ export function calculateTotalAcquisitionCost(
+       missingFields.push(field);
+       continue;
+     }
+-    if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
++    if (typeof value !== "number" || !Number.isFinite(value) || value < 0 ||
++        !Number.isSafeInteger(Math.round((total + value) * 100))) {
+       invalidFields.push(field);
+       continue;
+     }
+diff --git a/src/lib/finance/operating-expenses.ts b/src/lib/finance/operating-expenses.ts
+index 023e97a..d674553 100644
+--- a/src/lib/finance/operating-expenses.ts
++++ b/src/lib/finance/operating-expenses.ts
+@@ -52,7 +52,9 @@ function roundMoney(value: number): number {
+  */
+ export function monthlyToAnnual(monthly: number | null | undefined): number | null {
+   if (monthly === null || monthly === undefined) return null;
+-  if (typeof monthly !== "number" || !Number.isFinite(monthly)) return null;
++  // Invalid is distinct from unknown; the write boundary rejects NaN.
++  if (typeof monthly !== "number" || monthly < 0 ||
++      !Number.isSafeInteger(Math.round(monthly * 12 * 100))) return Number.NaN;
+   return roundMoney(monthly * 12);
+ }
+ 
+@@ -82,7 +84,8 @@ export function calculateTotalAnnualOperatingExpenses(
+       missingFields.push(field);
+       continue;
+     }
+-    if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
++    if (typeof value !== "number" || !Number.isFinite(value) || value < 0 ||
++        !Number.isSafeInteger(Math.round((total + value) * 100))) {
+       invalidFields.push(field);
+       continue;
+     }
+diff --git a/src/lib/property/acquisition-api.ts b/src/lib/property/acquisition-api.ts
+index d6aa4d4..d0d2b08 100644
+--- a/src/lib/property/acquisition-api.ts
++++ b/src/lib/property/acquisition-api.ts
+@@ -3,7 +3,7 @@
+ import type { SupabaseClient } from "@supabase/supabase-js";
+ 
+ import { supabase } from "@/integrations/supabase/external-client";
+-import type { AcquisitionCostsInput, AcquisitionCostsRecord } from "./acquisition-fields";
++import { acquisitionCostsSchema, type AcquisitionCostsInput, type AcquisitionCostsRecord } from "./acquisition-fields";
+ 
+ const db = supabase as unknown as SupabaseClient<any, "public", any>;
+ 
+@@ -25,6 +25,7 @@ export async function saveAcquisitionCosts(
+   propertyId: string,
+   values: AcquisitionCostsInput,
+ ): Promise<AcquisitionCostsRecord> {
++  values = acquisitionCostsSchema.parse(values);
+   const existing = await getAcquisitionCosts(propertyId);
+   if (existing) {
+     const { data, error } = await db
+diff --git a/src/lib/property/acquisition-fields.ts b/src/lib/property/acquisition-fields.ts
+index adb7b78..e3be43c 100644
+--- a/src/lib/property/acquisition-fields.ts
++++ b/src/lib/property/acquisition-fields.ts
+@@ -59,12 +59,19 @@ const optionalMoney = z
+   .union([z.string(), z.number(), z.null(), z.undefined()])
+   .transform((v) => {
+     if (v === null || v === undefined) return null;
+-    const raw = typeof v === "number" ? String(v) : v.trim().replace(/,/g, "");
++    if (typeof v === "number") return Number.isFinite(v) ? v : Number.NaN;
++    const raw = v.trim();
+     if (raw === "") return null;
+-    const parsed = Number(raw);
++    // Only decimal amounts and correctly grouped thousands separators are valid.
++    // Removing every comma first would silently turn "1,5" into 15.
++    if (!/^-?(?:(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?|\.\d+)$/.test(raw)) return Number.NaN;
++    const parsed = Number(raw.replace(/,/g, ""));
+     return Number.isFinite(parsed) ? parsed : Number.NaN;
+   })
+   .refine((v) => v === null || !Number.isNaN(v), { message: "Enter an amount or leave it blank" })
++  .refine((v) => v === null || Number.isSafeInteger(Math.round(v * 100)), {
++    message: "Amount is too large to represent safely",
++  })
+   .refine((v) => v === null || v >= 0, { message: "An amount cannot be negative" });
+ 
+ export const acquisitionCostsSchema = z.object(
+diff --git a/src/lib/property/operating-expense-fields.ts b/src/lib/property/operating-expense-fields.ts
+index e66cd84..967aa08 100644
+--- a/src/lib/property/operating-expense-fields.ts
++++ b/src/lib/property/operating-expense-fields.ts
+@@ -78,12 +78,19 @@ const optionalMoney = z
+   .union([z.string(), z.number(), z.null(), z.undefined()])
+   .transform((v) => {
+     if (v === null || v === undefined) return null;
+-    const raw = typeof v === "number" ? String(v) : v.trim().replace(/,/g, "");
++    if (typeof v === "number") return Number.isFinite(v) ? v : Number.NaN;
++    const raw = v.trim();
+     if (raw === "") return null;
+-    const parsed = Number(raw);
++    // Only decimal amounts and correctly grouped thousands separators are valid.
++    // Removing every comma first would silently turn "1,5" into 15.
++    if (!/^-?(?:(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?|\.\d+)$/.test(raw)) return Number.NaN;
++    const parsed = Number(raw.replace(/,/g, ""));
+     return Number.isFinite(parsed) ? parsed : Number.NaN;
+   })
+   .refine((v) => v === null || !Number.isNaN(v), { message: "Enter an amount or leave it blank" })
++  .refine((v) => v === null || Number.isSafeInteger(Math.round(v * 100)), {
++    message: "Amount is too large to represent safely",
++  })
+   .refine((v) => v === null || v >= 0, { message: "An amount cannot be negative" });
+ 
+ export const operatingExpensesSchema = z.object(
+diff --git a/src/lib/property/operating-expenses-api.ts b/src/lib/property/operating-expenses-api.ts
+index 1bc3bac..5167e80 100644
+--- a/src/lib/property/operating-expenses-api.ts
++++ b/src/lib/property/operating-expenses-api.ts
+@@ -3,7 +3,7 @@
+ import type { SupabaseClient } from "@supabase/supabase-js";
+ 
+ import { supabase } from "@/integrations/supabase/external-client";
+-import type { OperatingExpensesInput, OperatingExpensesRecord } from "./operating-expense-fields";
++import { operatingExpensesSchema, type OperatingExpensesInput, type OperatingExpensesRecord } from "./operating-expense-fields";
+ 
+ const db = supabase as unknown as SupabaseClient<any, "public", any>;
+ 
+@@ -25,6 +25,8 @@ export async function saveOperatingExpenses(
+   propertyId: string,
+   values: OperatingExpensesInput,
+ ): Promise<OperatingExpensesRecord> {
++  // Validate after monthly conversion, before JSON could serialize Infinity as null.
++  values = operatingExpensesSchema.parse(values);
+   const existing = await getOperatingExpenses(propertyId);
+   if (existing) {
+     const { data, error } = await db
+diff --git a/src/lib/property/property-fields.ts b/src/lib/property/property-fields.ts
+index 31a233e..87cf063 100644
+--- a/src/lib/property/property-fields.ts
++++ b/src/lib/property/property-fields.ts
+@@ -99,12 +99,19 @@ const optionalNumber = (opts: { min?: number; max?: number } = {}) =>
+     .union([z.string(), z.number(), z.null(), z.undefined()])
+     .transform((v) => {
+       if (v === null || v === undefined) return null;
+-      const raw = typeof v === "number" ? String(v) : v.trim().replace(/,/g, "");
++      if (typeof v === "number") return Number.isFinite(v) ? v : Number.NaN;
++      const raw = v.trim();
+       if (raw === "") return null;
+-      const parsed = Number(raw);
++      // Only decimal amounts and correctly grouped thousands separators are valid.
++      // Removing every comma first would silently turn "1,5" into 15.
++      if (!/^-?(?:(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?|\.\d+)$/.test(raw)) return Number.NaN;
++      const parsed = Number(raw.replace(/,/g, ""));
+       return Number.isFinite(parsed) ? parsed : Number.NaN;
+     })
+     .refine((v) => v === null || !Number.isNaN(v), { message: "Enter a number or leave it blank" })
++    .refine((v) => v === null || Number.isSafeInteger(Math.round(v * 100)), {
++      message: "Number is too large to represent safely",
++    })
+     .refine((v) => v === null || opts.min === undefined || v >= opts.min, {
+       message: `Must be ${opts.min} or more`,
+     })
+diff --git a/supabase/migrations/20260921000000_restrict_application_table_privileges.sql b/supabase/migrations/20260921000000_restrict_application_table_privileges.sql
+new file mode 100644
+index 0000000..27e2ed9
+--- /dev/null
++++ b/supabase/migrations/20260921000000_restrict_application_table_privileges.sql
+@@ -0,0 +1,12 @@
++-- Ordinary API roles only need row-level CRUD. TRUNCATE and REFERENCES bypass
++-- RLS, and application users must not be allowed to create table triggers.
++-- Scope this to the seven audited tables; preserve CRUD and service-role access.
++REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLE
++  public.profiles,
++  public.properties,
++  public.acquisition_costs,
++  public.operating_expenses,
++  public.financing,
++  public.investment_criteria,
++  public.scenario_configs
++FROM PUBLIC, anon, authenticated;
+diff --git a/supabase/migrations/20260921010000_reconcile_property_cost_columns.sql b/supabase/migrations/20260921010000_reconcile_property_cost_columns.sql
+new file mode 100644
+index 0000000..9b943b5
+--- /dev/null
++++ b/supabase/migrations/20260921010000_reconcile_property_cost_columns.sql
+@@ -0,0 +1,118 @@
++-- Capture the schema already used by Properties, Acquisition Costs and
++-- Operating Expenses. Existing values, ownership, RLS and relationships survive.
++-- Do not infer purchase prices or reinterpret legacy monthly/aggregate costs.
++DO $$
++BEGIN
++  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public'
++             AND table_name='properties' AND column_name='name') THEN
++    IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public'
++               AND table_name='properties' AND column_name='project_name') THEN
++      RAISE EXCEPTION 'Both name and project_name exist; reconcile explicitly before migration';
++    END IF;
++    ALTER TABLE public.properties RENAME COLUMN name TO project_name;
++  END IF;
++  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public'
++             AND table_name='properties' AND column_name='address') THEN
++    IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public'
++               AND table_name='properties' AND column_name='full_address') THEN
++      RAISE EXCEPTION 'Both address and full_address exist; reconcile explicitly before migration';
++    END IF;
++    ALTER TABLE public.properties RENAME COLUMN address TO full_address;
++  END IF;
++END $$;
++
++ALTER TABLE public.properties
++  ADD COLUMN IF NOT EXISTS postcode TEXT,
++  ADD COLUMN IF NOT EXISTS city TEXT,
++  ADD COLUMN IF NOT EXISTS district TEXT,
++  ADD COLUMN IF NOT EXISTS country TEXT DEFAULT 'Malaysia',
++  ADD COLUMN IF NOT EXISTS title_type TEXT,
++  ADD COLUMN IF NOT EXISTS lease_expiry_year INTEGER,
++  ADD COLUMN IF NOT EXISTS completion_year INTEGER,
++  ADD COLUMN IF NOT EXISTS developer TEXT,
++  ADD COLUMN IF NOT EXISTS car_parks INTEGER,
++  ADD COLUMN IF NOT EXISTS floor_level TEXT,
++  ADD COLUMN IF NOT EXISTS total_floors INTEGER,
++  ADD COLUMN IF NOT EXISTS furnishing_status TEXT,
++  ADD COLUMN IF NOT EXISTS unit_condition TEXT,
++  ADD COLUMN IF NOT EXISTS target_purchase_price NUMERIC,
++  ADD COLUMN IF NOT EXISTS bank_valuation NUMERIC,
++  ADD COLUMN IF NOT EXISTS expected_monthly_rent NUMERIC,
++  ADD COLUMN IF NOT EXISTS rent_verification_status TEXT DEFAULT 'missing',
++  ADD COLUMN IF NOT EXISTS property_status TEXT DEFAULT 'prospect',
++  ADD COLUMN IF NOT EXISTS analysis_status TEXT DEFAULT 'not_started';
++
++ALTER TABLE public.acquisition_costs
++  ADD COLUMN IF NOT EXISTS purchase_price NUMERIC,
++  ADD COLUMN IF NOT EXISTS spa_legal_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS transfer_stamp_duty NUMERIC,
++  ADD COLUMN IF NOT EXISTS loan_legal_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS loan_stamp_duty NUMERIC,
++  ADD COLUMN IF NOT EXISTS utility_deposits NUMERIC,
++  ADD COLUMN IF NOT EXISTS maintenance_deposit NUMERIC,
++  ADD COLUMN IF NOT EXISTS acquisition_agent_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS initial_holding_cost NUMERIC,
++  ADD COLUMN IF NOT EXISTS contingency_cost NUMERIC,
++  ADD COLUMN IF NOT EXISTS other_cost NUMERIC;
++
++ALTER TABLE public.operating_expenses
++  ADD COLUMN IF NOT EXISTS annual_maintenance_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_sinking_fund NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_assessment_tax NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_quit_or_parcel_rent NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_landlord_insurance NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_property_management_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_leasing_agent_fee NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_tenancy_documentation NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_repair_reserve NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_furniture_replacement_reserve NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_cleaning_cost NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_vacancy_utilities NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_bad_debt_allowance NUMERIC,
++  ADD COLUMN IF NOT EXISTS annual_other_operating_expenses NUMERIC;
++
++-- Reproduce the CHECK constraints already present in the deployed schema too.
++-- Existing invalid data causes a migration error rather than being rewritten.
++DO $$
++DECLARE spec RECORD; constraint_name TEXT;
++BEGIN
++  FOR spec IN
++    SELECT 'acquisition_costs' AS tbl, unnest(ARRAY[
++      'purchase_price','spa_legal_fee','transfer_stamp_duty','loan_legal_fee',
++      'loan_stamp_duty','valuation_fee','renovation_cost','furnishing_cost',
++      'utility_deposits','maintenance_deposit','acquisition_agent_fee',
++      'initial_holding_cost','contingency_cost','other_cost']) AS col
++    UNION ALL
++    SELECT 'operating_expenses', unnest(ARRAY[
++      'annual_maintenance_fee','annual_sinking_fund','annual_assessment_tax',
++      'annual_quit_or_parcel_rent','annual_landlord_insurance',
++      'annual_property_management_fee','annual_leasing_agent_fee',
++      'annual_tenancy_documentation','annual_repair_reserve',
++      'annual_furniture_replacement_reserve','annual_cleaning_cost',
++      'annual_vacancy_utilities','annual_bad_debt_allowance','annual_other_operating_expenses'])
++  LOOP
++    constraint_name := spec.tbl || '_' || spec.col || '_check';
++    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conrelid=format('public.%I',spec.tbl)::regclass
++                   AND conname=constraint_name) THEN
++      EXECUTE format('ALTER TABLE public.%I ADD CONSTRAINT %I CHECK (%I IS NULL OR %I >= 0)',
++        spec.tbl,constraint_name,spec.col,spec.col);
++    END IF;
++  END LOOP;
++  FOR spec IN SELECT * FROM (VALUES
++    ('tenure', 'tenure IS NULL OR tenure IN (''freehold'',''leasehold'')'),
++    ('rent_verification_status', 'rent_verification_status IN (''verified'',''user-entered'',''estimated'',''listing-data'',''missing'')'),
++    ('property_status', 'property_status IN (''prospect'',''analysing'',''watchlist'',''shortlisted'',''purchased'',''rejected'')'),
++    ('analysis_status', 'analysis_status IN (''not_started'',''in_progress'',''completed'',''archived'')')
++  ) AS v(col,expression) LOOP
++    constraint_name := 'properties_' || spec.col || '_check';
++    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conrelid='public.properties'::regclass
++                   AND conname=constraint_name) THEN
++      EXECUTE format('ALTER TABLE public.properties ADD CONSTRAINT %I CHECK (%s)',
++        constraint_name,spec.expression);
++    END IF;
++  END LOOP;
++END $$;
++
++-- Financial columns deliberately have no zero defaults. Legacy columns remain
++-- untouched because their allocation to the new categories is not established.
++NOTIFY pgrst, 'reload schema';
+diff --git a/tests/build-module-schema-audit.mjs b/tests/build-module-schema-audit.mjs
+new file mode 100644
+index 0000000..b747fed
+--- /dev/null
++++ b/tests/build-module-schema-audit.mjs
+@@ -0,0 +1,131 @@
++﻿// Generate a rollback-only PostgreSQL test for an EMPTY local Supabase schema.
++// Run with psql -X -v ON_ERROR_STOP=1. Never reset an existing application schema.
++import { readFileSync, readdirSync, writeFileSync } from "node:fs";
++import { fileURLToPath } from "node:url";
++import { join } from "node:path";
++
++const root = fileURLToPath(new URL("../", import.meta.url));
++const directory = join(root, "supabase/migrations");
++const target = "20260921010000_reconcile_property_cost_columns.sql";
++const files = readdirSync(directory).filter((file) => file.endsWith(".sql")).sort();
++if (!process.argv[2] || files.at(-1) !== target) throw new Error("Review migration ordering; supply an output SQL path");
++const baseline = files.filter((file) => file !== target).map((file) => readFileSync(join(directory, file), "utf8")).join("\n");
++const migration = readFileSync(join(directory, target), "utf8");
++writeFileSync(process.argv[2], `
++BEGIN;
++DO $$ BEGIN
++  IF EXISTS (SELECT 1 FROM pg_tables WHERE schemaname='public') THEN
++    RAISE EXCEPTION 'Requires empty public schema: refusing to touch application tables';
++  END IF;
++END $$;
++${baseline}
++CREATE TEMP TABLE fixture AS SELECT gen_random_uuid() AS uid, gen_random_uuid() AS pid;
++INSERT INTO auth.users(id,raw_user_meta_data) SELECT uid,'{}'::jsonb FROM fixture;
++INSERT INTO public.properties(id,user_id,name,address,asking_price)
++  SELECT pid,uid,'Legacy fixture','Preserved address',0 FROM fixture;
++INSERT INTO public.acquisition_costs(property_id,legal_fees,valuation_fee)
++  SELECT pid,500,0 FROM fixture;
++INSERT INTO public.operating_expenses(property_id,maintenance_monthly,utilities_monthly)
++  SELECT pid,250,NULL FROM fixture;
++
++${migration}
++-- A project with already-aligned columns must also be supported, without data loss.
++${migration}
++
++CREATE TEMP TABLE module_checks(name text, passed boolean);
++INSERT INTO module_checks VALUES
++  ('renamed property values and explicit zero survive',
++    (SELECT project_name='Legacy fixture' AND full_address='Preserved address' AND asking_price=0
++     FROM public.properties WHERE id=(SELECT pid FROM fixture))),
++  ('legacy acquisition costs survive and no purchase price is fabricated',
++    (SELECT legal_fees=500 AND valuation_fee=0 AND purchase_price IS NULL AND spa_legal_fee IS NULL
++     FROM public.acquisition_costs WHERE property_id=(SELECT pid FROM fixture))),
++  ('legacy monthly expenses are not silently relabelled as annual',
++    (SELECT maintenance_monthly=250 AND utilities_monthly IS NULL AND annual_maintenance_fee IS NULL
++     FROM public.operating_expenses WHERE property_id=(SELECT pid FROM fixture))),
++  ('all three tables retain RLS',
++    (SELECT count(*)=3 FROM pg_class WHERE oid IN ('public.properties'::regclass,
++      'public.acquisition_costs'::regclass,'public.operating_expenses'::regclass) AND relrowsecurity)),
++  ('all twelve ownership policies survive',
++    (SELECT count(*)=12 FROM pg_policies WHERE schemaname='public'
++      AND tablename IN ('properties','acquisition_costs','operating_expenses')));
++
++DO $$
++DECLARE field_name text; audit_table text; parent uuid; owner_id uuid;
++BEGIN
++  -- The complete financial write contract: NUMERIC, nullable, no zero default.
++  FOR audit_table,field_name IN
++    SELECT 'properties',unnest(ARRAY['asking_price','target_purchase_price','bank_valuation','expected_monthly_rent'])
++    UNION ALL
++    SELECT 'acquisition_costs',unnest(ARRAY['purchase_price','spa_legal_fee','transfer_stamp_duty',
++      'loan_legal_fee','loan_stamp_duty','valuation_fee','renovation_cost','furnishing_cost',
++      'utility_deposits','maintenance_deposit','acquisition_agent_fee','initial_holding_cost','contingency_cost','other_cost'])
++    UNION ALL
++    SELECT 'operating_expenses',unnest(ARRAY['annual_maintenance_fee','annual_sinking_fund','annual_assessment_tax',
++      'annual_quit_or_parcel_rent','annual_landlord_insurance','annual_property_management_fee',
++      'annual_leasing_agent_fee','annual_tenancy_documentation','annual_repair_reserve',
++      'annual_furniture_replacement_reserve','annual_cleaning_cost','annual_vacancy_utilities',
++      'annual_bad_debt_allowance','annual_other_operating_expenses'])
++  LOOP
++    INSERT INTO module_checks SELECT audit_table || '.' || field_name || ' numeric/nullable/no-default',
++      count(*)=1 FROM information_schema.columns c WHERE c.table_schema='public'
++      AND c.table_name=audit_table AND c.column_name=field_name AND c.data_type='numeric'
++      AND c.is_nullable='YES' AND c.column_default IS NULL;
++    IF audit_table <> 'properties' THEN
++      BEGIN
++        EXECUTE format('UPDATE public.%I SET %I=-1 WHERE property_id=(SELECT pid FROM fixture)',audit_table,field_name);
++        INSERT INTO module_checks VALUES (audit_table || '.' || field_name || ' negative rejected',false);
++      EXCEPTION WHEN check_violation THEN
++        INSERT INTO module_checks VALUES (audit_table || '.' || field_name || ' negative rejected',true);
++      END;
++    END IF;
++  END LOOP;
++  FOREACH field_name IN ARRAY ARRAY['tenure','rent_verification_status','property_status','analysis_status'] LOOP
++    BEGIN
++      EXECUTE format('UPDATE public.properties SET %I=''invalid-audit-value'' WHERE id=(SELECT pid FROM fixture)',field_name);
++      INSERT INTO module_checks VALUES (field_name || ' invalid enum rejected',false);
++    EXCEPTION WHEN check_violation THEN
++      INSERT INTO module_checks VALUES (field_name || ' invalid enum rejected',true);
++    END;
++  END LOOP;
++  SELECT pid,uid INTO parent,owner_id FROM fixture;
++  FOREACH audit_table IN ARRAY ARRAY['acquisition_costs','operating_expenses'] LOOP
++    BEGIN
++      EXECUTE format('INSERT INTO public.%I(property_id) VALUES ($1)',audit_table) USING parent;
++      INSERT INTO module_checks VALUES (audit_table || ' duplicate child rejected',false);
++    EXCEPTION WHEN unique_violation THEN
++      INSERT INTO module_checks VALUES (audit_table || ' duplicate child rejected',true);
++    END;
++    BEGIN
++      EXECUTE format('INSERT INTO public.%I(property_id) VALUES ($1)',audit_table) USING gen_random_uuid();
++      INSERT INTO module_checks VALUES (audit_table || ' orphan child rejected',false);
++    EXCEPTION WHEN foreign_key_violation THEN
++      INSERT INTO module_checks VALUES (audit_table || ' orphan child rejected',true);
++    END;
++    BEGIN
++      EXECUTE format('INSERT INTO public.%I(property_id) VALUES (NULL)',audit_table);
++      INSERT INTO module_checks VALUES (audit_table || ' null parent rejected',false);
++    EXCEPTION WHEN not_null_violation THEN
++      INSERT INTO module_checks VALUES (audit_table || ' null parent rejected',true);
++    END;
++  END LOOP;
++END $$;
++
++-- Current field names can be written; real zero and missing remain distinguishable.
++UPDATE public.properties SET target_purchase_price=NULL,expected_monthly_rent=0 WHERE id=(SELECT pid FROM fixture);
++UPDATE public.acquisition_costs SET purchase_price=600000,other_cost=0 WHERE property_id=(SELECT pid FROM fixture);
++UPDATE public.operating_expenses SET annual_maintenance_fee=4800,annual_sinking_fund=0 WHERE property_id=(SELECT pid FROM fixture);
++INSERT INTO module_checks VALUES
++  ('property zero and null round trip', (SELECT expected_monthly_rent=0 AND target_purchase_price IS NULL FROM public.properties WHERE id=(SELECT pid FROM fixture))),
++  ('acquisition zero and null round trip', (SELECT purchase_price=600000 AND other_cost=0 AND spa_legal_fee IS NULL FROM public.acquisition_costs WHERE property_id=(SELECT pid FROM fixture))),
++  ('operating annual value, zero and null round trip', (SELECT annual_maintenance_fee=4800 AND annual_sinking_fund=0 AND annual_assessment_tax IS NULL FROM public.operating_expenses WHERE property_id=(SELECT pid FROM fixture)));
++DELETE FROM public.properties WHERE id=(SELECT pid FROM fixture);
++INSERT INTO module_checks VALUES
++  ('property deletion cascades to acquisition',NOT EXISTS(SELECT 1 FROM public.acquisition_costs WHERE property_id=(SELECT pid FROM fixture))),
++  ('property deletion cascades to operating',NOT EXISTS(SELECT 1 FROM public.operating_expenses WHERE property_id=(SELECT pid FROM fixture)));
++SELECT jsonb_build_object('passed',count(*) FILTER(WHERE passed),'failed',count(*) FILTER(WHERE NOT passed OR passed IS NULL),
++  'checks',jsonb_agg(to_jsonb(module_checks))) FROM module_checks;
++ROLLBACK;
++`);
++console.log("Prepared local schema audit; entire test rolls back");
++
+diff --git a/tests/build-supabase-audit.mjs b/tests/build-supabase-audit.mjs
+new file mode 100644
+index 0000000..9e9dca0
+--- /dev/null
++++ b/tests/build-supabase-audit.mjs
+@@ -0,0 +1,64 @@
++// Generate an audit of repository migrations on an EMPTY public schema.
++// All application schema and fixture changes are rolled back in a subtransaction.
++// This verifies migration behavior; it does not deploy permanent policies.
++import { readFileSync, readdirSync, writeFileSync } from "node:fs";
++import { resolve, join } from "node:path";
++import process from "node:process";
++
++const [migrationDirectory, outputFile] = process.argv.slice(2);
++if (!migrationDirectory || !outputFile) {
++  throw new Error("Usage: node tests/build-supabase-audit.mjs <migration-directory> <output-file>");
++}
++const files = readdirSync(migrationDirectory).filter((file) => file.endsWith(".sql")).sort();
++if (!files.length) throw new Error("No application migrations found");
++const migrations = files.map((file) => readFileSync(join(migrationDirectory, file), "utf8")).join("\n");
++let audit = readFileSync(new URL("./supabase-ownership.sql", import.meta.url), "utf8");
++const finalQuery = /SELECT requirement, test_name, CASE WHEN passed THEN 'PASS' ELSE 'FAIL' END AS result, detail\s+FROM pg_temp\.ownership_audit_results\s+ORDER BY requirement, test_name;\s*$/;
++if (!finalQuery.test(audit)) throw new Error("Audit result query changed; review the wrapper generator");
++audit = audit.replace(finalQuery, "SELECT coalesce(jsonb_agg(to_jsonb(r)), '[]'::jsonb) FROM pg_temp.ownership_audit_results r;");
++for (const delimiter of ["$migration_source$", "$test_source$", "$schema_audit$"]) {
++  if (migrations.includes(delimiter) || audit.includes(delimiter)) throw new Error("SQL delimiter collision");
++}
++const sql = `-- Generated from the application's migrations; not a deployment.
++-- Submit this entire file as ONE SQL request/transaction.
++CREATE TEMP TABLE migration_audit_report (
++  requirement text, test_name text, passed boolean, detail text
++) ON COMMIT DROP;
++DO $schema_audit$
++DECLARE
++  audit_report jsonb;
++  auth_before bigint;
++  auth_after bigint;
++BEGIN
++  IF EXISTS (SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
++             WHERE n.nspname='public' AND c.relkind IN ('r','p','v','m','f')) THEN
++    RAISE EXCEPTION 'This migration-validation wrapper requires an empty public schema; use the standalone ownership audit for an existing application database';
++  END IF;
++  SELECT count(*) INTO auth_before FROM auth.users;
++  BEGIN
++    EXECUTE $migration_source$${migrations}$migration_source$;
++    EXECUTE $test_source$${audit}$test_source$ INTO audit_report;
++    RAISE EXCEPTION USING ERRCODE='ZX002', MESSAGE='Rollback temporary application schema';
++  EXCEPTION
++    WHEN SQLSTATE 'ZX002' THEN NULL;
++    WHEN OTHERS THEN
++      audit_report := jsonb_build_array(jsonb_build_object(
++        'requirement','audit execution','test_name','migration test setup',
++        'passed',false,'detail','SQLSTATE=' || SQLSTATE || ': ' || SQLERRM));
++  END;
++  INSERT INTO pg_temp.migration_audit_report
++  SELECT * FROM jsonb_to_recordset(audit_report) AS r(requirement text,test_name text,passed boolean,detail text);
++  INSERT INTO pg_temp.migration_audit_report
++  SELECT 'cleanup','temporary application tables removed',count(*)=0,'remaining=' || count(*)
++    FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
++    WHERE n.nspname='public' AND c.relkind IN ('r','p','v','m','f');
++  SELECT count(*) INTO auth_after FROM auth.users;
++  INSERT INTO pg_temp.migration_audit_report VALUES
++    ('cleanup','Auth user count restored',auth_before=auth_after,'before=' || auth_before || '; after=' || auth_after);
++END;
++$schema_audit$;
++SELECT requirement, test_name, CASE WHEN passed THEN 'PASS' ELSE 'FAIL' END AS result, detail
++FROM pg_temp.migration_audit_report ORDER BY requirement, test_name;
++`;
++writeFileSync(resolve(outputFile), sql);
++console.log(`Prepared rollback-only audit from ${files.length} migrations`);
+diff --git a/tests/financial-input-integrity.test.ts b/tests/financial-input-integrity.test.ts
+new file mode 100644
+index 0000000..fff3aca
+--- /dev/null
++++ b/tests/financial-input-integrity.test.ts
+@@ -0,0 +1,88 @@
++import { describe, expect, it, vi } from "vitest";
++import { acquisitionCostsSchema } from "@/lib/property/acquisition-fields";
++import {
++  annualiseInput, defaultOperatingExpenseBases, operatingExpenseRecordToForm,
++  operatingExpensesSchema,
++} from "@/lib/property/operating-expense-fields";
++import { emptyPropertyForm, propertySchema } from "@/lib/property/property-fields";
++import { calculateTotalAcquisitionCost } from "@/lib/finance/acquisition";
++import { calculateTotalAnnualOperatingExpenses, monthlyToAnnual } from "@/lib/finance/operating-expenses";
++
++const { from } = vi.hoisted(() => ({ from: vi.fn() }));
++vi.mock("@/integrations/supabase/external-client", () => ({ supabase: { from } }));
++import { saveAcquisitionCosts } from "@/lib/property/acquisition-api";
++import { saveOperatingExpenses } from "@/lib/property/operating-expenses-api";
++
++describe("numeric entry integrity across all three modules", () => {
++  const parsers = [
++    ["property", (value: string | number) => propertySchema.safeParse({
++      ...emptyPropertyForm, project_name: "Audit fixture", asking_price: value,
++    })],
++    ["acquisition", (value: string | number) => acquisitionCostsSchema.safeParse({ purchase_price: value })],
++    ["operating", (value: string | number) => operatingExpensesSchema.safeParse({ annual_maintenance_fee: value })],
++  ] as const;
++
++  for (const [module, parse] of parsers) {
++    it.each(["1,5", "12,34", "1,,000", ",", "0x100", "0b10", "1e3"])(
++      `${module} rejects ambiguous or non-decimal entry %s`,
++      (value) => expect(parse(value).success).toBe(false),
++    );
++    it.each(["1,234.50", "1234.50", ".50", "0", "  "])(
++      `${module} accepts unambiguous entry %s`,
++      (value) => expect(parse(value).success).toBe(true),
++    );
++    it(`${module} rejects a finite number too large to preserve monetary precision`, () => {
++      expect(parse(Number.MAX_VALUE).success).toBe(false);
++    });
++  }
++});
++
++describe("overflow must not become a total or an unknown saved amount", () => {
++  it.each([NaN, Infinity, -Infinity, -1])("rejects invalid annual conversions: %s", (value) => {
++    expect(monthlyToAnnual(value)).toBeNaN();
++  });
++  it("rejects a total outside safe monetary precision even when individual amounts fit", () => {
++    expect(calculateTotalAcquisitionCost({ purchase_price: 5e13, other_cost: 5e13 }).status).toBe("invalid");
++    expect(calculateTotalAnnualOperatingExpenses({ annual_maintenance_fee: 5e13, annual_sinking_fund: 5e13 }).status).toBe("invalid");
++  });
++  it("rejects overflowing acquisition totals", () => {
++    const result = calculateTotalAcquisitionCost({ purchase_price: Number.MAX_VALUE });
++    expect(result.status).toBe("invalid");
++    expect(result.total).toBeNull();
++  });
++  it("rejects overflowing operating totals", () => {
++    const result = calculateTotalAnnualOperatingExpenses({ annual_maintenance_fee: Number.MAX_VALUE });
++    expect(result.status).toBe("invalid");
++    expect(result.total).toBeNull();
++  });
++  it("marks an unrepresentable annual conversion invalid, distinct from missing", () => {
++    expect(monthlyToAnnual(Number.MAX_VALUE)).toBeNaN();
++    expect(monthlyToAnnual(null)).toBeNull();
++    expect(monthlyToAnnual(0)).toBe(0);
++  });
++  it("rejects invalid acquisition writes before reaching the database", async () => {
++    const values = acquisitionCostsSchema.parse({ purchase_price: 1 });
++    await expect(saveAcquisitionCosts("fixture", { ...values, purchase_price: Infinity })).rejects.toThrow();
++    expect(from).not.toHaveBeenCalled();
++  });
++  it("rejects invalid annualised writes before JSON can turn Infinity into null", async () => {
++    const values = operatingExpensesSchema.parse({ annual_maintenance_fee: 1 });
++    await expect(saveOperatingExpenses("fixture", { ...values, annual_maintenance_fee: Infinity })).rejects.toThrow();
++    expect(from).not.toHaveBeenCalled();
++  });
++  it("rejects overflow introduced after otherwise valid monthly input", async () => {
++    const values = operatingExpensesSchema.parse({ annual_maintenance_fee: 1e13 });
++    const annual = annualiseInput(values, { ...defaultOperatingExpenseBases, annual_maintenance_fee: "monthly" });
++    await expect(saveOperatingExpenses("fixture", annual)).rejects.toThrow();
++    expect(from).not.toHaveBeenCalled();
++  });
++  it("round-trips a normal monthly value once, preserving zero and unknown separately", () => {
++    const values = operatingExpensesSchema.parse({ annual_maintenance_fee: "400", annual_sinking_fund: "0" });
++    const annual = annualiseInput(values, { ...defaultOperatingExpenseBases, annual_maintenance_fee: "monthly" });
++    const reloaded = operatingExpensesSchema.parse(operatingExpenseRecordToForm(annual));
++    expect(annualiseInput(reloaded, defaultOperatingExpenseBases)).toEqual(annual);
++    expect(reloaded.annual_maintenance_fee).toBe(4800);
++    expect(reloaded.annual_sinking_fund).toBe(0);
++    expect(reloaded.annual_assessment_tax).toBeNull();
++  });
++});
+diff --git a/tests/supabase-ownership.sql b/tests/supabase-ownership.sql
+new file mode 100644
+index 0000000..f71f929
+--- /dev/null
++++ b/tests/supabase-ownership.sql
+@@ -0,0 +1,259 @@
++-- Run the ENTIRE file in one database request/transaction as the project owner.
++-- With psql: psql "$DATABASE_URL" -X --single-transaction -v ON_ERROR_STOP=1 -f tests/supabase-ownership.sql
++-- Requires the application's real migrations. Does not create or alter policies.
++-- Creates two temporary auth.users and their trigger-generated profiles.
++-- Tests run as anon/authenticated, NOT as the database owner.
++-- A deliberate subtransaction rollback removes ALL fixture users and rows,
++-- including when a test fails. The final result explicitly checks cleanup.
++-- This tests database authorization, not password login or browser behavior.
++
++CREATE TEMP TABLE ownership_audit_results (
++  requirement TEXT NOT NULL,
++  test_name TEXT NOT NULL,
++  passed BOOLEAN NOT NULL,
++  detail TEXT
++) ON COMMIT DROP;
++GRANT INSERT ON ownership_audit_results TO anon, authenticated;
++
++CREATE OR REPLACE FUNCTION pg_temp.audit_query(
++  requirement TEXT, label TEXT, statement TEXT, expected_count BIGINT,
++  mode TEXT DEFAULT 'count'
++) RETURNS VOID LANGUAGE plpgsql SECURITY INVOKER AS $$
++DECLARE
++  actual BIGINT;
++  succeeded BOOLEAN;
++  detail TEXT;
++BEGIN
++  BEGIN
++    EXECUTE statement INTO actual;
++    succeeded := mode <> 'denied' AND actual = expected_count;
++    detail := format('rows=%s; expected=%s', actual, expected_count);
++  EXCEPTION WHEN OTHERS THEN
++    succeeded := SQLSTATE = '42501' AND mode IN ('denied', 'hidden');
++    detail := 'SQLSTATE=' || SQLSTATE;
++  END;
++  INSERT INTO pg_temp.ownership_audit_results
++  VALUES (requirement, label, coalesce(succeeded, false), detail);
++END;
++$$;
++
++DO $audit$
++DECLARE
++  a UUID := gen_random_uuid();
++  b UUID := gen_random_uuid();
++  pa UUID := gen_random_uuid();
++  pb UUID := gen_random_uuid();
++  ea UUID := gen_random_uuid();
++  eb UUID := gen_random_uuid();
++  actor UUID;
++  victim UUID;
++  own_property UUID;
++  other_property UUID;
++  other_empty UUID;
++  descriptor RECORD;
++  fixture RECORD;
++  own_filter TEXT;
++  other_filter TEXT;
++  insert_columns TEXT;
++  insert_values TEXT;
++  field_value TEXT;
++  result_rows JSONB;
++  residual_count BIGINT;
++  property_name_column TEXT;
++  privilege_name TEXT;
++  role_name TEXT;
++BEGIN
++  -- The deployed schema renamed name to project_name after the initial migration.
++  SELECT attname INTO property_name_column FROM pg_attribute
++  WHERE attrelid='public.properties'::regclass AND NOT attisdropped
++    AND attname IN ('project_name','name')
++  ORDER BY CASE attname WHEN 'project_name' THEN 0 ELSE 1 END LIMIT 1;
++  -- Everything in this block, including profiles produced by the auth trigger,
++  -- is rolled back before the outer block returns its result rows.
++  BEGIN
++    INSERT INTO auth.users (
++      id, instance_id, aud, role, email, email_confirmed_at,
++      raw_app_meta_data, raw_user_meta_data, created_at, updated_at
++    ) VALUES
++      (a, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
++       'security-audit-a-' || a || '@example.invalid', now(),
++       '{"provider":"email","providers":["email"]}', '{"full_name":"Temporary Audit User A"}', now(), now()),
++      (b, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
++       'security-audit-b-' || b || '@example.invalid', now(),
++       '{"provider":"email","providers":["email"]}', '{"full_name":"Temporary Audit User B"}', now(), now());
++
++    PERFORM pg_temp.audit_query('authentication', 'signup trigger creates both profiles',
++      format('SELECT count(*) FROM public.profiles WHERE id IN (%L,%L)', a, b), 2);
++
++    -- Positive controls: each real database role must be able to insert its own
++    -- property and user configuration before any negative result can count.
++    FOR fixture IN SELECT * FROM (VALUES (a,pa,ea), (b,pb,eb)) AS v(uid,pid,empty_id)
++    LOOP
++      PERFORM set_config('request.jwt.claims', jsonb_build_object('sub',fixture.uid,'role','authenticated')::TEXT, true);
++      PERFORM set_config('request.jwt.claim.sub', fixture.uid::TEXT, true);
++      SET LOCAL ROLE authenticated;
++      PERFORM pg_temp.audit_query('positive control', 'authenticated role and subject ' || fixture.uid,
++        format('SELECT count(*) WHERE current_user=''authenticated'' AND auth.uid()=%L::uuid',fixture.uid),1);
++      PERFORM pg_temp.audit_query('positive control', 'insert own properties ' || fixture.uid,
++        format('WITH r AS (INSERT INTO public.properties (id,user_id,%I) VALUES (%L,%L,''SECURITY AUDIT ONLY''),(%L,%L,''SECURITY AUDIT EMPTY PARENT'') RETURNING id) SELECT count(*) FROM r',
++          property_name_column,fixture.pid,fixture.uid,fixture.empty_id,fixture.uid), 2);
++      PERFORM pg_temp.audit_query('positive control', 'insert own criteria ' || fixture.uid,
++        format('WITH r AS (INSERT INTO public.investment_criteria (user_id,config_version) VALUES (%L,''audit'') RETURNING id) SELECT count(*) FROM r',fixture.uid), 1);
++      PERFORM pg_temp.audit_query('positive control', 'insert own scenario ' || fixture.uid,
++        format('WITH r AS (INSERT INTO public.scenario_configs (user_id,scenario_name) VALUES (%L,''audit'') RETURNING id) SELECT count(*) FROM r',fixture.uid), 1);
++      FOR descriptor IN SELECT unnest(ARRAY['acquisition_costs','operating_expenses','financing']) AS tbl
++      LOOP
++        PERFORM pg_temp.audit_query('positive control', 'insert own ' || descriptor.tbl || ' ' || fixture.uid,
++          format('WITH r AS (INSERT INTO public.%I (property_id) VALUES (%L) RETURNING id) SELECT count(*) FROM r',descriptor.tbl,fixture.pid), 1);
++      END LOOP;
++      RESET ROLE;
++    END LOOP;
++
++    -- Cover all tables, both A -> B and B -> A, including direct queries which
++    -- do not use the frontend's owner filtering.
++    FOR descriptor IN
++      SELECT * FROM (VALUES
++        ('profiles','id','full_name','text'),
++        ('properties','user_id',property_name_column,'text'),
++        ('acquisition_costs','property_id','legal_fees','numeric'),
++        ('operating_expenses','property_id','maintenance_monthly','numeric'),
++        ('financing','property_id','purchase_price','numeric'),
++        ('investment_criteria','user_id','config_version','text'),
++        ('scenario_configs','user_id','scenario_name','text')
++      ) AS v(tbl,owner_col,field,field_type)
++    LOOP
++      PERFORM pg_temp.audit_query('6 / database controls', descriptor.tbl || ' has RLS enabled',
++        format('SELECT count(*) FROM pg_class WHERE oid=%L::regclass AND relrowsecurity','public.' || descriptor.tbl),1);
++      -- Inspect effective privileges without executing destructive table-wide SQL.
++      FOREACH role_name IN ARRAY ARRAY['anon','authenticated'] LOOP
++        FOREACH privilege_name IN ARRAY ARRAY['TRUNCATE','REFERENCES','TRIGGER'] LOOP
++          PERFORM pg_temp.audit_query('table-wide privileges',
++            descriptor.tbl || ' denies ' || privilege_name || ' to ' || role_name,
++            format('SELECT count(*) WHERE NOT has_table_privilege(%L,%L,%L)',
++              role_name,'public.' || descriptor.tbl,privilege_name),1);
++        END LOOP;
++      END LOOP;
++      field_value := CASE WHEN descriptor.field_type = 'numeric' THEN '123' ELSE quote_literal('audit-updated') END;
++      FOR fixture IN SELECT * FROM (VALUES (a,b,pa,pb,eb), (b,a,pb,pa,ea)) AS v(uid,other_uid,pid,other_pid,other_empty)
++      LOOP
++        actor := fixture.uid; victim := fixture.other_uid;
++        own_property := fixture.pid; other_property := fixture.other_pid; other_empty := fixture.other_empty;
++        own_filter := CASE
++          WHEN descriptor.owner_col = 'property_id' THEN format('property_id=%L',own_property)
++          WHEN descriptor.tbl = 'properties' THEN format('id=%L',own_property)
++          ELSE format('%I=%L',descriptor.owner_col,actor) END;
++        other_filter := CASE
++          WHEN descriptor.owner_col = 'property_id' THEN format('property_id=%L',other_property)
++          WHEN descriptor.tbl = 'properties' THEN format('id=%L',other_property)
++          ELSE format('%I=%L',descriptor.owner_col,victim) END;
++
++        PERFORM set_config('request.jwt.claims', jsonb_build_object('sub',actor,'role','authenticated')::TEXT,true);
++        PERFORM set_config('request.jwt.claim.sub',actor::TEXT,true);
++        SET LOCAL ROLE authenticated;
++        PERFORM pg_temp.audit_query('positive control', descriptor.tbl || ' own read ' || actor,
++          format('SELECT count(*) FROM public.%I WHERE %s',descriptor.tbl,own_filter),1);
++        PERFORM pg_temp.audit_query('positive control', descriptor.tbl || ' own update ' || actor,
++          format('WITH r AS (UPDATE public.%I SET %I=%s WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,descriptor.field,field_value,own_filter),1);
++        PERFORM pg_temp.audit_query('2 / cross-user reads', descriptor.tbl || ' hides other rows from ' || actor,
++          format('SELECT count(*) FROM public.%I WHERE %s',descriptor.tbl,other_filter),0);
++        PERFORM pg_temp.audit_query('3 / cross-user updates', descriptor.tbl || ' rejects other update by ' || actor,
++          format('WITH r AS (UPDATE public.%I SET %I=%s WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,descriptor.field,field_value,other_filter),0,'hidden');
++        PERFORM pg_temp.audit_query('4 / cross-user deletes', descriptor.tbl || ' rejects other delete by ' || actor,
++          format('WITH r AS (DELETE FROM public.%I WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,other_filter),0,'hidden');
++        PERFORM pg_temp.audit_query('ownership changes', descriptor.tbl || ' rejects owner/parent change by ' || actor,
++          format('WITH r AS (UPDATE public.%I SET %I=%L WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,descriptor.owner_col,
++            CASE WHEN descriptor.owner_col='property_id' THEN other_empty ELSE victim END,own_filter),0,'denied');
++
++        insert_columns := format('%I,%I',descriptor.owner_col,descriptor.field);
++        insert_values := format('%L,%s',CASE WHEN descriptor.owner_col='property_id' THEN other_empty ELSE victim END,field_value);
++        PERFORM pg_temp.audit_query('5 / forged inserts', descriptor.tbl || ' rejects other owner/parent insert by ' || actor,
++          format('WITH r AS (INSERT INTO public.%I (%s) VALUES (%s) RETURNING id) SELECT count(*) FROM r',descriptor.tbl,insert_columns,insert_values),0,'denied');
++        IF descriptor.tbl <> 'properties' AND descriptor.tbl <> 'scenario_configs' THEN
++          PERFORM pg_temp.audit_query('cross-user upserts', descriptor.tbl || ' rejects other upsert by ' || actor,
++            format('WITH r AS (INSERT INTO public.%I (%s) VALUES (%L,%s) ON CONFLICT (%I) DO UPDATE SET %I=EXCLUDED.%I RETURNING id) SELECT count(*) FROM r',
++              descriptor.tbl,insert_columns,CASE WHEN descriptor.owner_col='property_id' THEN other_property ELSE victim END,
++              field_value,descriptor.owner_col,descriptor.field,descriptor.field),0,'denied');
++        END IF;
++
++        -- Check as the victim that attempted deletion did not remove its row.
++        RESET ROLE;
++        PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',victim,'role','authenticated')::TEXT,true);
++        PERFORM set_config('request.jwt.claim.sub',victim::TEXT,true);
++        SET LOCAL ROLE authenticated;
++        PERFORM pg_temp.audit_query('integrity', descriptor.tbl || ' victim row survives attack by ' || actor,
++          format('SELECT count(*) FROM public.%I WHERE %s',descriptor.tbl,other_filter),1);
++        RESET ROLE;
++      END LOOP;
++
++      -- Anonymous requests use the real anon role and no authenticated subject.
++      PERFORM set_config('request.jwt.claims','{"role":"anon"}',true);
++      PERFORM set_config('request.jwt.claim.sub','',true);
++      SET LOCAL ROLE anon;
++      PERFORM pg_temp.audit_query('positive control', descriptor.tbl || ' anonymous role has no subject',
++        'SELECT count(*) WHERE current_user=''anon'' AND auth.uid() IS NULL',1);
++      PERFORM pg_temp.audit_query('1 / anonymous access', descriptor.tbl || ' anonymous read denied',
++        format('SELECT count(*) FROM public.%I',descriptor.tbl),0,'hidden');
++      PERFORM pg_temp.audit_query('anonymous mutation', descriptor.tbl || ' anonymous update denied',
++        format('WITH r AS (UPDATE public.%I SET %I=%s WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,descriptor.field,field_value,own_filter),0,'hidden');
++      PERFORM pg_temp.audit_query('anonymous mutation', descriptor.tbl || ' anonymous delete denied',
++        format('WITH r AS (DELETE FROM public.%I WHERE %s RETURNING id) SELECT count(*) FROM r',descriptor.tbl,own_filter),0,'hidden');
++      PERFORM pg_temp.audit_query('anonymous mutation', descriptor.tbl || ' anonymous insert denied',
++        format('WITH r AS (INSERT INTO public.%I (%s) VALUES (%s) RETURNING id) SELECT count(*) FROM r',descriptor.tbl,insert_columns,insert_values),0,'denied');
++      RESET ROLE;
++    END LOOP;
++
++    -- Owner deletion must work too. These only target this run's generated IDs.
++    FOR fixture IN SELECT * FROM (VALUES (a,pa,ea), (b,pb,eb)) AS v(uid,pid,empty_id)
++    LOOP
++      PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',fixture.uid,'role','authenticated')::TEXT,true);
++      PERFORM set_config('request.jwt.claim.sub',fixture.uid::TEXT,true);
++      SET LOCAL ROLE authenticated;
++      FOR descriptor IN SELECT * FROM (VALUES
++        ('acquisition_costs','property_id'),('operating_expenses','property_id'),('financing','property_id'),
++        ('investment_criteria','user_id'),('scenario_configs','user_id'),('profiles','id')
++      ) AS v(tbl,owner_col)
++      LOOP
++        PERFORM pg_temp.audit_query('positive control',descriptor.tbl || ' own delete ' || fixture.uid,
++          format('WITH r AS (DELETE FROM public.%I WHERE %I=%L RETURNING id) SELECT count(*) FROM r',descriptor.tbl,descriptor.owner_col,
++            CASE WHEN descriptor.owner_col='property_id' THEN fixture.pid ELSE fixture.uid END),1);
++      END LOOP;
++      PERFORM pg_temp.audit_query('positive control','properties own delete ' || fixture.uid,
++        format('WITH r AS (DELETE FROM public.properties WHERE id IN (%L,%L) RETURNING id) SELECT count(*) FROM r',fixture.pid,fixture.empty_id),2);
++      RESET ROLE;
++    END LOOP;
++
++    SELECT coalesce(jsonb_agg(to_jsonb(r)),'[]'::JSONB) INTO result_rows FROM pg_temp.ownership_audit_results r;
++    -- Variables retain their values across exception rollback; fixture rows do not.
++    RAISE EXCEPTION USING ERRCODE='ZX001', MESSAGE='Rollback temporary security audit fixtures';
++  EXCEPTION
++    WHEN SQLSTATE 'ZX001' THEN NULL;
++    WHEN OTHERS THEN
++      result_rows := jsonb_build_array(jsonb_build_object(
++        'requirement','audit execution','test_name','fixture/setup execution',
++        'passed',false,'detail','SQLSTATE=' || SQLSTATE || ': ' || SQLERRM));
++  END;
++
++  INSERT INTO pg_temp.ownership_audit_results
++  SELECT * FROM jsonb_to_recordset(result_rows) AS r(requirement TEXT,test_name TEXT,passed BOOLEAN,detail TEXT);
++  SELECT count(*) INTO residual_count FROM auth.users WHERE id IN (a,b);
++  INSERT INTO pg_temp.ownership_audit_results VALUES ('cleanup','temporary Auth accounts removed',residual_count=0,'remaining=' || residual_count);
++  SELECT count(*) INTO residual_count FROM public.profiles WHERE id IN (a,b);
++  INSERT INTO pg_temp.ownership_audit_results VALUES ('cleanup','temporary profiles removed',residual_count=0,'remaining=' || residual_count);
++  SELECT count(*) INTO residual_count FROM public.properties WHERE id IN (pa,pb,ea,eb) OR user_id IN (a,b);
++  INSERT INTO pg_temp.ownership_audit_results VALUES ('cleanup','temporary properties removed',residual_count=0,'remaining=' || residual_count);
++  FOR descriptor IN SELECT unnest(ARRAY['acquisition_costs','operating_expenses','financing']) AS tbl
++  LOOP
++    EXECUTE format('SELECT count(*) FROM public.%I WHERE property_id IN (%L,%L,%L,%L)',descriptor.tbl,pa,pb,ea,eb) INTO residual_count;
++    INSERT INTO pg_temp.ownership_audit_results VALUES ('cleanup',descriptor.tbl || ' temporary children removed',residual_count=0,'remaining=' || residual_count);
++  END LOOP;
++  FOR descriptor IN SELECT unnest(ARRAY['investment_criteria','scenario_configs']) AS tbl
++  LOOP
++    EXECUTE format('SELECT count(*) FROM public.%I WHERE user_id IN (%L,%L)',descriptor.tbl,a,b) INTO residual_count;
++    INSERT INTO pg_temp.ownership_audit_results VALUES ('cleanup',descriptor.tbl || ' temporary configuration removed',residual_count=0,'remaining=' || residual_count);
++  END LOOP;
++END;
++$audit$;
++
++SELECT requirement, test_name, CASE WHEN passed THEN 'PASS' ELSE 'FAIL' END AS result, detail
++FROM pg_temp.ownership_audit_results
++ORDER BY requirement, test_name;

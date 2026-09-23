@@ -1,0 +1,798 @@
+[
+  {
+    "formula": "Potential Annual Rent",
+    "implementation": "potentialAnnualRent",
+    "case": "normal",
+    "input": [
+      2500
+    ],
+    "expected": 30000,
+    "actual": 30000,
+    "result": "PASS"
+  },
+  {
+    "formula": "Potential Annual Rent",
+    "implementation": "potentialAnnualRent",
+    "case": "boundary",
+    "input": [
+      0
+    ],
+    "expected": 0,
+    "actual": 0,
+    "result": "PASS"
+  },
+  {
+    "formula": "Potential Annual Rent",
+    "implementation": "potentialAnnualRent",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Potential Annual Rent",
+    "implementation": "potentialAnnualRent",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "normal",
+    "input": [
+      2500,
+      11
+    ],
+    "expected": 27500,
+    "actual": 27500,
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "boundary",
+    "input": [
+      2500,
+      0
+    ],
+    "expected": 0,
+    "actual": 0,
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      11
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      11
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "missing argument 2 (null)",
+    "input": [
+      2500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Effective Annual Rent",
+    "implementation": "effectiveAnnualRent",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      2500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "normal",
+    "input": [
+      30000,
+      500000
+    ],
+    "expected": 6,
+    "actual": 6,
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "boundary",
+    "input": [
+      30000,
+      0
+    ],
+    "expected": "invalid",
+    "actual": "invalid",
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      500000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      500000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "missing argument 2 (null)",
+    "input": [
+      30000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Gross Rental Yield (%)",
+    "implementation": "grossRentalYield",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      30000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "normal",
+    "input": [
+      30000,
+      550000
+    ],
+    "expected": 5.45,
+    "actual": 5.45,
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "boundary",
+    "input": [
+      30000,
+      0
+    ],
+    "expected": "invalid",
+    "actual": "invalid",
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      550000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      550000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "missing argument 2 (null)",
+    "input": [
+      30000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Yield on Total Cost (%)",
+    "implementation": "yieldOnTotalCost",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      30000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "normal",
+    "input": [
+      27500,
+      6000
+    ],
+    "expected": 21500,
+    "actual": 21500,
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "boundary",
+    "input": [
+      0,
+      6000
+    ],
+    "expected": -6000,
+    "actual": -6000,
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      6000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      6000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "missing argument 2 (null)",
+    "input": [
+      27500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Operating Income",
+    "implementation": "netOperatingIncome",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      27500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "normal",
+    "input": [
+      21500,
+      550000
+    ],
+    "expected": 3.91,
+    "actual": 3.91,
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "boundary",
+    "input": [
+      -5500,
+      550000
+    ],
+    "expected": -1,
+    "actual": -1,
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      550000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      550000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "missing argument 2 (null)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Net Rental Yield (%)",
+    "implementation": "netRentalYield",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "normal",
+    "input": [
+      21500,
+      1500
+    ],
+    "expected": 291.67,
+    "actual": 291.67,
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "boundary",
+    "input": [
+      0,
+      1500
+    ],
+    "expected": -1500,
+    "actual": -1500,
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      1500
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      1500
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "missing argument 2 (null)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Monthly Cash Flow",
+    "implementation": "monthlyCashFlow",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "normal",
+    "input": [
+      21500,
+      18000
+    ],
+    "expected": 3500,
+    "actual": 3500,
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "boundary",
+    "input": [
+      0,
+      18000
+    ],
+    "expected": -18000,
+    "actual": -18000,
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      18000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      18000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "missing argument 2 (null)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Annual Cash Flow",
+    "implementation": "annualCashFlow",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      21500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "normal",
+    "input": [
+      3500,
+      100000
+    ],
+    "expected": 3.5,
+    "actual": 3.5,
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "boundary",
+    "input": [
+      3500,
+      0
+    ],
+    "expected": "invalid",
+    "actual": "invalid",
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      100000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      100000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "missing argument 2 (null)",
+    "input": [
+      3500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Cash-on-Cash Return (%)",
+    "implementation": "cashOnCashReturn",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      3500,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "normal",
+    "input": [
+      6000,
+      30000
+    ],
+    "expected": 20,
+    "actual": 20,
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "boundary",
+    "input": [
+      36000,
+      30000
+    ],
+    "expected": 120,
+    "actual": 120,
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "missing argument 2 (null)",
+    "input": [
+      6000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Property-Level Break-Even Occupancy (%)",
+    "implementation": "propertyBreakEvenOccupancy",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      6000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "normal",
+    "input": [
+      6000,
+      18000,
+      30000
+    ],
+    "expected": 80,
+    "actual": 80,
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "boundary",
+    "input": [
+      6000,
+      30000,
+      30000
+    ],
+    "expected": 120,
+    "actual": 120,
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 1 (null)",
+    "input": [
+      null,
+      18000,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 1 (undefined)",
+    "input": [
+      null,
+      18000,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 2 (null)",
+    "input": [
+      6000,
+      null,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 2 (undefined)",
+    "input": [
+      6000,
+      null,
+      30000
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 3 (null)",
+    "input": [
+      6000,
+      18000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  },
+  {
+    "formula": "Financed Break-Even Occupancy (%)",
+    "implementation": "financedBreakEvenOccupancy",
+    "case": "missing argument 3 (undefined)",
+    "input": [
+      6000,
+      18000,
+      null
+    ],
+    "expected": "incomplete",
+    "actual": "incomplete",
+    "result": "PASS"
+  }
+]

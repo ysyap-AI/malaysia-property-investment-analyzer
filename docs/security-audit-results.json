@@ -1,0 +1,1254 @@
+{
+  "recordedAt": "2026-09-20T07:12:22.887Z",
+  "projectRef": "viddikrrhogcebpbstti",
+  "projectName": "MPIA",
+  "sourceCommit": "420dc449eeb311e3bacf45b5fe760f4021209337",
+  "scope": "Repository migrations installed temporarily in an empty cloud database; all fixtures and application schema rolled back. Does not certify permanent deployment or password-login flows.",
+  "sqlSha256": "39104666eb5911ba85cc2ef3767cfe061dfd6304ace290052be1250627bcf0aa",
+  "summary": {
+    "total": 203,
+    "passed": 203,
+    "failed": 0,
+    "groups": {
+      "1 / anonymous access": 7,
+      "2 / cross-user reads": 14,
+      "3 / cross-user updates": 14,
+      "4 / cross-user deletes": 14,
+      "5 / forged inserts": 14,
+      "6 / database controls": 7,
+      "anonymous mutation": 21,
+      "authentication": 1,
+      "cleanup": 10,
+      "cross-user upserts": 10,
+      "integrity": 14,
+      "ownership changes": 14,
+      "positive control": 63
+    }
+  },
+  "independentCleanupVerification": {
+    "public_tables": 0,
+    "remaining_test_functions": 0,
+    "remaining_test_profile_triggers": 0,
+    "remaining_test_users": 0
+  },
+  "assertions": [
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "acquisition_costs anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "financing anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "investment_criteria anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "operating_expenses anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "profiles anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "properties anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "1 / anonymous access",
+      "result": "PASS",
+      "test_name": "scenario_configs anonymous read denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "acquisition_costs hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "acquisition_costs hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "financing hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "financing hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "investment_criteria hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "investment_criteria hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "operating_expenses hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "operating_expenses hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "profiles hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "profiles hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "properties hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "properties hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "scenario_configs hides other rows from 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "2 / cross-user reads",
+      "result": "PASS",
+      "test_name": "scenario_configs hides other rows from c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "financing rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "financing rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "profiles rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "profiles rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "properties rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "properties rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other update by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "3 / cross-user updates",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other update by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "financing rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "financing rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "profiles rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "profiles rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "properties rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "properties rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other delete by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "4 / cross-user deletes",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other delete by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "financing rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "financing rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "profiles rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "profiles rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "properties rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "properties rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other owner/parent insert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "5 / forged inserts",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects other owner/parent insert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "acquisition_costs has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "financing has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "investment_criteria has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "operating_expenses has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "profiles has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "properties has RLS enabled"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "6 / database controls",
+      "result": "PASS",
+      "test_name": "scenario_configs has RLS enabled"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "acquisition_costs anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "acquisition_costs anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "acquisition_costs anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "financing anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "financing anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "financing anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "investment_criteria anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "investment_criteria anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "investment_criteria anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "operating_expenses anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "operating_expenses anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "operating_expenses anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "profiles anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "profiles anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "profiles anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "properties anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "properties anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "properties anonymous update denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "scenario_configs anonymous delete denied"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "scenario_configs anonymous insert denied"
+    },
+    {
+      "detail": "rows=0; expected=0",
+      "requirement": "anonymous mutation",
+      "result": "PASS",
+      "test_name": "scenario_configs anonymous update denied"
+    },
+    {
+      "detail": "rows=2; expected=2",
+      "requirement": "authentication",
+      "result": "PASS",
+      "test_name": "signup trigger creates both profiles"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "acquisition_costs temporary children removed"
+    },
+    {
+      "detail": "before=0; after=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "Auth user count restored"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "financing temporary children removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "investment_criteria temporary configuration removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "operating_expenses temporary children removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "scenario_configs temporary configuration removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "temporary application tables removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "temporary Auth accounts removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "temporary profiles removed"
+    },
+    {
+      "detail": "remaining=0",
+      "requirement": "cleanup",
+      "result": "PASS",
+      "test_name": "temporary properties removed"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other upsert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects other upsert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "financing rejects other upsert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "financing rejects other upsert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other upsert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects other upsert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other upsert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects other upsert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "profiles rejects other upsert by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "cross-user upserts",
+      "result": "PASS",
+      "test_name": "profiles rejects other upsert by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "acquisition_costs victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "acquisition_costs victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "financing victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "financing victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "investment_criteria victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "investment_criteria victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "operating_expenses victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "operating_expenses victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "profiles victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "profiles victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "properties victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "properties victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "scenario_configs victim row survives attack by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "integrity",
+      "result": "PASS",
+      "test_name": "scenario_configs victim row survives attack by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "acquisition_costs rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "financing rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "financing rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "investment_criteria rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "operating_expenses rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "profiles rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "profiles rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "properties rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "properties rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects owner/parent change by 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "SQLSTATE=42501",
+      "requirement": "ownership changes",
+      "result": "PASS",
+      "test_name": "scenario_configs rejects owner/parent change by c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "acquisition_costs own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "authenticated role and subject 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "authenticated role and subject c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "financing own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own acquisition_costs 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own acquisition_costs c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own criteria 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own criteria c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own financing 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own financing c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own operating_expenses 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own operating_expenses c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=2; expected=2",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own properties 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=2; expected=2",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own properties c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own scenario 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "insert own scenario c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "investment_criteria own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "operating_expenses own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "profiles own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties anonymous role has no subject"
+    },
+    {
+      "detail": "rows=2; expected=2",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=2; expected=2",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "properties own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs anonymous role has no subject"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own delete 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own delete c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own read 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own read c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own update 90e77170-aba4-48fb-b448-9949c93e9606"
+    },
+    {
+      "detail": "rows=1; expected=1",
+      "requirement": "positive control",
+      "result": "PASS",
+      "test_name": "scenario_configs own update c22ddecf-c736-49de-ae90-12ebb5f01ce2"
+    }
+  ]
+}

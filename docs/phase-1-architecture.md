@@ -77,9 +77,26 @@ the others.
 
 - Lovable Cloud auth, email + password for Phase 1 (Google can be added later).
 - `_authenticated/` route subtree gate; unauthenticated visitors redirect to `/auth`.
-- RLS on every table: `using (auth.uid() = user_id)` for select/insert/update/delete.
+- Enable RLS on every exposed table and scope owner policies to `authenticated`.
+  Owner columns must be non-null and reference `auth.users`.
+- For user-owned rows, SELECT/DELETE use `USING (auth.uid() = user_id)`;
+  INSERT uses `WITH CHECK (auth.uid() = user_id)`; UPDATE uses both, so a user
+  cannot read/change another owner's row or transfer their own row to that owner.
+- Property child tables must check the referenced property's ownership in both
+  `USING` and `WITH CHECK` as appropriate. A foreign key or client-supplied child
+  `user_id` alone does not establish ownership of the parent property.
+- Personal investment criteria and scenario configuration need the same owner
+  protections. Property-specific configuration must also check parent ownership.
+  Shared system defaults, if introduced, must not be writable by ordinary users.
+- Server functions must verify the caller and query with that user's identity;
+  never use a service-role client for ordinary user CRUD. Test the database
+  directly as anonymous and two different authenticated users before enabling
+  persistence. See `security-audit.md` for the required test matrix.
 - Roles, if ever needed, go in a separate `user_roles` table with a
   `has_role()` security-definer function — never a column on `profiles`.
+
+These are planned controls, not implemented policies. Policy command semantics
+are documented in [Supabase's RLS guide](https://supabase.com/docs/guides/database/postgres/row-level-security).
 
 **Plain English:** the database itself refuses to hand over another person's
 property, even if the website code had a bug.

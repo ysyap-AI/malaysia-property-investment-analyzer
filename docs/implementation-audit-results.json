@@ -1,0 +1,2168 @@
+﻿{
+    "date":  "2026-09-22",
+    "source_commit":  "d2cc389608c821957cc0b3796712dff29caf1dcc",
+    "branch":  "audit/property-cost-integrity",
+    "scope":  "Properties, Acquisition Costs, Operating Expenses",
+    "deployment":  "Local worktree fixes only; no cloud mutations or push in this audit",
+    "live_schema_project":  "viddikrrhogcebpbstti",
+    "severity":  {
+                     "critical":  0,
+                     "high_fixed":  3,
+                     "medium_remaining":  5,
+                     "low_remaining":  3
+                 },
+    "application_tests":  {
+                              "passed":  82,
+                              "failed":  0,
+                              "files":  4,
+                              "original_tests":  31,
+                              "added_tests":  51,
+                              "cases":  [
+                                            {
+                                                "fullName":  "total acquisition cost adds every cost when all fields are provided",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost treats optional costs entered as zero as real zeros",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost reports unknown optional costs instead of counting them as zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost refuses to produce a total when an important cost is missing",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost handles decimal amounts without floating point noise",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost rejects negative inputs rather than producing a total",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost treats an empty form entry as unknown, never zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost rejects negative amounts typed into the form",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total acquisition cost accepts amounts typed with thousands separators and decimals",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 1,5",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 12,34",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 1,,000",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry ,",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 0x100",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 0b10",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects ambiguous or non-decimal entry 1e3",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property accepts unambiguous entry 1,234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property accepts unambiguous entry 1234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property accepts unambiguous entry .50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property accepts unambiguous entry 0",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property accepts unambiguous entry   ",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules property rejects a finite number too large to preserve monetary precision",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 1,5",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 12,34",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 1,,000",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry ,",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 0x100",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 0b10",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects ambiguous or non-decimal entry 1e3",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition accepts unambiguous entry 1,234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition accepts unambiguous entry 1234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition accepts unambiguous entry .50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition accepts unambiguous entry 0",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition accepts unambiguous entry   ",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules acquisition rejects a finite number too large to preserve monetary precision",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 1,5",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 12,34",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 1,,000",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry ,",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 0x100",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 0b10",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects ambiguous or non-decimal entry 1e3",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating accepts unambiguous entry 1,234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating accepts unambiguous entry 1234.50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating accepts unambiguous entry .50",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating accepts unambiguous entry 0",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating accepts unambiguous entry   ",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "numeric entry integrity across all three modules operating rejects a finite number too large to preserve monetary precision",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid annual conversions: NaN",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid annual conversions: Infinity",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid annual conversions: -Infinity",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid annual conversions: -1",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects a total outside safe monetary precision even when individual amounts fit",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects overflowing acquisition totals",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects overflowing operating totals",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount marks an unrepresentable annual conversion invalid, distinct from missing",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid acquisition writes before reaching the database",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects invalid annualised writes before JSON can turn Infinity into null",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount rejects overflow introduced after otherwise valid monthly input",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "overflow must not become a total or an unknown saved amount round-trips a normal monthly value once, preserving zero and unknown separately",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses adds every expense when all fields are provided",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses treats an entered zero as a confirmed zero expense",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses keeps a missing expense separate from a zero expense",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses produces no total when nothing at all is known",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses handles decimal amounts without floating point noise",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "total annual operating expenses rejects negative expenses rather than producing a total",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "monthly to annual conversion multiplies a monthly amount by twelve",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "monthly to annual conversion keeps an unknown monthly amount unknown",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "monthly to annual conversion converts only the fields entered as monthly",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "operating expense form entries treats an empty entry as unknown, never zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "operating expense form entries rejects negative amounts typed into the form",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "operating expense form entries accepts amounts typed with thousands separators and decimals",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules requires a project name",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules keeps unknown numeric values as null, never zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules keeps unknown text values as null, never empty strings",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules stores a genuine zero when the user types zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules accepts numbers typed with thousands separators",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules rejects text in a numeric field instead of silently using zero",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules validates Malaysian postcodes",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules only allows the agreed property statuses",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules defaults rent evidence to Missing / Not Verified",
+                                                "status":  "passed"
+                                            },
+                                            {
+                                                "fullName":  "property field rules turns a stored record back into form values without inventing zeros",
+                                                "status":  "passed"
+                                            }
+                                        ]
+                          },
+    "schema_tests":  {
+                         "checks":  [
+                                        {
+                                            "name":  "renamed property values and explicit zero survive",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "legacy acquisition costs survive and no purchase price is fabricated",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "legacy monthly expenses are not silently relabelled as annual",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "all three tables retain RLS",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "all twelve ownership policies survive",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "properties.asking_price numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "properties.target_purchase_price numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "properties.bank_valuation numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "properties.expected_monthly_rent numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.purchase_price numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.purchase_price negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.spa_legal_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.spa_legal_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.transfer_stamp_duty numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.transfer_stamp_duty negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.loan_legal_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.loan_legal_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.loan_stamp_duty numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.loan_stamp_duty negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.valuation_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.valuation_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.renovation_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.renovation_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.furnishing_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.furnishing_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.utility_deposits numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.utility_deposits negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.maintenance_deposit numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.maintenance_deposit negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.acquisition_agent_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.acquisition_agent_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.initial_holding_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.initial_holding_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.contingency_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.contingency_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.other_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs.other_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_maintenance_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_maintenance_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_sinking_fund numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_sinking_fund negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_assessment_tax numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_assessment_tax negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_quit_or_parcel_rent numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_quit_or_parcel_rent negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_landlord_insurance numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_landlord_insurance negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_property_management_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_property_management_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_leasing_agent_fee numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_leasing_agent_fee negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_tenancy_documentation numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_tenancy_documentation negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_repair_reserve numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_repair_reserve negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_furniture_replacement_reserve numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_furniture_replacement_reserve negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_cleaning_cost numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_cleaning_cost negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_vacancy_utilities numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_vacancy_utilities negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_bad_debt_allowance numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_bad_debt_allowance negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_other_operating_expenses numeric/nullable/no-default",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses.annual_other_operating_expenses negative rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "tenure invalid enum rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "rent_verification_status invalid enum rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "property_status invalid enum rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "analysis_status invalid enum rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs duplicate child rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs orphan child rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition_costs null parent rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses duplicate child rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses orphan child rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating_expenses null parent rejected",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "property zero and null round trip",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "acquisition zero and null round trip",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "operating annual value, zero and null round trip",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "property deletion cascades to acquisition",
+                                            "passed":  true
+                                        },
+                                        {
+                                            "name":  "property deletion cascades to operating",
+                                            "passed":  true
+                                        }
+                                    ],
+                         "failed":  0,
+                         "passed":  80
+                     },
+    "ownership_tests":  {
+                            "passed":  245,
+                            "failed":  0,
+                            "assertions":  [
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "acquisition_costs anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "financing anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "investment_criteria anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "operating_expenses anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "profiles anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "properties anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "1 / anonymous access",
+                                                   "test_name":  "scenario_configs anonymous read denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "acquisition_costs hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "acquisition_costs hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "financing hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "financing hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "investment_criteria hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "investment_criteria hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "operating_expenses hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "operating_expenses hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "profiles hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "profiles hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "properties hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "properties hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "scenario_configs hides other rows from 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "2 / cross-user reads",
+                                                   "test_name":  "scenario_configs hides other rows from 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "acquisition_costs rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "acquisition_costs rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "financing rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "financing rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "investment_criteria rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "investment_criteria rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "operating_expenses rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "operating_expenses rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "profiles rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "profiles rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "properties rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "properties rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "scenario_configs rejects other update by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "3 / cross-user updates",
+                                                   "test_name":  "scenario_configs rejects other update by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "acquisition_costs rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "acquisition_costs rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "financing rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "financing rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "investment_criteria rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "investment_criteria rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "operating_expenses rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "operating_expenses rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "profiles rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "profiles rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "properties rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "properties rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "scenario_configs rejects other delete by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "4 / cross-user deletes",
+                                                   "test_name":  "scenario_configs rejects other delete by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "acquisition_costs rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "acquisition_costs rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "financing rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "financing rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "investment_criteria rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "investment_criteria rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "operating_expenses rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "operating_expenses rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "profiles rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "profiles rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "properties rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "properties rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "scenario_configs rejects other owner/parent insert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "5 / forged inserts",
+                                                   "test_name":  "scenario_configs rejects other owner/parent insert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "acquisition_costs has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "financing has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "investment_criteria has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "operating_expenses has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "profiles has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "properties has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "6 / database controls",
+                                                   "test_name":  "scenario_configs has RLS enabled",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "acquisition_costs anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "acquisition_costs anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "acquisition_costs anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "financing anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "financing anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "financing anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "investment_criteria anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "investment_criteria anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "investment_criteria anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "operating_expenses anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "operating_expenses anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "operating_expenses anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "profiles anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "profiles anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "profiles anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "properties anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "properties anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "properties anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "scenario_configs anonymous delete denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "scenario_configs anonymous insert denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "anonymous mutation",
+                                                   "test_name":  "scenario_configs anonymous update denied",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=0; expected=0"
+                                               },
+                                               {
+                                                   "requirement":  "authentication",
+                                                   "test_name":  "signup trigger creates both profiles",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=2; expected=2"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "acquisition_costs temporary children removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "Auth user count restored",
+                                                   "result":  "PASS",
+                                                   "detail":  "before=0; after=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "financing temporary children removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "investment_criteria temporary configuration removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "operating_expenses temporary children removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "scenario_configs temporary configuration removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "temporary application tables removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "temporary Auth accounts removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "temporary profiles removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cleanup",
+                                                   "test_name":  "temporary properties removed",
+                                                   "result":  "PASS",
+                                                   "detail":  "remaining=0"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "acquisition_costs rejects other upsert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "acquisition_costs rejects other upsert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "financing rejects other upsert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "financing rejects other upsert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "investment_criteria rejects other upsert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "investment_criteria rejects other upsert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "operating_expenses rejects other upsert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "operating_expenses rejects other upsert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "profiles rejects other upsert by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "cross-user upserts",
+                                                   "test_name":  "profiles rejects other upsert by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "acquisition_costs victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "acquisition_costs victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "financing victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "financing victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "investment_criteria victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "investment_criteria victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "operating_expenses victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "operating_expenses victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "profiles victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "profiles victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "properties victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "properties victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "scenario_configs victim row survives attack by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "integrity",
+                                                   "test_name":  "scenario_configs victim row survives attack by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "acquisition_costs rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "acquisition_costs rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "financing rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "financing rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "investment_criteria rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "investment_criteria rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "operating_expenses rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "operating_expenses rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "profiles rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "profiles rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "properties rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "properties rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "scenario_configs rejects owner/parent change by 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "ownership changes",
+                                                   "test_name":  "scenario_configs rejects owner/parent change by 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "SQLSTATE=42501"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "acquisition_costs own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "authenticated role and subject 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "authenticated role and subject 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "financing own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own acquisition_costs 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own acquisition_costs 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own criteria 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own criteria 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own financing 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own financing 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own operating_expenses 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own operating_expenses 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own properties 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=2; expected=2"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own properties 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=2; expected=2"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own scenario 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "insert own scenario 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "investment_criteria own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "operating_expenses own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "profiles own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=2; expected=2"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=2; expected=2"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "properties own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs anonymous role has no subject",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own delete 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own delete 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own read 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own read 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own update 0741efd7-1928-4d8f-a2bd-07898f334542",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "positive control",
+                                                   "test_name":  "scenario_configs own update 5c43d5f2-28f7-4e61-9122-6e51abb3f865",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "acquisition_costs denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "financing denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "investment_criteria denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "operating_expenses denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "profiles denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "properties denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies REFERENCES to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies REFERENCES to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies TRIGGER to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies TRIGGER to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies TRUNCATE to anon",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               },
+                                               {
+                                                   "requirement":  "table-wide privileges",
+                                                   "test_name":  "scenario_configs denies TRUNCATE to authenticated",
+                                                   "result":  "PASS",
+                                                   "detail":  "rows=1; expected=1"
+                                               }
+                                           ]
+                        },
+    "security_tests":  {
+                           "passed":  6,
+                           "failed":  0,
+                           "scope":  "New source and locally built browser assets; Git hygiene checks use original working copy"
+                       },
+    "cleanup":  {
+                    "auth_users":  0,
+                    "public_tables":  0
+                },
+    "production_build":  "PASS",
+    "sql_sha256":  "53a13872f128bc4037255e57e6f5bc196cb3aa03f29a2019fabb8f2498b4db8a",
+    "migration_sha256":  "36c52c08433030fca536831f027ddb220f7eaf8ef3c2123aabb38a84ffac8018",
+    "typecheck":  "PASS: tsc --noEmit, zero errors",
+    "patch_sha256":  "1e14f9af3e14594c539e50aededc050bf7792027a4eedf916a2fa3af1968f414",
+    "patch_validation":  "git apply --check --cached and git apply --reverse --check passed"
+}
