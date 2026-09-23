@@ -1,85 +1,97 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Building2, FilePlus2, ShieldAlert, Wallet } from "lucide-react";
+import { Building2, ShieldCheck, Calculator, Database } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
-import { MetricCard } from "@/components/common/MetricCard";
-import { PlaceholderSection } from "@/components/common/PlaceholderSection";
-import { PropertiesTable } from "@/components/property/PropertiesTable";
 import { Button } from "@/components/ui/button";
-import { placeholderProperties } from "@/lib/placeholder-data";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Malaysia Property Investment Analyzer" },
+      { title: "Malaysia Property Investment Analyzer" },
       {
         name: "description",
         content:
-          "Overview of your saved Malaysian rental property analyses, portfolio metrics and data confidence.",
+          "Analyse Malaysian residential rental properties with transparent data statuses and private, secure records.",
       },
-      { property: "og:title", content: "Dashboard — Malaysia Property Investment Analyzer" },
+      { property: "og:title", content: "Malaysia Property Investment Analyzer" },
       {
         property: "og:description",
-        content: "Track and review Malaysian residential rental property investment analyses.",
+        content: "Private, evidence-based analysis of Malaysian residential rental property.",
       },
     ],
   }),
-  component: DashboardPage,
+  component: LandingPage,
 });
 
-function DashboardPage() {
+function LandingPage() {
   return (
-    <AppShell
-      title="Dashboard"
-      description="Portfolio overview. Calculation modules are not implemented yet, so figures below are placeholders."
-      actions={
-        <Button asChild>
-          <Link to="/analysis/new">
-            <FilePlus2 className="size-4" /> New Analysis
-          </Link>
-        </Button>
-      }
-    >
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard
-          label="Properties Analyzed"
-          value={String(placeholderProperties.length)}
-          status="user-entered"
-          icon={<Building2 className="size-4" />}
-        />
-        <MetricCard
-          label="Average Net Yield"
-          status="missing"
-          hint="Awaiting calculation engine"
-          icon={<Wallet className="size-4" />}
-        />
-        <MetricCard
-          label="Average Investment Score"
-          status="missing"
-          hint="Awaiting scoring engine"
-        />
-        <MetricCard
-          label="Open Risk Flags"
-          status="missing"
-          hint="Awaiting risk module"
-          icon={<ShieldAlert className="size-4" />}
-        />
-      </div>
-
-      <div className="mt-6 grid gap-6 xl:grid-cols-3">
-        <div className="xl:col-span-2">
-          <PropertiesTable rows={placeholderProperties.slice(0, 4)} caption="Recent analyses" />
+    <div className="min-h-screen bg-background">
+      <header className="flex items-center justify-between border-b border-border px-6 py-4">
+        <div className="flex items-center gap-2">
+          <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Building2 className="size-5" />
+          </span>
+          <span className="text-sm font-semibold">Malaysia Property Investment Analyzer</span>
         </div>
-        <PlaceholderSection
-          title="Portfolio Insights"
-          items={[
-            "Yield distribution chart",
-            "Cash flow summary",
-            "Data confidence breakdown",
-            "Risk flag summary",
-          ]}
-        />
-      </div>
-    </AppShell>
+        <div className="flex gap-2">
+          <Button asChild variant="outline">
+            <Link to="/login">Sign in</Link>
+          </Button>
+          <Button asChild>
+            <Link to="/signup">Create account</Link>
+          </Button>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-5xl px-6 py-16">
+        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight">
+          Evidence-based decisions on Malaysian rental property.
+        </h1>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          Every figure carries a data status, so you always know what is verified, what is
+          estimated, and what is still missing. Your records are private to your account.
+        </p>
+        <div className="mt-8 flex gap-3">
+          <Button asChild size="lg">
+            <Link to="/signup">Get started</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link to="/login">I already have an account</Link>
+          </Button>
+        </div>
+
+        <div className="mt-16 grid gap-4 md:grid-cols-3">
+          <Feature
+            icon={<ShieldCheck className="size-5" />}
+            title="Private by design"
+            body="Your properties, costs and loan details are locked to your account at the database level."
+          />
+          <Feature
+            icon={<Calculator className="size-5" />}
+            title="Deterministic figures"
+            body="Financial calculations arrive in the next phase — no invented numbers in the meantime."
+          />
+          <Feature
+            icon={<Database className="size-5" />}
+            title="Honest data status"
+            body="Unknown values are shown as Missing / Not Verified, never quietly treated as zero."
+          />
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function Feature({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-base">
+          {icon}
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground">{body}</CardContent>
+    </Card>
   );
 }
