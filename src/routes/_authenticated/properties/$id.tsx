@@ -11,6 +11,7 @@ import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPan
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
 import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
 import { FinancingPanel } from "@/components/property/FinancingPanel";
+import { ScenariosPanel } from "@/components/property/ScenariosPanel";
 import {
   AnalysisStatusBadge,
   PropertyStatusBadge,
@@ -202,10 +203,7 @@ function PropertyDetailsPage() {
             </TabsContent>
 
             <TabsContent value="scenarios" className="mt-4">
-              <PlaceholderSection
-                title="Scenario Analysis"
-                items={["Bear case", "Base case", "Bull case"]}
-              />
+              <ScenariosPanel propertyId={id} />
             </TabsContent>
 
             <TabsContent value="risk" className="mt-4">
