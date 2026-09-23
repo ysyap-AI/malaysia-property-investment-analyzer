@@ -11,6 +11,7 @@ import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPan
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
 import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
 import { FinancingPanel } from "@/components/property/FinancingPanel";
+import { ScoresPanel } from "@/components/property/ScoresPanel";
 import { ScenariosPanel } from "@/components/property/ScenariosPanel";
 import {
   AnalysisStatusBadge,
@@ -125,6 +126,7 @@ function PropertyDetailsPage() {
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="financials">Financials</TabsTrigger>
               <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
+              <TabsTrigger value="scores">Scores</TabsTrigger>
               <TabsTrigger value="risk">Risk</TabsTrigger>
             </TabsList>
 
@@ -204,6 +206,10 @@ function PropertyDetailsPage() {
 
             <TabsContent value="scenarios" className="mt-4">
               <ScenariosPanel propertyId={id} />
+            </TabsContent>
+
+            <TabsContent value="scores" className="mt-4">
+              <ScoresPanel propertyId={id} />
             </TabsContent>
 
             <TabsContent value="risk" className="mt-4">
