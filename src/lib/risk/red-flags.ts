@@ -99,9 +99,10 @@ export function checkValuationShortfall(i: RedFlagInputs, c: RedFlagConfig): Red
   if (missing.length) return { key: "valuation_below_target", risk_name: name, reason: `Cannot check — ${missing.join(" and ")} Missing / Not Verified.` };
   const target = i.targetPurchasePrice as number;
   if (target <= 0) return { key: "valuation_below_target", risk_name: name, reason: "Target purchase price must be above zero." };
-  const shortfall = r2(((target - (i.bankValuation as number)) / target) * 100);
+  const rawShortfall = ((target - (i.bankValuation as number)) / target) * 100;
+  const shortfall = r2(rawShortfall);
   const t = c.valuationShortfall.thresholdPercent;
-  if (shortfall < t) return null;
+  if (rawShortfall < t) return null;
   return {
     key: "valuation_below_target", risk_name: name, severity: c.valuationShortfall.severity,
     trigger_rule: `(Target price − bank valuation) / target price ≥ ${t}%`,
