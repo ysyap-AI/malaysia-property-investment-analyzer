@@ -65,14 +65,14 @@ describe("weight calculation", () => {
     }
   });
   it("weighted average matches hand calculation", () => {
-    // net 75×25, gross 50×10, cash 40×25, coc 25×20, BE 50×20 → 4550/100
+    // net 75×25, gross 50×10, cash 40×25, coc 25×20, BE 50×20 → 4875/100
     const r = calculateInvestmentScore(
       { netRentalYield: ok(4.2), grossRentalYield: ok(5.5), monthlyCashFlow: ok(-100), cashOnCashReturn: ok(1), financedBreakEvenOccupancy: ok(85) },
       DEFAULT_SCORING_CONFIG,
     );
-    expect(r.overall_score).toBe(45.5);
+    expect(r.overall_score).toBe(48.75);
     expect(r.recommendation!.key).toBe("weak");
-    expect(r.categories.reduce((s, c) => s + (c.weighted_score ?? 0), 0)).toBeCloseTo(45.5, 2);
+    expect(r.categories.reduce((s, c) => s + (c.weighted_score ?? 0), 0)).toBeCloseTo(48.75, 2);
   });
   it("changing a weight changes the result", () => {
     const input = { ...full, monthlyCashFlow: ok(-1000) }; // 0 points
