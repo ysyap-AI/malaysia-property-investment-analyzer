@@ -10,6 +10,7 @@ import { StatusBadge } from "@/components/common/StatusBadge";
 import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPanel";
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
 import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
+import { FinancingPanel } from "@/components/property/FinancingPanel";
 import {
   AnalysisStatusBadge,
   PropertyStatusBadge,
@@ -193,13 +194,10 @@ function PropertyDetailsPage() {
             <TabsContent value="financials" className="mt-4 space-y-6">
               <AcquisitionCostsPanel propertyId={id} />
               <OperatingExpensesPanel propertyId={id} />
+              <FinancingPanel propertyId={id} />
               <PlaceholderSection
                 title="Still to come"
-                items={[
-                  "Loan instalment schedule",
-                  "Net operating income",
-                  "Cash-on-cash return",
-                ]}
+                items={["Net operating income", "Cash-on-cash return"]}
               />
             </TabsContent>
 
