@@ -4,13 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
 
 export function ScoresPanel({ propertyId }: { propertyId: string }) {
-  const { invest, confidence, isLoading } = usePropertyAnalysis(propertyId);
+  const { invest, confidence, recommendation: rec, isLoading } = usePropertyAnalysis(propertyId);
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading…</p>;
 
   const warn = invest.overall_score !== null && invest.overall_score >= 55 && confidence.score < 60;
 
   return (
     <div className="space-y-6">
+      <Card className={rec.recommendation === "REJECT" ? "border-destructive" : ""}>
+        <CardHeader><CardTitle className="text-base">Recommendation (rule-based, not AI)</CardTitle></CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <p className="text-2xl font-semibold tracking-wide">{rec.recommendation}</p>
+          <ul className="list-disc space-y-1 pl-5">{rec.reasons.map((r) => <li key={r}>{r}</li>)}</ul>
+          {rec.missing_information.length ? (
+            <p><span className="font-medium">Missing information:</span> {rec.missing_information.join(", ")}</p>
+          ) : null}
+          {rec.critical_risks.length ? (
+            <p className="text-destructive"><span className="font-medium">Critical risks:</span> {rec.critical_risks.map((c) => c.risk_name).join(", ")}</p>
+          ) : null}
+          <p className="text-muted-foreground">{rec.confidence_context}</p>
+          <p className="text-xs text-muted-foreground">Rules triggered: {rec.rules_triggered.join(", ")}</p>
+        </CardContent>
+      </Card>
       <div className="rounded-md border border-warning/40 bg-warning/10 p-4 text-sm text-foreground">
         <p className="flex items-center gap-2 font-medium">
           <AlertTriangle className="size-4 text-warning" /> Two separate scores — never read one without the other
