@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
 import { DEFAULT_CONFIDENCE_CONFIG } from "@/config/confidence";
+import { DEFAULT_RECOMMENDATION_CONFIG } from "@/config/recommendation";
 import { DEFAULT_RED_FLAG_CONFIG } from "@/config/red-flags";
 import { DEFAULT_SCENARIOS } from "@/config/scenarios";
 import { DEFAULT_SCORING_CONFIG } from "@/config/scoring";
@@ -14,6 +15,7 @@ import { acquisitionKeys, getAcquisitionCosts } from "@/lib/property/acquisition
 import { financingKeys, getFinancing } from "@/lib/property/financing-api";
 import { getOperatingExpenses, operatingExpenseKeys } from "@/lib/property/operating-expenses-api";
 import { getProperty, propertyKeys } from "@/lib/property/property-api";
+import { recommend } from "@/lib/recommendations/recommendation";
 import { evaluateRedFlags } from "@/lib/risk/red-flags";
 import { runScenario } from "@/lib/scenarios/scenario-engine";
 import { calculateDataConfidence } from "@/lib/scoring/data-confidence";
@@ -82,7 +84,23 @@ export function usePropertyAnalysis(propertyId: string) {
       },
       DEFAULT_RED_FLAG_CONFIG,
     );
-    return { invest, confidence, redFlags };
+    const imp: Record<string, number | null | undefined> = {
+      monthly_rent: p?.expected_monthly_rent, purchase_price: a?.purchase_price,
+      annual_interest_rate_percent: f?.annual_interest_rate_percent, loan_tenure_years: f?.loan_tenure_years,
+      annual_maintenance_fee: o?.annual_maintenance_fee,
+    };
+    const recommendation = recommend(
+      {
+        investmentScore: invest.overall_score,
+        dataConfidenceScore: confidence.score,
+        redFlags: redFlags.flags,
+        missingRequired: DEFAULT_RED_FLAG_CONFIG.requiredFields
+          .filter((x) => typeof imp[x.key] !== "number" || !Number.isFinite(imp[x.key]))
+          .map((x) => x.label),
+      },
+      DEFAULT_RECOMMENDATION_CONFIG,
+    );
+    return { invest, confidence, redFlags, recommendation };
   }, [property.data, acq.data, opex.data, fin.data]);
 
   const isLoading = property.isLoading || acq.isLoading || opex.isLoading || fin.isLoading;
