@@ -221,10 +221,9 @@ export type ReturnsResult = {
   financedBreakEvenOccupancy: MetricResult;
 };
 
-function dep(r: MetricResult, name: string): number | null {
-  return r.status === "ok" ? r.value : ((depNames.set(r, name), null));
+function dep(r: MetricResult): number | null {
+  return r.status === "ok" ? r.value : null;
 }
-const depNames = new WeakMap<MetricResult, string>();
 
 /** Replaces a dependency's generic input name with its own missing inputs when upstream failed. */
 function explain(result: MetricResult, upstream: Record<string, MetricResult>): MetricResult {
@@ -240,25 +239,25 @@ function explain(result: MetricResult, upstream: Record<string, MetricResult>): 
 export function calculateReturns(i: ReturnsInputs): ReturnsResult {
   const par = potentialAnnualRent(i.monthlyRent);
   const ear = effectiveAnnualRent(i.monthlyRent, i.occupiedMonths);
-  const noi = explain(netOperatingIncome(dep(ear, "effectiveAnnualRent"), i.annualOperatingExpenses), {
+  const noi = explain(netOperatingIncome(dep(ear), i.annualOperatingExpenses), {
     effectiveAnnualRent: ear,
   });
-  const acf = explain(annualCashFlow(dep(noi, "noi"), i.annualDebtService), { noi });
+  const acf = explain(annualCashFlow(dep(noi), i.annualDebtService), { noi });
   const cnf = acquisitionCostsNotFinanced(i.totalAcquisitionCost, i.purchasePrice);
-  const ici = explain(initialCashInvested(i.downPayment, dep(cnf, "cnf")), { acquisitionCostsNotFinanced: cnf });
-  const parV = dep(par, "par");
+  const ici = explain(initialCashInvested(i.downPayment, dep(cnf)), { acquisitionCostsNotFinanced: cnf });
+  const parV = dep(par);
   return {
     potentialAnnualRent: par,
     effectiveAnnualRent: ear,
     grossRentalYield: explain(grossRentalYield(parV, i.purchasePrice), { potentialAnnualRent: par }),
     yieldOnTotalCost: explain(yieldOnTotalCost(parV, i.totalAcquisitionCost), { potentialAnnualRent: par }),
     netOperatingIncome: noi,
-    netRentalYield: explain(netRentalYield(dep(noi, "noi"), i.totalAcquisitionCost), { noi }),
-    monthlyCashFlow: explain(monthlyCashFlow(dep(noi, "noi"), i.monthlyInstalment), { noi }),
+    netRentalYield: explain(netRentalYield(dep(noi), i.totalAcquisitionCost), { noi }),
+    monthlyCashFlow: explain(monthlyCashFlow(dep(noi), i.monthlyInstalment), { noi }),
     annualCashFlow: acf,
     acquisitionCostsNotFinanced: cnf,
     initialCashInvested: ici,
-    cashOnCashReturn: explain(cashOnCashReturn(dep(acf, "acf"), dep(ici, "ici")), {
+    cashOnCashReturn: explain(cashOnCashReturn(dep(acf), dep(ici)), {
       annualCashFlow: acf,
       initialCashInvested: ici,
     }),
