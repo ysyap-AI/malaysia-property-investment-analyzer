@@ -7,7 +7,16 @@ import type { ScoreBand, ScoreCategoryConfig, ScoringConfig } from "@/config/sco
 
 export type DataAvailability = "available" | "missing" | "invalid" | "disabled";
 
+/** Everything Engine B may read: Engine A returns plus the Bear-case cash flow from the Scenario Engine. */
+export type ScoringInputs = Partial<ReturnsResult> & { bearMonthlyCashFlow?: MetricResult };
+
+export const MISSING_EVIDENCE_LABEL = "Unavailable / Missing Evidence";
+
 export type CategoryScore = {
+  category_key: string;
+  category_name: string;
+  enabled: boolean;
+  scoring_direction: "higher-is-better" | "lower-is-better";
   key: string;
   label: string;
   raw_value: number | null;
@@ -55,6 +64,8 @@ export function validateScoringConfig(config: ScoringConfig): string[] {
   }
   const totalWeight = config.categories.filter((c) => c.enabled).reduce((s, c) => s + c.weight, 0);
   if (totalWeight <= 0) errors.push("At least one enabled category needs a weight above 0");
+  if (config.normalisationPolicy !== "renormalise-available" && config.normalisationPolicy !== "missing-as-zero")
+    errors.push("normalisationPolicy must be renormalise-available or missing-as-zero");
   if (config.minimumDataCoverage < 0 || config.minimumDataCoverage > 1)
     errors.push("minimumDataCoverage must be between 0 and 1");
   return errors;
@@ -65,7 +76,10 @@ function fmt(v: number, unit: "%" | "RM") {
 }
 
 function scoreCategory(cat: ScoreCategoryConfig, metric: MetricResult | undefined, totalWeight: number): CategoryScore {
-  const base = { key: cat.key, label: cat.label, weight: cat.weight };
+  const base = {
+    category_key: cat.key, category_name: cat.label, enabled: cat.enabled, scoring_direction: cat.direction,
+    key: cat.key, label: cat.label, weight: cat.weight,
+  };
   if (!cat.enabled) {
     return {
       ...base, raw_value: null, raw_score: null, normalised_weight: 0, weighted_score: null,
@@ -79,7 +93,7 @@ function scoreCategory(cat: ScoreCategoryConfig, metric: MetricResult | undefine
     return {
       ...base, raw_value: null, raw_score: null, normalised_weight: share, weighted_score: null,
       matched_band: null, data_availability_status: "missing",
-      explanation: `${cat.label} cannot be scored — required data is Missing / Not Verified.${miss} It is not treated as zero.`,
+      explanation: `${cat.label} is ${MISSING_EVIDENCE_LABEL} — required data is Missing / Not Verified.${miss} It is not treated as zero.`,
     };
   }
   if (metric.status === "invalid") {
@@ -104,7 +118,7 @@ function scoreCategory(cat: ScoreCategoryConfig, metric: MetricResult | undefine
   };
 }
 
-export function calculateInvestmentScore(returns: Partial<ReturnsResult>, config: ScoringConfig): InvestmentScore {
+export function calculateInvestmentScore(returns: ScoringInputs, config: ScoringConfig): InvestmentScore {
   const errors = validateScoringConfig(config);
   if (errors.length) throw new Error(`Invalid scoring config: ${errors.join("; ")}`);
 
@@ -126,14 +140,17 @@ export function calculateInvestmentScore(returns: Partial<ReturnsResult>, config
     return { config_version: config.version, categories, overall_score: null, data_coverage: coverage, recommendation: null, status: "insufficient-data", notes };
   }
 
-  // Missing categories are excluded and the remaining weights re-normalised,
-  // so a missing value is never scored as zero. Coverage is reported alongside.
+  // Policy "renormalise-available": missing categories excluded, remaining weights rescaled.
+  // Policy "missing-as-zero": missing enabled categories count as 0 (only if explicitly configured).
+  const denominator = config.normalisationPolicy === "missing-as-zero" ? totalWeight : coveredWeight;
   const overall = r2(
-    scored.reduce((s, c) => s + (c.raw_score as number) * c.weight, 0) / coveredWeight,
+    scored.reduce((s, c) => s + (c.raw_score as number) * c.weight, 0) / denominator,
   );
+  if (config.normalisationPolicy === "missing-as-zero" && coveredWeight < totalWeight)
+    notes.push("Missing categories are counted as 0 because the scoring settings say so.");
   const band = config.recommendationBands.find((b) => overall >= b.minScore) ?? null;
   const complete = coveredWeight === totalWeight;
-  if (!complete) notes.push("Some categories lack data; the overall score uses only the categories that could be scored.");
+  if (!complete && config.normalisationPolicy === "renormalise-available") notes.push("Some categories lack data; the overall score uses only the categories that could be scored.");
 
   return {
     config_version: config.version,

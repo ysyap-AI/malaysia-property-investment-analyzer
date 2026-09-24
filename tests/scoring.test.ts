@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 
 import { DEFAULT_SCORING_CONFIG, type ScoringConfig } from "@/config/scoring";
-import type { MetricResult, ReturnsResult } from "@/lib/finance/returns";
-import { calculateInvestmentScore, matchBand, validateScoringConfig } from "@/lib/scoring/investment-score";
+import type { MetricResult } from "@/lib/finance/returns";
+import { calculateInvestmentScore, matchBand, validateScoringConfig, type ScoringInputs } from "@/lib/scoring/investment-score";
 
 const ok = (value: number): MetricResult => ({ status: "ok", value });
 const missing = (...m: string[]): MetricResult => ({ status: "incomplete", value: null, missingInputs: m });
 
-const full: Partial<ReturnsResult> = {
+const full: ScoringInputs = {
+  bearMonthlyCashFlow: ok(0),
   netRentalYield: ok(5),
   grossRentalYield: ok(7),
   monthlyCashFlow: ok(500),
@@ -65,14 +66,14 @@ describe("weight calculation", () => {
     }
   });
   it("weighted average matches hand calculation", () => {
-    // net 75×25, gross 50×10, cash 40×25, coc 25×20, BE 50×20 → 4875/100
+    // net 75×25, gross 50×10, cash 40×25, coc 25×20, BE 50×20, resilience 40×15 → 5475/115
     const r = calculateInvestmentScore(
-      { netRentalYield: ok(4.2), grossRentalYield: ok(5.5), monthlyCashFlow: ok(-100), cashOnCashReturn: ok(1), financedBreakEvenOccupancy: ok(85) },
+      { bearMonthlyCashFlow: ok(-500), netRentalYield: ok(4.2), grossRentalYield: ok(5.5), monthlyCashFlow: ok(-100), cashOnCashReturn: ok(1), financedBreakEvenOccupancy: ok(85) },
       DEFAULT_SCORING_CONFIG,
     );
-    expect(r.overall_score).toBe(48.75);
+    expect(r.overall_score).toBe(47.61);
     expect(r.recommendation!.key).toBe("weak");
-    expect(r.categories.reduce((s, c) => s + (c.weighted_score ?? 0), 0)).toBeCloseTo(48.75, 2);
+    expect(r.categories.reduce((s, c) => s + (c.weighted_score ?? 0), 0)).toBeCloseTo(47.61, 1);
   });
   it("changing a weight changes the result", () => {
     const input = { ...full, monthlyCashFlow: ok(-1000) }; // 0 points
@@ -97,7 +98,7 @@ describe("missing category behaviour", () => {
     expect(c.explanation).toContain("downPayment");
     expect(r.overall_score).toBe(100);
     expect(r.status).toBe("partial");
-    expect(r.data_coverage).toBe(0.8);
+    expect(r.data_coverage).toBeCloseTo(0.826, 3); // 95/115
   });
   it("too little data gives no overall score or recommendation", () => {
     const r = calculateInvestmentScore({ netRentalYield: ok(5), grossRentalYield: ok(7) }, DEFAULT_SCORING_CONFIG);
@@ -130,6 +131,62 @@ describe("disabled category behaviour", () => {
     expect(r.data_coverage).toBe(1);
   });
   it("records config version", () => {
-    expect(calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG).config_version).toBe("scoring-v1");
+    expect(calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG).config_version).toBe("scoring-v2");
+  });
+});
+
+describe("financing resilience (Bear-case cash flow)", () => {
+  const f = cat("financing_resilience");
+  it("exact, below and above thresholds", () => {
+    expect(matchBand(0, f)!.points).toBe(100);
+    expect(matchBand(0.01, f)!.points).toBe(100);
+    expect(matchBand(-0.01, f)!.points).toBe(70);
+    expect(matchBand(-300, f)!.points).toBe(70);
+    expect(matchBand(-800, f)!.points).toBe(40);
+    expect(matchBand(-1500, f)!.points).toBe(15);
+    expect(matchBand(-1500.01, f)!.points).toBe(0);
+  });
+  it("missing Bear-case data is Unavailable / Missing Evidence, not zero", () => {
+    const { bearMonthlyCashFlow: _b, ...rest } = full;
+    const r = calculateInvestmentScore(rest, DEFAULT_SCORING_CONFIG);
+    const c = r.categories.find((x) => x.category_key === "financing_resilience")!;
+    expect(c.data_availability_status).toBe("missing");
+    expect(c.explanation).toContain("Unavailable / Missing Evidence");
+    expect(c.raw_score).toBeNull();
+    expect(r.overall_score).toBe(100);
+  });
+});
+
+describe("normalisation policy", () => {
+  const input = { ...full, cashOnCashReturn: missing("downPayment") };
+  it("default renormalises across available categories", () => {
+    expect(DEFAULT_SCORING_CONFIG.normalisationPolicy).toBe("renormalise-available");
+    expect(calculateInvestmentScore(input, DEFAULT_SCORING_CONFIG).overall_score).toBe(100);
+  });
+  it("missing-as-zero only when explicitly configured", () => {
+    const r = calculateInvestmentScore(input, cfg((c) => { c.normalisationPolicy = "missing-as-zero"; }));
+    expect(r.overall_score).toBe(82.61); // 9500/115
+  });
+  it("normalised weights of available categories sum to 1", () => {
+    const r = calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG);
+    expect(r.categories.reduce((s, c) => s + c.normalised_weight, 0)).toBeCloseTo(1, 3);
+  });
+});
+
+describe("generic category fields, determinism, no AI", () => {
+  it("every category exposes the required fields", () => {
+    for (const c of calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG).categories) {
+      for (const k of ["category_key", "category_name", "enabled", "weight", "scoring_direction", "raw_score", "weighted_score", "explanation", "data_availability_status"])
+        expect(c).toHaveProperty(k);
+    }
+  });
+  it("repeated runs give identical output", () => {
+    const a = calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG);
+    for (let i = 0; i < 20; i++) expect(calculateInvestmentScore(full, DEFAULT_SCORING_CONFIG)).toEqual(a);
+  });
+  it("engine source has no AI, network or randomness", async () => {
+    const { readFileSync } = await import("node:fs");
+    const src = readFileSync("src/lib/scoring/investment-score.ts", "utf8") + readFileSync("src/config/scoring.ts", "utf8");
+    expect(src).not.toMatch(/fetch\(|Math\.random|Date\.now|openai|gemini|ai-gateway|lovable\.ai/i);
   });
 });

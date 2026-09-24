@@ -34,8 +34,7 @@ export function usePropertyAnalysis(propertyId: string) {
     const f = fin.data ?? null;
     const acqValues = a ? Object.fromEntries(ACQUISITION_COST_FIELDS.map((k) => [k, a[k] ?? null])) : null;
     const opexValues = o ? Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((k) => [k, o[k] ?? null])) : null;
-    const base = runScenario(
-      {
+    const scenarioInputs = {
         monthlyRent: p?.expected_monthly_rent ?? null,
         totalAcquisitionCost: a ? calculateTotalAcquisitionCost(a).total ?? null : null,
         operatingExpenses: opexValues ?? {},
@@ -48,10 +47,13 @@ export function usePropertyAnalysis(propertyId: string) {
           user_provided_monthly_instalment: f?.user_provided_monthly_instalment ?? null,
           use_user_provided_instalment: f?.use_user_provided_instalment ?? false,
         },
-      },
-      DEFAULT_SCENARIOS.base,
+      };
+    const base = runScenario(scenarioInputs, DEFAULT_SCENARIOS.base);
+    const bear = runScenario(scenarioInputs, DEFAULT_SCENARIOS.bear);
+    const invest = calculateInvestmentScore(
+      { ...base.returns, bearMonthlyCashFlow: bear.returns.monthlyCashFlow },
+      DEFAULT_SCORING_CONFIG,
     );
-    const invest = calculateInvestmentScore(base.returns, DEFAULT_SCORING_CONFIG);
     const confidence = calculateDataConfidence(
       {
         rentEvidence: p?.rent_verification_status ?? null,

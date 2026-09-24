@@ -6,10 +6,20 @@
 
 import type { ReturnsResult } from "@/lib/finance/returns";
 
-export const SCORING_CONFIG_VERSION = "scoring-v1";
+export const SCORING_CONFIG_VERSION = "scoring-v2";
 
 /** Which Engine A result a category reads. */
-export type MetricKey = keyof ReturnsResult;
+export type MetricKey = keyof ReturnsResult | "bearMonthlyCashFlow";
+
+/**
+ * Weight normalisation policy.
+ * - "renormalise-available" (default): only enabled categories WITH data count;
+ *   their weights are rescaled to sum to 100%. Missing categories are excluded, never zero.
+ * - "missing-as-zero": missing enabled categories stay in the denominator and score 0.
+ *   Only used if explicitly configured.
+ * Disabled categories never count under either policy.
+ */
+export type NormalisationPolicy = "renormalise-available" | "missing-as-zero";
 
 /**
  * A band awards points when the value meets its bound.
@@ -38,6 +48,7 @@ export type ScoringConfig = {
   categories: ScoreCategoryConfig[];
   /** Minimum share (0–1) of enabled weight that must have data before an overall score is given. */
   minimumDataCoverage: number;
+  normalisationPolicy: NormalisationPolicy;
   /** Checked top to bottom; first band whose minScore <= overall score wins. */
   recommendationBands: RecommendationBand[];
 };
@@ -45,6 +56,7 @@ export type ScoringConfig = {
 export const DEFAULT_SCORING_CONFIG: ScoringConfig = {
   version: SCORING_CONFIG_VERSION,
   minimumDataCoverage: 0.6,
+  normalisationPolicy: "renormalise-available",
   categories: [
     {
       key: "net_rental_yield",
@@ -129,6 +141,25 @@ export const DEFAULT_SCORING_CONFIG: ScoringConfig = {
         { atMost: 90, points: 50, label: "Above 80% to 90%" },
         { atMost: 100, points: 25, label: "Above 90% to 100%" },
         { points: 0, label: "Above 100%" },
+      ],
+    },
+    {
+      // Financing resilience = monthly cash flow in the Bear scenario
+      // (higher rate, lower rent, more vacancy). Read from the Scenario Engine, not recalculated.
+      key: "financing_resilience",
+      label: "Financing resilience (Bear-case cash flow)",
+      group: "financial",
+      metric: "bearMonthlyCashFlow",
+      unit: "RM",
+      direction: "higher-is-better",
+      enabled: true,
+      weight: 15,
+      bands: [
+        { atLeast: 0, points: 100, label: "RM 0 or more" },
+        { atLeast: -300, points: 70, label: "RM -300 to under RM 0" },
+        { atLeast: -800, points: 40, label: "RM -800 to under RM -300" },
+        { atLeast: -1500, points: 15, label: "RM -1,500 to under RM -800" },
+        { points: 0, label: "Below RM -1,500" },
       ],
     },
   ],
