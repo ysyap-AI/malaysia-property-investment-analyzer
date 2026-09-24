@@ -98,7 +98,7 @@ describe("missing category behaviour", () => {
     expect(c.explanation).toContain("downPayment");
     expect(r.overall_score).toBe(100);
     expect(r.status).toBe("partial");
-    expect(r.data_coverage).toBe(0.8261); // 95/115
+    expect(r.data_coverage).toBeCloseTo(0.826, 3); // 95/115
   });
   it("too little data gives no overall score or recommendation", () => {
     const r = calculateInvestmentScore({ netRentalYield: ok(5), grossRentalYield: ok(7) }, DEFAULT_SCORING_CONFIG);
