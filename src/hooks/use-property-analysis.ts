@@ -99,6 +99,13 @@ export function usePropertyAnalysis(propertyId: string) {
     };
     const recommendation = recommend(
       {
+        financials: {
+          grossYield: val(base.returns.grossRentalYield),
+          netYield: val(base.returns.netRentalYield),
+          monthlyCashFlow: val(base.returns.monthlyCashFlow),
+          cashOnCashReturn: val(base.returns.cashOnCashReturn),
+          financedBreakEvenOccupancy: val(base.returns.financedBreakEvenOccupancy),
+        },
         investmentScore: invest.overall_score,
         dataConfidenceScore: confidence.score,
         redFlags: redFlags.flags,

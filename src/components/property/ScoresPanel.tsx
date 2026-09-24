@@ -22,7 +22,8 @@ export function ScoresPanel({ propertyId }: { propertyId: string }) {
           {rec.critical_risks.length ? (
             <p className="text-destructive"><span className="font-medium">Critical risks:</span> {rec.critical_risks.map((c) => c.risk_name).join(", ")}</p>
           ) : null}
-          <p className="text-muted-foreground">{rec.confidence_context}</p>
+          <p className="text-muted-foreground">{rec.investment_score_context}</p>
+          <p className="text-muted-foreground">{rec.data_confidence_context}</p>
           <p className="text-xs text-muted-foreground">Rules triggered: {rec.rules_triggered.join(", ")}</p>
         </CardContent>
       </Card>
