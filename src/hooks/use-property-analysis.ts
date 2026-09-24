@@ -76,6 +76,12 @@ export function usePropertyAnalysis(propertyId: string) {
         rentEvidence: p?.rent_verification_status ?? null,
         bankValuation: p?.bank_valuation ?? null,
         targetPurchasePrice: p?.target_purchase_price ?? null,
+        operatingExpenses: opexValues,
+        acquisitionCosts: acqValues,
+        financing: f
+          ? { loanToValuePercent: f.loan_to_value_percent, loanAmount: f.loan_amount, annualInterestRatePercent: f.annual_interest_rate_percent, loanTenureYears: f.loan_tenure_years }
+          : null,
+        cashOnCashReturn: val(base.returns.cashOnCashReturn),
         importantFields: {
           monthly_rent: p?.expected_monthly_rent ?? null,
           purchase_price: a?.purchase_price ?? null,

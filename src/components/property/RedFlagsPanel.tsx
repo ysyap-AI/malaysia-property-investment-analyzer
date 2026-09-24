@@ -7,6 +7,7 @@ const STYLE: Record<RedFlag["severity"], string> = {
   critical: "border-destructive bg-destructive/10",
   high: "border-warning bg-warning/10",
   medium: "border-border bg-muted",
+  low: "border-border bg-card",
 };
 
 function FlagCard({ f }: { f: RedFlag }) {
@@ -15,7 +16,7 @@ function FlagCard({ f }: { f: RedFlag }) {
       <div className="flex items-center justify-between gap-2">
         <p className="flex items-center gap-2 font-semibold">
           {f.severity === "critical" ? <AlertOctagon className="size-4 text-destructive" /> : <AlertTriangle className="size-4 text-warning" />}
-          {f.risk_name}
+          <span className="text-xs text-muted-foreground">{f.risk_code}</span> {f.risk_name}
         </p>
         <span className={`rounded px-2 py-0.5 text-xs font-semibold uppercase ${f.severity === "critical" ? "bg-destructive text-destructive-foreground" : "bg-warning/20 text-foreground"}`}>
           {f.severity}
@@ -26,6 +27,7 @@ function FlagCard({ f }: { f: RedFlag }) {
         <dt className="text-muted-foreground">Rule</dt><dd>{f.trigger_rule}</dd>
         <dt className="text-muted-foreground">Actual</dt><dd className="font-medium">{f.actual_value}</dd>
         <dt className="text-muted-foreground">Threshold</dt><dd>{f.threshold}</dd>
+        <dt className="text-muted-foreground">Evidence</dt><dd>{f.evidence_status}</dd>
       </dl>
     </div>
   );
