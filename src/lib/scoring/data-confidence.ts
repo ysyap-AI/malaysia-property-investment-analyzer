@@ -16,11 +16,27 @@ export type ConfidenceInputs = {
   /** null = no operating expense record saved. */
   operatingExpenses: Record<string, Num> | null;
   /** null = no financing record saved. */
-  financing: { bankQuoteVerified: boolean; annualInterestRatePercent: Num; loanTenureYears: Num } | null;
+  financing: {
+    bankQuoteVerified: boolean;
+    annualInterestRatePercent: Num;
+    loanTenureYears: Num;
+    /** Either loan-to-value % or loan amount makes the loan size known. Omit when unknown to the caller. */
+    loanToValuePercent?: Num;
+    loanAmount?: Num;
+  } | null;
   bankValuation: Num;
 };
 
+export type EvidenceStatus = "Verified" | "User Entered" | "Estimated" | "Listing Data" | "Missing / Not Verified";
+
 export type ConfidenceFactorResult = {
+  factor_key: ConfidenceFactorKey;
+  description: string;
+  /** Configured weight (max points this factor can deduct). */
+  weight: number;
+  /** Points this factor keeps out of its weight (weight − deduction). */
+  contribution: number;
+  evidence_status: EvidenceStatus | "Not assessed yet";
   key: ConfidenceFactorKey;
   label: string;
   status: "full" | "deducted" | "not-available-in-phase";
@@ -36,7 +52,12 @@ export type DataConfidence = {
   factors: ConfidenceFactorResult[];
 };
 
-function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cfg: ConfidenceConfig): [number, string] {
+const EV: Record<RentEvidence, EvidenceStatus> = {
+  verified: "Verified", "user-entered": "User Entered", estimated: "Estimated", "listing-data": "Listing Data", missing: "Missing / Not Verified",
+};
+const M: EvidenceStatus = "Missing / Not Verified";
+
+function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cfg: ConfidenceConfig): [number, string, EvidenceStatus] {
   switch (key) {
     case "rent_evidence": {
       const ev = i.rentEvidence ?? "missing";
@@ -48,25 +69,40 @@ function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cf
         "listing-data": "Rent is taken from listings — advertised rent is not verified achieved rent.",
         missing: "Rent evidence is Missing / Not Verified.",
       };
-      return [d, msg[ev]];
+      return [d, msg[ev], EV[ev]];
     }
     case "acquisition_costs_completeness":
     case "operating_expenses_completeness": {
       const rec = key === "acquisition_costs_completeness" ? i.acquisitionCosts : i.operatingExpenses;
       const name = key === "acquisition_costs_completeness" ? "acquisition cost" : "operating expense";
-      if (!rec) return [max, `No ${name} details have been saved.`];
+      if (!rec) return [max, `No ${name} details have been saved.`, M];
       const fields = Object.keys(rec);
       const missing = fields.filter((f) => !known(rec[f]));
-      if (!missing.length) return [0, `All ${fields.length} ${name} fields are filled in (entered zeros count as known).`];
-      return [max * (missing.length / fields.length), `${missing.length} of ${fields.length} ${name} fields are Missing / Not Verified: ${missing.join(", ")}.`];
+      if (!missing.length) return [0, `All ${fields.length} ${name} fields are filled in (entered zeros count as known).`, "User Entered"];
+      return [max * (missing.length / fields.length), `${missing.length} of ${fields.length} ${name} fields are Missing / Not Verified: ${missing.join(", ")}.`, M];
+    }
+    case "financing_completeness": {
+      if (!i.financing) return [max, "No financing details saved.", M];
+      const f = i.financing;
+      const sizeKnown = known(f.loanToValuePercent) || known(f.loanAmount) || (f.loanToValuePercent === undefined && f.loanAmount === undefined);
+      const parts = [
+        { ok: sizeKnown, label: "loan size (LTV or amount)" },
+        { ok: known(f.annualInterestRatePercent), label: "interest rate" },
+        { ok: known(f.loanTenureYears), label: "loan tenure" },
+      ];
+      const miss = parts.filter((p) => !p.ok);
+      if (!miss.length) return [0, "Loan size, interest rate and tenure are all known.", f.bankQuoteVerified ? "Verified" : "User Entered"];
+      return [max * (miss.length / parts.length), `Financing is incomplete — Missing / Not Verified: ${miss.map((p) => p.label).join(", ")}.`, M];
     }
     case "financing_source":
-      if (!i.financing) return [max, "No financing details saved — loan terms are unknown."];
+      if (!i.financing) return [max, "No financing details saved — loan terms are unknown.", M];
       return i.financing.bankQuoteVerified
-        ? [0, "Loan terms are based on a verified bank quote."]
-        : [max, "Loan terms are an estimate, not a verified bank quote."];
+        ? [0, "Loan terms are based on an actual bank quote.", "Verified"]
+        : [max, "Loan terms are an estimate, not a verified bank quote.", "Estimated"];
     case "bank_valuation":
-      return known(i.bankValuation) ? [0, "A bank valuation is recorded."] : [max, "No bank valuation — the purchase price is not independently supported."];
+      return known(i.bankValuation)
+        ? [0, "A bank valuation is recorded.", "User Entered"]
+        : [max, "No bank valuation — the purchase price is not independently supported.", M];
     case "required_financial_fields": {
       const values: Record<string, Num> = {
         monthly_rent: i.monthlyRent,
@@ -77,11 +113,11 @@ function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cf
       };
       const req = cfg.requiredFinancialFields;
       const missing = req.filter((f) => !known(values[f.key]));
-      if (!missing.length) return [0, "All important financial fields are present."];
-      return [max * (missing.length / req.length), `Missing important fields: ${missing.map((f) => f.label).join(", ")}.`];
+      if (!missing.length) return [0, "All important financial fields are present.", "User Entered"];
+      return [max * (missing.length / req.length), `Missing important fields: ${missing.map((f) => f.label).join(", ")}.`, M];
     }
     default:
-      return [0, ""];
+      return [0, "", M];
   }
 }
 
@@ -89,13 +125,16 @@ export function calculateDataConfidence(inputs: ConfidenceInputs, config: Confid
   const factors: ConfidenceFactorResult[] = config.factors.map((f) => {
     if (!f.enabled) {
       return {
-        key: f.key, label: f.label, status: "not-available-in-phase", maxDeduction: 0, deduction: 0,
+        factor_key: f.key, description: f.description, weight: 0, contribution: 0, evidence_status: "Not assessed yet" as const,
+        key: f.key, label: f.label, status: "not-available-in-phase" as const, maxDeduction: 0, deduction: 0,
         explanation: `${f.label} is not assessed yet (planned for Phase ${f.phase}). No evidence is assumed.`,
       };
     }
-    const [raw, explanation] = evaluate(f.key, f.maxDeduction, inputs, config);
+    const [raw, explanation, evidence] = evaluate(f.key, f.maxDeduction, inputs, config);
     const deduction = r2(Math.min(Math.max(raw, 0), f.maxDeduction));
-    return { key: f.key, label: f.label, status: deduction > 0 ? "deducted" : "full", maxDeduction: f.maxDeduction, deduction, explanation };
+    return {
+      factor_key: f.key, description: f.description, weight: f.maxDeduction, contribution: r2(f.maxDeduction - deduction), evidence_status: evidence,
+      key: f.key, label: f.label, status: deduction > 0 ? "deducted" : "full", maxDeduction: f.maxDeduction, deduction, explanation };
   });
   const score = r2(Math.max(0, 100 - factors.reduce((s, f) => s + f.deduction, 0)));
   const band = config.bands.find((b) => score >= b.minScore) ?? config.bands[config.bands.length - 1]!;
