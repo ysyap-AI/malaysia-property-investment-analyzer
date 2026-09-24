@@ -3,7 +3,7 @@
 // from 100. Future factors are declared but disabled: they never deduct or add
 // points until their module exists and supplies real evidence.
 
-export const CONFIDENCE_CONFIG_VERSION = "confidence-v1";
+export const CONFIDENCE_CONFIG_VERSION = "confidence-v2";
 
 export type RentEvidence = "verified" | "user-entered" | "estimated" | "listing-data" | "missing";
 
@@ -11,10 +11,12 @@ export type ConfidenceFactorKey =
   | "rent_evidence"
   | "acquisition_costs_completeness"
   | "operating_expenses_completeness"
+  | "financing_completeness"
   | "financing_source"
   | "bank_valuation"
   | "required_financial_fields"
   // Future (not available in Phase 1):
+  | "rental_comparables"
   | "transaction_evidence"
   | "building_inspection"
   | "legal_verification"
@@ -23,7 +25,10 @@ export type ConfidenceFactorKey =
 export type ConfidenceFactorConfig = {
   key: ConfidenceFactorKey;
   label: string;
+  /** Plain-English description of what the factor measures. */
+  description: string;
   enabled: boolean;
+  /** Weight = the most points this factor can take off 100. Enabled Phase 1 weights sum to 100. */
   maxDeduction: number;
   phase: 1 | 2 | 3 | 4;
 };
@@ -41,16 +46,18 @@ export type ConfidenceConfig = {
 export const DEFAULT_CONFIDENCE_CONFIG: ConfidenceConfig = {
   version: CONFIDENCE_CONFIG_VERSION,
   factors: [
-    { key: "rent_evidence", label: "Rent evidence", enabled: true, maxDeduction: 25, phase: 1 },
-    { key: "acquisition_costs_completeness", label: "Acquisition costs completeness", enabled: true, maxDeduction: 15, phase: 1 },
-    { key: "operating_expenses_completeness", label: "Operating expenses completeness", enabled: true, maxDeduction: 15, phase: 1 },
-    { key: "financing_source", label: "Financing source (bank quote vs estimate)", enabled: true, maxDeduction: 15, phase: 1 },
-    { key: "bank_valuation", label: "Bank valuation", enabled: true, maxDeduction: 10, phase: 1 },
-    { key: "required_financial_fields", label: "Important financial fields", enabled: true, maxDeduction: 20, phase: 1 },
-    { key: "transaction_evidence", label: "Actual transaction evidence", enabled: false, maxDeduction: 0, phase: 3 },
-    { key: "building_inspection", label: "Building inspection", enabled: false, maxDeduction: 0, phase: 3 },
-    { key: "legal_verification", label: "Legal verification", enabled: false, maxDeduction: 0, phase: 3 },
-    { key: "external_data_quality", label: "External data quality", enabled: false, maxDeduction: 0, phase: 2 },
+    { key: "rent_evidence", label: "Rent evidence", description: "How well the expected rent is supported by evidence.", enabled: true, maxDeduction: 25, phase: 1 },
+    { key: "acquisition_costs_completeness", label: "Acquisition costs completeness", description: "Share of acquisition cost fields that are filled in.", enabled: true, maxDeduction: 15, phase: 1 },
+    { key: "operating_expenses_completeness", label: "Operating expenses completeness", description: "Share of operating expense fields that are filled in.", enabled: true, maxDeduction: 15, phase: 1 },
+    { key: "financing_completeness", label: "Financing completeness", description: "Whether loan amount/LTV, interest rate and tenure are all known.", enabled: true, maxDeduction: 10, phase: 1 },
+    { key: "financing_source", label: "Financing source (bank quote vs estimate)", description: "Whether loan terms come from an actual bank quote.", enabled: true, maxDeduction: 10, phase: 1 },
+    { key: "bank_valuation", label: "Bank valuation", description: "Whether a bank valuation supports the price.", enabled: true, maxDeduction: 10, phase: 1 },
+    { key: "required_financial_fields", label: "Important financial fields", description: "Whether key values needed for the analysis are present.", enabled: true, maxDeduction: 15, phase: 1 },
+    { key: "rental_comparables", label: "Verified rental comparables", description: "Future: verified achieved rents nearby.", enabled: false, maxDeduction: 0, phase: 2 },
+    { key: "transaction_evidence", label: "Actual transaction evidence", description: "Future: recorded sale transactions.", enabled: false, maxDeduction: 0, phase: 3 },
+    { key: "building_inspection", label: "Building inspection", description: "Future: physical inspection results.", enabled: false, maxDeduction: 0, phase: 3 },
+    { key: "legal_verification", label: "Legal / title verification", description: "Future: verified title and legal status.", enabled: false, maxDeduction: 0, phase: 3 },
+    { key: "external_data_quality", label: "External data source quality", description: "Future: quality of externally retrieved data.", enabled: false, maxDeduction: 0, phase: 2 },
   ],
   rentEvidenceMultiplier: {
     verified: 0,

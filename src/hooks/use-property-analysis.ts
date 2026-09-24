@@ -61,7 +61,7 @@ export function usePropertyAnalysis(propertyId: string) {
         acquisitionCosts: acqValues,
         operatingExpenses: opexValues,
         financing: f
-          ? { bankQuoteVerified: f.bank_quote_verified, annualInterestRatePercent: f.annual_interest_rate_percent, loanTenureYears: f.loan_tenure_years }
+          ? { bankQuoteVerified: f.bank_quote_verified, annualInterestRatePercent: f.annual_interest_rate_percent, loanTenureYears: f.loan_tenure_years, loanToValuePercent: f.loan_to_value_percent, loanAmount: f.loan_amount }
           : null,
         bankValuation: p?.bank_valuation ?? null,
       },
