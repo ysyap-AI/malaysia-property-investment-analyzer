@@ -3,6 +3,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { supabase } from "@/integrations/supabase/external-client";
+import { calculateTotalAcquisitionCost } from "@/lib/finance/acquisition";
 import type { AcquisitionCostsInput, AcquisitionCostsRecord } from "./acquisition-fields";
 
 const db = supabase as unknown as SupabaseClient<any, "public", any>;
@@ -25,6 +26,9 @@ export async function saveAcquisitionCosts(
   propertyId: string,
   values: AcquisitionCostsInput,
 ): Promise<AcquisitionCostsRecord> {
+  if (calculateTotalAcquisitionCost(values).status === "invalid") {
+    throw new Error("Acquisition costs contain invalid amounts or exceed the supported numeric range.");
+  }
   const existing = await getAcquisitionCosts(propertyId);
   if (existing) {
     const { data, error } = await db

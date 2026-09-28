@@ -4,6 +4,9 @@
 // Pure TypeScript. No React, no database, no network, no AI, no randomness.
 // Unknown values arrive as `null`/`undefined` and are NEVER treated as zero.
 
+import { decimal, isSafeFinancialNumber, roundToTwo as round2 } from "./rounding";
+export { round2 };
+
 export type MetricResult =
   | { status: "ok"; value: number }
   | { status: "incomplete"; value: null; missingInputs: string[] }
@@ -12,27 +15,22 @@ export type MetricResult =
 type Input = number | null | undefined;
 type Rule = "nonNegative" | "positive" | "any" | "months";
 
-/** Round to 2 decimal places (sen for money, 0.01 for percentages). */
-export function round2(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
-}
-
-function isKnown(v: Input): v is number {
-  return typeof v === "number" && Number.isFinite(v);
-}
-
 /**
  * Shared guard: collects missing inputs first, then invalid ones.
  * "positive" is used for divisors so division by zero is reported, not computed.
  */
 function check(inputs: Record<string, [Input, Rule]>): MetricResult | null {
   const missing = Object.entries(inputs)
-    .filter(([, [v]]) => !isKnown(v))
+    .filter(([, [v]]) => v === null || v === undefined)
     .map(([k]) => k);
   if (missing.length) return { status: "incomplete", value: null, missingInputs: missing };
   const invalid: string[] = [];
   let divByZero = false;
   for (const [k, [v, rule]] of Object.entries(inputs)) {
+    if (!isSafeFinancialNumber(v)) {
+      invalid.push(k);
+      continue;
+    }
     const n = v as number;
     if (rule === "nonNegative" && n < 0) invalid.push(k);
     if (rule === "positive" && n <= 0) {
@@ -48,24 +46,29 @@ function check(inputs: Record<string, [Input, Rule]>): MetricResult | null {
       invalidInputs: invalid,
       reason: divByZero
         ? "Cannot divide by zero"
-        : "Value is outside the allowed range (negative, or occupied months not between 0 and 12)",
+        : "Expected a finite number in the supported range (nonnegative costs; occupied months between 0 and 12)",
     };
   }
   return null;
 }
 
-const ok = (value: number): MetricResult => ({ status: "ok", value: round2(value) });
+const ok = (value: number): MetricResult => {
+  const rounded = round2(value);
+  return Number.isFinite(rounded)
+    ? { status: "ok", value: rounded }
+    : { status: "invalid", value: null, invalidInputs: ["result"], reason: "Result exceeds the supported numeric range" };
+};
 
 /** 1. Potential Annual Rent = Monthly Rent × 12 */
 export function potentialAnnualRent(monthlyRent: Input): MetricResult {
-  return check({ monthlyRent: [monthlyRent, "nonNegative"] }) ?? ok((monthlyRent as number) * 12);
+  return check({ monthlyRent: [monthlyRent, "nonNegative"] }) ?? ok(decimal(monthlyRent as number).multiply(decimal(12)).round());
 }
 
 /** 2. Effective Annual Rent = Monthly Rent × Expected Occupied Months (0–12) */
 export function effectiveAnnualRent(monthlyRent: Input, occupiedMonths: Input): MetricResult {
   return (
     check({ monthlyRent: [monthlyRent, "nonNegative"], occupiedMonths: [occupiedMonths, "months"] }) ??
-    ok((monthlyRent as number) * (occupiedMonths as number))
+    ok(decimal(monthlyRent as number).multiply(decimal(occupiedMonths as number)).round())
   );
 }
 
@@ -75,7 +78,7 @@ export function grossRentalYield(potentialAnnualRentValue: Input, purchasePrice:
     check({
       potentialAnnualRent: [potentialAnnualRentValue, "nonNegative"],
       purchasePrice: [purchasePrice, "positive"],
-    }) ?? ok(((potentialAnnualRentValue as number) / (purchasePrice as number)) * 100)
+    }) ?? ok(decimal(potentialAnnualRentValue as number).divide(decimal(purchasePrice as number)).multiply(decimal(100)).round())
   );
 }
 
@@ -85,7 +88,7 @@ export function yieldOnTotalCost(potentialAnnualRentValue: Input, totalAcquisiti
     check({
       potentialAnnualRent: [potentialAnnualRentValue, "nonNegative"],
       totalAcquisitionCost: [totalAcquisitionCost, "positive"],
-    }) ?? ok(((potentialAnnualRentValue as number) / (totalAcquisitionCost as number)) * 100)
+    }) ?? ok(decimal(potentialAnnualRentValue as number).divide(decimal(totalAcquisitionCost as number)).multiply(decimal(100)).round())
   );
 }
 
@@ -95,7 +98,7 @@ export function netOperatingIncome(effectiveAnnualRentValue: Input, annualOperat
     check({
       effectiveAnnualRent: [effectiveAnnualRentValue, "nonNegative"],
       annualOperatingExpenses: [annualOperatingExpenses, "nonNegative"],
-    }) ?? ok((effectiveAnnualRentValue as number) - (annualOperatingExpenses as number))
+    }) ?? ok(decimal(effectiveAnnualRentValue as number).subtract(decimal(annualOperatingExpenses as number)).round())
   );
 }
 
@@ -103,7 +106,7 @@ export function netOperatingIncome(effectiveAnnualRentValue: Input, annualOperat
 export function netRentalYield(noi: Input, totalAcquisitionCost: Input): MetricResult {
   return (
     check({ noi: [noi, "any"], totalAcquisitionCost: [totalAcquisitionCost, "positive"] }) ??
-    ok(((noi as number) / (totalAcquisitionCost as number)) * 100)
+    ok(decimal(noi as number).divide(decimal(totalAcquisitionCost as number)).multiply(decimal(100)).round())
   );
 }
 
@@ -111,7 +114,7 @@ export function netRentalYield(noi: Input, totalAcquisitionCost: Input): MetricR
 export function monthlyCashFlow(noi: Input, monthlyInstalment: Input): MetricResult {
   return (
     check({ noi: [noi, "any"], monthlyInstalment: [monthlyInstalment, "nonNegative"] }) ??
-    ok((noi as number) / 12 - (monthlyInstalment as number))
+    ok(decimal(noi as number).divide(decimal(12)).subtract(decimal(monthlyInstalment as number)).round())
   );
 }
 
@@ -119,7 +122,7 @@ export function monthlyCashFlow(noi: Input, monthlyInstalment: Input): MetricRes
 export function annualCashFlow(noi: Input, annualDebtService: Input): MetricResult {
   return (
     check({ noi: [noi, "any"], annualDebtService: [annualDebtService, "nonNegative"] }) ??
-    ok((noi as number) - (annualDebtService as number))
+    ok(decimal(noi as number).subtract(decimal(annualDebtService as number)).round())
   );
 }
 
@@ -142,7 +145,7 @@ export function acquisitionCostsNotFinanced(totalAcquisitionCost: Input, purchas
       reason: "Total acquisition cost is lower than the purchase price",
     };
   }
-  return ok(diff);
+  return ok(decimal(totalAcquisitionCost as number).subtract(decimal(purchasePrice as number)).round());
 }
 
 /** 9. Initial Cash Invested = Down Payment + Acquisition Costs Not Financed */
@@ -151,7 +154,7 @@ export function initialCashInvested(downPayment: Input, costsNotFinanced: Input)
     check({
       downPayment: [downPayment, "nonNegative"],
       acquisitionCostsNotFinanced: [costsNotFinanced, "nonNegative"],
-    }) ?? ok((downPayment as number) + (costsNotFinanced as number))
+    }) ?? ok(decimal(downPayment as number).add(decimal(costsNotFinanced as number)).round())
   );
 }
 
@@ -159,7 +162,7 @@ export function initialCashInvested(downPayment: Input, costsNotFinanced: Input)
 export function cashOnCashReturn(annualCashFlowValue: Input, initialCash: Input): MetricResult {
   return (
     check({ annualCashFlow: [annualCashFlowValue, "any"], initialCashInvested: [initialCash, "positive"] }) ??
-    ok(((annualCashFlowValue as number) / (initialCash as number)) * 100)
+    ok(decimal(annualCashFlowValue as number).divide(decimal(initialCash as number)).multiply(decimal(100)).round())
   );
 }
 
@@ -169,7 +172,7 @@ export function propertyBreakEvenOccupancy(annualOperatingExpenses: Input, poten
     check({
       annualOperatingExpenses: [annualOperatingExpenses, "nonNegative"],
       potentialAnnualRent: [potentialAnnualRentValue, "positive"],
-    }) ?? ok(((annualOperatingExpenses as number) / (potentialAnnualRentValue as number)) * 100)
+    }) ?? ok(decimal(annualOperatingExpenses as number).divide(decimal(potentialAnnualRentValue as number)).multiply(decimal(100)).round())
   );
 }
 
@@ -185,7 +188,7 @@ export function financedBreakEvenOccupancy(
       annualDebtService: [annualDebtService, "nonNegative"],
       potentialAnnualRent: [potentialAnnualRentValue, "positive"],
     }) ??
-    ok((((annualOperatingExpenses as number) + (annualDebtService as number)) / (potentialAnnualRentValue as number)) * 100)
+    ok(decimal(annualOperatingExpenses as number).add(decimal(annualDebtService as number)).divide(decimal(potentialAnnualRentValue as number)).multiply(decimal(100)).round())
   );
 }
 

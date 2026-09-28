@@ -8,10 +8,12 @@ function optionalNumber(opts: { max?: number; integer?: boolean; positive?: bool
     .union([z.string(), z.number(), z.null(), z.undefined()])
     .transform((v) => {
       if (v === null || v === undefined) return null;
-      const raw = typeof v === "number" ? String(v) : v.trim().replace(/,/g, "");
+      if (typeof v === "number") return Number.isFinite(v) && Math.abs(v) <= Number.MAX_SAFE_INTEGER / 100 ? v : Number.NaN;
+      const raw = v.trim();
       if (raw === "") return null;
-      const n = Number(raw);
-      return Number.isFinite(n) ? n : Number.NaN;
+      if (!/^[+-]?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?$|^[+-]?\.\d+$/.test(raw)) return Number.NaN;
+      const n = Number(raw.replace(/,/g, ""));
+      return Number.isFinite(n) && Math.abs(n) <= Number.MAX_SAFE_INTEGER / 100 ? n : Number.NaN;
     })
     .refine((v) => v === null || !Number.isNaN(v), { message: "Enter a number or leave it blank" })
     .refine((v) => v === null || v >= 0, { message: "Cannot be negative" })

@@ -3,6 +3,8 @@
 // Every value handled here is ANNUAL. Monthly figures must be converted with
 // `monthlyToAnnual` before they reach this calculation — never mixed silently.
 
+import { decimal, isSafeFinancialNumber } from "./rounding";
+
 export const OPERATING_EXPENSE_FIELDS = [
   "annual_maintenance_fee",
   "annual_sinking_fund",
@@ -41,19 +43,15 @@ export type OperatingExpenseResult = {
   zeroFields: OperatingExpenseField[];
 };
 
-/** Money is summed at 2 decimal places so floating point noise never shows up. */
-function roundMoney(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
-}
-
 /**
  * Explicit monthly -> annual conversion. Nothing else in the module multiplies
  * by 12, so a monthly amount can never be stored or summed as an annual one.
  */
 export function monthlyToAnnual(monthly: number | null | undefined): number | null {
   if (monthly === null || monthly === undefined) return null;
-  if (typeof monthly !== "number" || !Number.isFinite(monthly)) return null;
-  return roundMoney(monthly * 12);
+  // NaN preserves invalid input for the expense guard; null means only missing.
+  if (!isSafeFinancialNumber(monthly) || monthly < 0) return Number.NaN;
+  return decimal(monthly).multiply(decimal(12)).round();
 }
 
 /**
@@ -74,7 +72,7 @@ export function calculateTotalAnnualOperatingExpenses(
   const missingFields: OperatingExpenseField[] = [];
   const knownFields: OperatingExpenseField[] = [];
   const zeroFields: OperatingExpenseField[] = [];
-  let total = 0;
+  let sum = decimal(0);
 
   for (const field of OPERATING_EXPENSE_FIELDS) {
     const value = inputs[field];
@@ -82,19 +80,24 @@ export function calculateTotalAnnualOperatingExpenses(
       missingFields.push(field);
       continue;
     }
-    if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+    if (!isSafeFinancialNumber(value) || value < 0) {
       invalidFields.push(field);
       continue;
     }
     knownFields.push(field);
     if (value === 0) zeroFields.push(field);
-    total += value;
+    sum = sum.add(decimal(value));
   }
 
   const base = { invalidFields, missingFields, knownFields, zeroFields };
 
+  const total = sum.round();
+  if (!Number.isFinite(total)) {
+    return { ...base, status: "invalid", total: null, invalidFields: [...invalidFields, ...knownFields] };
+  }
+
   if (invalidFields.length > 0) return { status: "invalid", total: null, ...base };
   if (knownFields.length === 0) return { status: "unknown", total: null, ...base };
-  if (missingFields.length > 0) return { status: "partial", total: roundMoney(total), ...base };
-  return { status: "complete", total: roundMoney(total), ...base };
+  if (missingFields.length > 0) return { status: "partial", total, ...base };
+  return { status: "complete", total, ...base };
 }

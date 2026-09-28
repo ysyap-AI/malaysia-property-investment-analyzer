@@ -2,12 +2,15 @@
 // Pure TypeScript. No React, no database, no network, no AI, no randomness.
 // Unknown values arrive as `null` and are NEVER treated as zero.
 
-function roundMoney(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
+import { decimal, isSafeFinancialNumber, roundToTwo } from "./rounding";
+
+function roundMoney(value: number): number | null {
+  const rounded = roundToTwo(value);
+  return Number.isFinite(rounded) ? rounded : null;
 }
 
 function isKnown(v: number | null | undefined): v is number {
-  return typeof v === "number" && Number.isFinite(v);
+  return isSafeFinancialNumber(v);
 }
 
 /** Explicit percentage conversion: 90 -> 0.9. Unknown stays unknown. */
@@ -23,7 +26,7 @@ export function calculateLoanAmount(
   const ltv = percentToDecimal(loanToValuePercent);
   if (!isKnown(purchasePrice) || ltv === null) return null;
   if (purchasePrice < 0 || ltv < 0 || ltv > 1) return null;
-  return roundMoney(purchasePrice * ltv);
+  return roundMoney(decimal(purchasePrice).multiply(decimal(loanToValuePercent as number)).divide(decimal(100)).round());
 }
 
 /** Down Payment = purchase price − loan amount. */
@@ -33,7 +36,7 @@ export function calculateDownPayment(
 ): number | null {
   if (!isKnown(purchasePrice) || !isKnown(loanAmount)) return null;
   if (loanAmount < 0 || loanAmount > purchasePrice) return null;
-  return roundMoney(purchasePrice - loanAmount);
+  return roundMoney(decimal(purchasePrice).subtract(decimal(loanAmount)).round());
 }
 
 /**
@@ -54,8 +57,11 @@ export function calculateMonthlyInstalment(
   if (loanAmount === 0) return 0;
   const n = loanTenureYears * 12;
   const r = (percentToDecimal(annualInterestRatePercent) as number) / 12;
-  if (r === 0) return roundMoney(loanAmount / n);
-  return roundMoney((loanAmount * r) / (1 - Math.pow(1 + r, -n)));
+  if (!Number.isFinite(n) || n <= 0) return null;
+  if (r === 0) return roundMoney(decimal(loanAmount).divide(decimal(loanTenureYears).multiply(decimal(12))).round());
+  // Equivalent amortising formula, without cancellation near zero interest.
+  const denominator = -Math.expm1(-n * Math.log1p(r));
+  return roundMoney((loanAmount * r) / denominator);
 }
 
 /** Annual Debt Service = instalment in use × 12. */
@@ -63,7 +69,8 @@ export function calculateAnnualDebtService(
   monthlyInstalment: number | null | undefined,
 ): number | null {
   if (!isKnown(monthlyInstalment) || monthlyInstalment < 0) return null;
-  return roundMoney(monthlyInstalment * 12);
+  const payable = roundMoney(monthlyInstalment);
+  return payable === null ? null : roundMoney(decimal(payable).multiply(decimal(12)).round());
 }
 
 export type InstalmentSource = "calculated" | "user-provided" | "none";
@@ -82,14 +89,11 @@ export function selectInstalment(args: {
   userProvided: number | null | undefined;
   useUserProvided: boolean;
 }): InstalmentSelection {
-  if (args.useUserProvided) {
-    return isKnown(args.userProvided) && args.userProvided >= 0
-      ? { amount: args.userProvided, source: "user-provided" }
-      : { amount: null, source: "none" };
-  }
-  return isKnown(args.calculated)
-    ? { amount: args.calculated, source: "calculated" }
-    : { amount: null, source: "none" };
+  const selected = args.useUserProvided ? args.userProvided : args.calculated;
+  const amount = isKnown(selected) && selected >= 0 ? roundMoney(selected) : null;
+  return amount === null
+    ? { amount: null, source: "none" }
+    : { amount, source: args.useUserProvided ? "user-provided" : "calculated" };
 }
 
 export type FinancingInputs = {
@@ -118,11 +122,11 @@ export function calculateFinancing(i: FinancingInputs): FinancingResult {
   let loanAmount: number | null = null;
   let loanAmountSource: FinancingResult["loanAmountSource"] = "none";
 
-  if (isKnown(i.loan_to_value_percent)) {
+  if (i.loan_to_value_percent !== null && i.loan_to_value_percent !== undefined) {
     loanAmount = calculateLoanAmount(i.purchase_price, i.loan_to_value_percent);
     if (loanAmount !== null) loanAmountSource = "from-ltv";
     if (!isKnown(i.purchase_price)) missingFields.push("purchase_price");
-  } else if (isKnown(i.loan_amount)) {
+  } else if (isKnown(i.loan_amount) && i.loan_amount >= 0) {
     loanAmount = i.loan_amount;
     loanAmountSource = "entered";
   } else {

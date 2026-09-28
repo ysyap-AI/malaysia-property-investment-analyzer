@@ -3,6 +3,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { supabase } from "@/integrations/supabase/external-client";
+import { calculateTotalAnnualOperatingExpenses } from "@/lib/finance/operating-expenses";
 import type { OperatingExpensesInput, OperatingExpensesRecord } from "./operating-expense-fields";
 
 const db = supabase as unknown as SupabaseClient<any, "public", any>;
@@ -25,6 +26,9 @@ export async function saveOperatingExpenses(
   propertyId: string,
   values: OperatingExpensesInput,
 ): Promise<OperatingExpensesRecord> {
+  if (calculateTotalAnnualOperatingExpenses(values).status === "invalid") {
+    throw new Error("Operating expenses contain invalid amounts or exceed the supported numeric range.");
+  }
   const existing = await getOperatingExpenses(propertyId);
   if (existing) {
     const { data, error } = await db

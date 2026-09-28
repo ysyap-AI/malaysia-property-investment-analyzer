@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { watchAuthIsolation } from "@/lib/auth-isolation";
+import { supabase } from "@/integrations/supabase/external-client";
 
 function NotFoundComponent() {
   return (
@@ -117,6 +119,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => watchAuthIsolation(supabase.auth, queryClient, (nextUserId) => {
+    window.location.replace(nextUserId ? "/properties" : "/login");
+  }), [queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>

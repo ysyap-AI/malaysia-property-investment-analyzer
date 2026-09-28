@@ -34,7 +34,11 @@ export type ScenarioResult = {
 };
 
 const known = (v: number | null | undefined): v is number => typeof v === "number" && Number.isFinite(v);
-const scale = (v: number | null | undefined, pct: number) => (known(v) ? v * (1 + pct / 100) : null);
+const scale = (v: number | null | undefined, pct: number) => {
+  if (v == null) return null;
+  if (!known(v) || v < 0 || !known(pct) || pct < -100) return Number.NaN;
+  return v * (1 + pct / 100);
+};
 
 /** Step 1: turn base inputs + scenario settings into adjusted assumptions. */
 export function adjustAssumptions(base: ScenarioBaseInputs, s: ScenarioAssumptions): AdjustedAssumptions {
@@ -67,7 +71,7 @@ export function runScenario(base: ScenarioBaseInputs, s: ScenarioAssumptions): S
     occupiedMonths: a.occupiedMonths,
     purchasePrice: base.financing.purchase_price,
     totalAcquisitionCost: base.totalAcquisitionCost,
-    annualOperatingExpenses: opex.status === "invalid" ? null : opex.total,
+    annualOperatingExpenses: opex.status === "complete" ? opex.total : null,
     monthlyInstalment: fin.instalmentInUse.amount,
     annualDebtService: fin.annualDebtService,
     downPayment: fin.downPayment,

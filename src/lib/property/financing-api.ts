@@ -3,6 +3,8 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { supabase } from "@/integrations/supabase/external-client";
 import type { FinancingRecord, FinancingRow } from "./financing-fields";
+import { financingSchema } from "./financing-fields";
+import { isSafeFinancialNumber } from "@/lib/finance/rounding";
 
 const db = supabase as unknown as SupabaseClient<any, "public", any>;
 const TABLE = "financing";
@@ -14,10 +16,16 @@ export async function getFinancing(propertyId: string): Promise<FinancingRecord 
 }
 
 export async function saveFinancing(propertyId: string, values: FinancingRow): Promise<void> {
+  financingSchema.parse(values);
+  for (const amount of [values.down_payment, values.calculated_monthly_instalment]) {
+    if (amount !== null && (!isSafeFinancialNumber(amount) || amount < 0)) {
+      throw new Error("Invalid financing amount");
+    }
+  }
   const existing = await getFinancing(propertyId);
   const { error } = existing
-    ? await db.from(TABLE).update(values).eq("id", existing.id)
-    : await db.from(TABLE).insert({ ...values, property_id: propertyId });
+    ? await db.from(TABLE).update(values).eq("id", existing.id).select("id").single()
+    : await db.from(TABLE).insert({ ...values, property_id: propertyId }).select("id").single();
   if (error) throw new Error(error.message);
 }
 

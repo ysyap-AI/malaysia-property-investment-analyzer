@@ -51,9 +51,16 @@ function Metric({ r, kind }: { r: MetricResult; kind: "money" | "pct" }) {
   );
 }
 
+function isInvalidDraft(raw: string | undefined): boolean {
+  return raw !== undefined && (raw.trim() === "" || !Number.isFinite(Number(raw)));
+}
+
 export function ScenariosPanel({ propertyId }: { propertyId: string }) {
   const [settings, setSettings] = useState<Record<ScenarioKey, ScenarioAssumptions>>(DEFAULT_SCENARIOS);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const invalidScenarios = new Set(SCENARIO_ORDER.filter((k) =>
+    ASSUMPTION_FIELDS.some((f) => isInvalidDraft(drafts[`${k}.${f.key}`])),
+  ));
 
   const property = useQuery({ queryKey: propertyKeys.detail(propertyId), queryFn: () => getProperty(propertyId) });
   const acq = useQuery({ queryKey: acquisitionKeys.detail(propertyId), queryFn: () => getAcquisitionCosts(propertyId) });
@@ -67,7 +74,7 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
     const f = fin.data ?? null;
     return {
       monthlyRent: property.data?.expected_monthly_rent ?? null,
-      totalAcquisitionCost: acqTotal?.total ?? null,
+      totalAcquisitionCost: acqTotal?.status === "complete" ? acqTotal.total : null,
       operatingExpenses: o ? Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((k) => [k, o[k] ?? null])) : {},
       financing: {
         purchase_price: a?.purchase_price ?? null,
@@ -98,6 +105,9 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
   }
 
   if (loading) return <p className="text-sm text-muted-foreground">Loading…</p>;
+  if (property.isError || acq.isError || opex.isError || fin.isError) {
+    return <p role="alert" className="text-sm text-destructive">Unable to load scenario inputs. Reload the page to try again.</p>;
+  }
 
   return (
     <div className="space-y-6">
@@ -133,6 +143,7 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
                         <Input
                           inputMode="decimal"
                           aria-label={`${SCENARIO_LABELS[k]} ${f.label}`}
+                          aria-invalid={isInvalidDraft(drafts[`${k}.${f.key}`]) || undefined}
                           className="h-8 w-28"
                           value={drafts[`${k}.${f.key}`] ?? String(settings[k][f.key])}
                           onChange={(e) => edit(k, f.key, e.target.value)}
@@ -144,6 +155,11 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
               </tbody>
             </table>
           </div>
+          {invalidScenarios.size > 0 ? (
+            <p className="text-sm text-destructive" role="alert">
+              Enter a number for each assumption. Results are unavailable for scenarios with blank or invalid entries.
+            </p>
+          ) : null}
           <p className="text-xs text-muted-foreground">
             Changes apply instantly and are not saved yet — reloading the page restores the defaults.
             Repair changes adjust the annual repair reserve only.
@@ -167,7 +183,11 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
                   <tr key={row.key} className="border-b border-border last:border-0">
                     <td className="py-2 pr-2 text-muted-foreground">{row.label}</td>
                     {SCENARIO_ORDER.map((k) => (
-                      <td key={k} className="py-2 pr-2 font-medium"><Metric r={results[k].returns[row.key]} kind={row.kind} /></td>
+                      <td key={k} className="py-2 pr-2 font-medium">
+                        {invalidScenarios.has(k)
+                          ? <span className="text-muted-foreground">Enter valid assumptions</span>
+                          : <Metric r={results[k].returns[row.key]} kind={row.kind} />}
+                      </td>
                     ))}
                   </tr>
                 ))}

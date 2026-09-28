@@ -2,6 +2,8 @@
 // Pure TypeScript. No React, no database, no network, no AI, no randomness.
 // Unknown values arrive as `null` and are NEVER treated as zero.
 
+import { decimal, isSafeFinancialNumber } from "./rounding";
+
 export const ACQUISITION_COST_FIELDS = [
   "purchase_price",
   "spa_legal_fee",
@@ -62,11 +64,6 @@ export type AcquisitionCostResult =
       knownFields: AcquisitionCostField[];
     };
 
-/** Money is summed at 2 decimal places so floating point noise never shows up. */
-function roundMoney(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
-}
-
 /**
  * Total Acquisition Cost = purchase price + every known acquisition cost line.
  *
@@ -83,7 +80,7 @@ export function calculateTotalAcquisitionCost(
   const invalidFields: AcquisitionCostField[] = [];
   const missingFields: AcquisitionCostField[] = [];
   const knownFields: AcquisitionCostField[] = [];
-  let total = 0;
+  let sum = decimal(0);
 
   for (const field of ACQUISITION_COST_FIELDS) {
     const value = inputs[field];
@@ -91,15 +88,20 @@ export function calculateTotalAcquisitionCost(
       missingFields.push(field);
       continue;
     }
-    if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+    if (!isSafeFinancialNumber(value) || value < 0) {
       invalidFields.push(field);
       continue;
     }
     knownFields.push(field);
-    total += value;
+    sum = sum.add(decimal(value));
   }
 
   const base = { invalidFields, missingFields, knownFields };
+
+  const total = sum.round();
+  if (!Number.isFinite(total)) {
+    return { ...base, status: "invalid", total: null, invalidFields: [...invalidFields, ...knownFields] };
+  }
 
   if (invalidFields.length > 0) {
     return { status: "invalid", total: null, ...base };
@@ -108,7 +110,7 @@ export function calculateTotalAcquisitionCost(
     return { status: "incomplete", total: null, ...base };
   }
   if (missingFields.length > 0) {
-    return { status: "partial", total: roundMoney(total), ...base };
+    return { status: "partial", total, ...base };
   }
-  return { status: "complete", total: roundMoney(total), ...base };
+  return { status: "complete", total, ...base };
 }

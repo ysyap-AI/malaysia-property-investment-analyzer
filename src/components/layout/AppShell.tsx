@@ -11,6 +11,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
+import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -75,7 +76,11 @@ export function AppShell({
   async function handleSignOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Sign out failed. Please try again.");
+      return;
+    }
     navigate({ to: "/login", replace: true });
   }
 

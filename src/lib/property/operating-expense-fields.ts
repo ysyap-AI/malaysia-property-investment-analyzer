@@ -78,12 +78,19 @@ const optionalMoney = z
   .union([z.string(), z.number(), z.null(), z.undefined()])
   .transform((v) => {
     if (v === null || v === undefined) return null;
-    const raw = typeof v === "number" ? String(v) : v.trim().replace(/,/g, "");
+    if (typeof v === "number") return Number.isFinite(v) ? v : Number.NaN;
+    const raw = v.trim();
     if (raw === "") return null;
-    const parsed = Number(raw);
+    // Only decimal amounts and correctly grouped thousands separators are valid.
+    // Removing every comma first would silently turn "1,5" into 15.
+    if (!/^-?(?:(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d*)?|\.\d+)$/.test(raw)) return Number.NaN;
+    const parsed = Number(raw.replace(/,/g, ""));
     return Number.isFinite(parsed) ? parsed : Number.NaN;
   })
   .refine((v) => v === null || !Number.isNaN(v), { message: "Enter an amount or leave it blank" })
+  .refine((v) => v === null || Number.isSafeInteger(Math.round(v * 100)), {
+    message: "Amount is too large to represent safely",
+  })
   .refine((v) => v === null || v >= 0, { message: "An amount cannot be negative" });
 
 export const operatingExpensesSchema = z.object(

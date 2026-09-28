@@ -2,12 +2,14 @@ import { describe, expect, it, vi } from "vitest";
 
 import { DEFAULT_SCENARIOS } from "@/config/scenarios";
 import * as returnsModule from "@/lib/finance/returns";
+import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 import { adjustAssumptions, runScenario, type ScenarioBaseInputs } from "@/lib/scenarios/scenario-engine";
 
 const base: ScenarioBaseInputs = {
   monthlyRent: 2000,
   totalAcquisitionCost: 550_000,
-  operatingExpenses: { annual_maintenance_fee: 3600, annual_repair_reserve: 1200 },
+  // This normal-case fixture explicitly confirms all other expenses as zero.
+  operatingExpenses: { ...Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((key) => [key, 0])), annual_maintenance_fee: 3600, annual_repair_reserve: 1200 },
   financing: {
     purchase_price: 500_000,
     loan_to_value_percent: 90,
