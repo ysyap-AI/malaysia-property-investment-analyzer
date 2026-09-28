@@ -1,0 +1,1739 @@
+{
+  "schema": {
+    "checks": [
+      {
+        "name": "renamed property values and explicit zero survive",
+        "passed": true
+      },
+      {
+        "name": "legacy acquisition costs survive and no purchase price is fabricated",
+        "passed": true
+      },
+      {
+        "name": "legacy monthly expenses are not silently relabelled as annual",
+        "passed": true
+      },
+      {
+        "name": "all three tables retain RLS",
+        "passed": true
+      },
+      {
+        "name": "all twelve ownership policies survive",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance negative rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses numeric/nullable/no-default",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses negative rejected",
+        "passed": true
+      },
+      {
+        "name": "tenure invalid enum rejected",
+        "passed": true
+      },
+      {
+        "name": "rent_verification_status invalid enum rejected",
+        "passed": true
+      },
+      {
+        "name": "property_status invalid enum rejected",
+        "passed": true
+      },
+      {
+        "name": "analysis_status invalid enum rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs duplicate child rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs orphan child rejected",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs null parent rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses duplicate child rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses orphan child rejected",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses null parent rejected",
+        "passed": true
+      },
+      {
+        "name": "property zero and null round trip",
+        "passed": true
+      },
+      {
+        "name": "acquisition zero and null round trip",
+        "passed": true
+      },
+      {
+        "name": "operating annual value, zero and null round trip",
+        "passed": true
+      },
+      {
+        "name": "property deletion cascades to acquisition",
+        "passed": true
+      },
+      {
+        "name": "property deletion cascades to operating",
+        "passed": true
+      }
+    ],
+    "failed": 0,
+    "passed": 80
+  },
+  "ownership": {
+    "passed": 245,
+    "failed": 0
+  },
+  "constraints": {
+    "checks": [
+      {
+        "name": "acquisition_costs.legal_fees rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.legal_fees rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.legal_fees rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.legal_fees rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.legal_fees rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.legal_fees permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.stamp_duty permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.valuation_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.agent_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.renovation_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.furnishing_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_costs permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.purchase_price permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.spa_legal_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.transfer_stamp_duty permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_legal_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.loan_stamp_duty permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.utility_deposits permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.maintenance_deposit permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.acquisition_agent_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.initial_holding_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.contingency_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "acquisition_costs.other_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.purchase_price permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_percent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.deposit_amount permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_amount permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.interest_rate_percent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_tenure_years rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_tenure_years permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.loan_to_value_percent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.annual_interest_rate_percent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.user_provided_monthly_instalment permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.down_payment permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment rejects -1",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "financing.calculated_monthly_instalment permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.management_fee_monthly permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.maintenance_monthly permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.sinking_fund_monthly permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.quit_rent_annual permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.assessment_annual permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.insurance_annual permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.utilities_monthly permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.other_monthly permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_maintenance_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_sinking_fund permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_assessment_tax permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_quit_or_parcel_rent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_landlord_insurance permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_property_management_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_leasing_agent_fee permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_tenancy_documentation permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_repair_reserve permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_furniture_replacement_reserve permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_cleaning_cost permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_vacancy_utilities permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_bad_debt_allowance permits unknown",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses rejects -1",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "operating_expenses.annual_other_operating_expenses permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "properties.built_up_sqft permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.bedrooms rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.bedrooms permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.bathrooms rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.bathrooms permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "properties.asking_price permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.lease_expiry_year rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.lease_expiry_year permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.completion_year rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.completion_year permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.car_parks rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.car_parks permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.total_floors rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.total_floors permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "properties.target_purchase_price permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "properties.bank_valuation permits unknown",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent rejects NaN",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent rejects Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent rejects -Infinity",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent rejects 90071992547410",
+        "passed": true
+      },
+      {
+        "name": "properties.expected_monthly_rent permits unknown",
+        "passed": true
+      },
+      {
+        "name": "financing boundary loan_to_value_percent=101",
+        "passed": true
+      },
+      {
+        "name": "financing boundary annual_interest_rate_percent=31",
+        "passed": true
+      },
+      {
+        "name": "financing boundary loan_tenure_years=0",
+        "passed": true
+      },
+      {
+        "name": "financing boundary loan_tenure_years=51",
+        "passed": true
+      },
+      {
+        "name": "current financing fields preserve confirmed zero",
+        "passed": true
+      }
+    ],
+    "failed": 0,
+    "passed": 349
+  },
+  "cleanup": {
+    "authUsers": 0,
+    "publicTables": 0,
+    "authUsersBefore": 0
+  }
+}

@@ -1,0 +1,245 @@
+1 / anonymous access|acquisition_costs anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|financing anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|investment_criteria anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|operating_expenses anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|profiles anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|properties anonymous read denied|PASS|rows=0; expected=0
+1 / anonymous access|scenario_configs anonymous read denied|PASS|rows=0; expected=0
+2 / cross-user reads|acquisition_costs hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|acquisition_costs hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|financing hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|financing hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|investment_criteria hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|investment_criteria hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|operating_expenses hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|operating_expenses hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|profiles hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|profiles hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|properties hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|properties hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+2 / cross-user reads|scenario_configs hides other rows from 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+2 / cross-user reads|scenario_configs hides other rows from ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|acquisition_costs rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|acquisition_costs rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|financing rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|financing rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|investment_criteria rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|investment_criteria rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|operating_expenses rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|operating_expenses rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|profiles rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|profiles rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|properties rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|properties rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+3 / cross-user updates|scenario_configs rejects other update by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+3 / cross-user updates|scenario_configs rejects other update by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|acquisition_costs rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|acquisition_costs rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|financing rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|financing rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|investment_criteria rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|investment_criteria rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|operating_expenses rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|operating_expenses rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|profiles rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|profiles rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|properties rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|properties rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+4 / cross-user deletes|scenario_configs rejects other delete by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=0; expected=0
+4 / cross-user deletes|scenario_configs rejects other delete by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=0; expected=0
+5 / forged inserts|acquisition_costs rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|acquisition_costs rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|financing rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|financing rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|investment_criteria rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|investment_criteria rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|operating_expenses rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|operating_expenses rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|profiles rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|profiles rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|properties rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|properties rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+5 / forged inserts|scenario_configs rejects other owner/parent insert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+5 / forged inserts|scenario_configs rejects other owner/parent insert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+6 / database controls|acquisition_costs has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|financing has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|investment_criteria has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|operating_expenses has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|profiles has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|properties has RLS enabled|PASS|rows=1; expected=1
+6 / database controls|scenario_configs has RLS enabled|PASS|rows=1; expected=1
+anonymous mutation|acquisition_costs anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|acquisition_costs anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|acquisition_costs anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|financing anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|financing anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|financing anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|investment_criteria anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|investment_criteria anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|investment_criteria anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|operating_expenses anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|operating_expenses anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|operating_expenses anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|profiles anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|profiles anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|profiles anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|properties anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|properties anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|properties anonymous update denied|PASS|rows=0; expected=0
+anonymous mutation|scenario_configs anonymous delete denied|PASS|rows=0; expected=0
+anonymous mutation|scenario_configs anonymous insert denied|PASS|SQLSTATE=42501
+anonymous mutation|scenario_configs anonymous update denied|PASS|rows=0; expected=0
+authentication|signup trigger creates both profiles|PASS|rows=2; expected=2
+cleanup|acquisition_costs temporary children removed|PASS|remaining=0
+cleanup|Auth user count restored|PASS|before=0; after=0
+cleanup|financing temporary children removed|PASS|remaining=0
+cleanup|investment_criteria temporary configuration removed|PASS|remaining=0
+cleanup|operating_expenses temporary children removed|PASS|remaining=0
+cleanup|scenario_configs temporary configuration removed|PASS|remaining=0
+cleanup|temporary application tables removed|PASS|remaining=0
+cleanup|temporary Auth accounts removed|PASS|remaining=0
+cleanup|temporary profiles removed|PASS|remaining=0
+cleanup|temporary properties removed|PASS|remaining=0
+cross-user upserts|acquisition_costs rejects other upsert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+cross-user upserts|acquisition_costs rejects other upsert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+cross-user upserts|financing rejects other upsert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+cross-user upserts|financing rejects other upsert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+cross-user upserts|investment_criteria rejects other upsert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+cross-user upserts|investment_criteria rejects other upsert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+cross-user upserts|operating_expenses rejects other upsert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+cross-user upserts|operating_expenses rejects other upsert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+cross-user upserts|profiles rejects other upsert by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+cross-user upserts|profiles rejects other upsert by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+integrity|acquisition_costs victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|acquisition_costs victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|financing victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|financing victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|investment_criteria victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|investment_criteria victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|operating_expenses victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|operating_expenses victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|profiles victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|profiles victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|properties victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|properties victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+integrity|scenario_configs victim row survives attack by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+integrity|scenario_configs victim row survives attack by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+ownership changes|acquisition_costs rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|acquisition_costs rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|financing rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|financing rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|investment_criteria rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|investment_criteria rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|operating_expenses rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|operating_expenses rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|profiles rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|profiles rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|properties rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|properties rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+ownership changes|scenario_configs rejects owner/parent change by 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|SQLSTATE=42501
+ownership changes|scenario_configs rejects owner/parent change by ac0157a2-4042-419d-890c-ca463fd6e927|PASS|SQLSTATE=42501
+positive control|acquisition_costs anonymous role has no subject|PASS|rows=1; expected=1
+positive control|acquisition_costs own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|acquisition_costs own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|acquisition_costs own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|acquisition_costs own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|acquisition_costs own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|acquisition_costs own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|authenticated role and subject 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|authenticated role and subject ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|financing anonymous role has no subject|PASS|rows=1; expected=1
+positive control|financing own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|financing own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|financing own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|financing own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|financing own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|financing own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|insert own acquisition_costs 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|insert own acquisition_costs ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|insert own criteria 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|insert own criteria ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|insert own financing 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|insert own financing ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|insert own operating_expenses 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|insert own operating_expenses ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|insert own properties 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=2; expected=2
+positive control|insert own properties ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=2; expected=2
+positive control|insert own scenario 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|insert own scenario ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|investment_criteria anonymous role has no subject|PASS|rows=1; expected=1
+positive control|investment_criteria own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|investment_criteria own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|investment_criteria own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|investment_criteria own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|investment_criteria own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|investment_criteria own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|operating_expenses anonymous role has no subject|PASS|rows=1; expected=1
+positive control|operating_expenses own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|operating_expenses own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|operating_expenses own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|operating_expenses own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|operating_expenses own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|operating_expenses own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|profiles anonymous role has no subject|PASS|rows=1; expected=1
+positive control|profiles own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|profiles own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|profiles own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|profiles own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|profiles own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|profiles own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|properties anonymous role has no subject|PASS|rows=1; expected=1
+positive control|properties own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=2; expected=2
+positive control|properties own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=2; expected=2
+positive control|properties own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|properties own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|properties own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|properties own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|scenario_configs anonymous role has no subject|PASS|rows=1; expected=1
+positive control|scenario_configs own delete 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|scenario_configs own delete ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|scenario_configs own read 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|scenario_configs own read ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+positive control|scenario_configs own update 0cc669b5-7859-462a-b84e-7d7b7c32e4f8|PASS|rows=1; expected=1
+positive control|scenario_configs own update ac0157a2-4042-419d-890c-ca463fd6e927|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|acquisition_costs denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|financing denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|financing denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|financing denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|financing denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|financing denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|financing denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|investment_criteria denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|operating_expenses denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|profiles denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|profiles denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|profiles denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|profiles denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|profiles denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|profiles denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|properties denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|properties denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|properties denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|properties denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|properties denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|properties denies TRUNCATE to authenticated|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies REFERENCES to anon|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies REFERENCES to authenticated|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies TRIGGER to anon|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies TRIGGER to authenticated|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies TRUNCATE to anon|PASS|rows=1; expected=1
+table-wide privileges|scenario_configs denies TRUNCATE to authenticated|PASS|rows=1; expected=1
