@@ -50,6 +50,7 @@ export function usePropertyAnalysis(propertyId: string) {
       };
     const base = runScenario(scenarioInputs, DEFAULT_SCENARIOS.base);
     const bear = runScenario(scenarioInputs, DEFAULT_SCENARIOS.bear);
+    const bull = runScenario(scenarioInputs, DEFAULT_SCENARIOS.bull);
     const invest = calculateInvestmentScore(
       { ...base.returns, bearMonthlyCashFlow: bear.returns.monthlyCashFlow },
       DEFAULT_SCORING_CONFIG,
@@ -115,7 +116,7 @@ export function usePropertyAnalysis(propertyId: string) {
       },
       DEFAULT_RECOMMENDATION_CONFIG,
     );
-    return { invest, confidence, redFlags, recommendation };
+    return { invest, confidence, redFlags, recommendation, property: p, scenarios: { bear, base, bull } };
   }, [property.data, acq.data, opex.data, fin.data]);
 
   const isLoading = property.isLoading || acq.isLoading || opex.isLoading || fin.isLoading;

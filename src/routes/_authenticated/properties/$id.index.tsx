@@ -13,6 +13,7 @@ import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesP
 import { FinancingPanel } from "@/components/property/FinancingPanel";
 import { RedFlagsPanel } from "@/components/property/RedFlagsPanel";
 import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
+import { PropertySummaryDashboard } from "@/components/property/PropertySummaryDashboard";
 import { ScoresPanel } from "@/components/property/ScoresPanel";
 import { ScenariosPanel } from "@/components/property/ScenariosPanel";
 import {
@@ -123,14 +124,19 @@ function PropertyDetailsPage() {
             </span>
           </div>
 
-          <Tabs defaultValue="overview">
+          <Tabs defaultValue="summary">
             <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="summary">Summary</TabsTrigger>
+              <TabsTrigger value="overview">Details</TabsTrigger>
               <TabsTrigger value="financials">Financials</TabsTrigger>
               <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
               <TabsTrigger value="scores">Scores</TabsTrigger>
               <TabsTrigger value="risk">Risk</TabsTrigger>
             </TabsList>
+
+            <TabsContent value="summary" className="mt-4">
+              <PropertySummaryDashboard propertyId={id} />
+            </TabsContent>
 
             <TabsContent value="overview" className="mt-4 grid gap-6 xl:grid-cols-2">
               <Block title="Identification">
