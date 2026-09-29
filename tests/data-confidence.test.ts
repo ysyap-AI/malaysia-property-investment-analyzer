@@ -2,16 +2,19 @@ import { describe, expect, it } from "vitest";
 
 import { DEFAULT_CONFIDENCE_CONFIG as CFG } from "@/config/confidence";
 import { calculateDataConfidence, type ConfidenceInputs } from "@/lib/scoring/data-confidence";
+import { ACQUISITION_COST_FIELDS } from "@/lib/finance/acquisition";
+import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 
-const acq = { purchase_price: 500000, spa_legal_fee: 8000, transfer_stamp_duty: 9000, renovation_cost: 0 };
-const opex = { annual_maintenance_fee: 3600, annual_sinking_fund: 360, annual_assessment_tax: 800, annual_cleaning_cost: 0 };
+// A complete fixture explicitly supplies all 14 fields, including known zero costs.
+const acq = { ...Object.fromEntries(ACQUISITION_COST_FIELDS.map((key) => [key, 0])), purchase_price: 500000, spa_legal_fee: 8000, transfer_stamp_duty: 9000, renovation_cost: 0 };
+const opex = { ...Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((key) => [key, 0])), annual_maintenance_fee: 3600, annual_sinking_fund: 360, annual_assessment_tax: 800, annual_cleaning_cost: 0 };
 
 const verified: ConfidenceInputs = {
   rentEvidence: "verified",
   monthlyRent: 2200,
   acquisitionCosts: acq,
   operatingExpenses: opex,
-  financing: { bankQuoteVerified: true, annualInterestRatePercent: 4.2, loanTenureYears: 35 },
+  financing: { bankQuoteVerified: true, loanAmount: 400000, annualInterestRatePercent: 4.2, loanTenureYears: 35 },
   bankValuation: 510000,
 };
 const f = (r: ReturnType<typeof calculateDataConfidence>, k: string) => r.factors.find((x) => x.key === k)!;
@@ -48,10 +51,10 @@ describe("data confidence", () => {
 
   it("missing maintenance fee deducts expenses completeness and required fields", () => {
     const r = calculateDataConfidence({ ...verified, operatingExpenses: { ...opex, annual_maintenance_fee: null } }, CFG);
-    expect(f(r, "operating_expenses_completeness").deduction).toBe(3.75); // 1 of 4 × 15
+    expect(f(r, "operating_expenses_completeness").deduction).toBe(1.07); // 1 of 14 × 15
     expect(f(r, "operating_expenses_completeness").explanation).toContain("annual_maintenance_fee");
     expect(f(r, "required_financial_fields").deduction).toBe(3);
-    expect(r.score).toBe(93.25);
+    expect(r.score).toBe(95.93); // 100 - 1.07 - 3
   });
 
   it("entered zero is not treated as missing", () => {
@@ -99,7 +102,7 @@ describe("data confidence", () => {
 
   it("incomplete acquisition costs deduct in proportion", () => {
     const r = calculateDataConfidence({ ...verified, acquisitionCosts: { ...acq, spa_legal_fee: null, transfer_stamp_duty: null } }, CFG);
-    expect(f(r, "acquisition_costs_completeness").deduction).toBe(7.5); // 2 of 4 × 15
+    expect(f(r, "acquisition_costs_completeness").deduction).toBe(2.14); // 2 of 14 × 15
     expect(f(r, "acquisition_costs_completeness").evidence_status).toBe("Missing / Not Verified");
   });
 
@@ -107,7 +110,7 @@ describe("data confidence", () => {
     const r = calculateDataConfidence({ ...verified, financing: { ...verified.financing!, loanTenureYears: null } }, CFG);
     expect(f(r, "financing_completeness").deduction).toBeCloseTo(3.33, 2); // 1 of 3 × 10
     expect(f(r, "financing_completeness").explanation).toContain("loan tenure");
-    expect(f(r, "financing_source").deduction).toBe(0);
+    expect(f(r, "financing_source").deduction).toBe(10); // A Verified label cannot verify missing loan terms.
   });
 
   it("actual bank quote is labelled Verified", () => {

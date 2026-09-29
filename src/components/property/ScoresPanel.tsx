@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
 
 export function ScoresPanel({ propertyId }: { propertyId: string }) {
-  const { invest, confidence, recommendation: rec, isLoading } = usePropertyAnalysis(propertyId);
+  const { invest, confidence, recommendation: rec, isLoading, isError } = usePropertyAnalysis(propertyId);
+  if (isError) return <p role="alert" className="text-sm text-destructive">Analysis inputs could not be loaded. A current recommendation is unavailable. Please retry.</p>;
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading…</p>;
 
   const warn = invest.overall_score !== null && invest.overall_score >= 55 && confidence.score < 60;
@@ -61,6 +62,7 @@ export function ScoresPanel({ propertyId }: { propertyId: string }) {
                     <span>{c.raw_score === null ? "—" : `${c.raw_score}/100`} · weight {c.weight}</span>
                   </div>
                   <p className="text-xs text-muted-foreground">{c.explanation}</p>
+                  <p className="text-xs text-muted-foreground">Effective weight: {(c.normalised_weight * 100).toFixed(2)}% · Contribution: {c.weighted_score === null ? "Unavailable" : c.weighted_score.toFixed(2)} points</p>
                 </li>
               ))}
             </ul>

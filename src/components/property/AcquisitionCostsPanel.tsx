@@ -48,6 +48,7 @@ export function AcquisitionCostsPanel({ propertyId }: { propertyId: string }) {
 
   const save = useMutation({
     mutationFn: async () => {
+      if (isLoading || error) throw new Error("Unable to load acquisition costs. Reload before saving.");
       const parsed = acquisitionCostsSchema.safeParse(values);
       if (!parsed.success) {
         const next: Errors = {};
@@ -74,6 +75,9 @@ export function AcquisitionCostsPanel({ propertyId }: { propertyId: string }) {
     Object.entries(stored).map(([k, v]) => [k, v === "" ? null : Number(v)]),
   ) as Record<AcquisitionCostField, number | null>;
   const result = calculateTotalAcquisitionCost(storedNumbers);
+
+  if (error) return <p role="alert" className="text-sm text-destructive">Unable to load acquisition costs. Reload the page to try again.</p>;
+  if (isLoading) return <p className="text-sm text-muted-foreground">Loading acquisition costs...</p>;
 
   return (
     <div className="space-y-6">

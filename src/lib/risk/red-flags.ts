@@ -4,6 +4,7 @@
 
 import type { RedFlagConfig, RedFlagSeverity } from "@/config/red-flags";
 import type { RentEvidence } from "@/config/confidence";
+import { numericEvidence, financialFieldEvidence, financingEvidence, validMetricValue } from "@/lib/phase1-validation";
 
 type Num = number | null | undefined;
 const known = (v: Num): v is number => typeof v === "number" && Number.isFinite(v);
@@ -21,7 +22,7 @@ export type RedFlagKey =
   | "financing_incomplete"
   | "low_cash_on_cash";
 
-export type EvidenceStatus = "Verified" | "User Entered" | "Estimated" | "Listing Data" | "Missing / Not Verified" | "Calculated";
+export type EvidenceStatus = "Verified" | "User Entered" | "Estimated" | "Listing Data" | "Missing / Not Verified" | "Calculated" | "Invalid / Unavailable";
 
 /** Stable short codes for each rule. */
 export const RISK_CODES: Record<RedFlagKey, string> = {
@@ -46,7 +47,7 @@ export type RedFlagInputs = {
   targetPurchasePrice: Num;
   /** Values of the important fields, keyed as in config.requiredFields. */
   importantFields: Record<string, Num>;
-  /** null = no record saved. Omit (undefined) to skip the rule. */
+  /** null or undefined = required evidence missing, never intentional disabling. */
   operatingExpenses?: Record<string, Num> | null;
   acquisitionCosts?: Record<string, Num> | null;
   financing?: { loanToValuePercent: Num; loanAmount: Num; annualInterestRatePercent: Num; loanTenureYears: Num } | null;
@@ -70,6 +71,7 @@ export type UncheckedRule = { key: RedFlagKey; risk_name: string; reason: string
 
 export type RedFlagReport = {
   config_version: string;
+  rules: { key: RedFlagKey; state: "TRIGGERED" | "CLEAR" | "UNCHECKED" | "DISABLED"; reason?: string }[];
   flags: RedFlag[];
   unchecked: UncheckedRule[];
   criticalCount: number;
@@ -78,7 +80,22 @@ export type RedFlagReport = {
 const money = (n: number) => `RM ${n.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const SEVERITY_ORDER: Record<RedFlagSeverity, number> = { critical: 0, high: 1, medium: 2, low: 3 };
 
+export function validateRedFlagConfig(c: RedFlagConfig): void {
+  const finite = [c.negativeCashFlow.thresholdMonthly, c.lowCashOnCash.thresholdPercent];
+  const bounded = [c.lowDataConfidence.thresholdScore, c.valuationShortfall.thresholdPercent];
+  const occupancy = [c.financedBreakEven.highPercent, c.financedBreakEven.criticalPercent];
+  const severities = [c.negativeCashFlow.severity, c.lowDataConfidence.severity, c.lowCashOnCash.severity,
+    c.valuationShortfall.severity, c.rentNotVerified.severityMissing, c.rentNotVerified.severityUnverified,
+    c.requiredAcquisitionCosts.severity, c.requiredOperatingCosts.severity, c.financingIncomplete.severity, c.missingFieldsSeverity];
+  if (finite.some((v) => !Number.isFinite(v)) || bounded.some((v) => !Number.isFinite(v) || v < 0 || v > 100) ||
+      occupancy.some((v) => !Number.isFinite(v) || v < 0) || occupancy[0]! > occupancy[1]! ||
+      severities.some((v) => !Object.hasOwn(SEVERITY_ORDER, v)) ||
+      c.disabledRules?.some((key) => !Object.hasOwn(RISK_CODES, key)))
+    throw new Error("Invalid red flag configuration: thresholds must be finite and in the supported range");
+}
+
 export function checkNegativeCashFlow(i: RedFlagInputs, c: RedFlagConfig): RedFlag | UncheckedRule | null {
+  validateRedFlagConfig(c);
   const name = "Negative base-case cash flow";
   if (!known(i.baseMonthlyCashFlow)) return { key: "negative_base_cash_flow", risk_name: name, reason: "Base-case monthly cash flow cannot be calculated — inputs are missing." };
   const t = c.negativeCashFlow.thresholdMonthly;
@@ -93,8 +110,9 @@ export function checkNegativeCashFlow(i: RedFlagInputs, c: RedFlagConfig): RedFl
 }
 
 export function checkLowDataConfidence(i: RedFlagInputs, c: RedFlagConfig): RedFlag | UncheckedRule | null {
+  validateRedFlagConfig(c);
   const name = "Very low data confidence";
-  if (!known(i.dataConfidenceScore)) return { key: "very_low_data_confidence", risk_name: name, reason: "Data confidence score is unavailable." };
+  if (!known(i.dataConfidenceScore) || i.dataConfidenceScore < 0 || i.dataConfidenceScore > 100) return { key: "very_low_data_confidence", risk_name: name, reason: "Data confidence score is unavailable or invalid." };
   const t = c.lowDataConfidence.thresholdScore;
   if (i.dataConfidenceScore >= t) return null;
   return {
@@ -107,6 +125,7 @@ export function checkLowDataConfidence(i: RedFlagInputs, c: RedFlagConfig): RedF
 }
 
 export function checkRentNotVerified(i: RedFlagInputs, c: RedFlagConfig): RedFlag | null {
+  validateRedFlagConfig(c);
   const ev = i.rentEvidence ?? "missing";
   if (ev === "verified") return null;
   const missing = ev === "missing";
@@ -125,7 +144,10 @@ export function checkRentNotVerified(i: RedFlagInputs, c: RedFlagConfig): RedFla
 }
 
 export function checkValuationShortfall(i: RedFlagInputs, c: RedFlagConfig): RedFlag | UncheckedRule | null {
+  validateRedFlagConfig(c);
   const name = "Bank valuation below target purchase price";
+  if (numericEvidence(i.bankValuation) === "invalid" || numericEvidence(i.targetPurchasePrice, "positive") === "invalid")
+    return { key: "valuation_below_target", risk_name: name, reason: "Invalid valuation or target purchase price; valuation must be nonnegative and target price must be positive." };
   const missing = [!known(i.bankValuation) && "bank valuation", !known(i.targetPurchasePrice) && "target purchase price"].filter(Boolean);
   if (missing.length) return { key: "valuation_below_target", risk_name: name, reason: `Cannot check — ${missing.join(" and ")} Missing / Not Verified.` };
   const target = i.targetPurchasePrice as number;
@@ -145,7 +167,10 @@ export function checkValuationShortfall(i: RedFlagInputs, c: RedFlagConfig): Red
 }
 
 export function checkFinancedBreakEven(i: RedFlagInputs, c: RedFlagConfig): RedFlag | UncheckedRule | null {
+  validateRedFlagConfig(c);
   const name = "Very high financed break-even occupancy";
+  if (i.financedBreakEvenOccupancy != null && !validMetricValue("financedBreakEvenOccupancy", i.financedBreakEvenOccupancy))
+    return { key: "high_financed_break_even", risk_name: name, reason: "Invalid financed break-even occupancy; a finite nonnegative percentage is required." };
   if (!known(i.financedBreakEvenOccupancy)) return { key: "high_financed_break_even", risk_name: name, reason: "Financed break-even occupancy cannot be calculated — inputs are missing." };
   const { highPercent, criticalPercent } = c.financedBreakEven;
   const v = i.financedBreakEvenOccupancy;
@@ -163,7 +188,10 @@ export function checkFinancedBreakEven(i: RedFlagInputs, c: RedFlagConfig): RedF
 }
 
 export function checkMissingImportantFields(i: RedFlagInputs, c: RedFlagConfig): RedFlag | null {
-  const missing = c.requiredFields.filter((f) => !known(i.importantFields[f.key]));
+  validateRedFlagConfig(c);
+  const missing = c.requiredFields.filter((f) => !known(i.importantFields?.[f.key]));
+  const invalid = c.requiredFields.filter((f) => financialFieldEvidence(f.key, i.importantFields?.[f.key]) === "invalid");
+  if (invalid.length) return invalidFieldsFlag("important_information_missing", "Important financial information invalid", c.missingFieldsSeverity, invalid.map((f) => f.label));
   if (!missing.length) return null;
   return {
     risk_code: RISK_CODES.important_information_missing, evidence_status: "Missing / Not Verified",
@@ -176,13 +204,23 @@ export function checkMissingImportantFields(i: RedFlagInputs, c: RedFlagConfig):
   };
 }
 
+function invalidFieldsFlag(key: RedFlagKey, name: string, severity: RedFlagSeverity, fields: string[]): RedFlag {
+  return {
+    risk_code: RISK_CODES[key], evidence_status: "Invalid / Unavailable", key, risk_name: name, severity,
+    trigger_rule: "Required evidence violates its numeric domain",
+    actual_value: `Invalid: ${fields.join(", ")}`, threshold: "All required values valid",
+    explanation: "Invalid values cannot establish complete evidence. Correct these values before relying on the analysis.",
+  };
+}
+
 function missingList(
   key: "operating_costs_missing" | "acquisition_costs_missing",
   name: string, noun: string, rec: Record<string, Num> | null | undefined,
   cfg: { fields: { key: string; label: string }[]; severity: RedFlagSeverity },
 ): RedFlag | null {
-  if (rec === undefined) return null;
   const missing = cfg.fields.filter((f) => !known(rec?.[f.key]));
+  const invalid = cfg.fields.filter((f) => numericEvidence(rec?.[f.key]) === "invalid");
+  if (invalid.length) return invalidFieldsFlag(key, name, cfg.severity, invalid.map((f) => f.label));
   if (!missing.length) return null;
   return {
     risk_code: RISK_CODES[key], evidence_status: "Missing / Not Verified", key, risk_name: name, severity: cfg.severity,
@@ -194,21 +232,22 @@ function missingList(
 }
 
 export function checkOperatingCostsMissing(i: RedFlagInputs, c: RedFlagConfig) {
+  validateRedFlagConfig(c);
   return missingList("operating_costs_missing", "Required operating cost information missing", "operating cost", i.operatingExpenses, c.requiredOperatingCosts);
 }
 
 export function checkAcquisitionCostsMissing(i: RedFlagInputs, c: RedFlagConfig) {
+  validateRedFlagConfig(c);
   return missingList("acquisition_costs_missing", "Required acquisition cost information missing", "acquisition cost", i.acquisitionCosts, c.requiredAcquisitionCosts);
 }
 
 export function checkFinancingIncomplete(i: RedFlagInputs, c: RedFlagConfig): RedFlag | null {
-  if (i.financing === undefined) return null;
+  validateRedFlagConfig(c);
   const f = i.financing;
-  const missing = [
-    !(f && (known(f.loanToValuePercent) || known(f.loanAmount))) && "loan size (LTV or amount)",
-    !(f && known(f.annualInterestRatePercent)) && "interest rate",
-    !(f && known(f.loanTenureYears)) && "loan tenure",
-  ].filter((x): x is string => !!x);
+  const parts = financingEvidence(f);
+  const invalid = parts.filter((p) => p.state === "invalid");
+  if (invalid.length) return invalidFieldsFlag("financing_incomplete", "Financing inputs invalid", c.financingIncomplete.severity, invalid.map((p) => p.label));
+  const missing = parts.filter((p) => p.state === "missing").map((p) => p.label);
   if (!missing.length) return null;
   return {
     risk_code: RISK_CODES.financing_incomplete, evidence_status: "Missing / Not Verified",
@@ -221,8 +260,8 @@ export function checkFinancingIncomplete(i: RedFlagInputs, c: RedFlagConfig): Re
 }
 
 export function checkLowCashOnCash(i: RedFlagInputs, c: RedFlagConfig): RedFlag | UncheckedRule | null {
+  validateRedFlagConfig(c);
   const name = "Cash-on-cash return below critical threshold";
-  if (i.cashOnCashReturn === undefined) return null;
   if (!known(i.cashOnCashReturn)) return { key: "low_cash_on_cash", risk_name: name, reason: "Cash-on-cash return cannot be calculated — inputs are missing." };
   const t = c.lowCashOnCash.thresholdPercent;
   if (i.cashOnCashReturn >= t) return null;
@@ -239,21 +278,29 @@ const isFlag = (r: RedFlag | UncheckedRule | null): r is RedFlag => !!r && "seve
 const isUnchecked = (r: RedFlag | UncheckedRule | null): r is UncheckedRule => !!r && "reason" in r;
 
 export function evaluateRedFlags(i: RedFlagInputs, c: RedFlagConfig): RedFlagReport {
-  const results = [
-    checkNegativeCashFlow(i, c),
-    checkLowDataConfidence(i, c),
-    checkRentNotVerified(i, c),
-    checkValuationShortfall(i, c),
-    checkFinancedBreakEven(i, c),
-    checkOperatingCostsMissing(i, c),
-    checkAcquisitionCostsMissing(i, c),
-    checkFinancingIncomplete(i, c),
-    checkLowCashOnCash(i, c),
-    checkMissingImportantFields(i, c),
-  ];
+  validateRedFlagConfig(c);
+  const evaluators: Record<RedFlagKey, (i: RedFlagInputs, c: RedFlagConfig) => RedFlag | UncheckedRule | null> = {
+    negative_base_cash_flow: checkNegativeCashFlow, very_low_data_confidence: checkLowDataConfidence,
+    rent_not_verified: checkRentNotVerified, valuation_below_target: checkValuationShortfall,
+    high_financed_break_even: checkFinancedBreakEven, operating_costs_missing: checkOperatingCostsMissing,
+    acquisition_costs_missing: checkAcquisitionCostsMissing, financing_incomplete: checkFinancingIncomplete,
+    low_cash_on_cash: checkLowCashOnCash, important_information_missing: checkMissingImportantFields,
+  };
+  const rules: RedFlagReport["rules"] = [];
+  const results = (Object.keys(evaluators) as RedFlagKey[]).map((key) => {
+    if (c.disabledRules?.includes(key)) {
+      rules.push({ key, state: "DISABLED", reason: "Intentionally disabled by configuration." });
+      return null;
+    }
+    const result = evaluators[key](i, c);
+    rules.push({ key, state: isFlag(result) ? "TRIGGERED" : isUnchecked(result) ? "UNCHECKED" : "CLEAR",
+      ...(isUnchecked(result) ? { reason: result.reason } : {}) });
+    return result;
+  });
   const flags = results.filter(isFlag).sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
   return {
     config_version: c.version,
+    rules,
     flags,
     unchecked: results.filter(isUnchecked),
     criticalCount: flags.filter((f) => f.severity === "critical").length,

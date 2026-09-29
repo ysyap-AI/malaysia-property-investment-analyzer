@@ -26,17 +26,23 @@ export function usePropertyAnalysis(propertyId: string) {
   const acq = useQuery({ queryKey: acquisitionKeys.detail(propertyId), queryFn: () => getAcquisitionCosts(propertyId) });
   const opex = useQuery({ queryKey: operatingExpenseKeys.detail(propertyId), queryFn: () => getOperatingExpenses(propertyId) });
   const fin = useQuery({ queryKey: financingKeys.detail(propertyId), queryFn: () => getFinancing(propertyId) });
+  const isLoading = property.isLoading || acq.isLoading || opex.isLoading || fin.isLoading;
+  const isError = property.isError || acq.isError || opex.isError || fin.isError;
+  const error = property.error ?? acq.error ?? opex.error ?? fin.error ?? null;
 
   const analysis = useMemo(() => {
-    const p = property.data ?? null;
-    const a = acq.data ?? null;
-    const o = opex.data ?? null;
-    const f = fin.data ?? null;
+    // Cached inputs are not current evidence after any required query fails.
+    const unavailable = isError || isLoading;
+    const p = unavailable ? null : property.data ?? null;
+    const a = unavailable ? null : acq.data ?? null;
+    const o = unavailable ? null : opex.data ?? null;
+    const f = unavailable ? null : fin.data ?? null;
+    const acquisition = a ? calculateTotalAcquisitionCost(a) : null;
     const acqValues = a ? Object.fromEntries(ACQUISITION_COST_FIELDS.map((k) => [k, a[k] ?? null])) : null;
     const opexValues = o ? Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((k) => [k, o[k] ?? null])) : null;
     const scenarioInputs = {
         monthlyRent: p?.expected_monthly_rent ?? null,
-        totalAcquisitionCost: a ? calculateTotalAcquisitionCost(a).total ?? null : null,
+        totalAcquisitionCost: acquisition?.status === "complete" ? acquisition.total : null,
         operatingExpenses: opexValues ?? {},
         financing: {
           purchase_price: a?.purchase_price ?? null,
@@ -116,9 +122,8 @@ export function usePropertyAnalysis(propertyId: string) {
       },
       DEFAULT_RECOMMENDATION_CONFIG,
     );
-    return { invest, confidence, redFlags, recommendation, property: p, scenarios: { bear, base, bull } };
-  }, [property.data, acq.data, opex.data, fin.data]);
+    return { invest, confidence, redFlags, recommendation, returns: base.returns, property: p, scenarios: { bear, base, bull } };
+  }, [property.data, acq.data, opex.data, fin.data, isError, isLoading]);
 
-  const isLoading = property.isLoading || acq.isLoading || opex.isLoading || fin.isLoading;
-  return { ...analysis, isLoading };
+  return { ...analysis, isLoading, isError, error, loadState: isError ? "error" as const : isLoading ? "loading" as const : "ready" as const };
 }

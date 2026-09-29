@@ -36,7 +36,7 @@ export function FinancingPanel({ propertyId }: { propertyId: string }) {
     queryKey: financingKeys.detail(propertyId),
     queryFn: () => getFinancing(propertyId),
   });
-  const { data: acquisition } = useQuery({
+  const { data: acquisition, isLoading: acquisitionLoading, error: acquisitionError } = useQuery({
     queryKey: acquisitionKeys.detail(propertyId),
     queryFn: () => getAcquisitionCosts(propertyId),
   });
@@ -52,6 +52,9 @@ export function FinancingPanel({ propertyId }: { propertyId: string }) {
 
   const save = useMutation({
     mutationFn: async () => {
+      if (isLoading || error || acquisitionLoading || acquisitionError) {
+        throw new Error("Unable to load financing inputs. Reload before saving.");
+      }
       const p = financingSchema.safeParse(values);
       if (!p.success) {
         const next: Errors = {};
@@ -93,6 +96,9 @@ export function FinancingPanel({ propertyId }: { propertyId: string }) {
       {errors[k] ? <p className="text-xs text-destructive">{errors[k]}</p> : null}
     </div>
   );
+
+  if (error || acquisitionError) return <p role="alert" className="text-sm text-destructive">Unable to load financing inputs. Reload the page to try again.</p>;
+  if (isLoading || acquisitionLoading) return <p className="text-sm text-muted-foreground">Loading financing inputs...</p>;
 
   return (
     <Card>

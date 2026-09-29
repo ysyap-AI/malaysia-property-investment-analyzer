@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "./*.ts",
+    "../phase1-property-fixtures.test.ts",
+    "../phase1-property-fixtures-integration.test.ts"
+  ],
+  "compilerOptions": {
+    "types": ["vite/client", "node"]
+  }
+}

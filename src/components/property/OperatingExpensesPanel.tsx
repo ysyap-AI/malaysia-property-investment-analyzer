@@ -55,6 +55,7 @@ export function OperatingExpensesPanel({ propertyId }: { propertyId: string }) {
 
   const save = useMutation({
     mutationFn: async () => {
+      if (isLoading || error) throw new Error("Unable to load operating expenses. Reload before saving.");
       const parsed = operatingExpensesSchema.safeParse(values);
       if (!parsed.success) {
         const next: Errors = {};
@@ -91,6 +92,9 @@ export function OperatingExpensesPanel({ propertyId }: { propertyId: string }) {
     if (!Number.isFinite(n) || n < 0) return null;
     return displayMoney(monthlyToAnnual(n));
   }
+
+  if (error) return <p role="alert" className="text-sm text-destructive">Unable to load operating expenses. Reload the page to try again.</p>;
+  if (isLoading) return <p className="text-sm text-muted-foreground">Loading operating expenses...</p>;
 
   return (
     <div className="space-y-6">

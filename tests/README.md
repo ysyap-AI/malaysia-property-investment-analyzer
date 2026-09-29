@@ -1,6 +1,10 @@
 # Tests
 
-Run `npm test` or `npm run test:security` with Node.js 22+ and Git. These checks
+Run `npm test` with Node.js 22+, Git, and installed project dependencies to run
+all Vitest suites followed by the security tests. Reusable P01-P10 development
+fixtures and their coverage are documented in [fixtures/README.md](fixtures/README.md).
+
+Run `npm run test:security` for the source security checks alone; those checks
 require no installed application dependencies. They scan source, public assets
 and build configuration for common credential patterns, test the scanner with
 synthetic secrets and public keys, and verify environment-file Git exclusions.
@@ -58,11 +62,9 @@ application schema. The completed MPIA run returned 203 passing assertions;
 cleanup query. A CLI exit code of zero alone is insufficient: inspect the result
 rows for failures. No permanent tables or policies remain after this wrapper.
 
-## Planned application tests
+## Application tests
 
-Reserved for Phase 1 step 4 onward. Vitest, unit tests colocated as `*.test.ts`
-next to each finance/scoring module; cross-module golden-file fixtures live here.
-
-Planned coverage: hand-worked Malaysian examples per finance function, `null`
-inputs yielding `incomplete` (never `0`), scoring band boundaries, risk flags,
-recommendation branches.
+Vitest suites live in `tests/**/*.test.ts`. Coverage includes financial engines,
+scenarios, scoring, confidence, critical flags, recommendations, missing inputs,
+and application integration. The reusable P01-P10 fixtures add cross-engine
+regressions with fixed expected financial results and explicit Phase 1 limits.

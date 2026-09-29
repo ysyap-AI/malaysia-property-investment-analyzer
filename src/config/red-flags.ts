@@ -9,6 +9,8 @@ export type RedFlagSeverity = "critical" | "high" | "medium" | "low";
 
 export type RedFlagConfig = {
   version: string;
+  /** Explicitly disabled rules are reported separately from missing evidence. */
+  disabledRules?: import("@/lib/risk/red-flags").RedFlagKey[];
   /** Base-case monthly cash flow below this (MYR) is flagged. */
   negativeCashFlow: { thresholdMonthly: number; severity: RedFlagSeverity };
   /** Data confidence score below this is flagged. */

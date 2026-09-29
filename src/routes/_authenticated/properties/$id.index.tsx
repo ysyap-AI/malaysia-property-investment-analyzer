@@ -259,6 +259,7 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 function RiskTab({ propertyId }: { propertyId: string }) {
-  const { redFlags, isLoading } = usePropertyAnalysis(propertyId);
+  const { redFlags, isLoading, isError } = usePropertyAnalysis(propertyId);
+  if (isError) return <p role="alert" className="text-sm text-destructive">Analysis inputs could not be loaded. Current risk checks are unavailable. Please retry.</p>;
   return <RedFlagsPanel report={redFlags} isLoading={isLoading} />;
 }

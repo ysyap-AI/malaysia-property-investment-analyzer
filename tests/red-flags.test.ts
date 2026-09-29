@@ -9,6 +9,11 @@ const good: RedFlagInputs = {
   baseMonthlyCashFlow: 200, financedBreakEvenOccupancy: 70, dataConfidenceScore: 90, rentEvidence: "verified",
   bankValuation: 500000, targetPurchasePrice: 500000,
   importantFields: { monthly_rent: 2500, purchase_price: 500000, annual_interest_rate_percent: 4, loan_tenure_years: 35, annual_maintenance_fee: 0 },
+  // A clean fixture must supply every enabled rule's evidence.
+  operatingExpenses: Object.fromEntries(C.requiredOperatingCosts.fields.map((f) => [f.key, 0])),
+  acquisitionCosts: Object.fromEntries(C.requiredAcquisitionCosts.fields.map((f) => [f.key, 0])),
+  financing: { loanToValuePercent: 80, loanAmount: null, annualInterestRatePercent: 4, loanTenureYears: 35 },
+  cashOnCashReturn: 5,
 };
 const w = (o: Partial<RedFlagInputs>) => ({ ...good, ...o });
 const fields = ["risk_name", "severity", "trigger_rule", "actual_value", "threshold", "explanation"];

@@ -5,12 +5,12 @@ import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
 import { ACQUISITION_COST_FIELDS } from "@/lib/finance/acquisition";
 import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 
-const state = vi.hoisted(() => ({ data: {} as Record<string, unknown>, error: false }));
+const state = vi.hoisted(() => ({ data: {} as Record<string, unknown>, error: false, errorKey: "", loading: false }));
 vi.mock("@/integrations/supabase/external-client", () => ({ supabase: {} }));
 vi.mock("@tanstack/react-query", () => ({
   useQuery: ({ queryKey }: { queryKey: string[] }) => ({
-    data: state.data[queryKey[0]!], isLoading: false, isError: state.error,
-    error: state.error ? new Error("Input retrieval failed") : null,
+    data: state.data[queryKey[0]!], isLoading: state.loading, isError: state.error || state.errorKey === queryKey[0],
+    error: state.error || state.errorKey === queryKey[0] ? new Error("Input retrieval failed") : null,
   }),
 }));
 
@@ -26,6 +26,8 @@ function evaluate() {
 
 beforeEach(() => {
   state.error = false;
+  state.errorKey = "";
+  state.loading = false;
   state.data = {
     properties: { expected_monthly_rent: 6000, rent_verification_status: "verified", bank_valuation: 500000, target_purchase_price: 500000 },
     "acquisition-costs": { ...Object.fromEntries(ACQUISITION_COST_FIELDS.map((key) => [key, 0])), purchase_price: 500000 },
@@ -33,6 +35,54 @@ beforeEach(() => {
     financing: { loan_to_value_percent: 80, loan_amount: null, annual_interest_rate_percent: 4,
       loan_tenure_years: 35, bank_quote_verified: true, use_user_provided_instalment: false, user_provided_monthly_instalment: null },
   };
+});
+
+describe("analysis integration fix regressions", () => {
+  it.each(ACQUISITION_COST_FIELDS)("withholds dependent results when %s is unknown", (field) => {
+    const row = state.data["acquisition-costs"] as Record<string, unknown>;
+    for (const missing of [null, undefined]) {
+      row[field] = missing;
+      const result = evaluate();
+      for (const metric of ["yieldOnTotalCost", "netRentalYield", "cashOnCashReturn"] as const)
+        expect(result.returns[metric].status).not.toBe("ok");
+      for (const key of ["net_rental_yield", "cash_on_cash_return"])
+        expect(result.invest.categories.find((c) => c.key === key)!.raw_score).toBeNull();
+      expect(result.recommendation.recommendation).toBe("INSUFFICIENT DATA");
+    }
+  });
+
+  it("exposes initial retrieval failure with no cached data", () => {
+    state.data = {};
+    state.error = true;
+    const result = evaluate();
+    expect(result.loadState).toBe("error");
+    expect(result.isError).toBe(true);
+    expect(result.error).toBeInstanceOf(Error);
+    expect(result.invest.overall_score).toBeNull();
+    expect(result.recommendation.recommendation).toBe("INSUFFICIENT DATA");
+  });
+
+  it.each(["properties", "acquisition-costs", "operating-expenses", "financing"])("withholds cached results after %s fails and recovers", (key) => {
+    const initial = evaluate();
+    expect(initial.recommendation.recommendation).toBe("BUY CANDIDATE");
+    state.errorKey = key;
+    const failed = evaluate();
+    expect(failed.loadState).toBe("error");
+    expect(failed.invest.overall_score).toBeNull();
+    expect(failed.recommendation.recommendation).toBe("INSUFFICIENT DATA");
+    state.errorKey = "";
+    const recovered = evaluate();
+    expect(recovered.loadState).toBe("ready");
+    expect(recovered.error).toBeNull();
+    expect(recovered.recommendation).toEqual(initial.recommendation);
+  });
+
+  it("does not report a current recommendation during initial loading", () => {
+    state.loading = true;
+    const result = evaluate();
+    expect(result.loadState).toBe("loading");
+    expect(result.recommendation.recommendation).toBe("INSUFFICIENT DATA");
+  });
 });
 
 describe("focused analysis integration audit", () => {

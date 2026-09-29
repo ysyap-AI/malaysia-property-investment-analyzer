@@ -43,23 +43,40 @@ const METRIC_LABEL: Record<FinancialMetricKey, string> = {
 };
 
 const ok = (n: number | null | undefined): n is number => typeof n === "number" && Number.isFinite(n);
+const validScore = (n: number | null | undefined): n is number => ok(n) && n >= 0 && n <= 100;
+// These financials are used by BUY comparisons and cannot be disabled by config.
+const BUY_METRICS: FinancialMetricKey[] = ["netYield", "monthlyCashFlow", "cashOnCashReturn", "financedBreakEvenOccupancy"];
+
+export function validateRecommendationConfig(c: RecommendationConfig): void {
+  const scores = [c.insufficientConfidenceBelow, c.watchlistConfidenceBelow, c.rejectScoreBelow, c.buyScoreAtLeast];
+  const nonnegative = [c.rejectFinancedBreakEvenAbove, c.buyMinNetYieldPercent, c.buyMinCashOnCashPercent, c.buyMaxFinancedBreakEvenPercent];
+  if (scores.some((v) => !validScore(v)) || nonnegative.some((v) => !ok(v) || v < 0) ||
+      !ok(c.rejectMonthlyCashFlowBelow) || !ok(c.buyMinMonthlyCashFlow) ||
+      c.insufficientConfidenceBelow > c.watchlistConfidenceBelow || c.rejectScoreBelow > c.buyScoreAtLeast ||
+      c.rejectMonthlyCashFlowBelow > c.buyMinMonthlyCashFlow || c.buyMaxFinancedBreakEvenPercent > c.rejectFinancedBreakEvenAbove ||
+      c.requiredFinancialMetrics.some((key) => !Object.hasOwn(METRIC_LABEL, key))) {
+    throw new Error("Invalid recommendation configuration: finite thresholds in supported ranges and valid required metrics are required");
+  }
+}
 
 export function recommend(i: RecommendationInputs, c: RecommendationConfig): Recommendation {
+  validateRecommendationConfig(c);
   const critical = i.redFlags.filter((f) => f.severity === "critical");
   const has = (keys: string[]) => critical.filter((f) => keys.includes(f.key));
   const conf = i.dataConfidenceScore;
   const score = i.investmentScore;
   const fin = i.financials;
 
-  const missingMetrics = c.requiredFinancialMetrics.filter((k) => !ok(fin[k])).map((k) => METRIC_LABEL[k]);
+  const required = [...new Set([...BUY_METRICS, ...c.requiredFinancialMetrics])];
+  const missingMetrics = required.filter((k) => !ok(fin[k]) || (k === "financedBreakEvenOccupancy" && fin[k]! < 0)).map((k) => METRIC_LABEL[k]);
   const missing_information = [...i.missingRequired, ...missingMetrics.filter((m) => !i.missingRequired.includes(m))];
 
   const investment_score_context =
-    score === null
+    !validScore(score)
       ? "Investment score is unavailable — not enough financial data to score."
       : `Investment score is ${score}/100 (buy threshold ${c.buyScoreAtLeast}, reject below ${c.rejectScoreBelow}). It rates the numbers only, not their reliability.`;
   const data_confidence_context =
-    conf === null
+    !validScore(conf)
       ? "Data confidence is unavailable, so no result can be relied on."
       : `Data confidence is ${conf}/100 (minimum ${c.watchlistConfidenceBelow} to act). ${conf < c.watchlistConfidenceBelow ? "Inputs are not reliable enough to act on without verification." : "Inputs are reasonably well supported."} The investment score and data confidence are separate and never combined.`;
 
@@ -79,9 +96,9 @@ export function recommend(i: RecommendationInputs, c: RecommendationConfig): Rec
   const ins: [string, string][] = [];
   if (i.missingRequired.length) ins.push(["missing_required_information", `Required information is missing: ${i.missingRequired.join(", ")}.`]);
   if (missingMetrics.length) ins.push(["missing_financial_results", `Financial results unavailable: ${missingMetrics.join(", ")}.`]);
-  if (score === null) ins.push(["no_investment_score", "There is not enough data to produce an investment score."]);
-  if (conf === null || conf < c.insufficientConfidenceBelow)
-    ins.push(["confidence_below_insufficient_threshold", `Data confidence is below ${c.insufficientConfidenceBelow}.`]);
+  if (!validScore(score)) ins.push(["no_investment_score", "Investment score is unavailable or invalid; a finite score from 0 to 100 is required."]);
+  if (!validScore(conf) || conf < c.insufficientConfidenceBelow)
+    ins.push(["confidence_below_insufficient_threshold", `Data confidence is unavailable, invalid or below ${c.insufficientConfidenceBelow}.`]);
   if (ins.length) return out("INSUFFICIENT DATA", ins);
   const s = score as number;
   const cf = conf as number;

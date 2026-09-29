@@ -3,10 +3,30 @@
 // Pure and deterministic. No AI, no React, no database.
 
 import type { ConfidenceConfig, ConfidenceFactorKey, RentEvidence } from "@/config/confidence";
+import { ACQUISITION_COST_FIELDS } from "@/lib/finance/acquisition";
+import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
+import { numericEvidence, financialFieldEvidence, financingEvidence } from "@/lib/phase1-validation";
 
 type Num = number | null | undefined;
-const known = (v: Num): v is number => typeof v === "number" && Number.isFinite(v);
-const r2 = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
+const known = (v: Num): v is number => numericEvidence(v) === "valid";
+const r2 = (n: number) => n > Number.MAX_SAFE_INTEGER / 100 ? n : Math.round((n + Number.EPSILON) * 100) / 100;
+
+/** Phase 1 evidence contract. Omitted fields and explicit nulls are both missing.
+ * Financing requires either loan size field plus rate and tenure. A valuation
+ * is required for this financed-property analysis; no cash-purchase mode exists.
+ */
+export const PHASE1_EVIDENCE_FIELDS = {
+  rental: ["monthlyRent", "rentEvidence"],
+  acquisition: ACQUISITION_COST_FIELDS,
+  operating: OPERATING_EXPENSE_FIELDS,
+  financing: ["loanToValuePercent or loanAmount", "annualInterestRatePercent", "loanTenureYears", "bankQuoteVerified"],
+  valuation: ["bankValuation"],
+} as const;
+const PHASE1_EVALUATORS = new Set<ConfidenceFactorKey>([
+  "rent_evidence", "acquisition_costs_completeness", "operating_expenses_completeness",
+  "financing_completeness", "financing_source", "bank_valuation", "required_financial_fields",
+]);
+const financingKnown = (f: ConfidenceInputs["financing"]) => financingEvidence(f).every((p) => p.state === "valid");
 
 export type ConfidenceInputs = {
   rentEvidence: RentEvidence | null;
@@ -27,7 +47,7 @@ export type ConfidenceInputs = {
   bankValuation: Num;
 };
 
-export type EvidenceStatus = "Verified" | "User Entered" | "Estimated" | "Listing Data" | "Missing / Not Verified";
+export type EvidenceStatus = "Verified" | "User Entered" | "Estimated" | "Listing Data" | "Missing / Not Verified" | "Invalid / Unavailable";
 
 export type ConfidenceFactorResult = {
   factor_key: ConfidenceFactorKey;
@@ -56,11 +76,13 @@ const EV: Record<RentEvidence, EvidenceStatus> = {
   verified: "Verified", "user-entered": "User Entered", estimated: "Estimated", "listing-data": "Listing Data", missing: "Missing / Not Verified",
 };
 const M: EvidenceStatus = "Missing / Not Verified";
+const I: EvidenceStatus = "Invalid / Unavailable";
 
 function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cfg: ConfidenceConfig): [number, string, EvidenceStatus] {
   switch (key) {
     case "rent_evidence": {
-      const ev = i.rentEvidence ?? "missing";
+      if (numericEvidence(i.monthlyRent) === "invalid") return [max, "Expected rent is invalid; it must be finite and nonnegative.", I];
+      const ev = known(i.monthlyRent) && i.rentEvidence && Object.hasOwn(EV, i.rentEvidence) ? i.rentEvidence : "missing";
       const d = max * cfg.rentEvidenceMultiplier[ev];
       const msg: Record<RentEvidence, string> = {
         verified: "Rent is verified.",
@@ -76,30 +98,31 @@ function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cf
       const rec = key === "acquisition_costs_completeness" ? i.acquisitionCosts : i.operatingExpenses;
       const name = key === "acquisition_costs_completeness" ? "acquisition cost" : "operating expense";
       if (!rec) return [max, `No ${name} details have been saved.`, M];
-      const fields = Object.keys(rec);
+      const fields = key === "acquisition_costs_completeness" ? PHASE1_EVIDENCE_FIELDS.acquisition : PHASE1_EVIDENCE_FIELDS.operating;
       const missing = fields.filter((f) => !known(rec[f]));
       if (!missing.length) return [0, `All ${fields.length} ${name} fields are filled in (entered zeros count as known).`, "User Entered"];
+      if (missing.some((f) => numericEvidence(rec[f]) === "invalid"))
+        return [max * (missing.length / fields.length), `Unavailable ${name} fields: ${missing.map((f) => `${f} (${numericEvidence(rec[f])})`).join(", ")}. Values must be finite and nonnegative.`, I];
       return [max * (missing.length / fields.length), `${missing.length} of ${fields.length} ${name} fields are Missing / Not Verified: ${missing.join(", ")}.`, M];
     }
     case "financing_completeness": {
       if (!i.financing) return [max, "No financing details saved.", M];
       const f = i.financing;
-      const sizeKnown = known(f.loanToValuePercent) || known(f.loanAmount) || (f.loanToValuePercent === undefined && f.loanAmount === undefined);
-      const parts = [
-        { ok: sizeKnown, label: "loan size (LTV or amount)" },
-        { ok: known(f.annualInterestRatePercent), label: "interest rate" },
-        { ok: known(f.loanTenureYears), label: "loan tenure" },
-      ];
-      const miss = parts.filter((p) => !p.ok);
-      if (!miss.length) return [0, "Loan size, interest rate and tenure are all known.", f.bankQuoteVerified ? "Verified" : "User Entered"];
+      const parts = financingEvidence(f);
+      const miss = parts.filter((p) => p.state !== "valid");
+      if (!miss.length) return [0, "Loan size, interest rate and tenure are all known.", f.bankQuoteVerified === true ? "Verified" : "User Entered"];
+      if (miss.some((p) => p.state === "invalid"))
+        return [max * (miss.length / parts.length), `Unavailable financing: ${miss.map((p) => `${p.label} (${p.state})`).join(", ")}.`, I];
       return [max * (miss.length / parts.length), `Financing is incomplete — Missing / Not Verified: ${miss.map((p) => p.label).join(", ")}.`, M];
     }
     case "financing_source":
-      if (!i.financing) return [max, "No financing details saved — loan terms are unknown.", M];
-      return i.financing.bankQuoteVerified
+      if (financingEvidence(i.financing).some((p) => p.state === "invalid")) return [max, "Required financing values are invalid; a bank quote label alone does not verify loan terms.", I];
+      if (!financingKnown(i.financing)) return [max, "Required financing values are missing; a bank quote label alone does not verify loan terms.", M];
+      return i.financing!.bankQuoteVerified === true
         ? [0, "Loan terms are based on an actual bank quote.", "Verified"]
         : [max, "Loan terms are an estimate, not a verified bank quote.", "Estimated"];
     case "bank_valuation":
+      if (numericEvidence(i.bankValuation) === "invalid") return [max, "Bank valuation is invalid; it must be finite and nonnegative.", I];
       return known(i.bankValuation)
         ? [0, "A bank valuation is recorded.", "User Entered"]
         : [max, "No bank valuation — the purchase price is not independently supported.", M];
@@ -112,8 +135,10 @@ function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cf
         annual_maintenance_fee: i.operatingExpenses?.["annual_maintenance_fee"],
       };
       const req = cfg.requiredFinancialFields;
-      const missing = req.filter((f) => !known(values[f.key]));
+      const missing = req.filter((f) => financialFieldEvidence(f.key, values[f.key]) !== "valid");
       if (!missing.length) return [0, "All important financial fields are present.", "User Entered"];
+      if (missing.some((f) => financialFieldEvidence(f.key, values[f.key]) === "invalid"))
+        return [max * (missing.length / req.length), `Unavailable important fields: ${missing.map((f) => `${f.label} (${financialFieldEvidence(f.key, values[f.key])})`).join(", ")}.`, I];
       return [max * (missing.length / req.length), `Missing important fields: ${missing.map((f) => f.label).join(", ")}.`, M];
     }
     default:
@@ -122,8 +147,23 @@ function evaluate(key: ConfidenceFactorKey, max: number, i: ConfidenceInputs, cf
 }
 
 export function calculateDataConfidence(inputs: ConfidenceInputs, config: ConfidenceConfig): DataConfidence {
+  const seen = new Set<string>();
+  for (const f of config.factors) {
+    if (typeof f.enabled !== "boolean") throw new Error("Invalid confidence configuration: enabled must be a boolean");
+    if (!Number.isFinite(f.maxDeduction) || f.maxDeduction < 0 || seen.has(f.key)) throw new Error("Invalid confidence factor weight or duplicate factor");
+    seen.add(f.key);
+  }
+  const totalWeight = config.factors.filter((f) => f.enabled && f.phase === 1 && PHASE1_EVALUATORS.has(f.key))
+    .reduce((sum, f) => sum + f.maxDeduction, 0);
+  if (!Number.isFinite(totalWeight) || totalWeight <= 0) throw new Error("Invalid confidence total weight");
+  for (const key of Object.keys(EV) as RentEvidence[]) {
+    const multiplier = config.rentEvidenceMultiplier[key];
+    if (!Number.isFinite(multiplier) || multiplier < 0 || multiplier > 1) throw new Error("Invalid rent evidence multiplier");
+  }
+  if (!config.bands.length || config.bands.some((b) => !Number.isFinite(b.minScore) || b.minScore < 0 || b.minScore > 100))
+    throw new Error("Invalid confidence bands");
   const factors: ConfidenceFactorResult[] = config.factors.map((f) => {
-    if (!f.enabled) {
+    if (!f.enabled || f.phase !== 1 || !PHASE1_EVALUATORS.has(f.key)) {
       return {
         factor_key: f.key, description: f.description, weight: 0, contribution: 0, evidence_status: "Not assessed yet" as const,
         key: f.key, label: f.label, status: "not-available-in-phase" as const, maxDeduction: 0, deduction: 0,
