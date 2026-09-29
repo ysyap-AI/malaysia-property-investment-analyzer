@@ -34,7 +34,7 @@ import {
   rentStatusToDataStatus,
 } from "@/lib/property/property-fields";
 
-export const Route = createFileRoute("/_authenticated/properties/$id")({
+export const Route = createFileRoute("/_authenticated/properties/$id/")({
   head: () => ({
     meta: [
       { title: "Property Details — Malaysia Property Investment Analyzer" },
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/_authenticated/properties/$id")({
 });
 
 function PropertyDetailsPage() {
-  const { id } = useParams({ from: "/_authenticated/properties/$id" });
+  const { id } = useParams({ from: "/_authenticated/properties/$id/" });
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [confirmDelete, setConfirmDelete] = useState(false);
