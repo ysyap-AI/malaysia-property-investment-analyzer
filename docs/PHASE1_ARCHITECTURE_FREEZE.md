@@ -166,6 +166,96 @@ Future integrations, such as Google Maps, OpenStreetMap, property data providers
 
 Do not directly embed external API calls inside UI components. UI code requests application services and renders normalized results and status; adapters own provider-specific requests and error handling.
 
+## Phase 2 Scoring Integration Philosophy
+
+Phase 2 may introduce independent evidence modules within explicitly agreed scope, such as:
+
+- Location Quality Score
+- Connectivity Score
+- Amenity Score
+- Education Accessibility Score
+- Employment Accessibility Score
+- Rental Demand Indicator Score
+
+These scores must initially remain separate from the Financial Calculation Engine, Investment Score, Data Confidence Engine and Recommendation Engine. Their evidence quality belongs to the new location/market modules; it must not activate reserved Phase 1 confidence factors or change existing decision rules.
+
+**Phase 2 evidence enriches analysis. It does not silently modify existing investment decisions.** The scenario and red-flag protections in section 3 also remain binding.
+
+Any future integration between a Location Score and the Investment Score requires:
+
+- Documented scoring methodology.
+- Proposed weighting changes, including their effect on existing contributions and normalization.
+- Historical/backtesting evidence where available, with unavailable evidence and limitations recorded explicitly.
+- Regression testing against existing Phase 1 fixtures.
+- Architecture review approval before integration.
+- Versioned scoring configuration.
+
+Future combined scores, if introduced, must have separate versioning from their component scores. For example, **Investment Score v2**, **Location Score v1** and **Combined Property Score v1** would each identify a distinct score and version. These are illustrative names, not newly implemented scores or replacements for the released `scoring-v2` configuration.
+
+Existing Phase 1 decisions must remain reproducible from their original inputs, evidence statuses, engine revision and configuration. An approved combined score must identify its component versions and methodology; it must not silently reinterpret saved Phase 1 decisions. The baseline still has no automatic analysis-snapshot store.
+
+## Phase 2 Location and Market Data Architecture Rules
+
+External intelligence data must remain separate from Phase 1 financial data and should not be stored directly inside Phase 1 financial tables. The two data categories serve different purposes:
+
+| Phase 1 Financial Data | Phase 2 Location/Market Data |
+| --- | --- |
+| User entered | Externally sourced |
+| Property specific | Provider attributed |
+| Investment calculation input | Evidence based |
+| Relatively stable saved assumptions | Frequently changing observations |
+| Ownership controlled | Requires timestamps and may have uncertainty; ownership and access controls still apply |
+
+The recommended separation pattern is:
+
+```text
+properties
+    |
+    +-- location_profiles
+            |
+            +-- location_evidence
+                    |
+                    +-- provider_results
+```
+
+This is an architectural recommendation only. No Phase 2 schema is being created by this document. The proposed names describe logical separation, not approved tables, cardinalities or access policies. Any future schema requires architecture and migration review and must preserve the ownership, constraints and RLS protections in sections 4 and 5.
+
+Phase 2 must not:
+
+- Repurpose financial columns.
+- Store external provider data inside acquisition costs.
+- Overwrite user-entered assumptions.
+- Replace missing financial inputs with external estimates.
+- Silently modify Phase 1 calculations.
+
+Any external evidence that influences investment analysis must have source attribution, a retrieval timestamp, an evidence status, a confidence level and failure state handling. Missing or uncertain evidence must remain visible; provider results do not become verified financial inputs merely because they were retrieved successfully. Any proposed user-directed transfer into saved inputs remains subject to the explicit reviewed contract, visible user choice and provenance requirements in section 6.
+
+These rules govern future data separation without advancing later-phase scope. Rental/sale market data and automated property-data integrations remain Phase 3 work unless explicitly authorized, as required by `PROJECT_RULES.md` and section 6.
+
+## External Provider Operational and Cost Governance
+
+External integrations require documented operational controls before implementation, in addition to the provider abstraction, evidence and security requirements already defined in this freeze.
+
+### API Cost Control
+
+Each future provider must define its pricing model, request limits, expected usage volume, cost per analysis and caching opportunities. Document the assumptions behind usage and cost estimates so the proposed integration can be reviewed before adoption.
+
+### Request Management
+
+Each future integration must define when API calls occur, which refreshes are user-triggered versus automatic, how duplicate requests are prevented and the batching strategy where applicable. Refresh behavior must respect provider limits and the approved usage assumptions.
+
+### Caching Strategy
+
+Providers require documented cache keys, expiry rules, refresh rules, invalidation rules and stale-data handling. Cached data must preserve its source, retrieval date, ownership rules and confidence status. Reading a cached result must not present it as newly retrieved evidence. Private cache entries must retain user isolation through logout and account switching.
+
+### Failure Handling
+
+Provider failure must result in an explicit unavailable state, with bounded retry handling where appropriate. Never fabricate data or assume that missing results mean negative evidence. Preserve the distinction between an unsuccessful lookup and a successful lookup with no matching results; external failures must not alter saved inputs or prevent independent Phase 1 analysis.
+
+### Security
+
+Private provider credentials must remain server-side. They must never appear in browser code, be committed to Git or be exposed through client environment variables. Provider endpoints and caches remain subject to the authentication, authorization and ownership protections in section 5.
+
 ## 8. AI Usage Rules
 
 AI may summarize findings, explain results, generate reports and assist user interpretation when separately authorized for the relevant phase. These permissions describe boundaries, not an AI implementation in this release.
@@ -202,6 +292,11 @@ Before merging a Phase 2 feature into `main`:
 - [ ] Verify UI regression behavior for financial outputs, evidence labels, missing data, provider failure and user switching.
 - [ ] Record input/configuration versions and before/after evidence for approved decision-affecting changes so earlier analyses remain reproducible.
 - [ ] Update documentation with provider contracts, attribution, failure handling and known limitations.
+- [ ] Location/market data remains separated from Phase 1 financial data.
+- [ ] External providers have documented attribution, cost, caching and failure behaviour.
+- [ ] New scores do not silently modify Investment Score.
+- [ ] Any scoring integration has versioned methodology and regression evidence.
+- [ ] Existing Phase 1 fixtures produce unchanged results when external data is unavailable.
 - [ ] Keep `main` working and preserve `v0.1-phase1`. Do not force-push or rebase, amend or squash already-pushed commits; connected-branch pushes sync to Lovable, as required by [AGENTS.md](../AGENTS.md).
 
 Phase 2 development can begin on `phase2-location-intelligence` under these boundaries. This document freezes the Phase 1 architecture; it does not implement Phase 2.
