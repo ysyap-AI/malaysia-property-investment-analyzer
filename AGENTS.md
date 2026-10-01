@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Data-access code types against src/integrations/supabase/external-types.ts (external project schema); the auto-generated types.ts describes the unused Cloud database.
