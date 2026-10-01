@@ -2,7 +2,7 @@
 // No financial calculation lives here — this file only describes the fields,
 // their allowed values and how a form value is turned into a stored value.
 import { z } from "zod";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Tables } from "@/integrations/supabase/external-types";
 
 import type { DataStatus } from "@/components/common/StatusBadge";
 

@@ -1,7 +1,7 @@
 // Field definitions, entry basis and validation for the Operating Expenses module.
 // No calculation lives here — the maths is in src/lib/finance/operating-expenses.ts.
 import { z } from "zod";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Tables } from "@/integrations/supabase/external-types";
 
 import {
   OPERATING_EXPENSE_FIELDS,

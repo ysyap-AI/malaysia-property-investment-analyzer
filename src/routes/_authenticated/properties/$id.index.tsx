@@ -23,7 +23,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deleteProperty, getProperty, propertyKeys } from "@/lib/property/property-api";
+import { PropertyForm } from "@/components/property/PropertyForm";
+import {
+  deleteProperty,
+  getProperty,
+  propertyKeys,
+  updateProperty,
+} from "@/lib/property/property-api";
 import {
   ANALYSIS_STATUSES,
   PROPERTY_STATUSES,
@@ -32,7 +38,9 @@ import {
   displayNumber,
   displayText,
   labelFor,
+  recordToForm,
   rentStatusToDataStatus,
+  type PropertyInput,
 } from "@/lib/property/property-fields";
 
 export const Route = createFileRoute("/_authenticated/properties/$id/")({
@@ -59,6 +67,17 @@ function PropertyDetailsPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [editing, setEditing] = useState(false);
+
+  const save = useMutation({
+    mutationFn: (values: PropertyInput) => updateProperty(id, values),
+    onSuccess: async () => {
+      toast.success("Changes saved");
+      await queryClient.invalidateQueries({ queryKey: propertyKeys.all });
+      setEditing(false);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
 
   const { data: property, isLoading, error } = useQuery({
     queryKey: propertyKeys.detail(id),
@@ -88,11 +107,6 @@ function PropertyDetailsPage() {
           <Button asChild variant="outline">
             <Link to="/properties">
               <ArrowLeft className="size-4" /> Back
-            </Link>
-          </Button>
-          <Button asChild>
-            <Link to="/properties/$id/edit" params={{ id }}>
-              <Pencil className="size-4" /> Edit
             </Link>
           </Button>
           <Button
@@ -138,7 +152,23 @@ function PropertyDetailsPage() {
               <PropertySummaryDashboard propertyId={id} />
             </TabsContent>
 
-            <TabsContent value="overview" className="mt-4 grid gap-6 xl:grid-cols-2">
+            <TabsContent value="overview" className="mt-4">
+              {editing ? (
+                <PropertyForm
+                  initialValues={recordToForm(property)}
+                  submitLabel="Save changes"
+                  busy={save.isPending}
+                  onSubmit={(values) => save.mutate(values)}
+                  onCancel={() => setEditing(false)}
+                />
+              ) : (
+              <>
+              <div className="mb-4 flex justify-end">
+                <Button onClick={() => setEditing(true)}>
+                  <Pencil className="size-4" /> Edit details
+                </Button>
+              </div>
+              <div className="grid gap-6 xl:grid-cols-2">
               <Block title="Identification">
                 <Row label="Project name" value={property.project_name} />
                 <Row label="Developer" value={displayText(property.developer)} />
@@ -200,6 +230,9 @@ function PropertyDetailsPage() {
                 />
                 <Row label="Notes" value={displayText(property.notes)} />
               </Block>
+              </div>
+              </>
+              )}
             </TabsContent>
 
             <TabsContent value="financials" className="mt-4 space-y-6">

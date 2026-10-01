@@ -2,7 +2,7 @@
 // Mirrors the generated client.ts, but reads connection settings from
 // external-config.ts so the app talks to the user's own database.
 import { createClient } from '@supabase/supabase-js';
-import type { Database } from './types';
+import type { Database } from './external-types';
 import { brokeredPreviewStorage } from './previewAuthStorage';
 import { EXTERNAL_SUPABASE_ANON_KEY, EXTERNAL_SUPABASE_URL } from './external-config';
 
