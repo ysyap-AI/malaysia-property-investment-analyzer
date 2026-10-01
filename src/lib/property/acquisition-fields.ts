@@ -1,6 +1,7 @@
 // Field definitions and validation for the Acquisition Costs module.
 // No calculation lives here — the maths is in src/lib/finance/acquisition.ts.
 import { z } from "zod";
+import type { Tables } from "@/integrations/supabase/types";
 
 import { ACQUISITION_COST_FIELDS, type AcquisitionCostField } from "@/lib/finance/acquisition";
 
@@ -84,12 +85,7 @@ export const acquisitionCostsSchema = z.object(
 export type AcquisitionCostsFormValues = Record<AcquisitionCostField, string | number>;
 export type AcquisitionCostsInput = z.output<typeof acquisitionCostsSchema>;
 
-export type AcquisitionCostsRecord = AcquisitionCostsInput & {
-  id: string;
-  property_id: string;
-  created_at: string;
-  updated_at: string;
-};
+export type AcquisitionCostsRecord = Tables<"acquisition_costs">;
 
 export const emptyAcquisitionForm: AcquisitionCostsFormValues = Object.fromEntries(
   ACQUISITION_COST_FIELDS.map((f) => [f, ""]),

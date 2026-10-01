@@ -1,6 +1,7 @@
 // Field definitions, entry basis and validation for the Operating Expenses module.
 // No calculation lives here — the maths is in src/lib/finance/operating-expenses.ts.
 import { z } from "zod";
+import type { Tables } from "@/integrations/supabase/types";
 
 import {
   OPERATING_EXPENSE_FIELDS,
@@ -104,12 +105,7 @@ export type OperatingExpensesFormValues = Record<OperatingExpenseField, string |
 export type OperatingExpenseBases = Record<OperatingExpenseField, EntryBasis>;
 export type OperatingExpensesInput = z.output<typeof operatingExpensesSchema>;
 
-export type OperatingExpensesRecord = OperatingExpensesInput & {
-  id: string;
-  property_id: string;
-  created_at: string;
-  updated_at: string;
-};
+export type OperatingExpensesRecord = Tables<"operating_expenses">;
 
 export const emptyOperatingExpenseForm: OperatingExpensesFormValues = Object.fromEntries(
   OPERATING_EXPENSE_FIELDS.map((f) => [f, ""]),

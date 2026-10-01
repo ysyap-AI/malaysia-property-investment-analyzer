@@ -1,5 +1,6 @@
 // Field definitions and validation for the Financing module. No formulas here.
 import { z } from "zod";
+import type { Tables } from "@/integrations/supabase/types";
 
 import { calculateFinancing } from "@/lib/finance/financing";
 
@@ -63,10 +64,7 @@ export type FinancingRow = FinancingInput & {
   calculated_monthly_instalment: number | null;
 };
 
-export type FinancingRecord = FinancingRow & {
-  id: string;
-  property_id: string;
-};
+export type FinancingRecord = Tables<"financing">;
 
 export const LOAN_TYPES = ["Conventional", "Islamic", "Other"];
 

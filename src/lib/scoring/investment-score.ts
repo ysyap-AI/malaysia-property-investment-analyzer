@@ -5,6 +5,7 @@
 import type { MetricResult, ReturnsResult } from "@/lib/finance/returns";
 import type { ScoreBand, ScoreCategoryConfig, ScoringConfig } from "@/config/scoring";
 import { validMetricValue } from "@/lib/phase1-validation";
+import { validateCategoryBands, validateMinimumScoreBands } from "@/lib/scoring/band-validation";
 
 export type DataAvailability = "available" | "missing" | "invalid" | "disabled";
 
@@ -51,7 +52,7 @@ const PHASE1_CATEGORIES: Record<string, string> = {
 };
 
 export function matchBand(value: number, cat: Pick<ScoreCategoryConfig, "direction" | "bands">): ScoreBand | null {
-  if (!Number.isFinite(value)) return null;
+  if (!Number.isFinite(value) || validateCategoryBands(cat).length) return null;
   for (const b of cat.bands) {
     if (cat.direction === "higher-is-better") {
       if (b.atLeast === undefined || value >= b.atLeast) return b;
@@ -71,12 +72,7 @@ export function validateScoringConfig(config: ScoringConfig): string[] {
       errors.push(`Unsupported Phase 1 category/metric: "${c.key}"`);
     if (!["higher-is-better", "lower-is-better"].includes(c.direction)) errors.push(`Invalid direction for "${c.key}"`);
     if (!Number.isFinite(c.weight) || c.weight < 0) errors.push(`"${c.key}" weight must be 0 or more`);
-    if (!c.bands.length) errors.push(`"${c.key}" has no bands`);
-    for (const b of c.bands) {
-      if (!Number.isFinite(b.points) || b.points < 0 || b.points > 100) errors.push(`"${c.key}" band points must be 0–100`);
-      if ((b.atLeast !== undefined && !Number.isFinite(b.atLeast)) || (b.atMost !== undefined && !Number.isFinite(b.atMost)))
-        errors.push(`"${c.key}" band thresholds must be finite`);
-    }
+    errors.push(...validateCategoryBands(c).map((error) => `"${c.key}" bands: ${error}`));
   }
   const totalWeight = config.categories.filter((c) => c.enabled).reduce((s, c) => s + c.weight, 0);
   if (!Number.isFinite(totalWeight) || totalWeight <= 0) errors.push("Enabled total weight must be finite and above 0");
@@ -84,8 +80,7 @@ export function validateScoringConfig(config: ScoringConfig): string[] {
     errors.push("normalisationPolicy must be renormalise-available or missing-as-zero");
   if (!Number.isFinite(config.minimumDataCoverage) || config.minimumDataCoverage < 0 || config.minimumDataCoverage > 1)
     errors.push("minimumDataCoverage must be between 0 and 1");
-  for (const b of config.recommendationBands)
-    if (!Number.isFinite(b.minScore) || b.minScore < 0 || b.minScore > 100) errors.push("Recommendation bands must be finite and between 0 and 100");
+  errors.push(...validateMinimumScoreBands(config.recommendationBands).map((error) => `Recommendation bands: ${error}`));
   return errors;
 }
 

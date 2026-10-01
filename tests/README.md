@@ -62,6 +62,22 @@ application schema. The completed MPIA run returned 203 passing assertions;
 cleanup query. A CLI exit code of zero alone is insufficient: inspect the result
 rows for failures. No permanent tables or policies remain after this wrapper.
 
+## Local migration/schema tests
+
+Run `node tests/run-phase1-database-audit.mjs` against the existing local Docker
+container `supabase_db_malaysia-property-investment-analyzer`, which must have an
+empty public schema. The suite runs the module schema, reconciliation, ownership,
+and numeric constraint audits and rolls back all schema and fixture changes.
+It does not connect to the linked remote project or deploy migrations. Results
+are written to `docs/phase-1-database-results.json` and
+`docs/phase-1-ownership-results.txt`, including cleanup verification.
+
+The reconciliation audit covers all 28 cost protections on a clean schema,
+the compatible legacy names from the deployment preflight, repeat execution,
+and equivalent bare comparisons. It also checks preservation of existing
+constraint identities and cost rows, rejects weak/unvalidated substitutes,
+and requires conflicting expected names to fail safely.
+
 ## Application tests
 
 Vitest suites live in `tests/**/*.test.ts`. Coverage includes financial engines,

@@ -2,6 +2,7 @@
 // No financial calculation lives here — this file only describes the fields,
 // their allowed values and how a form value is turned into a stored value.
 import { z } from "zod";
+import type { Tables } from "@/integrations/supabase/types";
 
 import type { DataStatus } from "@/components/common/StatusBadge";
 
@@ -175,11 +176,12 @@ export type PropertyFormValues = z.input<typeof propertySchema>;
 /** What gets written to the database (unknown values are null). */
 export type PropertyInput = z.output<typeof propertySchema>;
 
-export type PropertyRecord = PropertyInput & {
-  id: string;
-  user_id: string;
-  created_at: string;
-  updated_at: string;
+/**
+ * Stored rows follow database nullability. Supabase generates TEXT CHECK columns
+ * as strings; retain the rent-evidence union required by the analysis engines.
+ */
+export type PropertyRecord = Tables<"properties"> & {
+  rent_verification_status: RentVerificationStatus | null;
 };
 
 export const emptyPropertyForm: PropertyFormValues = {

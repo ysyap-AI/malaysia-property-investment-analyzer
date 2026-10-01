@@ -16,42 +16,75 @@ export type Database = {
     Tables: {
       acquisition_costs: {
         Row: {
+          acquisition_agent_fee: number | null
           agent_fee: number | null
+          contingency_cost: number | null
           created_at: string
           furnishing_cost: number | null
           id: string
+          initial_holding_cost: number | null
           legal_fees: number | null
+          loan_legal_fee: number | null
+          loan_stamp_duty: number | null
+          maintenance_deposit: number | null
+          other_cost: number | null
           other_costs: number | null
           property_id: string
+          purchase_price: number | null
           renovation_cost: number | null
+          spa_legal_fee: number | null
           stamp_duty: number | null
+          transfer_stamp_duty: number | null
           updated_at: string
+          utility_deposits: number | null
           valuation_fee: number | null
         }
         Insert: {
+          acquisition_agent_fee?: number | null
           agent_fee?: number | null
+          contingency_cost?: number | null
           created_at?: string
           furnishing_cost?: number | null
           id?: string
+          initial_holding_cost?: number | null
           legal_fees?: number | null
+          loan_legal_fee?: number | null
+          loan_stamp_duty?: number | null
+          maintenance_deposit?: number | null
+          other_cost?: number | null
           other_costs?: number | null
           property_id: string
+          purchase_price?: number | null
           renovation_cost?: number | null
+          spa_legal_fee?: number | null
           stamp_duty?: number | null
+          transfer_stamp_duty?: number | null
           updated_at?: string
+          utility_deposits?: number | null
           valuation_fee?: number | null
         }
         Update: {
+          acquisition_agent_fee?: number | null
           agent_fee?: number | null
+          contingency_cost?: number | null
           created_at?: string
           furnishing_cost?: number | null
           id?: string
+          initial_holding_cost?: number | null
           legal_fees?: number | null
+          loan_legal_fee?: number | null
+          loan_stamp_duty?: number | null
+          maintenance_deposit?: number | null
+          other_cost?: number | null
           other_costs?: number | null
           property_id?: string
+          purchase_price?: number | null
           renovation_cost?: number | null
+          spa_legal_fee?: number | null
           stamp_duty?: number | null
+          transfer_stamp_duty?: number | null
           updated_at?: string
+          utility_deposits?: number | null
           valuation_fee?: number | null
         }
         Relationships: [
@@ -66,43 +99,67 @@ export type Database = {
       }
       financing: {
         Row: {
+          annual_interest_rate_percent: number | null
+          bank_quote_verified: boolean
+          calculated_monthly_instalment: number | null
           created_at: string
           deposit_amount: number | null
           deposit_percent: number | null
+          down_payment: number | null
+          financing_notes: string | null
           id: string
           interest_rate_percent: number | null
           loan_amount: number | null
           loan_tenure_years: number | null
+          loan_to_value_percent: number | null
           loan_type: string | null
           property_id: string
           purchase_price: number | null
           updated_at: string
+          use_user_provided_instalment: boolean
+          user_provided_monthly_instalment: number | null
         }
         Insert: {
+          annual_interest_rate_percent?: number | null
+          bank_quote_verified?: boolean
+          calculated_monthly_instalment?: number | null
           created_at?: string
           deposit_amount?: number | null
           deposit_percent?: number | null
+          down_payment?: number | null
+          financing_notes?: string | null
           id?: string
           interest_rate_percent?: number | null
           loan_amount?: number | null
           loan_tenure_years?: number | null
+          loan_to_value_percent?: number | null
           loan_type?: string | null
           property_id: string
           purchase_price?: number | null
           updated_at?: string
+          use_user_provided_instalment?: boolean
+          user_provided_monthly_instalment?: number | null
         }
         Update: {
+          annual_interest_rate_percent?: number | null
+          bank_quote_verified?: boolean
+          calculated_monthly_instalment?: number | null
           created_at?: string
           deposit_amount?: number | null
           deposit_percent?: number | null
+          down_payment?: number | null
+          financing_notes?: string | null
           id?: string
           interest_rate_percent?: number | null
           loan_amount?: number | null
           loan_tenure_years?: number | null
+          loan_to_value_percent?: number | null
           loan_type?: string | null
           property_id?: string
           purchase_price?: number | null
           updated_at?: string
+          use_user_provided_instalment?: boolean
+          user_provided_monthly_instalment?: number | null
         }
         Relationships: [
           {
@@ -164,6 +221,20 @@ export type Database = {
       }
       operating_expenses: {
         Row: {
+          annual_assessment_tax: number | null
+          annual_bad_debt_allowance: number | null
+          annual_cleaning_cost: number | null
+          annual_furniture_replacement_reserve: number | null
+          annual_landlord_insurance: number | null
+          annual_leasing_agent_fee: number | null
+          annual_maintenance_fee: number | null
+          annual_other_operating_expenses: number | null
+          annual_property_management_fee: number | null
+          annual_quit_or_parcel_rent: number | null
+          annual_repair_reserve: number | null
+          annual_sinking_fund: number | null
+          annual_tenancy_documentation: number | null
+          annual_vacancy_utilities: number | null
           assessment_annual: number | null
           created_at: string
           id: string
@@ -178,6 +249,20 @@ export type Database = {
           utilities_monthly: number | null
         }
         Insert: {
+          annual_assessment_tax?: number | null
+          annual_bad_debt_allowance?: number | null
+          annual_cleaning_cost?: number | null
+          annual_furniture_replacement_reserve?: number | null
+          annual_landlord_insurance?: number | null
+          annual_leasing_agent_fee?: number | null
+          annual_maintenance_fee?: number | null
+          annual_other_operating_expenses?: number | null
+          annual_property_management_fee?: number | null
+          annual_quit_or_parcel_rent?: number | null
+          annual_repair_reserve?: number | null
+          annual_sinking_fund?: number | null
+          annual_tenancy_documentation?: number | null
+          annual_vacancy_utilities?: number | null
           assessment_annual?: number | null
           created_at?: string
           id?: string
@@ -192,6 +277,20 @@ export type Database = {
           utilities_monthly?: number | null
         }
         Update: {
+          annual_assessment_tax?: number | null
+          annual_bad_debt_allowance?: number | null
+          annual_cleaning_cost?: number | null
+          annual_furniture_replacement_reserve?: number | null
+          annual_landlord_insurance?: number | null
+          annual_leasing_agent_fee?: number | null
+          annual_maintenance_fee?: number | null
+          annual_other_operating_expenses?: number | null
+          annual_property_management_fee?: number | null
+          annual_quit_or_parcel_rent?: number | null
+          annual_repair_reserve?: number | null
+          annual_sinking_fund?: number | null
+          annual_tenancy_documentation?: number | null
+          annual_vacancy_utilities?: number | null
           assessment_annual?: number | null
           created_at?: string
           id?: string
@@ -241,53 +340,110 @@ export type Database = {
       }
       properties: {
         Row: {
-          address: string | null
+          analysis_status: string | null
           asking_price: number | null
+          bank_valuation: number | null
           bathrooms: number | null
           bedrooms: number | null
           built_up_sqft: number | null
+          car_parks: number | null
+          city: string | null
+          completion_year: number | null
+          country: string | null
           created_at: string
+          developer: string | null
+          district: string | null
+          expected_monthly_rent: number | null
+          floor_level: string | null
+          full_address: string | null
+          furnishing_status: string | null
           id: string
+          lease_expiry_year: number | null
           listing_url: string | null
-          name: string
           notes: string | null
+          postcode: string | null
+          project_name: string
+          property_status: string | null
           property_type: string | null
+          rent_verification_status: string | null
           state: string | null
+          target_purchase_price: number | null
           tenure: string | null
+          title_type: string | null
+          total_floors: number | null
+          unit_condition: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
-          address?: string | null
+          analysis_status?: string | null
           asking_price?: number | null
+          bank_valuation?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
           built_up_sqft?: number | null
+          car_parks?: number | null
+          city?: string | null
+          completion_year?: number | null
+          country?: string | null
           created_at?: string
+          developer?: string | null
+          district?: string | null
+          expected_monthly_rent?: number | null
+          floor_level?: string | null
+          full_address?: string | null
+          furnishing_status?: string | null
           id?: string
+          lease_expiry_year?: number | null
           listing_url?: string | null
-          name: string
           notes?: string | null
+          postcode?: string | null
+          project_name: string
+          property_status?: string | null
           property_type?: string | null
+          rent_verification_status?: string | null
           state?: string | null
+          target_purchase_price?: number | null
           tenure?: string | null
+          title_type?: string | null
+          total_floors?: number | null
+          unit_condition?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
-          address?: string | null
+          analysis_status?: string | null
           asking_price?: number | null
+          bank_valuation?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
           built_up_sqft?: number | null
+          car_parks?: number | null
+          city?: string | null
+          completion_year?: number | null
+          country?: string | null
           created_at?: string
+          developer?: string | null
+          district?: string | null
+          expected_monthly_rent?: number | null
+          floor_level?: string | null
+          full_address?: string | null
+          furnishing_status?: string | null
           id?: string
+          lease_expiry_year?: number | null
           listing_url?: string | null
-          name?: string
           notes?: string | null
+          postcode?: string | null
+          project_name?: string
+          property_status?: string | null
           property_type?: string | null
+          rent_verification_status?: string | null
           state?: string | null
+          target_purchase_price?: number | null
           tenure?: string | null
+          title_type?: string | null
+          total_floors?: number | null
+          unit_condition?: string | null
           updated_at?: string
           user_id?: string
         }

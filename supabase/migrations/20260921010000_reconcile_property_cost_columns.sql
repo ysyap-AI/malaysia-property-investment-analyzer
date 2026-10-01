@@ -71,7 +71,7 @@ ALTER TABLE public.operating_expenses
   ADD COLUMN IF NOT EXISTS annual_bad_debt_allowance NUMERIC,
   ADD COLUMN IF NOT EXISTS annual_other_operating_expenses NUMERIC;
 
--- Reproduce the CHECK constraints already present in the deployed schema too.
+-- Reuse validated equivalent CHECKs, including the deployed legacy names.
 -- Existing invalid data causes a migration error rather than being rewritten.
 DO $$
 DECLARE spec RECORD; constraint_name TEXT;
@@ -92,8 +92,28 @@ BEGIN
       'annual_vacancy_utilities','annual_bad_debt_allowance','annual_other_operating_expenses'])
   LOOP
     constraint_name := spec.tbl || '_' || spec.col || '_check';
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conrelid=format('public.%I',spec.tbl)::regclass
+    -- Compare PostgreSQL's canonical expression, not the constraint name. These
+    -- exact forms cover the deployed nullable check and the equivalent bare
+    -- comparison (CHECK accepts NULL). Do not strip SQL tokens or accept a
+    -- merely similar/weaker expression. NOT VALID checks are not proof that
+    -- existing rows are protected; NO INHERIT checks do not cover descendants.
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint c
+      WHERE c.conrelid = format('public.%I',spec.tbl)::regclass
+        AND c.contype = 'c' AND c.convalidated AND NOT c.connoinherit
+        AND pg_get_expr(c.conbin, c.conrelid, false) IN (
+          format('((%I IS NULL) OR (%I >= (0)::numeric))', spec.col, spec.col),
+          format('(%I >= (0)::numeric)', spec.col)
+        )
+    ) THEN
+      -- Fail closed on a conflicting name; never silently skip a missing
+      -- protection or drop/replace a pre-existing constraint.
+      IF EXISTS (SELECT 1 FROM pg_constraint
+                 WHERE conrelid=format('public.%I',spec.tbl)::regclass
                    AND conname=constraint_name) THEN
+        RAISE EXCEPTION 'Constraint %.% exists without validated equivalent non-negative protection for %',
+          spec.tbl, constraint_name, spec.col;
+      END IF;
       EXECUTE format('ALTER TABLE public.%I ADD CONSTRAINT %I CHECK (%I IS NULL OR %I >= 0)',
         spec.tbl,constraint_name,spec.col,spec.col);
     END IF;

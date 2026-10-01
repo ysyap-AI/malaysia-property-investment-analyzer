@@ -325,6 +325,2060 @@
     "failed": 0,
     "passed": 80
   },
+  "reconciliation": {
+    "checks": [
+      {
+        "name": "clean: acquisition_costs.purchase_price one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.purchase_price rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.purchase_price permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.purchase_price permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.purchase_price permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.spa_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.transfer_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.loan_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.valuation_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.renovation_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.furnishing_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.utility_deposits permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.maintenance_deposit permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.acquisition_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.initial_holding_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.contingency_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: acquisition_costs.other_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_maintenance_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_sinking_fund permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_assessment_tax permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_quit_or_parcel_rent permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_landlord_insurance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_property_management_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_leasing_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_tenancy_documentation permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_repair_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_furniture_replacement_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_cleaning_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_vacancy_utilities permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_bad_debt_allowance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses one validated check",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses rejects -1",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses permits NULL",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses permits 0",
+        "passed": true
+      },
+      {
+        "name": "clean: operating_expenses.annual_other_operating_expenses permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy replay preserves every constraint OID, name, expression and validation",
+        "passed": true
+      },
+      {
+        "name": "legacy replay preserves complete cost rows including timestamps",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.purchase_price permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.spa_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.transfer_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.loan_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.valuation_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.renovation_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.furnishing_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.utility_deposits permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.maintenance_deposit permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.acquisition_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.initial_holding_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.contingency_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: acquisition_costs.other_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_maintenance_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_sinking_fund permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_assessment_tax permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_quit_or_parcel_rent permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_landlord_insurance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_property_management_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_leasing_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_tenancy_documentation permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_repair_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_furniture_replacement_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_cleaning_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_vacancy_utilities permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_bad_debt_allowance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses one validated check",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses rejects -1",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses permits NULL",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses permits 0",
+        "passed": true
+      },
+      {
+        "name": "legacy: operating_expenses.annual_other_operating_expenses permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.purchase_price permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.spa_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.transfer_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_legal_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.loan_stamp_duty permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.valuation_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.renovation_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.furnishing_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.utility_deposits permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.maintenance_deposit permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.acquisition_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.initial_holding_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.contingency_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: acquisition_costs.other_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_maintenance_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_sinking_fund permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_assessment_tax permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_quit_or_parcel_rent permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_landlord_insurance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_property_management_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_leasing_agent_fee permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_tenancy_documentation permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_repair_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_furniture_replacement_reserve permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_cleaning_cost permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_vacancy_utilities permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_bad_debt_allowance permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses one validated check",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses rejects -1",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses rejects -0.01",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses permits NULL",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses permits 0",
+        "passed": true
+      },
+      {
+        "name": "bare comparison: operating_expenses.annual_other_operating_expenses permits 123.45",
+        "passed": true
+      },
+      {
+        "name": "weak legacy check is retained but cannot substitute for required protection",
+        "passed": true
+      },
+      {
+        "name": "NOT VALID cannot hide invalid existing rows",
+        "passed": true
+      },
+      {
+        "name": "NOT VALID is retained and a validated protection is created",
+        "passed": true
+      },
+      {
+        "name": "same-name weak check fails closed",
+        "passed": true
+      },
+      {
+        "name": "same-name NOT VALID check fails closed",
+        "passed": true
+      },
+      {
+        "name": "NO INHERIT cannot substitute for inheritable protection",
+        "passed": true
+      }
+    ],
+    "failed": 0,
+    "passed": 512
+  },
   "ownership": {
     "passed": 245,
     "failed": 0

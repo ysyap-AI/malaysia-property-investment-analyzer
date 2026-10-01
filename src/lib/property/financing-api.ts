@@ -1,18 +1,15 @@
 // Data access for financing. Ownership is enforced by the database (RLS).
-import type { SupabaseClient } from "@supabase/supabase-js";
-
 import { supabase } from "@/integrations/supabase/external-client";
 import type { FinancingRecord, FinancingRow } from "./financing-fields";
 import { financingSchema } from "./financing-fields";
 import { isSafeFinancialNumber } from "@/lib/finance/rounding";
 
-const db = supabase as unknown as SupabaseClient<any, "public", any>;
 const TABLE = "financing";
 
 export async function getFinancing(propertyId: string): Promise<FinancingRecord | null> {
-  const { data, error } = await db.from(TABLE).select("*").eq("property_id", propertyId).maybeSingle();
+  const { data, error } = await supabase.from(TABLE).select("*").eq("property_id", propertyId).maybeSingle();
   if (error) throw new Error(error.message);
-  return (data ?? null) as FinancingRecord | null;
+  return data ?? null;
 }
 
 export async function saveFinancing(propertyId: string, values: FinancingRow): Promise<void> {
@@ -24,8 +21,8 @@ export async function saveFinancing(propertyId: string, values: FinancingRow): P
   }
   const existing = await getFinancing(propertyId);
   const { error } = existing
-    ? await db.from(TABLE).update(values).eq("id", existing.id).select("id").single()
-    : await db.from(TABLE).insert({ ...values, property_id: propertyId }).select("id").single();
+    ? await supabase.from(TABLE).update(values).eq("id", existing.id).select("id").single()
+    : await supabase.from(TABLE).insert({ ...values, property_id: propertyId }).select("id").single();
   if (error) throw new Error(error.message);
 }
 

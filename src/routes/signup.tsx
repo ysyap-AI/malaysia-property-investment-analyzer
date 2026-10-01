@@ -37,25 +37,30 @@ function SignUpPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: window.location.origin,
-        data: { full_name: fullName },
-      },
-    });
-    setBusy(false);
-    if (error) {
-      toast.error(error.message);
-      return;
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: window.location.origin,
+          data: { full_name: fullName },
+        },
+      });
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      if (!data.session) {
+        setCheckEmail(true);
+        return;
+      }
+      toast.success("Account created");
+      await navigate({ to: "/dashboard" });
+    } catch {
+      toast.error("Unable to create your account. Please try again.");
+    } finally {
+      setBusy(false);
     }
-    if (!data.session) {
-      setCheckEmail(true);
-      return;
-    }
-    toast.success("Account created");
-    navigate({ to: "/dashboard" });
   }
 
   if (checkEmail) {

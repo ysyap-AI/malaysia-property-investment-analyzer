@@ -11,10 +11,12 @@ function sql(input) {
   });
 }
 execFileSync(process.execPath, ["tests/build-module-schema-audit.mjs", `${directory}/schema.sql`]);
+execFileSync(process.execPath, ["tests/build-reconciliation-audit.mjs", `${directory}/reconciliation.sql`]);
 execFileSync(process.execPath, ["tests/build-supabase-audit.mjs", "supabase/migrations", `${directory}/ownership.sql`]);
 const reports = {};
 const usersBefore = Number(sql("SELECT count(*) FROM auth.users;").trim());
 reports.schema = JSON.parse(sql(readFileSync(`${directory}/schema.sql`, "utf8")).trim());
+reports.reconciliation = JSON.parse(sql(readFileSync(`${directory}/reconciliation.sql`, "utf8")).trim());
 const ownership = sql(`BEGIN;\n${readFileSync(`${directory}/ownership.sql`, "utf8")}\nROLLBACK;`);
 writeFileSync("docs/phase-1-ownership-results.txt", ownership);
 const rows = ownership.trim().split(/\r?\n/);

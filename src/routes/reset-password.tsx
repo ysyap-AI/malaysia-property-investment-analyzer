@@ -39,14 +39,19 @@ function ResetPasswordPage() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.updateUser({ password });
-    setBusy(false);
-    if (error) {
-      toast.error(error.message);
-      return;
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.success("Password updated");
+      await navigate({ to: "/dashboard" });
+    } catch {
+      toast.error("Unable to update your password. Please try again.");
+    } finally {
+      setBusy(false);
     }
-    toast.success("Password updated");
-    navigate({ to: "/dashboard" });
   }
 
   return (

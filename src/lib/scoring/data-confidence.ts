@@ -6,6 +6,7 @@ import type { ConfidenceConfig, ConfidenceFactorKey, RentEvidence } from "@/conf
 import { ACQUISITION_COST_FIELDS } from "@/lib/finance/acquisition";
 import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 import { numericEvidence, financialFieldEvidence, financingEvidence } from "@/lib/phase1-validation";
+import { validateMinimumScoreBands } from "@/lib/scoring/band-validation";
 
 type Num = number | null | undefined;
 const known = (v: Num): v is number => numericEvidence(v) === "valid";
@@ -160,8 +161,8 @@ export function calculateDataConfidence(inputs: ConfidenceInputs, config: Confid
     const multiplier = config.rentEvidenceMultiplier[key];
     if (!Number.isFinite(multiplier) || multiplier < 0 || multiplier > 1) throw new Error("Invalid rent evidence multiplier");
   }
-  if (!config.bands.length || config.bands.some((b) => !Number.isFinite(b.minScore) || b.minScore < 0 || b.minScore > 100))
-    throw new Error("Invalid confidence bands");
+  const bandErrors = validateMinimumScoreBands(config.bands);
+  if (bandErrors.length) throw new Error(`Invalid confidence bands: ${bandErrors.join("; ")}`);
   const factors: ConfidenceFactorResult[] = config.factors.map((f) => {
     if (!f.enabled || f.phase !== 1 || !PHASE1_EVALUATORS.has(f.key)) {
       return {
