@@ -1,6 +1,6 @@
 // Compile-only regression checks; this file never sends database requests.
 import { supabase } from "../../src/integrations/supabase/external-client";
-import type { Tables, TablesInsert, TablesUpdate } from "../../src/integrations/supabase/types";
+import type { Tables, TablesInsert, TablesUpdate } from "../../src/integrations/supabase/external-types";
 import type { getProperty, listProperties } from "../../src/lib/property/property-api";
 import type { getAcquisitionCosts } from "../../src/lib/property/acquisition-api";
 import type { getOperatingExpenses } from "../../src/lib/property/operating-expenses-api";

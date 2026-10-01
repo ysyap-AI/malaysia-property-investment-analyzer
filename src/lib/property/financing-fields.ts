@@ -1,6 +1,6 @@
 // Field definitions and validation for the Financing module. No formulas here.
 import { z } from "zod";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Tables } from "@/integrations/supabase/external-types";
 
 import { calculateFinancing } from "@/lib/finance/financing";
 

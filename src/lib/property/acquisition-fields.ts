@@ -1,7 +1,7 @@
 // Field definitions and validation for the Acquisition Costs module.
 // No calculation lives here — the maths is in src/lib/finance/acquisition.ts.
 import { z } from "zod";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Tables } from "@/integrations/supabase/external-types";
 
 import { ACQUISITION_COST_FIELDS, type AcquisitionCostField } from "@/lib/finance/acquisition";
 
