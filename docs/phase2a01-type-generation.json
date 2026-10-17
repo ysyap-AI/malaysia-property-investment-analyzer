@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "cli": "2.120.0",
+  "source": "verified disposable local public schema",
+  "generatedSha256": "93bae2b2bde563188384e248933efc47092da1306ec7072fa3d3b37acc204afb",
+  "destination": "src/integrations/supabase/types.ts",
+  "addedTables": [
+    "location_fact_definitions",
+    "location_freshness_policies",
+    "location_provider_registry",
+    "property_location_intelligence_state"
+  ],
+  "unchangedOriginalTables": [
+    "acquisition_costs",
+    "financing",
+    "investment_criteria",
+    "operating_expenses",
+    "profiles",
+    "properties",
+    "scenario_configs"
+  ],
+  "parityContracts": 28,
+  "preservedPostgrestVersion": "14.5",
+  "note": "Only four generated table nodes added; existing external project functions, helpers and internal metadata preserved. New generator includes ComputedFields: never."
+}
