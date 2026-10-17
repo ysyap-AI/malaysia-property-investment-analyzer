@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "completedDate": "2026-10-17",
+  "timezone": "Asia/Kuala_Lumpur",
+  "branch": "phase2-location-intelligence",
+  "head": "934ea702a2ecfdb31c530ea4a33e21a2d55e27d2",
+  "trackedChangedFiles": [
+    "src/integrations/supabase/types.ts"
+  ],
+  "unchangedHistoricalMigrations": 5,
+  "application": {
+    "files": 33,
+    "passed": 1073
+  },
+  "security": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "browserRoot": ".output/public"
+  },
+  "build": "PASS",
+  "typescript": [
+    "application",
+    "fixtures",
+    "original database types",
+    "foundation database types"
+  ],
+  "databaseBehavior": {
+    "passed": 2340,
+    "failed": 0
+  },
+  "sourceHashes": [
+    {
+      "file": "supabase/migrations/20261016000000_phase2a01_foundation.sql",
+      "sha256": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393"
+    },
+    {
+      "file": "src/integrations/supabase/types.ts",
+      "sha256": "26cf14db1ca74481775ceb81f7c7dddf367f2b99af1546e9368c95caa1ec6068"
+    },
+    {
+      "file": "tests/run-phase2a01-database-audit.mjs",
+      "sha256": "9be0ee073bdf0255bdd1e0907d178b91acf38f9d3f5aa5b5dd5f4b811b7642ca"
+    },
+    {
+      "file": "tests/phase2a01-contract-fixtures.mjs",
+      "sha256": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f"
+    },
+    {
+      "file": "tests/phase2a01-foundation.sql",
+      "sha256": "1deb923dbd0f8925230268ac81ece9234717616b7cdbb5a34ea43000f6101c71"
+    },
+    {
+      "file": "tests/phase2a01-security-cases.mjs",
+      "sha256": "9710a18cef95e9579a67feec345bf0530f0b8ed6cc7bfa987b75b1c3615dd6c3"
+    },
+    {
+      "file": "tests/verify-phase2a01-schema.mjs",
+      "sha256": "433797e919ff7cd707fc647ab4561d25f61c2d39b30c17fa22a0a41b4db5216d"
+    },
+    {
+      "file": "tests/database-types/phase2a01.ts",
+      "sha256": "6e8bbfba6605bc46da3ba80346a93cbdaf1f59b1e8674a8f051507ff612bfa0d"
+    }
+  ],
+  "logHashes": [
+    {
+      "file": "final-app-tests.log",
+      "sha256": "ee6ec2ed47f4c318a919746de3acd4da1cf9be681e47006d008c0c92c70598f2"
+    },
+    {
+      "file": "final-build.log",
+      "sha256": "afefbf1ffa0bd069e0901cee6ad804fed562d428c03bd3f42ae6044a0280328e"
+    },
+    {
+      "file": "final-security.log",
+      "sha256": "aa913c5939a7a87ec74e935b22ebe20080dbb0eaa6fbf2503332e7b398189848"
+    }
+  ]
+}

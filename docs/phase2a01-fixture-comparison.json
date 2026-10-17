@@ -1,0 +1,220 @@
+{
+  "status": "PASS",
+  "baseline": "934ea702a2ecfdb31c530ea4a33e21a2d55e27d2",
+  "before": 53,
+  "after": 53,
+  "identicalAssertions": [
+    {
+      "title": "property fixture integration with the existing analysis hook P01 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P02 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P03 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P04 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P05 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P06 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P07 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P08 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P09 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "property fixture integration with the existing analysis hook P10 feeds saved financial inputs into the real analysis path",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P01 applies rent, vacancy, repair and interest stress assumptions together",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P01 has independently calculated financial results and scoring",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P01 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P01 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P01 recommends BUY CANDIDATE with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P02 has independently calculated financial results and scoring",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P02 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P02 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P02 recommends REJECT with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P03 has independently calculated financial results and scoring",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P03 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P03 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P03 recommends NEGOTIATE with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P03 reduces collected rent, not potential yield or data confidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P04 has independently calculated financial results and scoring",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P04 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P04 maintenance costs reduce NOI by the known expense increase",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P04 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P04 recommends REJECT with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P05 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P05 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P05 recommends NEGOTIATE with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P05 uses only the bank-valuation gap to negotiate despite strong returns",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P06 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P06 propagates missing evidence through every scenario and blocks scoring/BUY",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P06 recommends INSUFFICIENT DATA with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P07 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P07 keeps partial expense totals separate from usable totals and confirmed zero",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P07 propagates missing evidence through every scenario and blocks scoring/BUY",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P07 recommends INSUFFICIENT DATA with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P08 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P08 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P08 placeholder cannot change financials, scoring, confidence, flags or recommendations",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P08 recommends BUY CANDIDATE with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P09 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P09 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P09 placeholder cannot change financials, scoring, confidence, flags or recommendations",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P09 recommends BUY CANDIDATE with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P10 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P10 orders bear/base/bull cash flow and scores the actual bear result",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P10 recommends WATCHLIST with exactly the supported critical flags",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures P10 separates confidence from returns and scores, withholding BUY until evidence improves",
+      "status": "passed"
+    },
+    {
+      "title": "reusable Phase 1 property fixtures provides all ten IDs and independent nested inputs for every consumer",
+      "status": "passed"
+    }
+  ]
+}
