@@ -660,6 +660,7 @@ export type Database = {
       property_location_intelligence_state: {
         Row: {
           created_at: string
+          current_location_version_id: string | null
           freshness_status: string
           processing_status: string
           property_id: string
@@ -670,6 +671,7 @@ export type Database = {
         ComputedFields: never
         Insert: {
           created_at?: string
+          current_location_version_id?: string | null
           freshness_status?: string
           processing_status?: string
           property_id: string
@@ -679,6 +681,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          current_location_version_id?: string | null
           freshness_status?: string
           processing_status?: string
           property_id?: string
@@ -688,10 +691,123 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "property_location_intelligence_state_current_location_fkey"
+            columns: ["property_id", "current_location_version_id"]
+            isOneToOne: true
+            referencedRelation: "property_location_versions"
+            referencedColumns: ["property_id", "id"]
+          },
+          {
             foreignKeyName: "property_location_intelligence_state_property_id_fkey"
             columns: ["property_id"]
             isOneToOne: true
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_location_versions: {
+        Row: {
+          accuracy_m: number | null
+          change_reason: string
+          confidence_mapping_version: string | null
+          confirmation_status: string
+          confirmed_at: string | null
+          confirmed_by: string | null
+          coordinate_precision: string
+          coordinate_source: string
+          created_at: string
+          created_by: string
+          geocode_confidence: string
+          id: string
+          input_address: string | null
+          latitude: number | null
+          longitude: number | null
+          normalization_version: string | null
+          normalized_address: string | null
+          operation_hash: string
+          operation_id: string
+          position: unknown
+          property_id: string
+          property_input_hash: string
+          provider_candidate_id: string | null
+          provider_version_id: string | null
+          retrieved_at: string | null
+          source_crs: string | null
+          version_number: number
+        }
+        ComputedFields: never
+        Insert: {
+          accuracy_m?: number | null
+          change_reason: string
+          confidence_mapping_version?: string | null
+          confirmation_status?: string
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          coordinate_precision?: string
+          coordinate_source?: string
+          created_at?: string
+          created_by: string
+          geocode_confidence?: string
+          id?: string
+          input_address?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          normalization_version?: string | null
+          normalized_address?: string | null
+          operation_hash: string
+          operation_id: string
+          position?: never
+          property_id: string
+          property_input_hash: string
+          provider_candidate_id?: string | null
+          provider_version_id?: string | null
+          retrieved_at?: string | null
+          source_crs?: string | null
+          version_number: number
+        }
+        Update: {
+          accuracy_m?: number | null
+          change_reason?: string
+          confidence_mapping_version?: string | null
+          confirmation_status?: string
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          coordinate_precision?: string
+          coordinate_source?: string
+          created_at?: string
+          created_by?: string
+          geocode_confidence?: string
+          id?: string
+          input_address?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          normalization_version?: string | null
+          normalized_address?: string | null
+          operation_hash?: string
+          operation_id?: string
+          position?: never
+          property_id?: string
+          property_input_hash?: string
+          provider_candidate_id?: string | null
+          provider_version_id?: string | null
+          retrieved_at?: string | null
+          source_crs?: string | null
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_location_versions_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "property_location_versions_provider_version_id_fkey"
+            columns: ["provider_version_id"]
+            isOneToOne: false
+            referencedRelation: "location_provider_registry"
             referencedColumns: ["id"]
           },
         ]

@@ -1,0 +1,1616 @@
+{
+  "task": "Phase 2A-02 TEST-CLOSURE-02",
+  "description": "Earlier attempts in this repair task, preserved independently from the final successful execution. TEST-CLOSURE-01 is archived separately.",
+  "attempts": [
+    {
+      "date": "2026-10-18",
+      "timezone": "Asia/Kuala_Lumpur",
+      "task": "Phase 2A-02 TEST-CLOSURE-02",
+      "startedAt": "2026-10-18T09:46:42.077Z",
+      "status": "FAIL",
+      "recommendation": "BLOCKED",
+      "historicalEvidence": "phase2a02-transaction-results-closure-01.json",
+      "results": [
+        {
+          "id": "TC01",
+          "name": "First location without state",
+          "expected": "Commit version 1, create state and publish pointer atomically.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC02",
+          "name": "Version numbering and current pointer",
+          "expected": "Successive accepted writes produce versions 1 and 2, matching pointers and one revision increment per publication.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC03",
+          "name": "Explicit expected revision",
+          "expected": "Reject missing/invalid expected revision; accept explicit ABSENT only for absent state and exact token for existing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC04",
+          "name": "Stale transaction",
+          "expected": "Reject stale revision/current-pointer command without appending history or changing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC05",
+          "name": "Simultaneous first-location writers",
+          "expected": "Observe rival blocked before releasing winner; exactly one first publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC06",
+          "name": "Simultaneous pointer updates",
+          "expected": "Observe rival blocked before releasing winner; exactly one new publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC07",
+          "name": "Actual lock contention",
+          "expected": "Record both backend PIDs, pg_blocking_pids, Lock wait type and positive ungranted-lock count before release.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC08",
+          "name": "Duplicate operation and idempotent retry",
+          "expected": "Exact retry returns original outcome without duplicate history, revision increment or repointing.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC09",
+          "name": "Same operation with different payload",
+          "expected": "Reject changed payload under existing operation ID; preserve history and state.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC10",
+          "name": "Delayed geocoding result",
+          "expected": "Reject synthetic delayed command after input/revision/pointer changes; no provider calls.",
+          "readinessIds": "L10/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC11",
+          "name": "Former owner or changed parent",
+          "expected": "Reject former-owner and deleted-parent commands; do not recreate parent or publish history.",
+          "readinessIds": "L14/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC12",
+          "name": "Failure after history insertion",
+          "expected": "Injected failure rolls back inserted history and any newly created state.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC13",
+          "name": "Failure after pointer update",
+          "expected": "Injected failure rolls back history, pointer, revision and timestamps.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC14",
+          "name": "Complete rollback including COMMIT failure",
+          "expected": "Observe actual COMMIT rejection with SQLSTATE and verify complete rollback; never acknowledge success before COMMIT.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        }
+      ],
+      "harnessErrors": [
+        {
+          "stage": "qualification",
+          "name": "Error",
+          "message": "docker exited 1: WARNING: Error loading config file: open C:\\Users\\ysyap\\.docker\\config.json: Access is denied.\ncontext \"desktop-linux\": open C:\\Users\\ysyap\\.docker\\contexts\\meta\\fe9c6bd7a66301f49ca9b6a70b217107cd1284598bfc254700c989b916da791e\\meta.json: Access is denied.\n",
+          "sqlstate": null
+        }
+      ],
+      "limitation": "Synthetic SQL contract only; does not implement or prove real handler authentication. TC14 uses a temporary deferred FK; permanent-pointer integrity evidence remains separately attributable.",
+      "safety": {
+        "stage": "C",
+        "status": "PASS",
+        "databaseCommands": 0,
+        "results": [
+          {
+            "name": "S01 command timeout kills the owned process and explicitly fails",
+            "status": "PASS",
+            "elapsedMs": 27
+          },
+          {
+            "name": "S02 query timeout cancels, terminates and verifies only the exact owned backend",
+            "status": "PASS",
+            "elapsedMs": 30
+          },
+          {
+            "name": "S03 blocked ROLLBACK has a finite shutdown and explicit failure",
+            "status": "PASS",
+            "elapsedMs": 46
+          },
+          {
+            "name": "S04 failure after acquisition before release always releases and joins winner",
+            "status": "PASS",
+            "elapsedMs": 2
+          },
+          {
+            "name": "S05 blocking-observation failure joins both writers before returning",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S06 PID acquisition failure is reported without a hanging acquisition promise",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S07 missing lock handshake is bounded and the started writer is joined",
+            "status": "PASS",
+            "elapsedMs": 43
+          },
+          {
+            "name": "S08 cleanup failure remains a harness failure in the written partial report",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S09 unverified session shutdown stops fixture cleanup but still writes evidence",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S10 actual local subprocess timeout leaves the event loop responsive",
+            "status": "PASS",
+            "elapsedMs": 178
+          },
+          {
+            "name": "S11 termination failure cannot be mistaken for a clean session",
+            "status": "PASS",
+            "elapsedMs": 40
+          }
+        ],
+        "sourceHashes": {
+          "tests/run-phase2a02-transactions.mjs": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+          "tests/phase2a02-transaction-runtime.mjs": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+          "tests/phase2a02-transaction-writer.mjs": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+          "tests/phase2a02-transaction-qualification.mjs": "507fb43a97d64c4358346245d38f942bc1a8f46f42b2129db9cf9a8b01843d9e",
+          "tests/phase2a02-catalog-query.mjs": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+          "tests/phase2a02-contention.mjs": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+          "tests/phase2a02-local-target.mjs": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+          "tests/phase2a02-harness-safety.test.mjs": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+          "tests/phase2a02-command-contract.mjs": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+          "tests/phase2a02-location-cases.mjs": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+          "tests/phase2a02-baseline-snapshot.mjs": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+          "tests/phase2a01-contract-fixtures.mjs": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f",
+          "tests/phase2a02-sql-helpers.mjs": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53"
+        }
+      },
+      "gitBefore": {
+        "head": "c9b6c4acc1879a2b84b89d3b39455f2489e4c56a",
+        "branch": "phase2-location-intelligence",
+        "index": ""
+      },
+      "sessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "events": []
+      },
+      "cleanup": {
+        "status": "NOT REQUIRED",
+        "reason": "No fixture writes attempted"
+      },
+      "preservation": {
+        "status": "NOT EXECUTED",
+        "reason": "Pre-test qualification did not complete"
+      },
+      "summary": {
+        "total": 14,
+        "pass": 0,
+        "fail": 0,
+        "notExecuted": 14
+      },
+      "finishedAt": "2026-10-18T09:46:42.431Z",
+      "transactionClosure": "BLOCKED",
+      "remainingAcceptanceGaps": [
+        "Separately designated clean installation",
+        "Full incompatible-extension/role/guard-attachment qualification",
+        "Representative GiST plan",
+        "Future-handler authentication and T15 browser regression"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "timezone": "Asia/Kuala_Lumpur",
+      "task": "Phase 2A-02 TEST-CLOSURE-02",
+      "startedAt": "2026-10-18T09:47:26.557Z",
+      "status": "FAIL",
+      "recommendation": "BLOCKED",
+      "historicalEvidence": "phase2a02-transaction-results-closure-01.json",
+      "results": [
+        {
+          "id": "TC01",
+          "name": "First location without state",
+          "expected": "Commit version 1, create state and publish pointer atomically.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC02",
+          "name": "Version numbering and current pointer",
+          "expected": "Successive accepted writes produce versions 1 and 2, matching pointers and one revision increment per publication.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC03",
+          "name": "Explicit expected revision",
+          "expected": "Reject missing/invalid expected revision; accept explicit ABSENT only for absent state and exact token for existing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC04",
+          "name": "Stale transaction",
+          "expected": "Reject stale revision/current-pointer command without appending history or changing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC05",
+          "name": "Simultaneous first-location writers",
+          "expected": "Observe rival blocked before releasing winner; exactly one first publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC06",
+          "name": "Simultaneous pointer updates",
+          "expected": "Observe rival blocked before releasing winner; exactly one new publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC07",
+          "name": "Actual lock contention",
+          "expected": "Record both backend PIDs, pg_blocking_pids, Lock wait type and positive ungranted-lock count before release.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC08",
+          "name": "Duplicate operation and idempotent retry",
+          "expected": "Exact retry returns original outcome without duplicate history, revision increment or repointing.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC09",
+          "name": "Same operation with different payload",
+          "expected": "Reject changed payload under existing operation ID; preserve history and state.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC10",
+          "name": "Delayed geocoding result",
+          "expected": "Reject synthetic delayed command after input/revision/pointer changes; no provider calls.",
+          "readinessIds": "L10/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC11",
+          "name": "Former owner or changed parent",
+          "expected": "Reject former-owner and deleted-parent commands; do not recreate parent or publish history.",
+          "readinessIds": "L14/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC12",
+          "name": "Failure after history insertion",
+          "expected": "Injected failure rolls back inserted history and any newly created state.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC13",
+          "name": "Failure after pointer update",
+          "expected": "Injected failure rolls back history, pointer, revision and timestamps.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC14",
+          "name": "Complete rollback including COMMIT failure",
+          "expected": "Observe actual COMMIT rejection with SQLSTATE and verify complete rollback; never acknowledge success before COMMIT.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        }
+      ],
+      "harnessErrors": [
+        {
+          "stage": "qualification",
+          "name": "AssertionError",
+          "message": "accepted baseline file integrity\n+ actual - expected\n\n+ '8df542b9fa9bd6c7a6d414e9ea114e9670fb471435a7f894ceba04ac62e29827'\n- '9fab0a7352f241a5fe507a35f63e7bf1c6b2a83f31309d6ba877db634c9df17e'\n",
+          "sqlstate": null
+        }
+      ],
+      "limitation": "Synthetic SQL contract only; does not implement or prove real handler authentication. TC14 uses a temporary deferred FK; permanent-pointer integrity evidence remains separately attributable.",
+      "safety": {
+        "stage": "C",
+        "status": "PASS",
+        "databaseCommands": 0,
+        "results": [
+          {
+            "name": "S01 command timeout kills the owned process and explicitly fails",
+            "status": "PASS",
+            "elapsedMs": 27
+          },
+          {
+            "name": "S02 query timeout cancels, terminates and verifies only the exact owned backend",
+            "status": "PASS",
+            "elapsedMs": 30
+          },
+          {
+            "name": "S03 blocked ROLLBACK has a finite shutdown and explicit failure",
+            "status": "PASS",
+            "elapsedMs": 46
+          },
+          {
+            "name": "S04 failure after acquisition before release always releases and joins winner",
+            "status": "PASS",
+            "elapsedMs": 2
+          },
+          {
+            "name": "S05 blocking-observation failure joins both writers before returning",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S06 PID acquisition failure is reported without a hanging acquisition promise",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S07 missing lock handshake is bounded and the started writer is joined",
+            "status": "PASS",
+            "elapsedMs": 43
+          },
+          {
+            "name": "S08 cleanup failure remains a harness failure in the written partial report",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S09 unverified session shutdown stops fixture cleanup but still writes evidence",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S10 actual local subprocess timeout leaves the event loop responsive",
+            "status": "PASS",
+            "elapsedMs": 178
+          },
+          {
+            "name": "S11 termination failure cannot be mistaken for a clean session",
+            "status": "PASS",
+            "elapsedMs": 40
+          }
+        ],
+        "sourceHashes": {
+          "tests/run-phase2a02-transactions.mjs": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+          "tests/phase2a02-transaction-runtime.mjs": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+          "tests/phase2a02-transaction-writer.mjs": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+          "tests/phase2a02-transaction-qualification.mjs": "507fb43a97d64c4358346245d38f942bc1a8f46f42b2129db9cf9a8b01843d9e",
+          "tests/phase2a02-catalog-query.mjs": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+          "tests/phase2a02-contention.mjs": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+          "tests/phase2a02-local-target.mjs": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+          "tests/phase2a02-harness-safety.test.mjs": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+          "tests/phase2a02-command-contract.mjs": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+          "tests/phase2a02-location-cases.mjs": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+          "tests/phase2a02-baseline-snapshot.mjs": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+          "tests/phase2a01-contract-fixtures.mjs": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f",
+          "tests/phase2a02-sql-helpers.mjs": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53"
+        }
+      },
+      "gitBefore": {
+        "head": "c9b6c4acc1879a2b84b89d3b39455f2489e4c56a",
+        "branch": "phase2-location-intelligence",
+        "index": ""
+      },
+      "sessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "terminated": [],
+        "events": []
+      },
+      "cleanup": {
+        "status": "NOT REQUIRED",
+        "reason": "No fixture writes attempted"
+      },
+      "preservation": {
+        "status": "NOT EXECUTED",
+        "reason": "Pre-test qualification did not complete"
+      },
+      "summary": {
+        "total": 14,
+        "pass": 0,
+        "fail": 0,
+        "notExecuted": 14
+      },
+      "finishedAt": "2026-10-18T09:47:27.794Z",
+      "transactionClosure": "BLOCKED",
+      "remainingAcceptanceGaps": [
+        "Separately designated clean installation",
+        "Full incompatible-extension/role/guard-attachment qualification",
+        "Representative GiST plan",
+        "Future-handler authentication and T15 browser regression"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "timezone": "Asia/Kuala_Lumpur",
+      "task": "Phase 2A-02 TEST-CLOSURE-02",
+      "startedAt": "2026-10-18T09:53:22.384Z",
+      "status": "PASS",
+      "recommendation": "BLOCKED",
+      "historicalEvidence": "phase2a02-transaction-results-closure-01.json",
+      "results": [
+        {
+          "id": "TC01",
+          "name": "First location without state",
+          "expected": "Commit version 1, create state and publish pointer atomically.",
+          "readinessIds": "L10",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:32.546Z",
+          "evidence": {
+            "pointer": "a8b64814-3532-4d43-ba5a-49239d9c67d1",
+            "revision": 1,
+            "versions": [
+              1
+            ],
+            "historyRows": 1
+          },
+          "finishedAt": "2026-10-18T09:53:34.184Z"
+        },
+        {
+          "id": "TC02",
+          "name": "Version numbering and current pointer",
+          "expected": "Successive accepted writes produce versions 1 and 2, matching pointers and one revision increment per publication.",
+          "readinessIds": "L10",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:34.187Z",
+          "evidence": {
+            "pointer": "826afbc1-257d-4b62-a7aa-19526bba0984",
+            "revision": 2,
+            "versions": [
+              1,
+              2
+            ],
+            "historyRows": 2
+          },
+          "finishedAt": "2026-10-18T09:53:35.064Z"
+        },
+        {
+          "id": "TC03",
+          "name": "Explicit expected revision",
+          "expected": "Reject missing/invalid expected revision; accept explicit ABSENT only for absent state and exact token for existing state.",
+          "readinessIds": "L10",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:35.066Z",
+          "evidence": {
+            "invalidAndWrongStateRejections": [
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "Error",
+                  "message": "Expected revision required",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "AssertionError",
+                  "message": "expected revision\n\n0 !== 'ABSENT'\n",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "rejection": {
+                  "name": "AssertionError",
+                  "message": "expected revision\n\n'ABSENT' !== 2\n",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              }
+            ],
+            "explicitAbsentAccepted": "TC01",
+            "exactExistingTokenAccepted": "TC02"
+          },
+          "finishedAt": "2026-10-18T09:53:41.435Z"
+        },
+        {
+          "id": "TC04",
+          "name": "Stale transaction",
+          "expected": "Reject stale revision/current-pointer command without appending history or changing state.",
+          "readinessIds": "L10",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:41.438Z",
+          "evidence": {
+            "staleRevision": {
+              "rejection": {
+                "name": "AssertionError",
+                "message": "expected revision\n\n1 !== 2\n",
+                "sqlstate": null
+              },
+              "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+              "rollbackVerified": true
+            },
+            "stalePointer": {
+              "rejection": {
+                "name": "AssertionError",
+                "message": "expected current location\n+ actual - expected\n\n+ 'a8b64814-3532-4d43-ba5a-49239d9c67d1'\n- '826afbc1-257d-4b62-a7aa-19526bba0984'\n",
+                "sqlstate": null
+              },
+              "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+              "rollbackVerified": true
+            }
+          },
+          "finishedAt": "2026-10-18T09:53:43.165Z"
+        },
+        {
+          "id": "TC05",
+          "name": "Simultaneous first-location writers",
+          "expected": "Observe rival blocked before releasing winner; exactly one first publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:54:04.879Z",
+          "evidence": {
+            "blocking": {
+              "blockers": [
+                3557
+              ],
+              "firstPid": 3557,
+              "waitType": "Lock",
+              "secondPid": 3564,
+              "observedAt": "2026-10-18T09:54:05.693972+00:00",
+              "ungrantedLocks": 1
+            },
+            "winner": {
+              "id": "e480a261-226b-424c-aace-6710403eb3e9",
+              "versionNumber": 1,
+              "retry": false
+            },
+            "loser": {
+              "name": "AssertionError",
+              "message": "expected revision\n\n'ABSENT' !== 1\n",
+              "sqlstate": null
+            },
+            "persisted": {
+              "pointer": "e480a261-226b-424c-aace-6710403eb3e9",
+              "revision": 1,
+              "versions": [
+                1
+              ],
+              "historyRows": 1
+            }
+          },
+          "finishedAt": "2026-10-18T09:54:06.201Z"
+        },
+        {
+          "id": "TC06",
+          "name": "Simultaneous pointer updates",
+          "expected": "Observe rival blocked before releasing winner; exactly one new publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:54:06.204Z",
+          "evidence": {
+            "blocking": {
+              "blockers": [
+                3614
+              ],
+              "firstPid": 3614,
+              "waitType": "Lock",
+              "secondPid": 3621,
+              "observedAt": "2026-10-18T09:54:07.014635+00:00",
+              "ungrantedLocks": 1
+            },
+            "winner": {
+              "id": "e816f343-d61e-4fb8-bcd1-ea07a17bd426",
+              "versionNumber": 3,
+              "retry": false
+            },
+            "loser": {
+              "name": "AssertionError",
+              "message": "expected revision\n\n2 !== 3\n",
+              "sqlstate": null
+            },
+            "persisted": {
+              "pointer": "e816f343-d61e-4fb8-bcd1-ea07a17bd426",
+              "revision": 3,
+              "versions": [
+                1,
+                2,
+                3
+              ],
+              "historyRows": 3
+            }
+          },
+          "finishedAt": "2026-10-18T09:54:07.548Z"
+        },
+        {
+          "id": "TC07",
+          "name": "Actual lock contention",
+          "expected": "Record both backend PIDs, pg_blocking_pids, Lock wait type and positive ungranted-lock count before release.",
+          "readinessIds": "L11",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:54:07.552Z",
+          "evidence": {
+            "races": [
+              {
+                "blockers": [
+                  3557
+                ],
+                "firstPid": 3557,
+                "waitType": "Lock",
+                "secondPid": 3564,
+                "observedAt": "2026-10-18T09:54:05.693972+00:00",
+                "ungrantedLocks": 1
+              },
+              {
+                "blockers": [
+                  3614
+                ],
+                "firstPid": 3614,
+                "waitType": "Lock",
+                "secondPid": 3621,
+                "observedAt": "2026-10-18T09:54:07.014635+00:00",
+                "ungrantedLocks": 1
+              }
+            ]
+          },
+          "finishedAt": "2026-10-18T09:54:07.552Z"
+        },
+        {
+          "id": "TC08",
+          "name": "Duplicate operation and idempotent retry",
+          "expected": "Exact retry returns original outcome without duplicate history, revision increment or repointing.",
+          "readinessIds": "L12",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:43.168Z",
+          "evidence": {
+            "retry": {
+              "id": "a8b64814-3532-4d43-ba5a-49239d9c67d1",
+              "versionNumber": 1,
+              "retry": true
+            },
+            "persisted": {
+              "pointer": "826afbc1-257d-4b62-a7aa-19526bba0984",
+              "revision": 2,
+              "versions": [
+                1,
+                2
+              ],
+              "historyRows": 2
+            }
+          },
+          "finishedAt": "2026-10-18T09:53:44.071Z"
+        },
+        {
+          "id": "TC09",
+          "name": "Same operation with different payload",
+          "expected": "Reject changed payload under existing operation ID; preserve history and state.",
+          "readinessIds": "L12",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:44.074Z",
+          "evidence": {
+            "rejection": {
+              "name": "AssertionError",
+              "message": "same request identity requires same payload\n+ actual - expected\n\n+ '682cd4c1e831598c598eb8651ffb55bc59cbec2f4d2b12ce043eabf550599ddc'\n- '1a0238f6386790998ab3106716098ee50284f4099ba17bb98ed578827e6781df'\n",
+              "sqlstate": null
+            },
+            "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+            "rollbackVerified": true
+          },
+          "finishedAt": "2026-10-18T09:53:44.800Z"
+        },
+        {
+          "id": "TC10",
+          "name": "Delayed geocoding result",
+          "expected": "Reject synthetic delayed command after input/revision/pointer changes; no provider calls.",
+          "readinessIds": "L10/L12",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:44.803Z",
+          "evidence": {
+            "changedInput": {
+              "rejection": {
+                "name": "AssertionError",
+                "message": "current property-input hash\n+ actual - expected\n\n+ '9676863391aebe5da4e352d0c2b1b550e932f2a1e4beb4a77d86481156906259'\n- 'e46ae692ebe83a5907810b5414f38289c9eb081e23ad04896e6029ef8ec7c4d2'\n",
+                "sqlstate": null
+              },
+              "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+              "rollbackVerified": true
+            },
+            "stalePublication": "TC04"
+          },
+          "finishedAt": "2026-10-18T09:53:46.005Z"
+        },
+        {
+          "id": "TC11",
+          "name": "Former owner or changed parent",
+          "expected": "Reject former-owner and deleted-parent commands; do not recreate parent or publish history.",
+          "readinessIds": "L14/L12",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:46.008Z",
+          "evidence": {
+            "ownerResult": {
+              "rejection": {
+                "name": "AssertionError",
+                "message": "actual parent owner\n+ actual - expected\n\n+ 'f3020000-0000-0000-0000-000000000001'\n- 'f3020000-0000-0000-0000-000000000002'\n                                      ^\n",
+                "sqlstate": null
+              },
+              "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+              "rollbackVerified": true
+            },
+            "deletedResult": {
+              "rejection": {
+                "name": "AssertionError",
+                "message": "deleted parent",
+                "sqlstate": null
+              },
+              "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+              "rollbackVerified": true
+            },
+            "parentRecreated": false
+          },
+          "finishedAt": "2026-10-18T09:53:48.524Z"
+        },
+        {
+          "id": "TC12",
+          "name": "Failure after history insertion",
+          "expected": "Injected failure rolls back inserted history and any newly created state.",
+          "readinessIds": "L20",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:48.527Z",
+          "evidence": {
+            "results": [
+              {
+                "property": "f3020000-0000-0000-0000-000000000012",
+                "wasAbsent": true,
+                "rejection": {
+                  "name": "Error",
+                  "message": "injected after insert",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "property": "f3020000-0000-0000-0000-000000000011",
+                "wasAbsent": false,
+                "rejection": {
+                  "name": "Error",
+                  "message": "injected after insert",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              }
+            ]
+          },
+          "finishedAt": "2026-10-18T09:53:50.687Z"
+        },
+        {
+          "id": "TC13",
+          "name": "Failure after pointer update",
+          "expected": "Injected failure rolls back history, pointer, revision and timestamps.",
+          "readinessIds": "L20",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:50.690Z",
+          "evidence": {
+            "results": [
+              {
+                "property": "f3020000-0000-0000-0000-000000000012",
+                "wasAbsent": true,
+                "rejection": {
+                  "name": "Error",
+                  "message": "injected after pointer",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "property": "f3020000-0000-0000-0000-000000000011",
+                "wasAbsent": false,
+                "rejection": {
+                  "name": "Error",
+                  "message": "injected after pointer",
+                  "sqlstate": null
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              }
+            ]
+          },
+          "finishedAt": "2026-10-18T09:53:53.362Z"
+        },
+        {
+          "id": "TC14",
+          "name": "Complete rollback including COMMIT failure",
+          "expected": "Observe actual COMMIT rejection with SQLSTATE and verify complete rollback; never acknowledge success before COMMIT.",
+          "readinessIds": "L20",
+          "status": "PASS",
+          "actual": "Fresh assertions completed",
+          "startedAt": "2026-10-18T09:53:53.365Z",
+          "evidence": {
+            "results": [
+              {
+                "property": "f3020000-0000-0000-0000-000000000012",
+                "wasAbsent": true,
+                "rejection": {
+                  "name": "Error",
+                  "message": "psql exited 3: ERROR:  23503: insert or update on table \"tc02_commit_child\" violates foreign key constraint \"tc02_deferred_fk\"\nDETAIL:  Key (id)=(1) is not present in table \"tc02_commit_parent\".\nSCHEMA NAME:  pg_temp_75\nTABLE NAME:  tc02_commit_child\nCONSTRAINT NAME:  tc02_deferred_fk\nLOCATION:  ri_ReportViolation, ri_triggers.c:2599\n",
+                  "sqlstate": "23503"
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              },
+              {
+                "property": "f3020000-0000-0000-0000-000000000011",
+                "wasAbsent": false,
+                "rejection": {
+                  "name": "Error",
+                  "message": "psql exited 3: ERROR:  23503: insert or update on table \"tc02_commit_child\" violates foreign key constraint \"tc02_deferred_fk\"\nDETAIL:  Key (id)=(1) is not present in table \"tc02_commit_parent\".\nSCHEMA NAME:  pg_temp_84\nTABLE NAME:  tc02_commit_child\nCONSTRAINT NAME:  tc02_deferred_fk\nLOCATION:  ri_ReportViolation, ri_triggers.c:2599\n",
+                  "sqlstate": "23503"
+                },
+                "snapshotSha256": "dce8cb924fcb27e16b8a417456dc176db185908c02e01d3a4964b6ff44ab1e53",
+                "rollbackVerified": true
+              }
+            ],
+            "commitMechanism": "Temporary ON COMMIT DROP tables with INITIALLY DEFERRED FK; orphan accepted by INSERT, rejected by actual COMMIT; permanent guards untouched"
+          },
+          "finishedAt": "2026-10-18T09:54:04.876Z"
+        }
+      ],
+      "harnessErrors": [],
+      "limitation": "Synthetic SQL contract only; does not implement or prove real handler authentication. TC14 uses a temporary deferred FK; permanent-pointer integrity evidence remains separately attributable.",
+      "safety": {
+        "stage": "C",
+        "status": "PASS",
+        "databaseCommands": 0,
+        "results": [
+          {
+            "name": "S01 command timeout kills the owned process and explicitly fails",
+            "status": "PASS",
+            "elapsedMs": 32
+          },
+          {
+            "name": "S02 query timeout cancels, terminates and verifies only the exact owned backend",
+            "status": "PASS",
+            "elapsedMs": 31
+          },
+          {
+            "name": "S03 blocked ROLLBACK has a finite shutdown and explicit failure",
+            "status": "PASS",
+            "elapsedMs": 45
+          },
+          {
+            "name": "S04 failure after acquisition before release always releases and joins winner",
+            "status": "PASS",
+            "elapsedMs": 2
+          },
+          {
+            "name": "S05 blocking-observation failure joins both writers before returning",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S06 PID acquisition failure is reported without a hanging acquisition promise",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S07 missing lock handshake is bounded and the started writer is joined",
+            "status": "PASS",
+            "elapsedMs": 43
+          },
+          {
+            "name": "S08 cleanup failure remains a harness failure in the written partial report",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S09 unverified session shutdown stops fixture cleanup but still writes evidence",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S10 actual local subprocess timeout leaves the event loop responsive",
+            "status": "PASS",
+            "elapsedMs": 175
+          },
+          {
+            "name": "S11 termination failure cannot be mistaken for a clean session",
+            "status": "PASS",
+            "elapsedMs": 40
+          }
+        ],
+        "sourceHashes": {
+          "tests/run-phase2a02-transactions.mjs": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+          "tests/phase2a02-transaction-runtime.mjs": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+          "tests/phase2a02-transaction-writer.mjs": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+          "tests/phase2a02-transaction-qualification.mjs": "6f4d8d4bc5625284183482f1059c40bb6783b46e9afc7378f101ed94f064998c",
+          "tests/phase2a02-catalog-query.mjs": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+          "tests/phase2a02-contention.mjs": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+          "tests/phase2a02-local-target.mjs": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+          "tests/phase2a02-harness-safety.test.mjs": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+          "tests/phase2a02-command-contract.mjs": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+          "tests/phase2a02-location-cases.mjs": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+          "tests/phase2a02-baseline-snapshot.mjs": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+          "tests/phase2a01-contract-fixtures.mjs": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f",
+          "tests/phase2a02-sql-helpers.mjs": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53"
+        }
+      },
+      "gitBefore": {
+        "head": "c9b6c4acc1879a2b84b89d3b39455f2489e4c56a",
+        "branch": "phase2-location-intelligence",
+        "index": ""
+      },
+      "target": {
+        "status": "PASS",
+        "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+        "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+        "volume": "supabase_db_mpia-phase2a01-implementation",
+        "volumeCreatedAt": "2026-10-16T14:23:02Z",
+        "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+        "user": "postgres",
+        "socket": true,
+        "postgis": {
+          "schema": "extensions",
+          "version": "3.3.7"
+        },
+        "version": "17.11",
+        "database": "postgres",
+        "idleTimeout": "15s",
+        "lockTimeout": "10s",
+        "statementTimeout": "12s",
+        "baselineSha256": "9fab0a7352f241a5fe507a35f63e7bf1c6b2a83f31309d6ba877db634c9df17e",
+        "snapshotSha256": "782cedb1204a5d331f47c9dbfc2ea0570e88fe0d0e77e221f130208a3b861437",
+        "migrationSha256": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+        "foundationSha256": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+        "migrationIdentity": "Accepted source hashes plus exact installed catalog comparison (not migration-ledger inference)",
+        "fixtureCounts": {
+          "state": 0,
+          "profiles": 0,
+          "authUsers": 0,
+          "financing": 0,
+          "properties": 0,
+          "locationVersions": 0,
+          "scenario_configs": 0,
+          "acquisition_costs": 0,
+          "operating_expenses": 0,
+          "investment_criteria": 0
+        }
+      },
+      "fixtureCreation": {
+        "state": 0,
+        "profiles": 2,
+        "authUsers": 2,
+        "financing": 3,
+        "properties": 3,
+        "locationVersions": 0,
+        "scenario_configs": 0,
+        "acquisition_costs": 3,
+        "operating_expenses": 3,
+        "investment_criteria": 0
+      },
+      "sessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "terminated": [],
+        "events": [
+          {
+            "name": "mpia_tc02_96253a617b3f488bbc1a7cc4b0d3b7ed_166",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_96253a617b3f488bbc1a7cc4b0d3b7ed_175",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          }
+        ]
+      },
+      "cleanup": {
+        "status": "PASS",
+        "counts": {
+          "state": 0,
+          "profiles": 0,
+          "authUsers": 0,
+          "financing": 0,
+          "properties": 0,
+          "locationVersions": 0,
+          "scenario_configs": 0,
+          "acquisition_costs": 0,
+          "operating_expenses": 0,
+          "investment_criteria": 0
+        }
+      },
+      "preservation": {
+        "status": "PASS",
+        "beforeSha256": "782cedb1204a5d331f47c9dbfc2ea0570e88fe0d0e77e221f130208a3b861437",
+        "afterSha256": "782cedb1204a5d331f47c9dbfc2ea0570e88fe0d0e77e221f130208a3b861437",
+        "data": {
+          "auth.audit_log_entries": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.custom_oauth_providers": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.flow_state": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.identities": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.instances": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.mfa_amr_claims": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.mfa_challenges": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.mfa_factors": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.mfa_recovery_code_sets": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.mfa_recovery_codes": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.oauth_authorizations": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.oauth_client_states": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.oauth_clients": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.oauth_consents": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.one_time_tokens": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.refresh_tokens": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.saml_providers": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.saml_relay_states": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.schema_migrations": {
+            "count": 82,
+            "digest": "18cd3c29ff3739c1d94309b448a9a690"
+          },
+          "auth.scim_tokens": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.scim_users": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.sessions": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.sso_domains": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.sso_providers": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.users": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.webauthn_challenges": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "auth.webauthn_credentials": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.acquisition_costs": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.financing": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.investment_criteria": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.location_fact_definitions": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.location_freshness_policies": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.location_provider_registry": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.operating_expenses": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.profiles": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.properties": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.property_location_intelligence_state": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.property_location_versions": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "public.scenario_configs": {
+            "count": 0,
+            "digest": "d41d8cd98f00b204e9800998ecf8427e"
+          }
+        },
+        "phase1": true,
+        "phase2a01": true,
+        "phase2a02": true,
+        "postgis": true,
+        "gitHeadAndIndexPreserved": true,
+        "finalSessions": {
+          "status": "PASS",
+          "remainingSessions": 0,
+          "remainingTransactions": 0,
+          "terminated": [],
+          "events": [
+            {
+              "name": "mpia_tc02_96253a617b3f488bbc1a7cc4b0d3b7ed_166",
+              "actions": [
+                {
+                  "cancel": ""
+                },
+                {
+                  "terminate": ""
+                }
+              ],
+              "remaining": 0
+            },
+            {
+              "name": "mpia_tc02_96253a617b3f488bbc1a7cc4b0d3b7ed_175",
+              "actions": [
+                {
+                  "cancel": ""
+                },
+                {
+                  "terminate": ""
+                }
+              ],
+              "remaining": 0
+            }
+          ]
+        }
+      },
+      "summary": {
+        "total": 14,
+        "pass": 14,
+        "fail": 0,
+        "notExecuted": 0
+      },
+      "finishedAt": "2026-10-18T09:54:16.394Z",
+      "transactionClosure": "GO",
+      "remainingAcceptanceGaps": [
+        "Separately designated clean installation",
+        "Full incompatible-extension/role/guard-attachment qualification",
+        "Representative GiST plan",
+        "Future-handler authentication and T15 browser regression"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "timezone": "Asia/Kuala_Lumpur",
+      "task": "Phase 2A-02 TEST-CLOSURE-02",
+      "startedAt": "2026-10-18T09:55:38.017Z",
+      "status": "FAIL",
+      "recommendation": "BLOCKED",
+      "historicalEvidence": "phase2a02-transaction-results-closure-01.json",
+      "results": [
+        {
+          "id": "TC01",
+          "name": "First location without state",
+          "expected": "Commit version 1, create state and publish pointer atomically.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC02",
+          "name": "Version numbering and current pointer",
+          "expected": "Successive accepted writes produce versions 1 and 2, matching pointers and one revision increment per publication.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC03",
+          "name": "Explicit expected revision",
+          "expected": "Reject missing/invalid expected revision; accept explicit ABSENT only for absent state and exact token for existing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC04",
+          "name": "Stale transaction",
+          "expected": "Reject stale revision/current-pointer command without appending history or changing state.",
+          "readinessIds": "L10",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC05",
+          "name": "Simultaneous first-location writers",
+          "expected": "Observe rival blocked before releasing winner; exactly one first publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC06",
+          "name": "Simultaneous pointer updates",
+          "expected": "Observe rival blocked before releasing winner; exactly one new publication and stale loser.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC07",
+          "name": "Actual lock contention",
+          "expected": "Record both backend PIDs, pg_blocking_pids, Lock wait type and positive ungranted-lock count before release.",
+          "readinessIds": "L11",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC08",
+          "name": "Duplicate operation and idempotent retry",
+          "expected": "Exact retry returns original outcome without duplicate history, revision increment or repointing.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC09",
+          "name": "Same operation with different payload",
+          "expected": "Reject changed payload under existing operation ID; preserve history and state.",
+          "readinessIds": "L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC10",
+          "name": "Delayed geocoding result",
+          "expected": "Reject synthetic delayed command after input/revision/pointer changes; no provider calls.",
+          "readinessIds": "L10/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC11",
+          "name": "Former owner or changed parent",
+          "expected": "Reject former-owner and deleted-parent commands; do not recreate parent or publish history.",
+          "readinessIds": "L14/L12",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC12",
+          "name": "Failure after history insertion",
+          "expected": "Injected failure rolls back inserted history and any newly created state.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC13",
+          "name": "Failure after pointer update",
+          "expected": "Injected failure rolls back history, pointer, revision and timestamps.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        },
+        {
+          "id": "TC14",
+          "name": "Complete rollback including COMMIT failure",
+          "expected": "Observe actual COMMIT rejection with SQLSTATE and verify complete rollback; never acknowledge success before COMMIT.",
+          "readinessIds": "L20",
+          "status": "NOT EXECUTED",
+          "actual": "Not reached"
+        }
+      ],
+      "harnessErrors": [
+        {
+          "stage": "qualification",
+          "name": "AssertionError",
+          "message": "exact enabled guard attachments; no additional triggers\n+ actual - expected\n... Skipped lines\n\n  [\n    [\n      'property_location_intelligence_state',\n      'property_location_intelligence_state_guard',\n      'O',\n...\n      0,\n+     '0'\n-     0\n    ],\n    [\n      'property_location_intelligence_state',\n      'property_location_pointer_guard',\n      'O',\n...\n      0,\n+     '0'\n-     0\n    ],\n    [\n      'property_location_versions',\n      'property_location_versions_guard',\n      'O',\n...\n      0,\n+     '0'\n-     0\n    ]\n  ]\n",
+          "sqlstate": null
+        }
+      ],
+      "limitation": "Synthetic SQL contract only; does not implement or prove real handler authentication. TC14 uses a temporary deferred FK; permanent-pointer integrity evidence remains separately attributable.",
+      "safety": {
+        "stage": "C",
+        "status": "PASS",
+        "databaseCommands": 0,
+        "results": [
+          {
+            "name": "S01 command timeout kills the owned process and explicitly fails",
+            "status": "PASS",
+            "elapsedMs": 31
+          },
+          {
+            "name": "S02 query timeout cancels, terminates and verifies only the exact owned backend",
+            "status": "PASS",
+            "elapsedMs": 44
+          },
+          {
+            "name": "S03 blocked ROLLBACK has a finite shutdown and explicit failure",
+            "status": "PASS",
+            "elapsedMs": 45
+          },
+          {
+            "name": "S04 failure after acquisition before release always releases and joins winner",
+            "status": "PASS",
+            "elapsedMs": 2
+          },
+          {
+            "name": "S05 blocking-observation failure joins both writers before returning",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S06 PID acquisition failure is reported without a hanging acquisition promise",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S07 missing lock handshake is bounded and the started writer is joined",
+            "status": "PASS",
+            "elapsedMs": 42
+          },
+          {
+            "name": "S08 cleanup failure remains a harness failure in the written partial report",
+            "status": "PASS",
+            "elapsedMs": 1
+          },
+          {
+            "name": "S09 unverified session shutdown stops fixture cleanup but still writes evidence",
+            "status": "PASS",
+            "elapsedMs": 0
+          },
+          {
+            "name": "S10 actual local subprocess timeout leaves the event loop responsive",
+            "status": "PASS",
+            "elapsedMs": 177
+          },
+          {
+            "name": "S11 termination failure cannot be mistaken for a clean session",
+            "status": "PASS",
+            "elapsedMs": 41
+          }
+        ],
+        "sourceHashes": {
+          "tests/run-phase2a02-transactions.mjs": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+          "tests/phase2a02-transaction-runtime.mjs": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+          "tests/phase2a02-transaction-writer.mjs": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+          "tests/phase2a02-transaction-qualification.mjs": "a5976c5cd60c3bc24f57997301f7cadd48fada26264cd8a3e3e3e5bba2bbcdaf",
+          "tests/phase2a02-catalog-query.mjs": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+          "tests/phase2a02-contention.mjs": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+          "tests/phase2a02-local-target.mjs": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+          "tests/phase2a02-harness-safety.test.mjs": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+          "tests/phase2a02-command-contract.mjs": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+          "tests/phase2a02-location-cases.mjs": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+          "tests/phase2a02-baseline-snapshot.mjs": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+          "tests/phase2a01-contract-fixtures.mjs": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f",
+          "tests/phase2a02-sql-helpers.mjs": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53"
+        }
+      },
+      "gitBefore": {
+        "head": "c9b6c4acc1879a2b84b89d3b39455f2489e4c56a",
+        "branch": "phase2-location-intelligence",
+        "index": ""
+      },
+      "sessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "terminated": [],
+        "events": []
+      },
+      "cleanup": {
+        "status": "NOT REQUIRED",
+        "reason": "No fixture writes attempted"
+      },
+      "preservation": {
+        "status": "NOT EXECUTED",
+        "reason": "Pre-test qualification did not complete"
+      },
+      "summary": {
+        "total": 14,
+        "pass": 0,
+        "fail": 0,
+        "notExecuted": 14
+      },
+      "finishedAt": "2026-10-18T09:55:46.899Z",
+      "transactionClosure": "BLOCKED",
+      "remainingAcceptanceGaps": [
+        "Separately designated clean installation",
+        "Full incompatible-extension/role/guard-attachment qualification",
+        "Representative GiST plan",
+        "Future-handler authentication and T15 browser regression"
+      ]
+    }
+  ]
+}

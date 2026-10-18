@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-18",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "status": "PASS",
+  "migrationSha256": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+  "results": [
+    {
+      "case": "populated Phase 1 + foundation upgrade preserves all accepted metadata/data and revision 7; no backfill",
+      "status": "PASS"
+    },
+    {
+      "case": "failed migration rollback after history table",
+      "status": "PASS",
+      "sqlstate": "P0001"
+    },
+    {
+      "case": "failed migration rollback after guards/policies",
+      "status": "PASS",
+      "sqlstate": "P0001"
+    },
+    {
+      "case": "failed migration rollback after grants",
+      "status": "PASS",
+      "sqlstate": "P0001"
+    },
+    {
+      "case": "retained local installation preserves baseline and has no seeded location rows",
+      "status": "PASS"
+    }
+  ],
+  "baselineSnapshotSha256": "9fab0a7352f241a5fe507a35f63e7bf1c6b2a83f31309d6ba877db634c9df17e",
+  "cleanInstallation": "NOT_EXECUTED: no separately designated clean database; no new Docker environment created"
+}

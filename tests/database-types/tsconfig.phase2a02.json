@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": { "strict": true },
+  "include": ["./phase1.ts", "./phase2a01.ts", "./phase2a02.ts"]
+}

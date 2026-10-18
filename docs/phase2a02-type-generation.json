@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-18",
+  "status": "PASS",
+  "method": "Scoped catalog-driven Supabase-compatible generation; not Supabase CLI output",
+  "source": "docs/phase2a02-schema-verification.json",
+  "sourceSha256": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "destination": "src/integrations/supabase/types.ts",
+  "destinationSha256": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347",
+  "unchangedTables": [
+    "acquisition_costs",
+    "financing",
+    "investment_criteria",
+    "operating_expenses",
+    "profiles",
+    "properties",
+    "scenario_configs",
+    "location_fact_definitions",
+    "location_freshness_policies",
+    "location_provider_registry"
+  ],
+  "preservedTypeContracts": 44,
+  "modifiedTable": "property_location_intelligence_state",
+  "addedTable": "property_location_versions",
+  "geography": "Row unknown (includes null); Insert/Update optional never",
+  "preservedPostgrestVersion": "14.5",
+  "limitations": [
+    "Types confer no database permissions",
+    "Synthetic writer/concurrency acceptance remains unexecuted; catalog, SQL assertions and committed cascades passed"
+  ]
+}

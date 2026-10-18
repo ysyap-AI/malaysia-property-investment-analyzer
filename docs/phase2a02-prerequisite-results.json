@@ -1,0 +1,1495 @@
+{
+  "date": "2026-10-18",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "status": "BLOCKED_POSTGIS_ABSENT",
+  "catalog": {
+    "roles": [
+      {
+        "name": "pg_database_owner",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_read_all_data",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_write_all_data",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_monitor",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_read_all_settings",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_read_all_stats",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_stat_scan_tables",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_read_server_files",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_write_server_files",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_execute_server_program",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_signal_backend",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_checkpoint",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_maintain",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_use_reserved_connections",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pg_create_subscription",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "supabase_etl_admin",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": true,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "dashboard_user",
+        "inherit": true,
+        "createDb": true,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": true
+      },
+      {
+        "name": "supabase_admin",
+        "inherit": true,
+        "createDb": true,
+        "bypassrls": true,
+        "superuser": true,
+        "createRole": true
+      },
+      {
+        "name": "authenticated",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "anon",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "service_role",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": true,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "supabase_privileged_role",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "postgres",
+        "inherit": true,
+        "createDb": true,
+        "bypassrls": true,
+        "superuser": false,
+        "createRole": true
+      },
+      {
+        "name": "authenticator",
+        "inherit": false,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "pgbouncer",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "supabase_auth_admin",
+        "inherit": false,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": true
+      },
+      {
+        "name": "supabase_storage_admin",
+        "inherit": false,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": true
+      },
+      {
+        "name": "supabase_replication_admin",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "supabase_read_only_user",
+        "inherit": true,
+        "createDb": false,
+        "bypassrls": true,
+        "superuser": false,
+        "createRole": false
+      },
+      {
+        "name": "supabase_functions_admin",
+        "inherit": false,
+        "createDb": false,
+        "bypassrls": false,
+        "superuser": false,
+        "createRole": true
+      }
+    ],
+    "tables": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=r/postgres"
+        ],
+        "rls": true,
+        "name": "location_provider_registry",
+        "force": true,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=r/postgres"
+        ],
+        "rls": true,
+        "name": "location_fact_definitions",
+        "force": true,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=r/postgres"
+        ],
+        "rls": true,
+        "name": "location_freshness_policies",
+        "force": true,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=arw/postgres"
+        ],
+        "rls": true,
+        "name": "property_location_intelligence_state",
+        "force": true,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "profiles",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "investment_criteria",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "scenario_configs",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "acquisition_costs",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "financing",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "operating_expenses",
+        "force": false,
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdm/postgres",
+          "authenticated=arwdm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "rls": true,
+        "name": "properties",
+        "force": false,
+        "owner": "postgres"
+      }
+    ],
+    "functions": [
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "signature": "guard_location_registry_row()",
+        "definition": "CREATE OR REPLACE FUNCTION public.guard_location_registry_row()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE canonical text[];\nBEGIN\n  IF TG_TABLE_SCHEMA<>'public' OR TG_TABLE_NAME NOT IN\n      ('location_provider_registry','location_fact_definitions','location_freshness_policies')\n      OR TG_WHEN<>'BEFORE' OR TG_LEVEL<>'ROW' OR TG_NARGS<>0\n      OR TG_OP NOT IN ('INSERT','UPDATE','DELETE') THEN\n    RAISE EXCEPTION 'Unsupported registry guard attachment' USING ERRCODE='23514';\n  END IF;\n  IF TG_OP='DELETE' THEN\n    RAISE EXCEPTION 'Registry history cannot be deleted' USING ERRCODE='23514';\n  ELSIF TG_OP='UPDATE' THEN\n    IF (to_jsonb(NEW)-'deprecated_at') IS DISTINCT FROM (to_jsonb(OLD)-'deprecated_at')\n       OR OLD.deprecated_at IS NOT NULL OR NEW.deprecated_at IS NULL THEN\n      RAISE EXCEPTION 'Only one-way registry deprecation is permitted' USING ERRCODE='23514';\n    END IF;\n    NEW.deprecated_at := transaction_timestamp();\n    RETURN NEW;\n  END IF;\n  IF NEW.deprecated_at IS NOT NULL THEN\n    RAISE EXCEPTION 'New registry versions cannot be deprecated' USING ERRCODE='23514';\n  END IF;\n  NEW.created_at := transaction_timestamp();\n  IF TG_TABLE_NAME='location_provider_registry' THEN\n    IF NEW.capabilities IS NULL OR array_ndims(NEW.capabilities) IS DISTINCT FROM 1\n       OR cardinality(NEW.capabilities)=0 OR array_position(NEW.capabilities,NULL) IS NOT NULL THEN\n      RAISE EXCEPTION 'Invalid capabilities array' USING ERRCODE='23514';\n    END IF;\n    SELECT array_agg(DISTINCT v COLLATE \"C\" ORDER BY v COLLATE \"C\") INTO canonical FROM unnest(NEW.capabilities) v;\n    IF cardinality(canonical)<>cardinality(NEW.capabilities) THEN\n      RAISE EXCEPTION 'Duplicate capabilities' USING ERRCODE='23514';\n    END IF;\n    NEW.capabilities := canonical;\n  ELSIF TG_TABLE_NAME='location_fact_definitions' THEN\n    IF NOT (CASE NEW.fact_key\n      WHEN 'transport.rail_station.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'rail_station', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.rail_station.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'rail_station', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.rail_station.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'rail_station', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.rail_station.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'rail_station', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'transport.bus_stop.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'bus_stop', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.bus_stop.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'bus_stop', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.bus_stop.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'bus_stop', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'transport.bus_stop.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('TRANSPORT', 'bus_stop', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'daily_convenience.supermarket.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'supermarket', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.supermarket.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'supermarket', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.supermarket.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'supermarket', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.supermarket.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'supermarket', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'daily_convenience.pharmacy.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'pharmacy', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.pharmacy.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'pharmacy', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.pharmacy.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'pharmacy', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.pharmacy.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'pharmacy', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'daily_convenience.convenience_store.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'convenience_store', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.convenience_store.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'convenience_store', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.convenience_store.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'convenience_store', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.convenience_store.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'convenience_store', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'daily_convenience.bank_atm.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'bank_atm', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.bank_atm.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'bank_atm', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.bank_atm.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'bank_atm', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'daily_convenience.bank_atm.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'bank_atm', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'education.school.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'school', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'education.school.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'school', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.school.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'school', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.school.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'school', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'education.university_college.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'university_college', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'education.university_college.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'university_college', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.university_college.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'university_college', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.university_college.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'university_college', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'education.international_school.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'international_school', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'education.international_school.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'international_school', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.international_school.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'international_school', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'education.international_school.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EDUCATION', 'international_school', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'healthcare.hospital_medical_centre.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.hospital_medical_centre.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.hospital_medical_centre.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.hospital_medical_centre.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'healthcare.hospital_medical_centre.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.hospital_medical_centre.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'hospital_medical_centre', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.clinic.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.clinic.nearest_walking_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'DECIMAL', 'm', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.clinic.nearest_walking_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'DECIMAL', 's', 'WALKING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.clinic.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'healthcare.clinic.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'healthcare.clinic.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('HEALTHCARE', 'clinic', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'retail.significant_retail_centre.nearest_straight_line_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('RETAIL', 'significant_retail_centre', 'DECIMAL', 'm', 'STRAIGHT_LINE', 'NEAREST_ELIGIBLE', 'COMPLETE_RADIUS', false, false, 'MEASURED_ZERO')\n      WHEN 'retail.significant_retail_centre.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('RETAIL', 'significant_retail_centre', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'retail.significant_retail_centre.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('RETAIL', 'significant_retail_centre', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'retail.significant_retail_centre.count_within_radius' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('RETAIL', 'significant_retail_centre', 'INTEGER', 'count', 'STRAIGHT_LINE', 'WITHIN_RADIUS', 'COMPLETE_RADIUS', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'road.major_road_access.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('ROAD', 'major_road_access', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'road.major_road_access.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('ROAD', 'major_road_access', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'road.expressway_interchange.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('ROAD', 'expressway_interchange', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'road.expressway_interchange.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('ROAD', 'expressway_interchange', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'employment.significant_economic_node.nearest_driving_route_m' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EMPLOYMENT', 'significant_economic_node', 'DECIMAL', 'm', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'employment.significant_economic_node.nearest_driving_route_s' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EMPLOYMENT', 'significant_economic_node', 'DECIMAL', 's', 'DRIVING_ROUTE', 'NEAREST_ELIGIBLE', 'COMPLETE_CANDIDATE_SET', false, false, 'MEASURED_ZERO')\n      WHEN 'employment.significant_economic_node.count_within_driving_duration' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('EMPLOYMENT', 'significant_economic_node', 'INTEGER', 'count', 'DRIVING_ROUTE', 'WITHIN_DURATION', 'COMPLETE_CANDIDATE_SET', false, true, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'daily_convenience.essential_categories.coverage_ratio' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('DAILY_CONVENIENCE', 'essential_categories', 'DECIMAL', 'ratio', 'CATEGORY_PRESENCE', 'CATEGORY_COVERAGE', 'COMPLETE_CATEGORY_SET', true, false, 'PROVEN_EMPTY_SCOPE')\n      WHEN 'context.area.classification' THEN ROW(NEW.category, NEW.entity_taxonomy_key, NEW.value_type, NEW.unit, NEW.measurement_method, NEW.aggregation_scope, NEW.coverage_requirement, NEW.radius_required, NEW.duration_required, NEW.zero_semantics) IS NOT DISTINCT FROM ROW('CONTEXT', 'area', 'CATEGORY', 'category', 'DETERMINISTIC_CLASSIFIER', 'AREA_CONTEXT', 'COMPLETE_AREA_FEATURES', false, false, 'NOT_ALLOWED')\n      ELSE false END) THEN\n      RAISE EXCEPTION 'Unsupported complete fact contract' USING ERRCODE='23514';\n    END IF;\n    IF NEW.fact_key='context.area.classification' THEN\n      IF NEW.allowed_category_values IS DISTINCT FROM ARRAY['REGIONAL_LOW_TRANSIT','SUBURBAN','URBAN_GENERAL','URBAN_TRANSIT']::text[] THEN\n        RAISE EXCEPTION 'Context requires the complete canonical label set' USING ERRCODE='23514';\n      END IF;\n    ELSIF NEW.allowed_category_values IS NOT NULL THEN\n      RAISE EXCEPTION 'Non-category facts cannot define labels' USING ERRCODE='23514';\n    END IF;\n  END IF;\n  RETURN NEW;\nEND\n$function$\n"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "signature": "guard_property_location_state_row()",
+        "definition": "CREATE OR REPLACE FUNCTION public.guard_property_location_state_row()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n  IF TG_TABLE_SCHEMA<>'public' OR TG_TABLE_NAME<>'property_location_intelligence_state'\n      OR TG_WHEN<>'BEFORE' OR TG_LEVEL<>'ROW' OR TG_NARGS<>0 OR TG_OP NOT IN ('INSERT','UPDATE') THEN\n    RAISE EXCEPTION 'Unsupported state guard attachment' USING ERRCODE='23514';\n  END IF;\n  IF TG_OP='INSERT' THEN\n    NEW.created_at := transaction_timestamp();\n    NEW.state_revision := 0;\n  ELSE\n    IF NEW.property_id IS DISTINCT FROM OLD.property_id OR NEW.created_at IS DISTINCT FROM OLD.created_at THEN\n      RAISE EXCEPTION 'State identity and creation time are immutable' USING ERRCODE='23514';\n    END IF;\n    IF OLD.state_revision>=9007199254740991 THEN\n      RAISE EXCEPTION 'State revision overflow' USING ERRCODE='23514';\n    END IF;\n    NEW.state_revision := OLD.state_revision+1;\n  END IF;\n  NEW.updated_at := transaction_timestamp();\n  RETURN NEW;\nEND\n$function$\n"
+      },
+      {
+        "acl": [
+          "=X/postgres",
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "signature": "owns_property(uuid)",
+        "definition": "CREATE OR REPLACE FUNCTION public.owns_property(_property_id uuid)\n RETURNS boolean\n LANGUAGE sql\n STABLE\n SET search_path TO 'public'\nAS $function$\r\n  SELECT EXISTS (\r\n    SELECT 1 FROM public.properties p\r\n    WHERE p.id = _property_id AND p.user_id = auth.uid()\r\n  );\r\n$function$\n"
+      }
+    ],
+    "columnAcls": null,
+    "extensions": [
+      {
+        "name": "plpgsql",
+        "owner": "supabase_admin",
+        "schema": "pg_catalog",
+        "version": "1.0"
+      },
+      {
+        "name": "uuid-ossp",
+        "owner": "supabase_admin",
+        "schema": "extensions",
+        "version": "1.1"
+      },
+      {
+        "name": "pgcrypto",
+        "owner": "supabase_admin",
+        "schema": "extensions",
+        "version": "1.3"
+      },
+      {
+        "name": "pg_stat_statements",
+        "owner": "supabase_admin",
+        "schema": "extensions",
+        "version": "1.11"
+      },
+      {
+        "name": "supabase_vault",
+        "owner": "supabase_admin",
+        "schema": "vault",
+        "version": "0.3.1"
+      }
+    ],
+    "defaultAcls": [
+      {
+        "oid": "16451",
+        "defaclacl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "r",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16452",
+        "defaclacl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "f",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16453",
+        "defaclacl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "S",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16454",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16455",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16456",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "2200"
+      },
+      {
+        "oid": "16507",
+        "defaclacl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16505"
+      },
+      {
+        "oid": "16508",
+        "defaclacl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16505"
+      },
+      {
+        "oid": "16509",
+        "defaclacl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ],
+        "defaclrole": "16384",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16505"
+      },
+      {
+        "oid": "16552",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_auth_admin",
+          "dashboard_user=arwdDxtm/supabase_auth_admin"
+        ],
+        "defaclrole": "16504",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16457"
+      },
+      {
+        "oid": "16553",
+        "defaclacl": [
+          "postgres=rwU/supabase_auth_admin",
+          "dashboard_user=rwU/supabase_auth_admin"
+        ],
+        "defaclrole": "16504",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16457"
+      },
+      {
+        "oid": "16554",
+        "defaclacl": [
+          "postgres=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ],
+        "defaclrole": "16504",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16457"
+      },
+      {
+        "oid": "16556",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "dashboard_user=arwdDxtm/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16555"
+      },
+      {
+        "oid": "16557",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "dashboard_user=rwU/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16555"
+      },
+      {
+        "oid": "16558",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "dashboard_user=X/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16555"
+      },
+      {
+        "oid": "16567",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16563"
+      },
+      {
+        "oid": "16565",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16563"
+      },
+      {
+        "oid": "16566",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16563"
+      },
+      {
+        "oid": "16630",
+        "defaclacl": [
+          "postgres=a*r*w*d*D*x*t*m*/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16394"
+      },
+      {
+        "oid": "16631",
+        "defaclacl": [
+          "postgres=X*/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16394"
+      },
+      {
+        "oid": "16632",
+        "defaclacl": [
+          "postgres=r*w*U*/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16394"
+      },
+      {
+        "oid": "16585",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16574"
+      },
+      {
+        "oid": "16586",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16574"
+      },
+      {
+        "oid": "16587",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16574"
+      },
+      {
+        "oid": "16665",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "r",
+        "defaclnamespace": "16664"
+      },
+      {
+        "oid": "16666",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "f",
+        "defaclnamespace": "16664"
+      },
+      {
+        "oid": "16667",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "defaclrole": "10",
+        "defaclobjtype": "S",
+        "defaclnamespace": "16664"
+      }
+    ],
+    "memberships": [
+      {
+        "set": true,
+        "role": "pg_read_all_settings",
+        "admin": false,
+        "member": "pg_monitor",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_stats",
+        "admin": false,
+        "member": "pg_monitor",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_stat_scan_tables",
+        "admin": false,
+        "member": "pg_monitor",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": false,
+        "member": "supabase_read_only_user",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "anon",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "authenticated",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "service_role",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "authenticator",
+        "admin": false,
+        "member": "supabase_storage_admin",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "anon",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "authenticated",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "service_role",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "authenticator",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_signal_backend",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": false,
+        "member": "supabase_read_only_user",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_create_subscription",
+        "admin": true,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "supabase_privileged_role",
+        "admin": false,
+        "member": "postgres",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "supabase_privileged_role",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "supabase_functions_admin",
+        "admin": false,
+        "member": "postgres",
+        "inherit": true
+      }
+    ],
+    "availablePostgis": [
+      {
+        "name": "postgis",
+        "schema": null,
+        "comment": "PostGIS geometry and geography spatial types and functions",
+        "trusted": false,
+        "version": "3.3.7",
+        "requires": null,
+        "installed": false,
+        "superuser": true,
+        "relocatable": false
+      },
+      {
+        "name": "postgis",
+        "schema": null,
+        "comment": "PostGIS geometry and geography spatial types and functions",
+        "trusted": false,
+        "version": "3.3.7next",
+        "requires": null,
+        "installed": false,
+        "superuser": true,
+        "relocatable": false
+      },
+      {
+        "name": "postgis",
+        "schema": null,
+        "comment": "PostGIS geometry and geography spatial types and functions",
+        "trusted": false,
+        "version": "unpackaged",
+        "requires": null,
+        "installed": false,
+        "superuser": true,
+        "relocatable": false
+      }
+    ],
+    "schemaPrivileges": [
+      [
+        "authenticated",
+        "public",
+        true,
+        false
+      ],
+      [
+        "authenticated",
+        "extensions",
+        true,
+        false
+      ],
+      [
+        "authenticated",
+        "auth",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "public",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "extensions",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "auth",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "public",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "extensions",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "auth",
+        true,
+        false
+      ],
+      [
+        "postgres",
+        "public",
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "extensions",
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "auth",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "public",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "extensions",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "auth",
+        false,
+        false
+      ]
+    ],
+    "spatialFunctions": null,
+    "effectivePrivileges": [
+      [
+        "authenticated",
+        "location_provider_registry",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "INSERT",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "UPDATE",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "location_provider_registry",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "location_provider_registry",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "location_provider_registry",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "location_provider_registry",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ]
+    ]
+  },
+  "notExecuted": [
+    "Spatial functions, SRID 4326 and generated-column runtime compatibility",
+    "Spatial schema migration and acceptance tests",
+    "Extension installation (requires separate approval)"
+  ]
+}
