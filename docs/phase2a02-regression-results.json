@@ -1,0 +1,348 @@
+{
+  "date": "2026-10-18",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "application",
+      "args": [
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "--reporter=json",
+        "--outputFile=.phase2a02-implementation.local/application-tests.json"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/application.log",
+      "sha256": "0623003354981240eb5e6feea90bcd2ce989ce41ea95cd9337416933257cb4ba"
+    },
+    {
+      "name": "typescript-app",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/typescript-app.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript-fixtures",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/fixtures/tsconfig.json",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/typescript-fixtures.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript-phase1",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.json",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/typescript-phase1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript-foundation",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a01.json",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/typescript-foundation.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript-location",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a02.json",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/typescript-location.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "command-contract",
+      "args": [
+        "--test",
+        "tests/phase2a02-contract.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/command-contract.log",
+      "sha256": "655b11a1cc1149c5162dc0b4dd6ddaad18fea1ecd295d140d6f423c6eeb38876"
+    },
+    {
+      "name": "production-build",
+      "args": [
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/production-build.log",
+      "sha256": "5358289bfe8abd0d0c764d046e30a39525e1e40191f68d6d3aa5416f7b0c0a21"
+    },
+    {
+      "name": "security",
+      "args": [
+        "--test",
+        "tests/security.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "log": ".phase2a02-implementation.local/security.log",
+      "sha256": "b1f744d2ed692dc2161ff02ae8eb072ff145be167bc4a0436a2f80afa8c64e25"
+    }
+  ],
+  "application": {
+    "total": 1073,
+    "passed": 1073,
+    "failed": 0,
+    "pending": 0
+  },
+  "propertyFixtures": {
+    "count": 53,
+    "outcomes": [
+      {
+        "name": "property fixture integration with the existing analysis hook P01 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P02 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P03 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P04 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P05 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P06 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P07 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P08 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P09 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "property fixture integration with the existing analysis hook P10 feeds saved financial inputs into the real analysis path",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures provides all ten IDs and independent nested inputs for every consumer",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P01 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P02 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P03 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P04 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P05 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P06 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P07 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P08 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P09 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P10 is deterministic, does not mutate inputs, and uses only Phase 1 evidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P01 has independently calculated financial results and scoring",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P02 has independently calculated financial results and scoring",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P03 has independently calculated financial results and scoring",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P04 has independently calculated financial results and scoring",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P01 recommends BUY CANDIDATE with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P02 recommends REJECT with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P03 recommends NEGOTIATE with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P04 recommends REJECT with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P05 recommends NEGOTIATE with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P06 recommends INSUFFICIENT DATA with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P07 recommends INSUFFICIENT DATA with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P08 recommends BUY CANDIDATE with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P09 recommends BUY CANDIDATE with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P10 recommends WATCHLIST with exactly the supported critical flags",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P01 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P02 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P03 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P04 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P05 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P08 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P09 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P10 orders bear/base/bull cash flow and scores the actual bear result",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P01 applies rent, vacancy, repair and interest stress assumptions together",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P03 reduces collected rent, not potential yield or data confidence",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P04 maintenance costs reduce NOI by the known expense increase",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P05 uses only the bank-valuation gap to negotiate despite strong returns",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P06 propagates missing evidence through every scenario and blocks scoring/BUY",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P07 propagates missing evidence through every scenario and blocks scoring/BUY",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P07 keeps partial expense totals separate from usable totals and confirmed zero",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P08 placeholder cannot change financials, scoring, confidence, flags or recommendations",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P09 placeholder cannot change financials, scoring, confidence, flags or recommendations",
+        "status": "passed"
+      },
+      {
+        "name": "reusable Phase 1 property fixtures P10 separates confidence from returns and scores, withholding BUY until evidence improves",
+        "status": "passed"
+      }
+    ]
+  },
+  "notExecuted": [
+    "Interactive browser T15",
+    "Original Phase 1 empty-schema DB runner"
+  ],
+  "separateEvidence": [
+    "phase2a02-database-results.json",
+    "phase2a02-commit-results.json",
+    "phase2a02-schema-verification.json",
+    "phase2a02-type-generation.json"
+  ]
+}

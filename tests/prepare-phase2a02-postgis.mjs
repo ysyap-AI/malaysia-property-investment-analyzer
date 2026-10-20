@@ -1,0 +1,23 @@
+// Explicit owner approval received 2026-10-18. Existing local target ONLY.
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { verifyTarget,sql,docker,psqlArgs } from './phase2a02-local-target.mjs';
+const target=verifyTarget();
+assert.equal(target.users,0);
+assert.equal(sql("SELECT count(*) FROM pg_tables WHERE schemaname='public'"),'11');
+assert.equal(sql("SELECT count(*) FROM pg_extension WHERE extname='postgis'"),'0','Refuse existing extension; never relocate or upgrade');
+assert.equal(sql("SELECT count(*) FROM pg_available_extension_versions WHERE name='postgis' AND version='3.3.7'"),'1');
+const adminArgs=[...psqlArgs];
+adminArgs[adminArgs.indexOf('-U')+1]='supabase_admin';
+const identity=JSON.parse(docker(adminArgs,`BEGIN READ ONLY; SELECT jsonb_build_object('user',current_user,'database',current_database(),'socket',inet_server_addr() IS NULL,'superuser',(SELECT rolsuper FROM pg_roles WHERE rolname=current_user)); COMMIT;`).trim());
+assert.deepEqual(identity,{user:'supabase_admin',database:'postgres',socket:true,superuser:true});
+docker(adminArgs,`BEGIN;
+ CREATE EXTENSION postgis WITH SCHEMA extensions VERSION '3.3.7';
+ COMMIT;`);
+const installed=JSON.parse(sql(`BEGIN READ ONLY; SELECT jsonb_build_object('version',e.extversion,'schema',n.nspname,'owner',pg_get_userbyid(e.extowner),'library',extensions.postgis_full_version(),'srid4326',EXISTS(SELECT FROM extensions.spatial_ref_sys WHERE srid=4326 AND auth_name='EPSG' AND auth_srid=4326)) FROM pg_extension e JOIN pg_namespace n ON n.oid=e.extnamespace WHERE e.extname='postgis'; COMMIT;`));
+assert.equal(installed.version,'3.3.7');
+assert.equal(installed.schema,'extensions');
+assert.equal(installed.owner,'supabase_admin');
+assert.equal(installed.srid4326,true);
+writeFileSync('docs/phase2a02-postgis-installation.json',JSON.stringify({date:'2026-10-18',status:'PASS',authorization:'Explicit owner approval in conversation',target,identity,installed},null,2)+'\n');
+console.log(JSON.stringify(installed));

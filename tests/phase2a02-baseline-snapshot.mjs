@@ -1,0 +1,13 @@
+// All accepted objects/rows, excluding only the explicitly additive 2A-02 objects.
+export const baselineTables=['profiles','properties','acquisition_costs','operating_expenses','financing','investment_criteria','scenario_configs','location_provider_registry','location_fact_definitions','location_freshness_policies','property_location_intelligence_state'];
+const names=baselineTables.map(n=>`'${n}'`).join(',');
+export const baselineSnapshot=`SELECT jsonb_build_object(
+ 'tables',(SELECT jsonb_agg(jsonb_build_array(relname,pg_get_userbyid(relowner),relrowsecurity,relforcerowsecurity,relacl) ORDER BY relname) FROM pg_class WHERE relnamespace='public'::regnamespace AND relname IN (${names})),
+ 'columns',(SELECT jsonb_agg(jsonb_build_array(c.relname,a.attname,format_type(a.atttypid,a.atttypmod),a.attnotnull,pg_get_expr(d.adbin,d.adrelid),a.attacl) ORDER BY c.relname,a.attnum) FROM pg_class c JOIN pg_attribute a ON a.attrelid=c.oid LEFT JOIN pg_attrdef d ON d.adrelid=c.oid AND d.adnum=a.attnum WHERE c.relnamespace='public'::regnamespace AND c.relname IN (${names}) AND a.attnum>0 AND NOT a.attisdropped AND a.attname<>'current_location_version_id'),
+ 'constraints',(SELECT jsonb_agg(jsonb_build_array(c.relname,k.conname,pg_get_constraintdef(k.oid)) ORDER BY c.relname,k.conname) FROM pg_constraint k JOIN pg_class c ON c.oid=k.conrelid WHERE c.relnamespace='public'::regnamespace AND c.relname IN (${names}) AND k.conname<>'property_location_intelligence_state_current_location_fkey'),
+ 'indexes',(SELECT jsonb_agg(to_jsonb(i) ORDER BY tablename,indexname) FROM pg_indexes i WHERE schemaname='public' AND tablename IN (${names})),
+ 'policies',(SELECT jsonb_agg(to_jsonb(p) ORDER BY tablename,policyname) FROM pg_policies p WHERE schemaname='public' AND tablename IN (${names})),
+ 'functions',(SELECT jsonb_agg(pg_get_functiondef(p.oid) ORDER BY proname) FROM pg_proc p WHERE pronamespace='public'::regnamespace AND proname IN ('owns_property','set_updated_at','handle_new_user','guard_location_registry_row','guard_property_location_state_row')),
+ 'triggers',(SELECT jsonb_agg(pg_get_triggerdef(t.oid) ORDER BY tgname) FROM pg_trigger t JOIN pg_proc p ON p.oid=t.tgfoid WHERE p.pronamespace='public'::regnamespace AND p.proname IN ('owns_property','set_updated_at','handle_new_user','guard_location_registry_row','guard_property_location_state_row')),
+ 'defaultAcls',(SELECT jsonb_agg(to_jsonb(d) ORDER BY oid) FROM pg_default_acl d),
+ 'rows',jsonb_build_object(${baselineTables.map(t=>`'${t}',(SELECT coalesce(jsonb_agg(to_jsonb(t)-'current_location_version_id' ORDER BY (to_jsonb(t)-'current_location_version_id')::text),'[]'::jsonb) FROM public.${t} t)`).join(',')}))`;

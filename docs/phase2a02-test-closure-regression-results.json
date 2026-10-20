@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-18",
+  "application": {
+    "command": "npm test",
+    "testFiles": 33,
+    "passed": 1073,
+    "failed": 0
+  },
+  "security": {
+    "command": "node --test tests/security.test.mjs (through npm test)",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 1,
+    "skip": "built browser assets check: no fresh production build in this test-only repair"
+  },
+  "serializer": {
+    "command": "node --test tests/phase2a02-contract.test.mjs",
+    "passed": 5,
+    "failed": 0
+  },
+  "safety": {
+    "passed": 11,
+    "failed": 0,
+    "evidence": "phase2a02-harness-safety-results.json"
+  }
+}

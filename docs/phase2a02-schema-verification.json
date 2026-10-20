@@ -1,0 +1,1345 @@
+{
+  "date": "2026-10-18",
+  "status": "PASS",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "baselinePreserved": true,
+  "catalog": {
+    "roles": [
+      [
+        "authenticated",
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        "anon",
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        "service_role",
+        false,
+        true,
+        false,
+        false
+      ],
+      [
+        "postgres",
+        false,
+        true,
+        true,
+        true
+      ],
+      [
+        "authenticator",
+        false,
+        false,
+        false,
+        false
+      ]
+    ],
+    "tables": [
+      [
+        "property_location_intelligence_state",
+        "postgres",
+        true,
+        true,
+        [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=arw/postgres"
+        ]
+      ],
+      [
+        "property_location_versions",
+        "postgres",
+        true,
+        true,
+        [
+          "postgres=arwdDxtm/postgres",
+          "authenticated=r/postgres",
+          "service_role=ar/postgres"
+        ]
+      ]
+    ],
+    "columns": [
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_intelligence_state",
+        "default": "now()",
+        "nullable": false,
+        "typeName": "timestamptz",
+        "generated": ""
+      },
+      {
+        "name": "current_location_version_id",
+        "type": "uuid",
+        "table": "property_location_intelligence_state",
+        "default": null,
+        "nullable": true,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "freshness_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'UNKNOWN'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "processing_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'NOT_STARTED'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "property_location_intelligence_state",
+        "default": null,
+        "nullable": false,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "publication_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'NOT_ASSESSED'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "state_revision",
+        "type": "bigint",
+        "table": "property_location_intelligence_state",
+        "default": "0",
+        "nullable": false,
+        "typeName": "int8",
+        "generated": ""
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_intelligence_state",
+        "default": "now()",
+        "nullable": false,
+        "typeName": "timestamptz",
+        "generated": ""
+      },
+      {
+        "name": "accuracy_m",
+        "type": "double precision",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "float8",
+        "generated": ""
+      },
+      {
+        "name": "change_reason",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "confidence_mapping_version",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "confirmation_status",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": "'UNCONFIRMED'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "confirmed_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "timestamptz",
+        "generated": ""
+      },
+      {
+        "name": "confirmed_by",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "coordinate_precision",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": "'UNKNOWN'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "coordinate_source",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": "'NONE'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_versions",
+        "default": "now()",
+        "nullable": false,
+        "typeName": "timestamptz",
+        "generated": ""
+      },
+      {
+        "name": "created_by",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "geocode_confidence",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": "'UNKNOWN'::text",
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": "gen_random_uuid()",
+        "nullable": false,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "input_address",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "latitude",
+        "type": "double precision",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "float8",
+        "generated": ""
+      },
+      {
+        "name": "longitude",
+        "type": "double precision",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "float8",
+        "generated": ""
+      },
+      {
+        "name": "normalization_version",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "normalized_address",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "operation_hash",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "operation_id",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "position",
+        "type": "geography(Point,4326)",
+        "table": "property_location_versions",
+        "default": "\nCASE\n    WHEN ((longitude IS NOT NULL) AND (latitude IS NOT NULL)) THEN (st_setsrid(st_makepoint(longitude, latitude), 4326))::geography(Point,4326)\n    ELSE NULL::geography\nEND",
+        "nullable": true,
+        "typeName": "geography",
+        "generated": "s"
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "property_input_hash",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "provider_candidate_id",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "provider_version_id",
+        "type": "uuid",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "uuid",
+        "generated": ""
+      },
+      {
+        "name": "retrieved_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "timestamptz",
+        "generated": ""
+      },
+      {
+        "name": "source_crs",
+        "type": "text",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": true,
+        "typeName": "text",
+        "generated": ""
+      },
+      {
+        "name": "version_number",
+        "type": "bigint",
+        "table": "property_location_versions",
+        "default": null,
+        "nullable": false,
+        "typeName": "int8",
+        "generated": ""
+      }
+    ],
+    "indexes": [
+      {
+        "indexdef": "CREATE UNIQUE INDEX property_location_versions_pkey ON public.property_location_versions USING btree (id)",
+        "indexname": "property_location_versions_pkey",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      },
+      {
+        "indexdef": "CREATE INDEX property_location_versions_position_gist ON public.property_location_versions USING gist (\"position\") WHERE (\"position\" IS NOT NULL)",
+        "indexname": "property_location_versions_position_gist",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX property_location_versions_property_id_id_key ON public.property_location_versions USING btree (property_id, id)",
+        "indexname": "property_location_versions_property_id_id_key",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX property_location_versions_property_id_operation_id_key ON public.property_location_versions USING btree (property_id, operation_id)",
+        "indexname": "property_location_versions_property_id_operation_id_key",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX property_location_versions_property_id_version_number_key ON public.property_location_versions USING btree (property_id, version_number)",
+        "indexname": "property_location_versions_property_id_version_number_key",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      },
+      {
+        "indexdef": "CREATE INDEX property_location_versions_provider_version_idx ON public.property_location_versions USING btree (provider_version_id) WHERE (provider_version_id IS NOT NULL)",
+        "indexname": "property_location_versions_provider_version_idx",
+        "tablename": "property_location_versions",
+        "schemaname": "public",
+        "tablespace": null
+      }
+    ],
+    "library": "POSTGIS=\"3.3.7 a0c7967\" [EXTENSION] PGSQL=\"170\" GEOS=\"3.14.1-CAPI-1.20.5\" PROJ=\"9.7.1\" LIBXML=\"2.15.1\" LIBJSON=\"0.18\" LIBPROTOBUF=\"1.5.2\" WAGYU=\"0.5.0 (Internal)\"",
+    "policies": [
+      {
+        "cmd": "SELECT",
+        "qual": "owns_property(property_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "property_location_intelligence_state",
+        "permissive": "PERMISSIVE",
+        "policyname": "property_location_intelligence_state_select_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "owns_property(property_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "property_location_versions",
+        "permissive": "PERMISSIVE",
+        "policyname": "property_location_versions_select_own",
+        "schemaname": "public",
+        "with_check": null
+      }
+    ],
+    "constraints": [
+      [
+        "property_location_versions_accuracy_m_check",
+        "c",
+        true,
+        "CHECK (((accuracy_m IS NULL) OR ((accuracy_m > (0)::double precision) AND (accuracy_m < 'Infinity'::double precision))))"
+      ],
+      [
+        "property_location_versions_change_reason_check",
+        "c",
+        true,
+        "CHECK ((change_reason = ANY (ARRAY['INITIAL_INPUT'::text, 'ADDRESS_CHANGED'::text, 'GEOCODE_SELECTED'::text, 'PIN_CONFIRMED'::text, 'LOCATION_CORRECTED'::text, 'METADATA_CORRECTED'::text, 'LOCATION_CLEARED'::text])))"
+      ],
+      [
+        "property_location_versions_confidence",
+        "c",
+        true,
+        "CHECK ((((geocode_confidence = 'UNKNOWN'::text) AND (confidence_mapping_version IS NULL)) OR ((geocode_confidence <> 'UNKNOWN'::text) AND (confidence_mapping_version IS NOT NULL))))"
+      ],
+      [
+        "property_location_versions_confidence_mapping_version_check",
+        "c",
+        true,
+        "CHECK (((confidence_mapping_version IS NULL) OR ((length(btrim(confidence_mapping_version)) > 0) AND (length(confidence_mapping_version) <= 160))))"
+      ],
+      [
+        "property_location_versions_confirmation",
+        "c",
+        true,
+        "CHECK ((((confirmation_status = 'CONFIRMED'::text) AND (longitude IS NOT NULL) AND (latitude IS NOT NULL) AND (confirmed_by IS NOT NULL) AND (confirmed_by = created_by) AND (confirmed_at IS NOT NULL) AND isfinite(confirmed_at) AND (confirmed_at = created_at)) OR ((confirmation_status <> 'CONFIRMED'::text) AND (confirmed_by IS NULL) AND (confirmed_at IS NULL))))"
+      ],
+      [
+        "property_location_versions_confirmation_status_check",
+        "c",
+        true,
+        "CHECK ((confirmation_status = ANY (ARRAY['UNCONFIRMED'::text, 'REVIEW_REQUIRED'::text, 'CONFIRMED'::text, 'CLEARED'::text])))"
+      ],
+      [
+        "property_location_versions_coordinate_precision_check",
+        "c",
+        true,
+        "CHECK ((coordinate_precision = ANY (ARRAY['UNKNOWN'::text, 'ROOFTOP'::text, 'BUILDING'::text, 'PARCEL'::text, 'STREET'::text, 'LOCALITY'::text, 'REGION'::text, 'USER_PIN'::text])))"
+      ],
+      [
+        "property_location_versions_coordinate_source_check",
+        "c",
+        true,
+        "CHECK ((coordinate_source = ANY (ARRAY['NONE'::text, 'USER_PIN'::text, 'GEOCODER'::text])))"
+      ],
+      [
+        "property_location_versions_coordinates",
+        "c",
+        true,
+        "CHECK ((((longitude IS NULL) AND (latitude IS NULL)) OR ((longitude IS NOT NULL) AND (latitude IS NOT NULL) AND ((longitude >= ('-180'::integer)::double precision) AND (longitude <= (180)::double precision)) AND ((latitude >= ('-90'::integer)::double precision) AND (latitude <= (90)::double precision)))))"
+      ],
+      [
+        "property_location_versions_created_at_check",
+        "c",
+        true,
+        "CHECK (isfinite(created_at))"
+      ],
+      [
+        "property_location_versions_geocode_confidence_check",
+        "c",
+        true,
+        "CHECK ((geocode_confidence = ANY (ARRAY['UNKNOWN'::text, 'LOW'::text, 'MEDIUM'::text, 'HIGH'::text])))"
+      ],
+      [
+        "property_location_versions_input_address_check",
+        "c",
+        true,
+        "CHECK (((input_address IS NULL) OR ((length(btrim(input_address)) > 0) AND (length(input_address) <= 4000))))"
+      ],
+      [
+        "property_location_versions_normalization",
+        "c",
+        true,
+        "CHECK ((((normalized_address IS NULL) AND (normalization_version IS NULL)) OR ((normalized_address IS NOT NULL) AND (normalization_version IS NOT NULL) AND (input_address IS NOT NULL))))"
+      ],
+      [
+        "property_location_versions_normalization_version_check",
+        "c",
+        true,
+        "CHECK (((normalization_version IS NULL) OR ((length(btrim(normalization_version)) > 0) AND (length(normalization_version) <= 160))))"
+      ],
+      [
+        "property_location_versions_normalized_address_check",
+        "c",
+        true,
+        "CHECK (((normalized_address IS NULL) OR ((length(btrim(normalized_address)) > 0) AND (length(normalized_address) <= 4000))))"
+      ],
+      [
+        "property_location_versions_operation_hash_check",
+        "c",
+        true,
+        "CHECK ((operation_hash ~ '^[0-9a-f]{64}$'::text))"
+      ],
+      [
+        "property_location_versions_pkey",
+        "p",
+        true,
+        "PRIMARY KEY (id)"
+      ],
+      [
+        "property_location_versions_position",
+        "c",
+        true,
+        "CHECK (((\"position\" IS NULL) OR ((NOT st_isempty((\"position\")::geometry)) AND st_isvalid((\"position\")::geometry) AND (st_srid((\"position\")::geometry) = 4326) AND (st_ndims((\"position\")::geometry) = 2))))"
+      ],
+      [
+        "property_location_versions_property_id_fkey",
+        "f",
+        true,
+        "FOREIGN KEY (property_id) REFERENCES properties(id) ON UPDATE RESTRICT ON DELETE CASCADE"
+      ],
+      [
+        "property_location_versions_property_id_id_key",
+        "u",
+        true,
+        "UNIQUE (property_id, id)"
+      ],
+      [
+        "property_location_versions_property_id_operation_id_key",
+        "u",
+        true,
+        "UNIQUE (property_id, operation_id)"
+      ],
+      [
+        "property_location_versions_property_id_version_number_key",
+        "u",
+        true,
+        "UNIQUE (property_id, version_number)"
+      ],
+      [
+        "property_location_versions_property_input_hash_check",
+        "c",
+        true,
+        "CHECK ((property_input_hash ~ '^[0-9a-f]{64}$'::text))"
+      ],
+      [
+        "property_location_versions_provider",
+        "c",
+        true,
+        "CHECK ((((provider_version_id IS NULL) AND (provider_candidate_id IS NULL) AND (retrieved_at IS NULL) AND (geocode_confidence = 'UNKNOWN'::text) AND (confidence_mapping_version IS NULL)) OR ((provider_version_id IS NOT NULL) AND (retrieved_at IS NOT NULL) AND isfinite(retrieved_at) AND (retrieved_at <= created_at))))"
+      ],
+      [
+        "property_location_versions_provider_candidate_id_check",
+        "c",
+        true,
+        "CHECK (((provider_candidate_id IS NULL) OR ((length(btrim(provider_candidate_id)) > 0) AND (length(provider_candidate_id) <= 1000))))"
+      ],
+      [
+        "property_location_versions_provider_version_id_fkey",
+        "f",
+        true,
+        "FOREIGN KEY (provider_version_id) REFERENCES location_provider_registry(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      ],
+      [
+        "property_location_versions_reason",
+        "c",
+        true,
+        "CHECK ((((change_reason = 'LOCATION_CLEARED'::text) = (confirmation_status = 'CLEARED'::text)) AND ((change_reason <> 'PIN_CONFIRMED'::text) OR ((confirmation_status = 'CONFIRMED'::text) AND (coordinate_source = 'USER_PIN'::text))) AND ((change_reason <> 'GEOCODE_SELECTED'::text) OR ((coordinate_source = 'GEOCODER'::text) AND (longitude IS NOT NULL)))))"
+      ],
+      [
+        "property_location_versions_source",
+        "c",
+        true,
+        "CHECK ((((coordinate_source = 'NONE'::text) AND (longitude IS NULL) AND (latitude IS NULL) AND (source_crs IS NULL) AND (coordinate_precision = 'UNKNOWN'::text) AND (accuracy_m IS NULL) AND (geocode_confidence = 'UNKNOWN'::text) AND (confidence_mapping_version IS NULL)) OR ((coordinate_source = ANY (ARRAY['USER_PIN'::text, 'GEOCODER'::text])) AND (longitude IS NOT NULL) AND (latitude IS NOT NULL) AND (source_crs IS NOT NULL) AND (source_crs = 'EPSG:4326'::text) AND (((coordinate_source = 'USER_PIN'::text) AND (coordinate_precision = 'USER_PIN'::text) AND (geocode_confidence = 'UNKNOWN'::text) AND (confidence_mapping_version IS NULL)) OR ((coordinate_source = 'GEOCODER'::text) AND (coordinate_precision <> 'USER_PIN'::text) AND (provider_version_id IS NOT NULL))))))"
+      ],
+      [
+        "property_location_versions_status",
+        "c",
+        true,
+        "CHECK ((((confirmation_status = 'UNCONFIRMED'::text) AND (input_address IS NOT NULL) AND (coordinate_source = 'NONE'::text)) OR ((confirmation_status = 'REVIEW_REQUIRED'::text) AND ((input_address IS NOT NULL) OR (longitude IS NOT NULL))) OR ((confirmation_status = 'CONFIRMED'::text) AND (longitude IS NOT NULL)) OR ((confirmation_status = 'CLEARED'::text) AND (coordinate_source = 'NONE'::text) AND (input_address IS NULL) AND (normalized_address IS NULL) AND (normalization_version IS NULL) AND (provider_version_id IS NULL) AND (provider_candidate_id IS NULL) AND (retrieved_at IS NULL))))"
+      ],
+      [
+        "property_location_versions_version_number_check",
+        "c",
+        true,
+        "CHECK (((version_number >= 1) AND (version_number <= '9007199254740991'::bigint)))"
+      ]
+    ],
+    "memberships": [
+      [
+        "pg_monitor",
+        "pg_read_all_settings",
+        true,
+        true,
+        false
+      ],
+      [
+        "pg_monitor",
+        "pg_read_all_stats",
+        true,
+        true,
+        false
+      ],
+      [
+        "pg_monitor",
+        "pg_stat_scan_tables",
+        true,
+        true,
+        false
+      ],
+      [
+        "supabase_etl_admin",
+        "pg_read_all_data",
+        true,
+        true,
+        false
+      ],
+      [
+        "supabase_read_only_user",
+        "pg_read_all_data",
+        true,
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "anon",
+        false,
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "authenticated",
+        false,
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "service_role",
+        false,
+        true,
+        false
+      ],
+      [
+        "supabase_storage_admin",
+        "authenticator",
+        false,
+        true,
+        false
+      ],
+      [
+        "postgres",
+        "anon",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "authenticated",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "service_role",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "authenticator",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "pg_monitor",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "pg_read_all_data",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "pg_signal_backend",
+        true,
+        true,
+        true
+      ],
+      [
+        "supabase_etl_admin",
+        "pg_monitor",
+        true,
+        true,
+        false
+      ],
+      [
+        "supabase_read_only_user",
+        "pg_monitor",
+        true,
+        true,
+        false
+      ],
+      [
+        "postgres",
+        "pg_create_subscription",
+        true,
+        true,
+        true
+      ],
+      [
+        "postgres",
+        "supabase_privileged_role",
+        true,
+        true,
+        false
+      ],
+      [
+        "supabase_etl_admin",
+        "supabase_privileged_role",
+        true,
+        true,
+        false
+      ],
+      [
+        "postgres",
+        "supabase_functions_admin",
+        true,
+        true,
+        false
+      ]
+    ],
+    "columnGrants": 0,
+    "emptyHistory": true,
+    "relationships": [
+      {
+        "name": "property_location_intelligence_state_current_location_fkey",
+        "table": "property_location_intelligence_state",
+        "columns": [
+          "property_id",
+          "current_location_version_id"
+        ],
+        "validated": true,
+        "definition": "FOREIGN KEY (property_id, current_location_version_id) REFERENCES property_location_versions(property_id, id) ON UPDATE RESTRICT DEFERRABLE INITIALLY DEFERRED",
+        "isOneToOne": true,
+        "referencedColumns": [
+          "property_id",
+          "id"
+        ],
+        "referencedRelation": "property_location_versions"
+      },
+      {
+        "name": "property_location_intelligence_state_property_id_fkey",
+        "table": "property_location_intelligence_state",
+        "columns": [
+          "property_id"
+        ],
+        "validated": true,
+        "definition": "FOREIGN KEY (property_id) REFERENCES properties(id) ON UPDATE RESTRICT ON DELETE CASCADE",
+        "isOneToOne": true,
+        "referencedColumns": [
+          "id"
+        ],
+        "referencedRelation": "properties"
+      },
+      {
+        "name": "property_location_versions_property_id_fkey",
+        "table": "property_location_versions",
+        "columns": [
+          "property_id"
+        ],
+        "validated": true,
+        "definition": "FOREIGN KEY (property_id) REFERENCES properties(id) ON UPDATE RESTRICT ON DELETE CASCADE",
+        "isOneToOne": false,
+        "referencedColumns": [
+          "id"
+        ],
+        "referencedRelation": "properties"
+      },
+      {
+        "name": "property_location_versions_provider_version_id_fkey",
+        "table": "property_location_versions",
+        "columns": [
+          "provider_version_id"
+        ],
+        "validated": true,
+        "definition": "FOREIGN KEY (provider_version_id) REFERENCES location_provider_registry(id) ON UPDATE RESTRICT ON DELETE RESTRICT",
+        "isOneToOne": false,
+        "referencedColumns": [
+          "id"
+        ],
+        "referencedRelation": "location_provider_registry"
+      }
+    ],
+    "guardFunctions": [
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "name": "guard_property_location_pointer",
+        "owner": "postgres",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "definer": false,
+        "definition": "CREATE OR REPLACE FUNCTION public.guard_property_location_pointer()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE latest uuid;\nBEGIN\n  IF TG_TABLE_SCHEMA<>'public' OR TG_TABLE_NAME<>'property_location_intelligence_state' OR TG_WHEN<>'BEFORE'\n     OR TG_LEVEL<>'ROW' OR TG_NARGS<>0 OR TG_OP NOT IN ('INSERT','UPDATE') THEN\n    RAISE EXCEPTION 'Unsupported pointer guard attachment' USING ERRCODE='23514';\n  END IF;\n  IF TG_OP='UPDATE' THEN\n    IF NEW.property_id IS DISTINCT FROM OLD.property_id THEN\n      RAISE EXCEPTION 'State parent is immutable' USING ERRCODE='23514';\n    END IF;\n    IF NEW.current_location_version_id IS NOT DISTINCT FROM OLD.current_location_version_id THEN RETURN NEW; END IF;\n    IF NEW.current_location_version_id IS NULL THEN\n      RAISE EXCEPTION 'Append CLEARED instead of resetting pointer' USING ERRCODE='23514';\n    END IF;\n  END IF;\n  IF NEW.current_location_version_id IS NULL THEN RETURN NEW; END IF;\n  PERFORM 1 FROM public.properties WHERE id=NEW.property_id FOR UPDATE;\n  IF NOT FOUND THEN RAISE EXCEPTION 'Missing parent property' USING ERRCODE='23503'; END IF;\n  SELECT id INTO latest FROM public.property_location_versions WHERE property_id=NEW.property_id ORDER BY version_number DESC LIMIT 1;\n  IF latest IS DISTINCT FROM NEW.current_location_version_id THEN\n    RAISE EXCEPTION 'Pointer must target newest version of this property' USING ERRCODE='23514';\n  END IF;\n  RETURN NEW;\nEND\n$function$\n"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "name": "guard_property_location_version",
+        "owner": "postgres",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "definer": false,
+        "definition": "CREATE OR REPLACE FUNCTION public.guard_property_location_version()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n  IF TG_TABLE_SCHEMA<>'public' OR TG_TABLE_NAME<>'property_location_versions' OR TG_WHEN<>'BEFORE'\n     OR TG_LEVEL<>'ROW' OR TG_NARGS<>0 OR TG_OP NOT IN ('INSERT','UPDATE','DELETE') THEN\n    RAISE EXCEPTION 'Unsupported location guard attachment' USING ERRCODE='23514';\n  END IF;\n  IF TG_OP='UPDATE' THEN\n    RAISE EXCEPTION 'Location history is immutable' USING ERRCODE='23514';\n  ELSIF TG_OP='DELETE' THEN\n    IF EXISTS(SELECT FROM public.properties WHERE id=OLD.property_id) THEN\n      RAISE EXCEPTION 'Location history can only cascade with its parent' USING ERRCODE='23514';\n    END IF;\n    RETURN OLD;\n  END IF;\n  -- BEFORE generated geography: do not read NEW.position or allow PostGIS coercion.\n  IF (NEW.longitude IS NULL)<>(NEW.latitude IS NULL)\n     OR (NEW.longitude IS NOT NULL AND NOT (NEW.longitude BETWEEN -180 AND 180 AND NEW.latitude BETWEEN -90 AND 90))\n     OR (NEW.longitude IS NOT NULL AND NEW.source_crs IS DISTINCT FROM 'EPSG:4326') THEN\n    RAISE EXCEPTION 'Invalid WGS84 coordinate pair or source CRS' USING ERRCODE='23514';\n  END IF;\n  NEW.created_at:=transaction_timestamp();\n  IF NEW.confirmation_status='CONFIRMED' THEN NEW.confirmed_at:=NEW.created_at; END IF;\n  IF NEW.provider_version_id IS NOT NULL AND NOT EXISTS (\n    SELECT FROM public.location_provider_registry p WHERE p.id=NEW.provider_version_id\n      AND p.deprecated_at IS NULL AND p.approval_state IN ('PROVISIONAL','APPROVED')\n      AND p.retention_class='PERMANENT' AND p.reviewed_at IS NOT NULL\n      AND p.terms_reference IS NOT NULL AND p.review_reference IS NOT NULL\n      AND 'GEOCODING'=ANY(p.capabilities)) THEN\n    RAISE EXCEPTION 'Ineligible provider version' USING ERRCODE='23514';\n  END IF;\n  RETURN NEW;\nEND\n$function$\n"
+      }
+    ],
+    "effectivePrivileges": [
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "SELECT",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "SELECT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "INSERT",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "INSERT",
+        true,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "INSERT",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "UPDATE",
+        true,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "UPDATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "DELETE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "TRUNCATE",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "REFERENCES",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "TRIGGER",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticated",
+        "property_location_versions",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "anon",
+        "property_location_versions",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "service_role",
+        "property_location_versions",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_intelligence_state",
+        "MAINTAIN",
+        false,
+        false
+      ],
+      [
+        "authenticator",
+        "property_location_versions",
+        "MAINTAIN",
+        false,
+        false
+      ]
+    ]
+  }
+}

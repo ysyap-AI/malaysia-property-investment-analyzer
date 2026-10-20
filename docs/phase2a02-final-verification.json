@@ -1,0 +1,2228 @@
+{
+  "schemaVersion": 1,
+  "task": "Phase 2A-02 FINAL-ACCEPTANCE-01",
+  "date": "2026-10-18",
+  "timezone": "Asia/Kuala_Lumpur",
+  "status": "QUALIFIED_DEVELOPMENT_ACCEPTANCE_PRODUCTION_BLOCKED",
+  "generatedAt": "2026-10-18T14:20:43.326Z",
+  "baseline": {
+    "branch": "phase2-location-intelligence",
+    "head": "c9b6c4acc1879a2b84b89d3b39455f2489e4c56a",
+    "parent": "e9b55b024263857aacafbd8d9d9158d749d9261f",
+    "expectedHeadMatches": true,
+    "indexUnchanged": true
+  },
+  "decisions": {
+    "A": {
+      "status": "ACCEPTED_WITH_QUALIFICATIONS",
+      "scope": "Dormant database implementation on exact qualified local target"
+    },
+    "B": {
+      "status": "GO_RECOMMENDATION",
+      "scope": "Development checkpoint only",
+      "separateOwnerInstructionRequired": true,
+      "performed": false
+    },
+    "C": {
+      "status": "GO_RECOMMENDATION_WITH_ENTRY_CONDITIONS",
+      "scope": "Narrow Phase 2A-03 interfaces/design/development",
+      "separateOwnerInstructionRequired": true,
+      "performed": false
+    },
+    "D": {
+      "status": "BLOCKED",
+      "scope": "Production deployment readiness"
+    }
+  },
+  "sourceIntegrity": {
+    "status": "PASS",
+    "migrations": [
+      {
+        "path": "supabase/migrations/20260919043352_7772cf3d-825c-4ac1-8812-fcd953b116b8.sql",
+        "expected": "e4866959224287f3a51455fc8c7e96135119961e3b24bd2e985460bb0fdd5543",
+        "actual": "e4866959224287f3a51455fc8c7e96135119961e3b24bd2e985460bb0fdd5543",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260919043419_c5274c00-7154-486e-ac66-4048fbc8df1b.sql",
+        "expected": "36bb353c95fdc63510540c9a3b02ffd07dc89ea672153093fab0ec9b074b3826",
+        "actual": "36bb353c95fdc63510540c9a3b02ffd07dc89ea672153093fab0ec9b074b3826",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260921000000_restrict_application_table_privileges.sql",
+        "expected": "0e485124f24be25fc55d859bb26d3db74b47863ccffa39fd6d57d85842af1cd3",
+        "actual": "0e485124f24be25fc55d859bb26d3db74b47863ccffa39fd6d57d85842af1cd3",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260921010000_reconcile_property_cost_columns.sql",
+        "expected": "fdbdca9335c65d24d73d56b50287f4049f628d15366dee808d09abad38152284",
+        "actual": "fdbdca9335c65d24d73d56b50287f4049f628d15366dee808d09abad38152284",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260924000000_phase1_financing_integrity.sql",
+        "expected": "30afeed7313afe57d6652600a82cf34bb39d99e30de5a681651094fc108a1a3f",
+        "actual": "30afeed7313afe57d6652600a82cf34bb39d99e30de5a681651094fc108a1a3f",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20261016000000_phase2a01_foundation.sql",
+        "expected": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+        "actual": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+        "status": "MATCH"
+      }
+    ],
+    "locationMigrationSha256": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+    "protectedPaths": [
+      "src/lib/finance",
+      "src/lib/scenarios",
+      "src/lib/scoring",
+      "src/lib/risk",
+      "src/lib/recommendations",
+      "src/config",
+      "src/lib/phase1-validation.ts",
+      "src/hooks/use-property-analysis.ts"
+    ],
+    "protectedSourcesUnchanged": true,
+    "trackedChanges": [
+      "PHASE2A_01_GITHUB_SYNC_REPORT.md",
+      "PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+      "src/integrations/supabase/types.ts"
+    ],
+    "relocations": [
+      {
+        "from": "PHASE2A_01_GITHUB_SYNC_REPORT.md",
+        "to": "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md",
+        "byteIdentical": true
+      },
+      {
+        "from": "PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+        "to": "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+        "byteIdentical": true
+      }
+    ],
+    "typeProvenance": {
+      "status": "PASS",
+      "sourceSha256": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+      "destinationSha256": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347"
+    },
+    "baselineTypesEqualGitHead": true,
+    "preservedTypeContracts": 44,
+    "syntaxFiles": [
+      "tests/build-phase2a02-manifest.mjs",
+      "tests/generate-phase2a02-types.mjs",
+      "tests/inspect-phase2a02-prerequisites.mjs",
+      "tests/inspect-phase2a02-user-postgis.mjs",
+      "tests/phase2a01-quality-followup.mjs",
+      "tests/phase2a02-baseline-snapshot.mjs",
+      "tests/phase2a02-catalog-query.mjs",
+      "tests/phase2a02-command-contract.mjs",
+      "tests/phase2a02-contention.mjs",
+      "tests/phase2a02-contract.test.mjs",
+      "tests/phase2a02-final-acceptance.mjs",
+      "tests/phase2a02-harness-safety.test.mjs",
+      "tests/phase2a02-local-target.mjs",
+      "tests/phase2a02-location-cases.mjs",
+      "tests/phase2a02-sql-helpers.mjs",
+      "tests/phase2a02-transaction-qualification.mjs",
+      "tests/phase2a02-transaction-runtime.mjs",
+      "tests/phase2a02-transaction-writer.mjs",
+      "tests/prepare-phase2a02-postgis.mjs",
+      "tests/run-phase2a02-commit-cascades.mjs",
+      "tests/run-phase2a02-database-audit.mjs",
+      "tests/run-phase2a02-foundation-regression.mjs",
+      "tests/run-phase2a02-installation.mjs",
+      "tests/run-phase2a02-regressions.mjs",
+      "tests/run-phase2a02-transactions.mjs",
+      "tests/verify-phase2a02-schema.mjs"
+    ],
+    "secretScanAtAuditEntry": {
+      "status": "PASS",
+      "files": 62,
+      "findings": [],
+      "limitation": "Pattern scan plus scoped source review; not exhaustive credential attestation"
+    },
+    "unexpectedChanges": [],
+    "auditChangedExistingFiles": [
+      "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md",
+      "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md"
+    ],
+    "historicalDocumentBodiesPreserved": true
+  },
+  "provenance": {
+    "originalManifestComparisonsAtEntry": [
+      {
+        "path": "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md",
+        "expected": "4aaf16d4a784cdd1436e97c4492ac10d4298704217b491bbf62e5684ff980678",
+        "actual": "4aaf16d4a784cdd1436e97c4492ac10d4298704217b491bbf62e5684ff980678",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+        "expected": "ed188e629454f632f3d55490590b7f22250818b17efdc9ed9085e160aa1a4a4a",
+        "actual": "ed188e629454f632f3d55490590b7f22250818b17efdc9ed9085e160aa1a4a4a",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_ARCHITECTURE_REVIEW.md",
+        "expected": "504aa8f1620a8176babaf62b7b7e30adcb0e9514b1a2337d325b2b44f2903db1",
+        "actual": "504aa8f1620a8176babaf62b7b7e30adcb0e9514b1a2337d325b2b44f2903db1",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_DECISION_REGISTER.md",
+        "expected": "148731607f2a1c142a1aec0d5b3895e416ce834a3afbe046382b3582da251915",
+        "actual": "148731607f2a1c142a1aec0d5b3895e416ce834a3afbe046382b3582da251915",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md",
+        "expected": "9d20c80470cb289845919055c8075688a757c9ce7a01d191675c21f63f1e33c9",
+        "actual": "5568169636a1aaa64c040341a66a3386f1a9c5e04e3f7899529e456e0d2e62ef",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_READINESS.md",
+        "expected": "2bc55499c8caa49981a9ec06feac3d3af1aaf4654ab7cd7078ae8496d283dd25",
+        "actual": "2bc55499c8caa49981a9ec06feac3d3af1aaf4654ab7cd7078ae8496d283dd25",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md",
+        "expected": "58201678574b68aab7e828263ab57d3c288fd2bffc0a440d1cacd4e37c09b04f",
+        "actual": "9eaae64bdce5274a38228308aacf0468a2b6f30c11413fe49259b08f916220fd",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "docs/PHASE2A_02_SCHEMA_PROPOSAL.md",
+        "expected": "b572f0392da82ff91d8ecb1acc20403d993eda15b76807f0eea17e027dd30ca8",
+        "actual": "b572f0392da82ff91d8ecb1acc20403d993eda15b76807f0eea17e027dd30ca8",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a01-quality-followup-results.json",
+        "expected": "194e2330bbf02db00f78ecaea01c873373b3b22b1a3afdc68c448d2dd9df4fe3",
+        "actual": "194e2330bbf02db00f78ecaea01c873373b3b22b1a3afdc68c448d2dd9df4fe3",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-commit-results.json",
+        "expected": "679122a55dc0fc068c085d5e45d6eaffba7f111277869d989cd38866877f7555",
+        "actual": "679122a55dc0fc068c085d5e45d6eaffba7f111277869d989cd38866877f7555",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-database-results.json",
+        "expected": "9d2daba355bc32c2d1cddb31360e5d5e3d9d459a02529f22f56d111392fafeb3",
+        "actual": "9d2daba355bc32c2d1cddb31360e5d5e3d9d459a02529f22f56d111392fafeb3",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-fixture-comparison.json",
+        "expected": "ea83278d79b64f58a64fa89b0f37e7d9b16161b0735bf9cdf194cfa59242717d",
+        "actual": "ea83278d79b64f58a64fa89b0f37e7d9b16161b0735bf9cdf194cfa59242717d",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-foundation-regression-results.json",
+        "expected": "10827f93e7ded5a4a216fe1075977011e7ff4a28c7126129071f38eb3fe1d86e",
+        "actual": "10827f93e7ded5a4a216fe1075977011e7ff4a28c7126129071f38eb3fe1d86e",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-installation-results.json",
+        "expected": "e1ec19f4358cae279ec04809dff48a9cd46100d1dc9d6d64f3069234165cc19e",
+        "actual": "e1ec19f4358cae279ec04809dff48a9cd46100d1dc9d6d64f3069234165cc19e",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-postgis-installation.json",
+        "expected": "3b04575951017f6f16d0cee50f870cd34f856e3624cea49263b296eeafddac71",
+        "actual": "3b04575951017f6f16d0cee50f870cd34f856e3624cea49263b296eeafddac71",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-prerequisite-results.json",
+        "expected": "b4d7926cbcf78e683782836d14194a5c4825be386bbe9a4eb0cb869fd1353885",
+        "actual": "b4d7926cbcf78e683782836d14194a5c4825be386bbe9a4eb0cb869fd1353885",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-regression-results.json",
+        "expected": "fbc0d7e27dd6a7ff4299cdc3670b763cf728f0c9e176b3863845e39afd08f092",
+        "actual": "fbc0d7e27dd6a7ff4299cdc3670b763cf728f0c9e176b3863845e39afd08f092",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-schema-verification.json",
+        "expected": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+        "actual": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-test-inventory.json",
+        "expected": "978bb0c2464bdb7a318148e22aff06ea44f808f768a2381305099fe7aac5ecc1",
+        "actual": "978bb0c2464bdb7a318148e22aff06ea44f808f768a2381305099fe7aac5ecc1",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-transaction-results.json",
+        "expected": "64c760eb0ce167571d23dd083d08104d429e722550e660285b048c4bfebd3c83",
+        "actual": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "docs/phase2a02-type-generation.json",
+        "expected": "073b73692bd2c4d297e09903d0548ad00aa6942a8fb23f249775eaa5c087c7a1",
+        "actual": "073b73692bd2c4d297e09903d0548ad00aa6942a8fb23f249775eaa5c087c7a1",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-user-postgis-results.json",
+        "expected": "c3d1661bb5250d12d964640e90f468164a14013253acdf3ab120e7750786a21e",
+        "actual": "c3d1661bb5250d12d964640e90f468164a14013253acdf3ab120e7750786a21e",
+        "status": "MATCH"
+      },
+      {
+        "path": "src/integrations/supabase/types.ts",
+        "expected": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347",
+        "actual": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260919043352_7772cf3d-825c-4ac1-8812-fcd953b116b8.sql",
+        "expected": "e4866959224287f3a51455fc8c7e96135119961e3b24bd2e985460bb0fdd5543",
+        "actual": "e4866959224287f3a51455fc8c7e96135119961e3b24bd2e985460bb0fdd5543",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260919043419_c5274c00-7154-486e-ac66-4048fbc8df1b.sql",
+        "expected": "36bb353c95fdc63510540c9a3b02ffd07dc89ea672153093fab0ec9b074b3826",
+        "actual": "36bb353c95fdc63510540c9a3b02ffd07dc89ea672153093fab0ec9b074b3826",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260921000000_restrict_application_table_privileges.sql",
+        "expected": "0e485124f24be25fc55d859bb26d3db74b47863ccffa39fd6d57d85842af1cd3",
+        "actual": "0e485124f24be25fc55d859bb26d3db74b47863ccffa39fd6d57d85842af1cd3",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260921010000_reconcile_property_cost_columns.sql",
+        "expected": "fdbdca9335c65d24d73d56b50287f4049f628d15366dee808d09abad38152284",
+        "actual": "fdbdca9335c65d24d73d56b50287f4049f628d15366dee808d09abad38152284",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20260924000000_phase1_financing_integrity.sql",
+        "expected": "30afeed7313afe57d6652600a82cf34bb39d99e30de5a681651094fc108a1a3f",
+        "actual": "30afeed7313afe57d6652600a82cf34bb39d99e30de5a681651094fc108a1a3f",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20261016000000_phase2a01_foundation.sql",
+        "expected": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+        "actual": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+        "status": "MATCH"
+      },
+      {
+        "path": "supabase/migrations/20261017000000_phase2a02_property_locations.sql",
+        "expected": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+        "actual": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/PHASE2A02_README.md",
+        "expected": "87ef39b162c5a906498886dd5e4a50a1a75f8d3f7f5e899a94a512773ca09a24",
+        "actual": "303ed3cc3464239cfb2d03cc240054af51655dc63e4562c6fd837021f084bb8e",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "tests/build-phase2a02-manifest.mjs",
+        "expected": "bb6de283ded86627b5f34bb4a2f71413f1f5c4616fd87e484b00f2400d77bcb3",
+        "actual": "bb6de283ded86627b5f34bb4a2f71413f1f5c4616fd87e484b00f2400d77bcb3",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/database-types/phase2a02.ts",
+        "expected": "2f0f002d9eaffc1f894bea9a0dfda5a205e747abd3389833b829763506e8f8f5",
+        "actual": "2f0f002d9eaffc1f894bea9a0dfda5a205e747abd3389833b829763506e8f8f5",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/database-types/tsconfig.phase2a02.json",
+        "expected": "09c961e16e9402a94a3e2b2bd26a089b3d2cb474bfbca7edc2e1d168d985eeda",
+        "actual": "09c961e16e9402a94a3e2b2bd26a089b3d2cb474bfbca7edc2e1d168d985eeda",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/generate-phase2a02-types.mjs",
+        "expected": "34e1b93434ce30cef5e576a08f3eb105161bc2ec2b943c93d330d5787fd68d0c",
+        "actual": "34e1b93434ce30cef5e576a08f3eb105161bc2ec2b943c93d330d5787fd68d0c",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/inspect-phase2a02-prerequisites.mjs",
+        "expected": "808ed4c9974cae6a89a0e95bd6997800d372adecffce7cf90d31400305399e58",
+        "actual": "808ed4c9974cae6a89a0e95bd6997800d372adecffce7cf90d31400305399e58",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/inspect-phase2a02-user-postgis.mjs",
+        "expected": "8731f7cf1e5f5459af4fa7e5888753d7a9f72c324a74746b2eb859255d10ea15",
+        "actual": "8731f7cf1e5f5459af4fa7e5888753d7a9f72c324a74746b2eb859255d10ea15",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a01-quality-followup.mjs",
+        "expected": "3e912a4159296c6d14570e26195170b229d0c13a216971440f23497f236c20ff",
+        "actual": "3e912a4159296c6d14570e26195170b229d0c13a216971440f23497f236c20ff",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-baseline-snapshot.mjs",
+        "expected": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+        "actual": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-command-contract.mjs",
+        "expected": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+        "actual": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-contention.mjs",
+        "expected": "e2a049470f497f5e48032a186de66b9091ef3ef40b7b462f8d008a71d4edce6c",
+        "actual": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "tests/phase2a02-contract.test.mjs",
+        "expected": "ce894ab7bb079dec9eff6e2ddf6b82ea41b1447d8473c59830ce0e9ed096cf7e",
+        "actual": "ce894ab7bb079dec9eff6e2ddf6b82ea41b1447d8473c59830ce0e9ed096cf7e",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-local-target.mjs",
+        "expected": "c51235d06503e0c554f60eb7601e0d64c28ddf94691d60a09247091b74f2560e",
+        "actual": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "tests/phase2a02-location-cases.mjs",
+        "expected": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+        "actual": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-sql-helpers.mjs",
+        "expected": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53",
+        "actual": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/prepare-phase2a02-postgis.mjs",
+        "expected": "9f608ec13c9b3ab908d91e5dd95b360cde3ab5764fd0e9f61d0ab4520d123a4c",
+        "actual": "9f608ec13c9b3ab908d91e5dd95b360cde3ab5764fd0e9f61d0ab4520d123a4c",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-commit-cascades.mjs",
+        "expected": "39b5c229ab2674a794355395887cc49a75864f742a06ffe9002eca41677ec38e",
+        "actual": "39b5c229ab2674a794355395887cc49a75864f742a06ffe9002eca41677ec38e",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-database-audit.mjs",
+        "expected": "938ebdfe38fa4cb8999dc6ec2b54987867005a0f2648cb699acf4845ea682987",
+        "actual": "938ebdfe38fa4cb8999dc6ec2b54987867005a0f2648cb699acf4845ea682987",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-foundation-regression.mjs",
+        "expected": "fb0a884d2386ad9ac7e443347acb8b9f0641fde534b83552a2fece0e68e79bb3",
+        "actual": "fb0a884d2386ad9ac7e443347acb8b9f0641fde534b83552a2fece0e68e79bb3",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-installation.mjs",
+        "expected": "f2ef63023495e4d9de089ac47f3bd80bc4134c0c5e1ccc5392034c292b2444d4",
+        "actual": "f2ef63023495e4d9de089ac47f3bd80bc4134c0c5e1ccc5392034c292b2444d4",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-regressions.mjs",
+        "expected": "cac8e1e7568682c58ff953926f75c61f83046660fb2e2a37115aee9ad3a969fb",
+        "actual": "cac8e1e7568682c58ff953926f75c61f83046660fb2e2a37115aee9ad3a969fb",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-transactions.mjs",
+        "expected": "35d85b477b6d6484e8570af23e80ed56f7fe53c155f60b2d09272257e7711529",
+        "actual": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+        "status": "SUPERSEDED_OR_MISSING"
+      },
+      {
+        "path": "tests/verify-phase2a02-schema.mjs",
+        "expected": "cdc5ac43a5a876d1453125ae5f67c3d50a44cdee380ae45583b7e89c27197fd1",
+        "actual": "cdc5ac43a5a876d1453125ae5f67c3d50a44cdee380ae45583b7e89c27197fd1",
+        "status": "MATCH"
+      }
+    ],
+    "originalManifestExpectedSupersededCount": 7,
+    "closureComparisonsAtEntry": [
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md",
+        "expected": "5568169636a1aaa64c040341a66a3386f1a9c5e04e3f7899529e456e0d2e62ef",
+        "actual": "5568169636a1aaa64c040341a66a3386f1a9c5e04e3f7899529e456e0d2e62ef",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md",
+        "expected": "9eaae64bdce5274a38228308aacf0468a2b6f30c11413fe49259b08f916220fd",
+        "actual": "9eaae64bdce5274a38228308aacf0468a2b6f30c11413fe49259b08f916220fd",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_REPORT.md",
+        "expected": "2badbb96b8f262c79ba8ba5241e3755c037cb2ef8660e1635006e1f2e0f4f4ba",
+        "actual": "2badbb96b8f262c79ba8ba5241e3755c037cb2ef8660e1635006e1f2e0f4f4ba",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-transaction-results.json",
+        "expected": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c",
+        "actual": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/PHASE2A02_README.md",
+        "expected": "303ed3cc3464239cfb2d03cc240054af51655dc63e4562c6fd837021f084bb8e",
+        "actual": "303ed3cc3464239cfb2d03cc240054af51655dc63e4562c6fd837021f084bb8e",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-contention.mjs",
+        "expected": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+        "actual": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-local-target.mjs",
+        "expected": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+        "actual": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/run-phase2a02-transactions.mjs",
+        "expected": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+        "actual": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_TEST_HARNESS_REPAIR_REPORT.md",
+        "expected": "f5d7fb194cea3a61364d91feebd62848502c78dd8a65dcf3788ad22fdee6712d",
+        "actual": "f5d7fb194cea3a61364d91feebd62848502c78dd8a65dcf3788ad22fdee6712d",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_01_REPORT.md",
+        "expected": "a6aa9d68485266b02f51383892e563a6f3f7b13a19a255b9149fe2278ba53870",
+        "actual": "a6aa9d68485266b02f51383892e563a6f3f7b13a19a255b9149fe2278ba53870",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-harness-safety-results.json",
+        "expected": "a63b4459c4d6df05e0637fd77aa8dce4b65cd220e8dc800865ccae0d5b8ef1f4",
+        "actual": "a63b4459c4d6df05e0637fd77aa8dce4b65cd220e8dc800865ccae0d5b8ef1f4",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-test-closure-regression-results.json",
+        "expected": "3cadac6b66534143ffbfec14f41de562a7d11bdcad74ae31f21fa56e3d87f5dd",
+        "actual": "3cadac6b66534143ffbfec14f41de562a7d11bdcad74ae31f21fa56e3d87f5dd",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-transaction-attempt-history.json",
+        "expected": "d6107a1d93baac36aa22df097bdfe55852057347ce2bde7e0fb82415c68c640f",
+        "actual": "d6107a1d93baac36aa22df097bdfe55852057347ce2bde7e0fb82415c68c640f",
+        "status": "MATCH"
+      },
+      {
+        "path": "docs/phase2a02-transaction-results-closure-01.json",
+        "expected": "f238bc14c13fe30406a19f7addd53f149aa2fa492641d2eaf91cbec22ac6c08c",
+        "actual": "f238bc14c13fe30406a19f7addd53f149aa2fa492641d2eaf91cbec22ac6c08c",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-catalog-query.mjs",
+        "expected": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+        "actual": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-harness-safety.test.mjs",
+        "expected": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+        "actual": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-transaction-qualification.mjs",
+        "expected": "5251285cb1e7deaf488fffe72d8d8f022e08c794b4ad4aa4d5c9c53b3eddac09",
+        "actual": "5251285cb1e7deaf488fffe72d8d8f022e08c794b4ad4aa4d5c9c53b3eddac09",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-transaction-runtime.mjs",
+        "expected": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+        "actual": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+        "status": "MATCH"
+      },
+      {
+        "path": "tests/phase2a02-transaction-writer.mjs",
+        "expected": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+        "actual": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+        "status": "MATCH"
+      }
+    ],
+    "historicalLogHashes": [
+      {
+        "path": ".phase2a02-implementation.local/application.log",
+        "expected": "0623003354981240eb5e6feea90bcd2ce989ce41ea95cd9337416933257cb4ba",
+        "actual": "0623003354981240eb5e6feea90bcd2ce989ce41ea95cd9337416933257cb4ba",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/typescript-app.log",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/typescript-fixtures.log",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/typescript-phase1.log",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/typescript-foundation.log",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/typescript-location.log",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/command-contract.log",
+        "expected": "655b11a1cc1149c5162dc0b4dd6ddaad18fea1ecd295d140d6f423c6eeb38876",
+        "actual": "655b11a1cc1149c5162dc0b4dd6ddaad18fea1ecd295d140d6f423c6eeb38876",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/production-build.log",
+        "expected": "5358289bfe8abd0d0c764d046e30a39525e1e40191f68d6d3aa5416f7b0c0a21",
+        "actual": "5358289bfe8abd0d0c764d046e30a39525e1e40191f68d6d3aa5416f7b0c0a21",
+        "status": "MATCH"
+      },
+      {
+        "path": ".phase2a02-implementation.local/security.log",
+        "expected": "b1f744d2ed692dc2161ff02ae8eb072ff145be167bc4a0436a2f80afa8c64e25",
+        "actual": "b1f744d2ed692dc2161ff02ae8eb072ff145be167bc4a0436a2f80afa8c64e25",
+        "status": "MATCH"
+      }
+    ],
+    "retainedEvidence": [
+      {
+        "path": "docs/phase2a01-quality-followup-results.json",
+        "sha256": "194e2330bbf02db00f78ecaea01c873373b3b22b1a3afdc68c448d2dd9df4fe3",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-commit-results.json",
+        "sha256": "679122a55dc0fc068c085d5e45d6eaffba7f111277869d989cd38866877f7555",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-database-results.json",
+        "sha256": "9d2daba355bc32c2d1cddb31360e5d5e3d9d459a02529f22f56d111392fafeb3",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-fixture-comparison.json",
+        "sha256": "ea83278d79b64f58a64fa89b0f37e7d9b16161b0735bf9cdf194cfa59242717d",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-foundation-regression-results.json",
+        "sha256": "10827f93e7ded5a4a216fe1075977011e7ff4a28c7126129071f38eb3fe1d86e",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-harness-safety-results.json",
+        "sha256": "a63b4459c4d6df05e0637fd77aa8dce4b65cd220e8dc800865ccae0d5b8ef1f4",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-installation-results.json",
+        "sha256": "e1ec19f4358cae279ec04809dff48a9cd46100d1dc9d6d64f3069234165cc19e",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-postgis-installation.json",
+        "sha256": "3b04575951017f6f16d0cee50f870cd34f856e3624cea49263b296eeafddac71",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-prerequisite-results.json",
+        "sha256": "b4d7926cbcf78e683782836d14194a5c4825be386bbe9a4eb0cb869fd1353885",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-regression-results.json",
+        "sha256": "fbc0d7e27dd6a7ff4299cdc3670b763cf728f0c9e176b3863845e39afd08f092",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-schema-verification.json",
+        "sha256": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-test-closure-git-results.json",
+        "sha256": "d2524d772482ca894c23de667350a826a6e0a0170965d56326065fafe22a9402",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-test-closure-regression-results.json",
+        "sha256": "3cadac6b66534143ffbfec14f41de562a7d11bdcad74ae31f21fa56e3d87f5dd",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-test-inventory.json",
+        "sha256": "978bb0c2464bdb7a318148e22aff06ea44f808f768a2381305099fe7aac5ecc1",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-transaction-attempt-history.json",
+        "sha256": "d6107a1d93baac36aa22df097bdfe55852057347ce2bde7e0fb82415c68c640f",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-transaction-results-closure-01.json",
+        "sha256": "f238bc14c13fe30406a19f7addd53f149aa2fa492641d2eaf91cbec22ac6c08c",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-transaction-results.json",
+        "sha256": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-type-generation.json",
+        "sha256": "073b73692bd2c4d297e09903d0548ad00aa6942a8fb23f249775eaa5c087c7a1",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-user-postgis-results.json",
+        "sha256": "c3d1661bb5250d12d964640e90f468164a14013253acdf3ab120e7750786a21e",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a02-verification-manifest.json",
+        "sha256": "f7b6480d78ee24df9f5eea1cebf350e1052c15c25405d4ceffa7480222320531",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-database-results.json",
+        "sha256": "73e894f5b815b64e12368ebd03f02c8b7c03d9b092eae034714de106b86a725f",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-final-verification.json",
+        "sha256": "5eb84aaf768347d0aff6bac1b7eb1cb3155cce35446b41055de529a69ff48f90",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-fixture-comparison.json",
+        "sha256": "092e50536f3ec13dba039165e58e7f641cbabc356067df787b4c944de776ee30",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-phase1-database-results.json",
+        "sha256": "eadf14a8dd561b2fa0e62a0992499c1e3b42babd04e1e1dcbaea50da003d4112",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-phase1-ownership-results.txt",
+        "sha256": "a930563280c2472271d60d1b69d083144983d96fd49c6ece4418ce881ced33ab",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-schema-verification.json",
+        "sha256": "7a95560a9596978ab020977c5e2ad665737b5c9877957646a41ce0c0d4000076",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      },
+      {
+        "path": "docs/phase2a01-type-generation.json",
+        "sha256": "46de460a63577bbdb7f3339d921d0793129323e7c28e0ee40f64b423b55a1a0f",
+        "age": "RETAINED",
+        "preservedDuringAudit": true
+      }
+    ],
+    "authoritativeDocuments": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "f5b162a27132a2e9fc8a316e52fc98fcd407a0b6077221f92cdc991c417807bc"
+      },
+      {
+        "path": "PROJECT_RULES.md",
+        "sha256": "509ce8fbb9fa332a5f50af5ef783367868e70b1afca90ceaab101c6237c4eaa2"
+      },
+      {
+        "path": "docs/PHASE1_ARCHITECTURE_FREEZE.md",
+        "sha256": "9c37285e19e61ddd9231c555e76f31e5b394621066634ae5a1ad8c4ca2cd9b06"
+      },
+      {
+        "path": "docs/PHASE2_ARCHITECTURE_PLAN.md",
+        "sha256": "a46064abcc76a901ac48e7cb9824d89786597f7f28395b5710d1b3aed44c2f58"
+      },
+      {
+        "path": "docs/PHASE2A_01_FINAL_ACCEPTANCE_REPORT.md",
+        "sha256": "ee11bc7eec5b7d58e512ffc7a1299237ff172a0fbaa34a3262ecd4ea0f8f3933"
+      },
+      {
+        "path": "docs/PHASE2A_02_ARCHITECTURE_REVIEW.md",
+        "sha256": "504aa8f1620a8176babaf62b7b7e30adcb0e9514b1a2337d325b2b44f2903db1"
+      },
+      {
+        "path": "docs/PHASE2A_02_DECISION_REGISTER.md",
+        "sha256": "148731607f2a1c142a1aec0d5b3895e416ce834a3afbe046382b3582da251915"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md",
+        "sha256": "3e678fa30f538c8f0a396246761f8af724befcf26875424b0030c4eb0030eea0"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_READINESS.md",
+        "sha256": "2bc55499c8caa49981a9ec06feac3d3af1aaf4654ab7cd7078ae8496d283dd25"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md",
+        "sha256": "1d2762bfb585248315c5ab2f9bb315d0b5678264f790d15167ddf558d8b1d1ab"
+      },
+      {
+        "path": "docs/PHASE2A_02_SCHEMA_PROPOSAL.md",
+        "sha256": "b572f0392da82ff91d8ecb1acc20403d993eda15b76807f0eea17e027dd30ca8"
+      },
+      {
+        "path": "docs/PHASE2A_02_TEST_HARNESS_REPAIR_REPORT.md",
+        "sha256": "f5d7fb194cea3a61364d91feebd62848502c78dd8a65dcf3788ad22fdee6712d"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_01_REPORT.md",
+        "sha256": "a6aa9d68485266b02f51383892e563a6f3f7b13a19a255b9149fe2278ba53870"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_REPORT.md",
+        "sha256": "2badbb96b8f262c79ba8ba5241e3755c037cb2ef8660e1635006e1f2e0f4f4ba"
+      }
+    ],
+    "qualifications": [
+      "Local unsigned evidence, not independent attestation",
+      "Historical manifest was not regenerated",
+      "Original/closure overall blocked statuses are historical dispositions",
+      "Two implementation documents received current overlays; old full bodies preserved including original BOM",
+      "Separate owner-created PostGIS smoke evidence is not application-target acceptance"
+    ]
+  },
+  "evidenceSummary": [
+    {
+      "area": "spatial_database",
+      "age": "RETAINED",
+      "status": "PASS",
+      "assertions": 166,
+      "distinctRecordedLabels": 166,
+      "sourceLabels": 167,
+      "savepointRolledBackLabel": "L07 deferred FK independently rejects cross property",
+      "evidence": "docs/phase2a02-database-results.json"
+    },
+    {
+      "area": "upgrade_installation",
+      "age": "RETAINED",
+      "status": "PASS",
+      "groups": 5,
+      "populatedUpgrade": 1,
+      "migrationFaultRollbacks": 3,
+      "retainedInstallation": 1,
+      "evidence": "docs/phase2a02-installation-results.json"
+    },
+    {
+      "area": "pointer_fk_and_cascades",
+      "age": "RETAINED",
+      "status": "PASS",
+      "deferredPointerCommitRejections": 3,
+      "cascadeGroups": 2,
+      "evidence": "docs/phase2a02-commit-results.json"
+    },
+    {
+      "area": "location_transactions",
+      "age": "RETAINED_TEST_CLOSURE_02",
+      "status": "PASS",
+      "cases": 14,
+      "pass": 14,
+      "fail": 0,
+      "notExecuted": 0,
+      "observedLockRaces": 2,
+      "racesAreWithinCases": true,
+      "tc14": "Temporary deferred FK actual COMMIT rejection for absent/existing state; permanent-pointer FK proof is separate",
+      "evidence": "docs/phase2a02-transaction-results.json"
+    },
+    {
+      "area": "harness_safety",
+      "age": "RETAINED_SOURCE_HASHES_FRESHLY_VERIFIED",
+      "status": "PASS",
+      "simulations": 11,
+      "realDatabaseTimeoutsClaimed": 0,
+      "evidence": "docs/phase2a02-harness-safety-results.json"
+    },
+    {
+      "area": "application",
+      "age": "FRESH",
+      "status": "PASS",
+      "total": 1073,
+      "passed": 1073,
+      "failed": 0,
+      "pending": 0,
+      "files": 33
+    },
+    {
+      "area": "P01_P10",
+      "age": "FRESH",
+      "status": "PASS",
+      "assertions": 53,
+      "qualification": "Names/outcomes against unchanged frozen fixture expectations, not archived numeric-output snapshots; subset of 1073.",
+      "subsetOfApplication": true
+    },
+    {
+      "area": "typescript",
+      "age": "FRESH",
+      "status": "PASS",
+      "projects": 5,
+      "preservedContractEqualityChecks": 44,
+      "baselineTypesEqualGitHead": true
+    },
+    {
+      "area": "serializer",
+      "age": "FRESH",
+      "status": "PASS",
+      "passed": 5,
+      "failed": 0
+    },
+    {
+      "area": "security",
+      "age": "FRESH",
+      "status": "PASS_WITH_SKIP",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 1,
+      "skip": "Built browser assets; no fresh build produced"
+    },
+    {
+      "area": "build_and_bundle_security",
+      "age": "RETAINED",
+      "status": "PASS",
+      "securityPassed": 6,
+      "logHashesVerified": true
+    },
+    {
+      "area": "foundation_regression",
+      "age": "RETAINED_PRE_SPATIAL_INSTALLATION",
+      "status": "PASS",
+      "assertionExecutions": 2340,
+      "distinctLabels": 2303
+    },
+    {
+      "area": "foundation_quality",
+      "age": "RETAINED",
+      "status": "PASS",
+      "checks": 9,
+      "uniquenessRejections": 6,
+      "positiveControls": 3,
+      "observedLockRaces": 2,
+      "notLocationRaces": true
+    },
+    {
+      "area": "phase1_database",
+      "age": "HISTORICAL_RETAINED",
+      "status": "PASS",
+      "assertionOutcomes": 1186,
+      "notRerun": true
+    },
+    {
+      "area": "focused_database_audit",
+      "age": "FRESH",
+      "status": "PASS",
+      "negativeProbes": 6,
+      "representativeGist": true,
+      "fullSnapshotPreservation": true
+    },
+    {
+      "area": "clean_install_seven_migrations",
+      "age": "NONE",
+      "status": "NOT_VERIFIED",
+      "reason": "No designated clean target; no new environment or reset allowed",
+      "blocksDevelopmentCheckpoint": false
+    },
+    {
+      "area": "full_incompatible_extension_role_attachment_matrix",
+      "status": "PARTIAL",
+      "sourceReview": true,
+      "exactInstalledTarget": true,
+      "negativeEnvironmentMutationExecuted": false
+    },
+    {
+      "area": "real_handler_authentication",
+      "status": "NOT_EXECUTED",
+      "gate": "Before runtime exposure; no current handler"
+    },
+    {
+      "area": "provider_behavior",
+      "status": "NOT_EXECUTED",
+      "gate": "Later geocoding/provider integration; no provider calls"
+    },
+    {
+      "area": "T15",
+      "status": "NOT_EXECUTED",
+      "cases": 8,
+      "gate": "Later safe synthetic browser/release qualification"
+    }
+  ],
+  "countingPolicy": "Do not sum rows into distinct cases. Repeated runs, foundation repeated labels, source-only labels, P01-P10 subsets and TC07 repeated race observations are not extra cases.",
+  "fresh": {
+    "offline": {
+      "task": "FINAL-ACCEPTANCE-01",
+      "mode": "--offline",
+      "startedAt": "2026-10-18T14:09:44.644Z",
+      "status": "PASS",
+      "retainedSafetyHashes": "PASS",
+      "checks": [
+        {
+          "name": "application",
+          "args": [
+            "node_modules/vitest/vitest.mjs",
+            "run",
+            "--reporter=json",
+            "--outputFile=.phase2a02-implementation.local/final-acceptance/application.json"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/application.log",
+          "sha256": "07726276991e5340ee5367bf0dcbc2f582d0bf789c2d4d61bc5fcbaa54c6bc62"
+        },
+        {
+          "name": "typescript-app",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "--noEmit"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/typescript-app.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "tests/fixtures/tsconfig.json",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "-p",
+            "tests/fixtures/tsconfig.json",
+            "--noEmit"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/tests_fixtures_tsconfig.json.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "tests/database-types/tsconfig.json",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "-p",
+            "tests/database-types/tsconfig.json",
+            "--noEmit"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/tests_database-types_tsconfig.json.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "tests/database-types/tsconfig.phase2a01.json",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "-p",
+            "tests/database-types/tsconfig.phase2a01.json",
+            "--noEmit"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/tests_database-types_tsconfig.phase2a01.json.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "tests/database-types/tsconfig.phase2a02.json",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "-p",
+            "tests/database-types/tsconfig.phase2a02.json",
+            "--noEmit"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/tests_database-types_tsconfig.phase2a02.json.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "44-type-contracts",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "--noEmit",
+            "--strict",
+            "--skipLibCheck",
+            "--target",
+            "es2022",
+            "--moduleResolution",
+            "bundler",
+            "--module",
+            "esnext",
+            ".phase2a02-implementation.local/type-parity.ts"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/44-type-contracts.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "serializer",
+          "args": [
+            "--test",
+            "tests/phase2a02-contract.test.mjs"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/serializer.log",
+          "sha256": "61a59804a5853b6500d96b0fd13244b6c289398c5d3f3449b7e2526ff8ee2ef6"
+        },
+        {
+          "name": "security",
+          "args": [
+            "--test",
+            "tests/security.test.mjs"
+          ],
+          "exitCode": 0,
+          "status": "PASS",
+          "log": ".phase2a02-implementation.local/final-acceptance/security.log",
+          "sha256": "3e493f419341e148cb2880a76a2ffad8e7bf9ee35f29ef292cd4437b8ed7f6d1"
+        }
+      ],
+      "application": {
+        "total": 1073,
+        "passed": 1073,
+        "failed": 0,
+        "pending": 0
+      },
+      "fixtures": {
+        "status": "PASS",
+        "assertions": 53,
+        "qualification": "Names/outcomes against unchanged frozen fixture expectations, not archived numeric-output snapshots; subset of 1073."
+      },
+      "typeProvenance": {
+        "status": "PASS",
+        "sourceSha256": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+        "destinationSha256": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347"
+      },
+      "finishedAt": "2026-10-18T14:10:17.149Z"
+    },
+    "database": {
+      "task": "FINAL-ACCEPTANCE-01",
+      "mode": "--database",
+      "startedAt": "2026-10-18T14:10:51.796Z",
+      "status": "PASS",
+      "retainedSafetyHashes": "PASS",
+      "target": {
+        "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+        "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+        "volume": "supabase_db_mpia-phase2a01-implementation",
+        "volumeCreatedAt": "2026-10-16T14:23:02Z",
+        "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+        "user": "postgres",
+        "users": 0,
+        "socket": true,
+        "version": "17.11",
+        "database": "postgres",
+        "readOnly": "on"
+      },
+      "beforeSha256": "782cedb1204a5d331f47c9dbfc2ea0570e88fe0d0e77e221f130208a3b861437",
+      "acceptedClosureSnapshotMatches": true,
+      "catalog": {
+        "guards": [
+          [
+            "property_location_intelligence_state",
+            "property_location_intelligence_state_guard",
+            "O",
+            23,
+            "guard_property_location_state_row",
+            0
+          ],
+          [
+            "property_location_intelligence_state",
+            "property_location_pointer_guard",
+            "O",
+            23,
+            "guard_property_location_pointer",
+            0
+          ],
+          [
+            "property_location_versions",
+            "property_location_versions_guard",
+            "O",
+            31,
+            "guard_property_location_version",
+            0
+          ]
+        ],
+        "extension": {
+          "owner": "supabase_admin",
+          "schema": "extensions",
+          "version": "3.3.7"
+        },
+        "historyRows": 0,
+        "publicViews": [],
+        "invalidIndexes": 0,
+        "publicDefiners": [
+          [
+            "handle_new_user",
+            "CREATE OR REPLACE FUNCTION public.handle_new_user()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'public'\nAS $function$\r\nBEGIN\r\n  INSERT INTO public.profiles (id, full_name, contact_email)\r\n  VALUES (NEW.id, NEW.raw_user_meta_data ->> 'full_name', NEW.email)\r\n  ON CONFLICT (id) DO NOTHING;\r\n  RETURN NEW;\r\nEND; $function$\n"
+          ]
+        ],
+        "reachableAdmin": 0,
+        "unsafeRolePaths": [],
+        "danglingPointers": 0,
+        "authenticatorReachable": [
+          "anon",
+          "authenticated",
+          "service_role"
+        ]
+      },
+      "negativeChecks": [
+        {
+          "name": "Actual unmodified preflight rejects already-installed namespace",
+          "status": "PASS",
+          "sqlstate": "55000",
+          "expectedMessage": "Location namespace collision"
+        },
+        {
+          "name": "Actual unmodified preflight rejects runtime creator",
+          "status": "PASS",
+          "sqlstate": "55000",
+          "expectedMessage": "Requires verified postgres/BYPASSRLS"
+        },
+        {
+          "name": "guard_property_location_version: temporary wrong-schema/table ROW attachment",
+          "status": "PASS",
+          "sqlstate": "23514",
+          "expectedMessage": "Unsupported location guard attachment"
+        },
+        {
+          "name": "guard_property_location_version: temporary wrong-schema/table STATEMENT attachment",
+          "status": "PASS",
+          "sqlstate": "23514",
+          "expectedMessage": "Unsupported location guard attachment"
+        },
+        {
+          "name": "guard_property_location_pointer: temporary wrong-schema/table ROW attachment",
+          "status": "PASS",
+          "sqlstate": "23514",
+          "expectedMessage": "Unsupported pointer guard attachment"
+        },
+        {
+          "name": "guard_property_location_pointer: temporary wrong-schema/table STATEMENT attachment",
+          "status": "PASS",
+          "sqlstate": "23514",
+          "expectedMessage": "Unsupported pointer guard attachment"
+        }
+      ],
+      "representativePlan": [
+        {
+          "Plan": {
+            "Node Type": "Bitmap Heap Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Relation Name": "fa_spatial",
+            "Alias": "fa_spatial",
+            "Startup Cost": 4.42,
+            "Total Cost": 90.38,
+            "Plan Rows": 2,
+            "Plan Width": 4,
+            "Actual Startup Time": 62.844,
+            "Actual Total Time": 62.875,
+            "Actual Rows": 6,
+            "Actual Loops": 1,
+            "Filter": "st_dwithin(\"position\", '0101000020E61000005C8FC2F5286C59401F85EB51B81E0940'::geography, '15000'::double precision, true)",
+            "Rows Removed by Filter": 0,
+            "Exact Heap Blocks": 2,
+            "Lossy Heap Blocks": 0,
+            "Shared Hit Blocks": 94,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 6,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Bitmap Index Scan",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Index Name": "fa_spatial_gist",
+                "Startup Cost": 0,
+                "Total Cost": 4.42,
+                "Plan Rows": 3,
+                "Plan Width": 0,
+                "Actual Startup Time": 0.036,
+                "Actual Total Time": 0.037,
+                "Actual Rows": 6,
+                "Actual Loops": 1,
+                "Index Cond": "(\"position\" && _st_expand('0101000020E61000005C8FC2F5286C59401F85EB51B81E0940'::geography, '15000'::double precision))",
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 4,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 61,
+            "Shared Read Blocks": 4,
+            "Shared Dirtied Blocks": 1,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 3.051,
+          "Triggers": [],
+          "Execution Time": 63.001
+        }
+      ],
+      "sequentialPlan": [
+        {
+          "Plan": {
+            "Node Type": "Seq Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Relation Name": "fa_spatial",
+            "Alias": "fa_spatial",
+            "Startup Cost": 0,
+            "Total Cost": 525421,
+            "Plan Rows": 2,
+            "Plan Width": 4,
+            "Actual Startup Time": 10.019,
+            "Actual Total Time": 29.753,
+            "Actual Rows": 6,
+            "Actual Loops": 1,
+            "Filter": "((\"position\" IS NOT NULL) AND st_dwithin(\"position\", '0101000020E61000005C8FC2F5286C59401F85EB51B81E0940'::geography, '15000'::double precision, true))",
+            "Rows Removed by Filter": 20994
+          },
+          "Planning Time": 0.173,
+          "Triggers": [],
+          "Execution Time": 29.842
+        }
+      ],
+      "spatial": {
+        "status": "PASS",
+        "syntheticRows": 21000,
+        "nullPoints": 1000,
+        "radiusMetres": 15000,
+        "matchingIds": [
+          6216,
+          6217,
+          6218,
+          6416,
+          6417,
+          6418
+        ],
+        "unforcedGistPlan": true,
+        "sequentialParity": true,
+        "qualification": "Temporary representative distribution; not production performance or an authenticated RLS workload."
+      },
+      "installedIndexPlan": [
+        {
+          "Plan": {
+            "Node Type": "Index Scan",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Scan Direction": "Forward",
+            "Index Name": "property_location_versions_position_gist",
+            "Relation Name": "property_location_versions",
+            "Alias": "property_location_versions",
+            "Startup Cost": 0.25,
+            "Total Cost": 33.27,
+            "Plan Rows": 1,
+            "Plan Width": 16,
+            "Index Cond": "(\"position\" && _st_expand('0101000020E61000005C8FC2F5286C59401F85EB51B81E0940'::geography, '15000'::double precision))",
+            "Filter": "st_dwithin(\"position\", '0101000020E61000005C8FC2F5286C59401F85EB51B81E0940'::geography, '15000'::double precision, true)"
+          }
+        }
+      ],
+      "sessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "terminated": [],
+        "events": [
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_46",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_50",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_54",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_58",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_62",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_66",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          }
+        ]
+      },
+      "afterSha256": "782cedb1204a5d331f47c9dbfc2ea0570e88fe0d0e77e221f130208a3b861437",
+      "fixtureCounts": {
+        "state": 0,
+        "profiles": 0,
+        "authUsers": 0,
+        "financing": 0,
+        "properties": 0,
+        "locationVersions": 0,
+        "scenario_configs": 0,
+        "acquisition_costs": 0,
+        "operating_expenses": 0,
+        "investment_criteria": 0
+      },
+      "preservation": "PASS",
+      "finalSessions": {
+        "status": "PASS",
+        "remainingSessions": 0,
+        "remainingTransactions": 0,
+        "terminated": [],
+        "events": [
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_46",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_50",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_54",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_58",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_62",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          },
+          {
+            "name": "mpia_tc02_33ad90a0687a4ec2b968b43288d8e858_66",
+            "actions": [
+              {
+                "cancel": ""
+              },
+              {
+                "terminate": ""
+              }
+            ],
+            "remaining": 0
+          }
+        ]
+      },
+      "finishedAt": "2026-10-18T14:11:15.988Z"
+    },
+    "executionBoundary": {
+      "initialAttempt": "Sandbox denied Docker context files before SQL; approved escalation succeeded",
+      "newInfrastructure": false,
+      "permanentSchemaOrSecurityChanges": false,
+      "syntheticData": "Temporary tables only; rolled back",
+      "applicationFixtureWrites": false,
+      "providerCalls": false,
+      "productionAccess": false
+    }
+  },
+  "risks": [
+    {
+      "id": "R01",
+      "severity": "MEDIUM",
+      "risk": "Complete clean installation unverified",
+      "checkpointBlocker": false,
+      "closure": "Separately approved clean target before deployment qualification"
+    },
+    {
+      "id": "R02",
+      "severity": "MEDIUM",
+      "risk": "Full incompatible-extension and adversarial authority/attachment qualification incomplete",
+      "checkpointBlocker": false,
+      "closure": "Actual target preflight and isolated negative qualification before deployment"
+    },
+    {
+      "id": "R03",
+      "severity": "HIGH_IF_EXPOSED",
+      "risk": "Service BYPASSRLS does not authenticate users or enforce all expected-token/contiguous-version semantics",
+      "checkpointBlocker": false,
+      "closure": "Trusted authenticated atomic writer before runtime exposure"
+    },
+    {
+      "id": "R04",
+      "severity": "HIGH_IF_ENABLED",
+      "risk": "Provider snapshot eligibility is not field-specific rights, withdrawal serialization or purge policy",
+      "checkpointBlocker": false,
+      "closure": "Provider and retention contracts before ingestion"
+    },
+    {
+      "id": "R05",
+      "severity": "RELEASE_GATE",
+      "risk": "T15 and real handler/provider tests unexecuted",
+      "checkpointBlocker": false,
+      "closure": "Safe synthetic setup and corresponding implemented-runtime tests"
+    },
+    {
+      "id": "R06",
+      "severity": "LOW_TO_MEDIUM",
+      "risk": "Unsigned historical evidence; raw logs/baselines remain ignored local artifacts",
+      "checkpointBlocker": false,
+      "closure": "Retain redacted evidence separately; do not force-add environments"
+    },
+    {
+      "id": "R07",
+      "severity": "LOW",
+      "risk": "Temporary spatial plan does not qualify production RLS queries/performance",
+      "checkpointBlocker": false,
+      "closure": "Actual workload validation when implemented"
+    },
+    {
+      "id": "R08",
+      "severity": "LOW_FOR_THIS_AUDIT",
+      "risk": "No fresh build/bundle test",
+      "checkpointBlocker": false,
+      "closure": "Fresh build/bundle and combined-tree release validation"
+    }
+  ],
+  "phase2a03EntryConditions": [
+    "Separate owner instruction and narrow interface scope",
+    "Frozen Phase 1 independent save/analysis",
+    "Provider-neutral typed contracts and versioned serializers",
+    "Authenticated single-connection parent-then-state transaction; reauthorize retries; exact tokens; success only after COMMIT",
+    "Confirmed pointer plus current input fingerprint for origin eligibility",
+    "No provider selection/calls or runtime feature exposure without corresponding gates",
+    "Carry clean-install/platform/T15 to release qualification"
+  ],
+  "checkpoint": {
+    "recommendation": "INCLUDE_EXACT_INVENTORY_ONLY_AFTER_OWNER_INSTRUCTION",
+    "counts": {
+      "paths": 67,
+      "added": 64,
+      "modified": 1,
+      "deletedMoveSources": 2
+    },
+    "files": [
+      {
+        "path": "PHASE2A_01_GITHUB_SYNC_REPORT.md",
+        "gitStatus": "D",
+        "recommendation": "INCLUDE",
+        "action": "DELETE_MOVE_SOURCE",
+        "relocation": {
+          "from": "PHASE2A_01_GITHUB_SYNC_REPORT.md",
+          "to": "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md",
+          "byteIdentical": true
+        },
+        "sha256": "4aaf16d4a784cdd1436e97c4492ac10d4298704217b491bbf62e5684ff980678"
+      },
+      {
+        "path": "PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+        "gitStatus": "D",
+        "recommendation": "INCLUDE",
+        "action": "DELETE_MOVE_SOURCE",
+        "relocation": {
+          "from": "PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+          "to": "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+          "byteIdentical": true
+        },
+        "sha256": "ed188e629454f632f3d55490590b7f22250818b17efdc9ed9085e160aa1a4a4a"
+      },
+      {
+        "path": "src/integrations/supabase/types.ts",
+        "gitStatus": "M",
+        "recommendation": "INCLUDE",
+        "action": "MODIFY",
+        "sha256": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347"
+      },
+      {
+        "path": "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD_MOVE_DESTINATION",
+        "relocation": {
+          "from": "PHASE2A_01_GITHUB_SYNC_REPORT.md",
+          "to": "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md",
+          "byteIdentical": true
+        },
+        "sha256": "4aaf16d4a784cdd1436e97c4492ac10d4298704217b491bbf62e5684ff980678"
+      },
+      {
+        "path": "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD_MOVE_DESTINATION",
+        "relocation": {
+          "from": "PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+          "to": "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md",
+          "byteIdentical": true
+        },
+        "sha256": "ed188e629454f632f3d55490590b7f22250818b17efdc9ed9085e160aa1a4a4a"
+      },
+      {
+        "path": "docs/PHASE2A_02_ARCHITECTURE_REVIEW.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "504aa8f1620a8176babaf62b7b7e30adcb0e9514b1a2337d325b2b44f2903db1"
+      },
+      {
+        "path": "docs/PHASE2A_02_DECISION_REGISTER.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "148731607f2a1c142a1aec0d5b3895e416ce834a3afbe046382b3582da251915"
+      },
+      {
+        "path": "docs/PHASE2A_02_FINAL_ACCEPTANCE_CHECKLIST.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "e7d54bfa0b3f480b11ff775fe80a074842d6cdd5828976fd97f9f0b5826bc03a"
+      },
+      {
+        "path": "docs/PHASE2A_02_FINAL_ACCEPTANCE_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "8248f6ddc96c8b36e6d51da10079819d2aabe99d5d8f38833f73533b1ed4aadc"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "3e678fa30f538c8f0a396246761f8af724befcf26875424b0030c4eb0030eea0"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_READINESS.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "2bc55499c8caa49981a9ec06feac3d3af1aaf4654ab7cd7078ae8496d283dd25"
+      },
+      {
+        "path": "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "1d2762bfb585248315c5ab2f9bb315d0b5678264f790d15167ddf558d8b1d1ab"
+      },
+      {
+        "path": "docs/PHASE2A_02_SCHEMA_PROPOSAL.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "b572f0392da82ff91d8ecb1acc20403d993eda15b76807f0eea17e027dd30ca8"
+      },
+      {
+        "path": "docs/PHASE2A_02_TEST_HARNESS_REPAIR_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "f5d7fb194cea3a61364d91feebd62848502c78dd8a65dcf3788ad22fdee6712d"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_01_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "a6aa9d68485266b02f51383892e563a6f3f7b13a19a255b9149fe2278ba53870"
+      },
+      {
+        "path": "docs/PHASE2A_02_TRANSACTION_CLOSURE_REPORT.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "2badbb96b8f262c79ba8ba5241e3755c037cb2ef8660e1635006e1f2e0f4f4ba"
+      },
+      {
+        "path": "docs/phase2a01-quality-followup-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "194e2330bbf02db00f78ecaea01c873373b3b22b1a3afdc68c448d2dd9df4fe3"
+      },
+      {
+        "path": "docs/phase2a02-commit-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "679122a55dc0fc068c085d5e45d6eaffba7f111277869d989cd38866877f7555"
+      },
+      {
+        "path": "docs/phase2a02-database-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "9d2daba355bc32c2d1cddb31360e5d5e3d9d459a02529f22f56d111392fafeb3"
+      },
+      {
+        "path": "docs/phase2a02-final-verification.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": null,
+        "hashNote": "Self hash deliberately omitted; inventory includes this manifest."
+      },
+      {
+        "path": "docs/phase2a02-fixture-comparison.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "ea83278d79b64f58a64fa89b0f37e7d9b16161b0735bf9cdf194cfa59242717d"
+      },
+      {
+        "path": "docs/phase2a02-foundation-regression-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "10827f93e7ded5a4a216fe1075977011e7ff4a28c7126129071f38eb3fe1d86e"
+      },
+      {
+        "path": "docs/phase2a02-harness-safety-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "a63b4459c4d6df05e0637fd77aa8dce4b65cd220e8dc800865ccae0d5b8ef1f4"
+      },
+      {
+        "path": "docs/phase2a02-installation-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "e1ec19f4358cae279ec04809dff48a9cd46100d1dc9d6d64f3069234165cc19e"
+      },
+      {
+        "path": "docs/phase2a02-postgis-installation.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "3b04575951017f6f16d0cee50f870cd34f856e3624cea49263b296eeafddac71"
+      },
+      {
+        "path": "docs/phase2a02-prerequisite-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "b4d7926cbcf78e683782836d14194a5c4825be386bbe9a4eb0cb869fd1353885"
+      },
+      {
+        "path": "docs/phase2a02-regression-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "fbc0d7e27dd6a7ff4299cdc3670b763cf728f0c9e176b3863845e39afd08f092"
+      },
+      {
+        "path": "docs/phase2a02-schema-verification.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c"
+      },
+      {
+        "path": "docs/phase2a02-test-closure-git-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "d2524d772482ca894c23de667350a826a6e0a0170965d56326065fafe22a9402"
+      },
+      {
+        "path": "docs/phase2a02-test-closure-regression-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "3cadac6b66534143ffbfec14f41de562a7d11bdcad74ae31f21fa56e3d87f5dd"
+      },
+      {
+        "path": "docs/phase2a02-test-inventory.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "978bb0c2464bdb7a318148e22aff06ea44f808f768a2381305099fe7aac5ecc1"
+      },
+      {
+        "path": "docs/phase2a02-transaction-attempt-history.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "d6107a1d93baac36aa22df097bdfe55852057347ce2bde7e0fb82415c68c640f"
+      },
+      {
+        "path": "docs/phase2a02-transaction-results-closure-01.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "f238bc14c13fe30406a19f7addd53f149aa2fa492641d2eaf91cbec22ac6c08c"
+      },
+      {
+        "path": "docs/phase2a02-transaction-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c"
+      },
+      {
+        "path": "docs/phase2a02-type-generation.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "073b73692bd2c4d297e09903d0548ad00aa6942a8fb23f249775eaa5c087c7a1"
+      },
+      {
+        "path": "docs/phase2a02-user-postgis-results.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "c3d1661bb5250d12d964640e90f468164a14013253acdf3ab120e7750786a21e"
+      },
+      {
+        "path": "docs/phase2a02-verification-manifest.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "f7b6480d78ee24df9f5eea1cebf350e1052c15c25405d4ceffa7480222320531"
+      },
+      {
+        "path": "supabase/migrations/20261017000000_phase2a02_property_locations.sql",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40"
+      },
+      {
+        "path": "tests/PHASE2A02_README.md",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "303ed3cc3464239cfb2d03cc240054af51655dc63e4562c6fd837021f084bb8e"
+      },
+      {
+        "path": "tests/build-phase2a02-manifest.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "bb6de283ded86627b5f34bb4a2f71413f1f5c4616fd87e484b00f2400d77bcb3"
+      },
+      {
+        "path": "tests/database-types/phase2a02.ts",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "2f0f002d9eaffc1f894bea9a0dfda5a205e747abd3389833b829763506e8f8f5"
+      },
+      {
+        "path": "tests/database-types/tsconfig.phase2a02.json",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "09c961e16e9402a94a3e2b2bd26a089b3d2cb474bfbca7edc2e1d168d985eeda"
+      },
+      {
+        "path": "tests/generate-phase2a02-types.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "34e1b93434ce30cef5e576a08f3eb105161bc2ec2b943c93d330d5787fd68d0c"
+      },
+      {
+        "path": "tests/inspect-phase2a02-prerequisites.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "808ed4c9974cae6a89a0e95bd6997800d372adecffce7cf90d31400305399e58"
+      },
+      {
+        "path": "tests/inspect-phase2a02-user-postgis.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "8731f7cf1e5f5459af4fa7e5888753d7a9f72c324a74746b2eb859255d10ea15"
+      },
+      {
+        "path": "tests/phase2a01-quality-followup.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "3e912a4159296c6d14570e26195170b229d0c13a216971440f23497f236c20ff"
+      },
+      {
+        "path": "tests/phase2a02-baseline-snapshot.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb"
+      },
+      {
+        "path": "tests/phase2a02-catalog-query.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2"
+      },
+      {
+        "path": "tests/phase2a02-command-contract.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7"
+      },
+      {
+        "path": "tests/phase2a02-contention.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36"
+      },
+      {
+        "path": "tests/phase2a02-contract.test.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "ce894ab7bb079dec9eff6e2ddf6b82ea41b1447d8473c59830ce0e9ed096cf7e"
+      },
+      {
+        "path": "tests/phase2a02-final-acceptance.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "cf9b64ad5062594180fa793e4378db001945bbe382127bd4d59e93ae4f37daa8"
+      },
+      {
+        "path": "tests/phase2a02-harness-safety.test.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c"
+      },
+      {
+        "path": "tests/phase2a02-local-target.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500"
+      },
+      {
+        "path": "tests/phase2a02-location-cases.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0"
+      },
+      {
+        "path": "tests/phase2a02-sql-helpers.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53"
+      },
+      {
+        "path": "tests/phase2a02-transaction-qualification.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "5251285cb1e7deaf488fffe72d8d8f022e08c794b4ad4aa4d5c9c53b3eddac09"
+      },
+      {
+        "path": "tests/phase2a02-transaction-runtime.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8"
+      },
+      {
+        "path": "tests/phase2a02-transaction-writer.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe"
+      },
+      {
+        "path": "tests/prepare-phase2a02-postgis.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "9f608ec13c9b3ab908d91e5dd95b360cde3ab5764fd0e9f61d0ab4520d123a4c"
+      },
+      {
+        "path": "tests/run-phase2a02-commit-cascades.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "39b5c229ab2674a794355395887cc49a75864f742a06ffe9002eca41677ec38e"
+      },
+      {
+        "path": "tests/run-phase2a02-database-audit.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "938ebdfe38fa4cb8999dc6ec2b54987867005a0f2648cb699acf4845ea682987"
+      },
+      {
+        "path": "tests/run-phase2a02-foundation-regression.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "fb0a884d2386ad9ac7e443347acb8b9f0641fde534b83552a2fece0e68e79bb3"
+      },
+      {
+        "path": "tests/run-phase2a02-installation.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "f2ef63023495e4d9de089ac47f3bd80bc4134c0c5e1ccc5392034c292b2444d4"
+      },
+      {
+        "path": "tests/run-phase2a02-regressions.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "cac8e1e7568682c58ff953926f75c61f83046660fb2e2a37115aee9ad3a969fb"
+      },
+      {
+        "path": "tests/run-phase2a02-transactions.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba"
+      },
+      {
+        "path": "tests/verify-phase2a02-schema.mjs",
+        "gitStatus": "??",
+        "recommendation": "INCLUDE",
+        "action": "ADD",
+        "sha256": "cdc5ac43a5a876d1453125ae5f67c3d50a44cdee380ae45583b7e89c27197fd1"
+      }
+    ],
+    "excluded": [
+      "Ignored .phase2a01* and .phase2a02* local directories",
+      ".env and credentials",
+      "Docker configuration/volumes",
+      "node_modules and build outputs",
+      "Raw database snapshots/logs; preserve separately as redacted evidence"
+    ],
+    "staged": false,
+    "committed": false,
+    "pushed": false
+  },
+  "auditDeliverables": [
+    "docs/PHASE2A_02_FINAL_ACCEPTANCE_REPORT.md",
+    "docs/PHASE2A_02_FINAL_ACCEPTANCE_CHECKLIST.md",
+    "docs/phase2a02-final-verification.json"
+  ],
+  "auditSupportingSource": "tests/phase2a02-final-acceptance.mjs",
+  "stopPoint": "Acceptance assessment only; no Git checkpoint, next-phase work or deployment",
+  "limitations": [
+    "Clean seven-migration install NOT VERIFIED",
+    "Full incompatible-extension/adversarial qualification partial",
+    "No real handler, provider or T15 passes",
+    "No fresh build/bundle; historical build retained",
+    "Audit runner uses retained local baseline/type-parity evidence; not a clean-environment bootstrap"
+  ],
+  "finalArtifactValidation": {
+    "status": "PASS",
+    "inventoryPaths": 67,
+    "allInventoryHashesMatch": true,
+    "retainedEvidenceUnchanged": true,
+    "markdownLinksValid": true,
+    "finalCredentialPatternScan": {
+      "files": 65,
+      "findings": [],
+      "limitation": "Pattern scan, not exhaustive attestation"
+    },
+    "newArtifactWhitespace": [
+      "docs/PHASE2A_02_FINAL_ACCEPTANCE_REPORT.md",
+      "docs/PHASE2A_02_FINAL_ACCEPTANCE_CHECKLIST.md",
+      "docs/phase2a02-final-verification.json",
+      "tests/phase2a02-final-acceptance.mjs"
+    ],
+    "indexEmpty": true
+  }
+}

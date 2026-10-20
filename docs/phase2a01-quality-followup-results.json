@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-18",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "status": "PASS",
+  "uniqueness": {
+    "labels": [
+      "location_fact_definitions duplicate logical version 23505",
+      "location_fact_definitions duplicate UUID 23505",
+      "location_fact_definitions valid nondeprecated control",
+      "location_freshness_policies duplicate logical version 23505",
+      "location_freshness_policies duplicate UUID 23505",
+      "location_freshness_policies valid nondeprecated control",
+      "location_provider_registry duplicate logical version 23505",
+      "location_provider_registry duplicate UUID 23505",
+      "location_provider_registry valid nondeprecated control"
+    ],
+    "passed": 9
+  },
+  "contention": [
+    {
+      "case": "competing expected-revision updates",
+      "firstPid": 277,
+      "secondPid": 278,
+      "evidence": {
+        "blockers": [
+          277
+        ],
+        "waitType": "Lock",
+        "ungrantedLocks": 1
+      },
+      "winner": 1,
+      "loser": "zero changed rows"
+    },
+    {
+      "case": "parent lock serializes first-state creation",
+      "firstPid": 320,
+      "secondPid": 321,
+      "evidence": {
+        "blockers": [
+          320
+        ],
+        "waitType": "Lock",
+        "ungrantedLocks": 1
+      },
+      "winner": 1,
+      "loser": "observed existing state; ABSENT command rejected"
+    }
+  ],
+  "qualification": "Supplementary tests only; historical mixed-SQLSTATE assertions and historical count claims remain unchanged."
+}

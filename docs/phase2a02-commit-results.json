@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-18",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "status": "PASS",
+  "results": [
+    {
+      "case": "bad pointer commit f3020000-0000-0000-0000-000000009999",
+      "sqlstate": "23503",
+      "rollbackVerified": true
+    },
+    {
+      "case": "bad pointer commit f3020000-0000-0000-0000-000000000013",
+      "sqlstate": "23503",
+      "rollbackVerified": true
+    },
+    {
+      "case": "bad pointer commit f3020000-0000-0000-0000-000000000012",
+      "sqlstate": "23503",
+      "rollbackVerified": true
+    },
+    {
+      "case": "authenticated property delete commits with history/current/state/financial cascades and B preserved",
+      "status": "PASS"
+    },
+    {
+      "case": "Auth user deletion commits with private and financial cascades",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,1730 @@
+{
+  "status": "PASS",
+  "newColumns": 53,
+  "phase1ExternalColumns": 129,
+  "specSha256": "9cbfaf8e648de68244ca917adc0df484c55b89497f63038cbadb7c0929376804",
+  "evidenceSha256": "5258b0e5682a499fcaaf2666e4bbab78e96a5ccbb9df4355d623e052ad696def",
+  "catalog": {
+    "roles": [
+      {
+        "role": "authenticated",
+        "bypass": false,
+        "create_db": false,
+        "superuser": false,
+        "create_role": false
+      },
+      {
+        "role": "anon",
+        "bypass": false,
+        "create_db": false,
+        "superuser": false,
+        "create_role": false
+      },
+      {
+        "role": "service_role",
+        "bypass": true,
+        "create_db": false,
+        "superuser": false,
+        "create_role": false
+      },
+      {
+        "role": "postgres",
+        "bypass": true,
+        "create_db": true,
+        "superuser": false,
+        "create_role": true
+      }
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "acquisition_costs",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "legal_fees",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "stamp_duty",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "valuation_fee",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "agent_fee",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "renovation_cost",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "furnishing_cost",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "other_costs",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "acquisition_costs",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "acquisition_costs",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "purchase_price",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "spa_legal_fee",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "transfer_stamp_duty",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "loan_legal_fee",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "loan_stamp_duty",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "utility_deposits",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "maintenance_deposit",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "acquisition_agent_fee",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "initial_holding_cost",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "contingency_cost",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "other_cost",
+        "type": "numeric",
+        "table": "acquisition_costs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "financing",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "financing",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "purchase_price",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "deposit_percent",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "deposit_amount",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "loan_amount",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "interest_rate_percent",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "loan_tenure_years",
+        "type": "integer",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "loan_type",
+        "type": "text",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "financing",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "financing",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "loan_to_value_percent",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_interest_rate_percent",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "user_provided_monthly_instalment",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "use_user_provided_instalment",
+        "type": "boolean",
+        "table": "financing",
+        "default": "false",
+        "nullable": false
+      },
+      {
+        "name": "bank_quote_verified",
+        "type": "boolean",
+        "table": "financing",
+        "default": "false",
+        "nullable": false
+      },
+      {
+        "name": "financing_notes",
+        "type": "text",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "down_payment",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "calculated_monthly_instalment",
+        "type": "numeric",
+        "table": "financing",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "investment_criteria",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "uuid",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "min_gross_yield_percent",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "min_net_yield_percent",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "min_cash_on_cash_percent",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "max_break_even_occupancy_percent",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "weight_yield",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "weight_cash_flow",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "weight_risk",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "weight_data_confidence",
+        "type": "numeric",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "config_version",
+        "type": "text",
+        "table": "investment_criteria",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "investment_criteria",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "investment_criteria",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "location_fact_definitions",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "fact_key",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "definition_version",
+        "type": "integer",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "display_name",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "semantic_definition",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "category",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "value_type",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "unit",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "measurement_method",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "aggregation_scope",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "entity_taxonomy_key",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "taxonomy_version",
+        "type": "integer",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "coverage_requirement",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "radius_required",
+        "type": "boolean",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "duration_required",
+        "type": "boolean",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "zero_semantics",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "allowed_category_values",
+        "type": "ARRAY",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "contract_reference",
+        "type": "text",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "location_fact_definitions",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "deprecated_at",
+        "type": "timestamp with time zone",
+        "table": "location_fact_definitions",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "location_freshness_policies",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "policy_key",
+        "type": "text",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "policy_version",
+        "type": "integer",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "category",
+        "type": "text",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "age_basis",
+        "type": "text",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "fresh_for_seconds",
+        "type": "bigint",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "expire_after_seconds",
+        "type": "bigint",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "approval_reference",
+        "type": "text",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "location_freshness_policies",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "deprecated_at",
+        "type": "timestamp with time zone",
+        "table": "location_freshness_policies",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "location_provider_registry",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "provider_key",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "provider_version",
+        "type": "integer",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "display_name",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "capabilities",
+        "type": "ARRAY",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "approval_state",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": "'UNREVIEWED'::text",
+        "nullable": false
+      },
+      {
+        "name": "retention_class",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": "'UNREVIEWED'::text",
+        "nullable": false
+      },
+      {
+        "name": "retention_limit_seconds",
+        "type": "bigint",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "attribution_required",
+        "type": "boolean",
+        "table": "location_provider_registry",
+        "default": "true",
+        "nullable": false
+      },
+      {
+        "name": "attribution_text",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "terms_reference",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "review_reference",
+        "type": "text",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "reviewed_at",
+        "type": "timestamp with time zone",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "location_provider_registry",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "deprecated_at",
+        "type": "timestamp with time zone",
+        "table": "location_provider_registry",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "operating_expenses",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "management_fee_monthly",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "maintenance_monthly",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "sinking_fund_monthly",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "quit_rent_annual",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "assessment_annual",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "insurance_annual",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "utilities_monthly",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "other_monthly",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "operating_expenses",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "operating_expenses",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "annual_maintenance_fee",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_sinking_fund",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_assessment_tax",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_quit_or_parcel_rent",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_landlord_insurance",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_property_management_fee",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_leasing_agent_fee",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_tenancy_documentation",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_repair_reserve",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_furniture_replacement_reserve",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_cleaning_cost",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_vacancy_utilities",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_bad_debt_allowance",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "annual_other_operating_expenses",
+        "type": "numeric",
+        "table": "operating_expenses",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "profiles",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "full_name",
+        "type": "text",
+        "table": "profiles",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "contact_email",
+        "type": "text",
+        "table": "profiles",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "profiles",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "profiles",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "properties",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "uuid",
+        "table": "properties",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "project_name",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "full_address",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "state",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "property_type",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "tenure",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "built_up_sqft",
+        "type": "numeric",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "bedrooms",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "bathrooms",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "asking_price",
+        "type": "numeric",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "listing_url",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "properties",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "properties",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "postcode",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "city",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "district",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "country",
+        "type": "text",
+        "table": "properties",
+        "default": "'Malaysia'::text",
+        "nullable": true
+      },
+      {
+        "name": "title_type",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "lease_expiry_year",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "completion_year",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "developer",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "car_parks",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "floor_level",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "total_floors",
+        "type": "integer",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "furnishing_status",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "unit_condition",
+        "type": "text",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "target_purchase_price",
+        "type": "numeric",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "bank_valuation",
+        "type": "numeric",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "expected_monthly_rent",
+        "type": "numeric",
+        "table": "properties",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "rent_verification_status",
+        "type": "text",
+        "table": "properties",
+        "default": "'missing'::text",
+        "nullable": true
+      },
+      {
+        "name": "property_status",
+        "type": "text",
+        "table": "properties",
+        "default": "'prospect'::text",
+        "nullable": true
+      },
+      {
+        "name": "analysis_status",
+        "type": "text",
+        "table": "properties",
+        "default": "'not_started'::text",
+        "nullable": true
+      },
+      {
+        "name": "property_id",
+        "type": "uuid",
+        "table": "property_location_intelligence_state",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "processing_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'NOT_STARTED'::text",
+        "nullable": false
+      },
+      {
+        "name": "freshness_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'UNKNOWN'::text",
+        "nullable": false
+      },
+      {
+        "name": "publication_status",
+        "type": "text",
+        "table": "property_location_intelligence_state",
+        "default": "'NOT_ASSESSED'::text",
+        "nullable": false
+      },
+      {
+        "name": "state_revision",
+        "type": "bigint",
+        "table": "property_location_intelligence_state",
+        "default": "0",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_intelligence_state",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "property_location_intelligence_state",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "uuid",
+        "table": "scenario_configs",
+        "default": "gen_random_uuid()",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "uuid",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "scenario_name",
+        "type": "text",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": false
+      },
+      {
+        "name": "rent_adjustment_percent",
+        "type": "numeric",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "vacancy_rate_percent",
+        "type": "numeric",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "expense_adjustment_percent",
+        "type": "numeric",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "interest_rate_adjustment_percent",
+        "type": "numeric",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "config_version",
+        "type": "text",
+        "table": "scenario_configs",
+        "default": null,
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "table": "scenario_configs",
+        "default": "now()",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "table": "scenario_configs",
+        "default": "now()",
+        "nullable": false
+      }
+    ],
+    "defaults": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "kind": "r",
+        "owner": "postgres",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "kind": "f",
+        "owner": "postgres",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ],
+        "kind": "S",
+        "owner": "postgres",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ],
+        "kind": "S",
+        "owner": "supabase_admin",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ],
+        "kind": "r",
+        "owner": "supabase_admin",
+        "schema": "public"
+      },
+      {
+        "acl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ],
+        "kind": "f",
+        "owner": "supabase_admin",
+        "schema": "public"
+      }
+    ],
+    "guardACL": [
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "name": "guard_location_registry_row",
+        "owner": "postgres"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "name": "guard_property_location_state_row",
+        "owner": "postgres"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (((deprecated_at IS NULL) OR (isfinite(deprecated_at) AND (deprecated_at >= created_at))))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (((length(btrim(contract_reference)) > 0) AND (length(contract_reference) <= 1000)))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (isfinite(created_at))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK ((definition_version > 0))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (((length(btrim(display_name)) > 0) AND (length(display_name) <= 200)))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (\nCASE fact_key\n    WHEN 'transport.rail_station.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'rail_station'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.rail_station.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'rail_station'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.rail_station.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'rail_station'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.rail_station.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'rail_station'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'transport.bus_stop.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bus_stop'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.bus_stop.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bus_stop'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.bus_stop.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bus_stop'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'transport.bus_stop.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'TRANSPORT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bus_stop'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'daily_convenience.supermarket.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'supermarket'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.supermarket.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'supermarket'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.supermarket.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'supermarket'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.supermarket.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'supermarket'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'daily_convenience.pharmacy.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'pharmacy'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.pharmacy.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'pharmacy'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.pharmacy.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'pharmacy'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.pharmacy.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'pharmacy'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'daily_convenience.convenience_store.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'convenience_store'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.convenience_store.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'convenience_store'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.convenience_store.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'convenience_store'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.convenience_store.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'convenience_store'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'daily_convenience.bank_atm.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bank_atm'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.bank_atm.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bank_atm'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.bank_atm.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bank_atm'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'daily_convenience.bank_atm.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'bank_atm'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'education.school.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.school.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.school.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.school.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'school'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'education.university_college.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'university_college'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.university_college.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'university_college'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.university_college.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'university_college'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.university_college.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'university_college'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'education.international_school.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'international_school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.international_school.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'international_school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.international_school.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'international_school'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'education.international_school.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EDUCATION'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'international_school'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'healthcare.hospital_medical_centre.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.hospital_medical_centre.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.hospital_medical_centre.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.hospital_medical_centre.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'healthcare.hospital_medical_centre.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.hospital_medical_centre.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'hospital_medical_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.clinic.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.clinic.nearest_walking_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.clinic.nearest_walking_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'WALKING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.clinic.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'healthcare.clinic.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'healthcare.clinic.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'HEALTHCARE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'clinic'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'retail.significant_retail_centre.nearest_straight_line_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'RETAIL'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_retail_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'retail.significant_retail_centre.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'RETAIL'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_retail_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'retail.significant_retail_centre.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'RETAIL'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_retail_centre'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'retail.significant_retail_centre.count_within_radius'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'RETAIL'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_retail_centre'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'STRAIGHT_LINE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_RADIUS'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_RADIUS'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'road.major_road_access.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'ROAD'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'major_road_access'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'road.major_road_access.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'ROAD'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'major_road_access'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'road.expressway_interchange.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'ROAD'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'expressway_interchange'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'road.expressway_interchange.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'ROAD'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'expressway_interchange'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'employment.significant_economic_node.nearest_driving_route_m'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EMPLOYMENT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_economic_node'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'm'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'employment.significant_economic_node.nearest_driving_route_s'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EMPLOYMENT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_economic_node'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 's'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'NEAREST_ELIGIBLE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'MEASURED_ZERO'::text)))\n    WHEN 'employment.significant_economic_node.count_within_driving_duration'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'EMPLOYMENT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'significant_economic_node'::text)) OR (value_type IS DISTINCT FROM 'INTEGER'::text)) OR (unit IS DISTINCT FROM 'count'::text)) OR (measurement_method IS DISTINCT FROM 'DRIVING_ROUTE'::text)) OR (aggregation_scope IS DISTINCT FROM 'WITHIN_DURATION'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CANDIDATE_SET'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM true)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'daily_convenience.essential_categories.coverage_ratio'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'DAILY_CONVENIENCE'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'essential_categories'::text)) OR (value_type IS DISTINCT FROM 'DECIMAL'::text)) OR (unit IS DISTINCT FROM 'ratio'::text)) OR (measurement_method IS DISTINCT FROM 'CATEGORY_PRESENCE'::text)) OR (aggregation_scope IS DISTINCT FROM 'CATEGORY_COVERAGE'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_CATEGORY_SET'::text)) OR (radius_required IS DISTINCT FROM true)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'PROVEN_EMPTY_SCOPE'::text)))\n    WHEN 'context.area.classification'::text THEN (NOT ((((((((((category IS DISTINCT FROM 'CONTEXT'::text) OR (entity_taxonomy_key IS DISTINCT FROM 'area'::text)) OR (value_type IS DISTINCT FROM 'CATEGORY'::text)) OR (unit IS DISTINCT FROM 'category'::text)) OR (measurement_method IS DISTINCT FROM 'DETERMINISTIC_CLASSIFIER'::text)) OR (aggregation_scope IS DISTINCT FROM 'AREA_CONTEXT'::text)) OR (coverage_requirement IS DISTINCT FROM 'COMPLETE_AREA_FEATURES'::text)) OR (radius_required IS DISTINCT FROM false)) OR (duration_required IS DISTINCT FROM false)) OR (zero_semantics IS DISTINCT FROM 'NOT_ALLOWED'::text)))\n    ELSE false\nEND)"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK ((((fact_key = 'context.area.classification'::text) AND (NOT (allowed_category_values IS DISTINCT FROM ARRAY['REGIONAL_LOW_TRANSIT'::text, 'SUBURBAN'::text, 'URBAN_GENERAL'::text, 'URBAN_TRANSIT'::text]))) OR ((fact_key <> 'context.area.classification'::text) AND (allowed_category_values IS NULL))))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK ((((length(fact_key) >= 1) AND (length(fact_key) <= 160)) AND (fact_key ~ '^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$'::text)))"
+      },
+      {
+        "type": "u",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "UNIQUE (fact_key, definition_version)"
+      },
+      {
+        "type": "p",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK (((length(btrim(semantic_definition)) > 0) AND (length(semantic_definition) <= 8000)))"
+      },
+      {
+        "type": "c",
+        "table": "location_fact_definitions",
+        "validated": true,
+        "definition": "CHECK ((taxonomy_version > 0))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK ((age_basis = ANY (ARRAY['OBSERVED_AT'::text, 'RETRIEVED_AT'::text])))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK (((length(btrim(approval_reference)) > 0) AND (length(approval_reference) <= 1000)))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK ((category = ANY (ARRAY['GEOCODING'::text, 'TRANSPORT'::text, 'ROAD'::text, 'DAILY_CONVENIENCE'::text, 'EDUCATION'::text, 'HEALTHCARE'::text, 'EMPLOYMENT'::text, 'RETAIL'::text, 'CONTEXT'::text, 'ROUTING'::text])))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK (((deprecated_at IS NULL) OR (isfinite(deprecated_at) AND (deprecated_at >= created_at))))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK (((0 < fresh_for_seconds) AND (fresh_for_seconds < expire_after_seconds) AND (expire_after_seconds <= '9007199254740991'::bigint)))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK (isfinite(created_at))"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK (((length(btrim(description)) > 0) AND (length(description) <= 4000)))"
+      },
+      {
+        "type": "p",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK ((((length(policy_key) >= 1) AND (length(policy_key) <= 160)) AND (policy_key ~ '^[a-z][a-z0-9_]*$'::text)))"
+      },
+      {
+        "type": "u",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "UNIQUE (policy_key, policy_version)"
+      },
+      {
+        "type": "c",
+        "table": "location_freshness_policies",
+        "validated": true,
+        "definition": "CHECK ((policy_version > 0))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((approval_state = ANY (ARRAY['UNREVIEWED'::text, 'PROVISIONAL'::text, 'APPROVED'::text, 'DISABLED'::text])))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((attribution_text IS NULL) OR ((length(btrim(attribution_text)) > 0) AND (length(attribution_text) <= 4000))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((array_ndims(capabilities) = 1) AND (cardinality(capabilities) > 0) AND (array_position(capabilities, NULL::text) IS NULL) AND (capabilities <@ ARRAY['GEOCODING'::text, 'PLACES'::text, 'ROUTING'::text, 'MAP_RENDERING'::text])))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((deprecated_at IS NULL) OR (isfinite(deprecated_at) AND (deprecated_at >= created_at))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((reviewed_at IS NULL) OR (isfinite(reviewed_at) AND (reviewed_at <= created_at))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((((terms_reference IS NULL) AND (review_reference IS NULL) AND (reviewed_at IS NULL)) OR ((terms_reference IS NOT NULL) AND (review_reference IS NOT NULL) AND (reviewed_at IS NOT NULL))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((approval_state <> 'UNREVIEWED'::text) OR ((retention_class = 'UNREVIEWED'::text) AND (reviewed_at IS NULL))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((approval_state <> ALL (ARRAY['PROVISIONAL'::text, 'APPROVED'::text])) OR ((retention_class <> 'UNREVIEWED'::text) AND (reviewed_at IS NOT NULL))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((retention_class = 'UNREVIEWED'::text) OR (reviewed_at IS NOT NULL)))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((reviewed_at IS NULL) OR (NOT attribution_required) OR (attribution_text IS NOT NULL)))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((((retention_class = 'TEMPORARY_30_DAY'::text) AND (retention_limit_seconds IS NOT NULL) AND ((retention_limit_seconds >= 1) AND (retention_limit_seconds <= 2592000))) OR ((retention_class <> 'TEMPORARY_30_DAY'::text) AND (retention_limit_seconds IS NULL))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (isfinite(created_at))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((length(btrim(display_name)) > 0))"
+      },
+      {
+        "type": "p",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((((length(provider_key) >= 1) AND (length(provider_key) <= 160)) AND (provider_key ~ '^[a-z][a-z0-9_]*$'::text)))"
+      },
+      {
+        "type": "u",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "UNIQUE (provider_key, provider_version)"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((provider_version > 0))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK ((retention_class = ANY (ARRAY['UNREVIEWED'::text, 'PERMANENT'::text, 'TEMPORARY_30_DAY'::text, 'ID_ONLY_PERMANENT'::text, 'NO_PERSISTENCE'::text])))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((review_reference IS NULL) OR ((length(btrim(review_reference)) > 0) AND (length(review_reference) <= 1000))))"
+      },
+      {
+        "type": "c",
+        "table": "location_provider_registry",
+        "validated": true,
+        "definition": "CHECK (((terms_reference IS NULL) OR ((length(btrim(terms_reference)) > 0) AND (length(terms_reference) <= 1000))))"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK ((isfinite(updated_at) AND (updated_at >= created_at)))"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK (isfinite(created_at))"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK ((freshness_status = 'UNKNOWN'::text))"
+      },
+      {
+        "type": "p",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "PRIMARY KEY (property_id)"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK ((processing_status = 'NOT_STARTED'::text))"
+      },
+      {
+        "type": "f",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "FOREIGN KEY (property_id) REFERENCES properties(id) ON UPDATE RESTRICT ON DELETE CASCADE"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK ((publication_status = 'NOT_ASSESSED'::text))"
+      },
+      {
+        "type": "c",
+        "table": "property_location_intelligence_state",
+        "validated": true,
+        "definition": "CHECK (((state_revision >= 0) AND (state_revision <= '9007199254740991'::bigint)))"
+      }
+    ],
+    "memberships": [
+      {
+        "set": true,
+        "role": "authenticated",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "anon",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "service_role",
+        "admin": false,
+        "member": "authenticator",
+        "inherit": false
+      }
+    ]
+  }
+}

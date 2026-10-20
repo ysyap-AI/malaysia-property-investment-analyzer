@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-18",
+  "status": "PASS",
+  "authorization": "Explicit owner approval in conversation",
+  "target": {
+    "container": "e95ce873b90725032affcffc801147d39945beb988ac33461deedd91d59b94c6",
+    "image": "sha256:6058a6759ab9268cff8ee70641d61f1bd75953316281b76427cf5a6b4db2eafc",
+    "volume": "supabase_db_mpia-phase2a01-implementation",
+    "volumeCreatedAt": "2026-10-16T14:23:02Z",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "user": "postgres",
+    "users": 0,
+    "socket": true,
+    "version": "17.11",
+    "database": "postgres",
+    "readOnly": "on"
+  },
+  "identity": {
+    "user": "supabase_admin",
+    "socket": true,
+    "database": "postgres",
+    "superuser": true
+  },
+  "installed": {
+    "owner": "supabase_admin",
+    "schema": "extensions",
+    "library": "POSTGIS=\"3.3.7 a0c7967\" [EXTENSION] PGSQL=\"170\" GEOS=\"3.14.1-CAPI-1.20.5\" PROJ=\"9.7.1\" LIBXML=\"2.15.1\" LIBJSON=\"0.18\" LIBPROTOBUF=\"1.5.2\" WAGYU=\"0.5.0 (Internal)\"",
+    "version": "3.3.7",
+    "srid4326": true
+  }
+}
