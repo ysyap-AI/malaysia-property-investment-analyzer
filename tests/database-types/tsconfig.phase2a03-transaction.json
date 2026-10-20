@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": { "strict": true, "types": ["node"] },
+  "include": [
+    "../../src/server/location/**/*.ts",
+    "../phase2a03/transaction-fake.ts",
+    "../phase2a03/transaction.test.ts",
+    "../phase2a03/redaction.test.ts"
+  ]
+}

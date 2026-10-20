@@ -1,0 +1,1562 @@
+{
+  "schemaVersion": 1,
+  "task": "Phase 2A-03 IMPLEMENT-02 I05 only",
+  "date": "2026-10-20",
+  "timezone": "Asia/Kuala_Lumpur",
+  "generatedAt": "2026-10-20T03:14:02.705Z",
+  "recommendation": "GO_FOR_DORMANT_I05_ACCEPTANCE_ONLY",
+  "runtimeRecommendation": "NO_GO",
+  "environment": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "node": "v24.18.0",
+    "git": "git version 2.55.0.windows.2",
+    "dependencies": {
+      "typescript": "5.9.3",
+      "vitest": "5.0.1",
+      "vite": "8.3.0",
+      "nitro": "3.0.260603-beta"
+    }
+  },
+  "baseline": {
+    "branch": "phase2-location-intelligence",
+    "head": "e000da794e44619f945597e83b004895e3854a71",
+    "indexDiff": "",
+    "trackedDiff": "",
+    "preStatus": "?? PHASE2A_02_GIT_CHECKPOINT_REPORT.md\n?? docs/PHASE2A_03_ARCHITECTURE_REVIEW.md\n?? docs/PHASE2A_03_DECISION_REGISTER.md\n?? docs/PHASE2A_03_IMPLEMENTATION_READINESS.md\n?? docs/PHASE2A_03_IMPLEMENT_01_CHECKLIST.md\n?? docs/PHASE2A_03_IMPLEMENT_01_REPORT.md\n?? docs/PHASE2A_03_INTERFACE_PROPOSAL.md\n?? docs/PHASE2A_03_TRANSACTION_DESIGN.md\n?? docs/phase2a03-implement01-results.json\n?? src/lib/location/canonical.ts\n?? src/lib/location/contracts.ts\n?? src/lib/location/errors.ts\n?? src/lib/location/primitives.ts\n?? src/lib/location/providers.ts\n?? src/lib/location/read-eligibility.ts\n?? tests/database-types/phase2a03.ts\n?? tests/database-types/tsconfig.phase2a03.json\n?? tests/phase2a03/canonical.test.ts\n?? tests/phase2a03/contracts.test.ts\n?? tests/phase2a03/fixtures.ts\n?? tests/phase2a03/primitives.test.ts\n?? tests/phase2a03/read-eligibility.test.ts\n",
+    "postStatus": "?? PHASE2A_02_GIT_CHECKPOINT_REPORT.md\n?? docs/PHASE2A_03_ARCHITECTURE_REVIEW.md\n?? docs/PHASE2A_03_DECISION_REGISTER.md\n?? docs/PHASE2A_03_IMPLEMENTATION_READINESS.md\n?? docs/PHASE2A_03_IMPLEMENT_01_CHECKLIST.md\n?? docs/PHASE2A_03_IMPLEMENT_01_REPORT.md\n?? docs/PHASE2A_03_IMPLEMENT_02_CHECKLIST.md\n?? docs/PHASE2A_03_IMPLEMENT_02_REPORT.md\n?? docs/PHASE2A_03_INTERFACE_PROPOSAL.md\n?? docs/PHASE2A_03_TRANSACTION_DESIGN.md\n?? docs/phase2a03-implement01-results.json\n?? docs/phase2a03-implement02-results.json\n?? src/lib/location/canonical.ts\n?? src/lib/location/contracts.ts\n?? src/lib/location/errors.ts\n?? src/lib/location/primitives.ts\n?? src/lib/location/providers.ts\n?? src/lib/location/read-eligibility.ts\n?? src/server/location/command-builder.server.ts\n?? src/server/location/diagnostics.server.ts\n?? src/server/location/ports.server.ts\n?? src/server/location/transaction.server.ts\n?? tests/database-types/phase2a03.ts\n?? tests/database-types/tsconfig.phase2a03-transaction.json\n?? tests/database-types/tsconfig.phase2a03.json\n?? tests/phase2a03/canonical.test.ts\n?? tests/phase2a03/contracts.test.ts\n?? tests/phase2a03/fixtures.ts\n?? tests/phase2a03/primitives.test.ts\n?? tests/phase2a03/read-eligibility.test.ts\n?? tests/phase2a03/redaction.test.ts\n?? tests/phase2a03/transaction-fake.ts\n?? tests/phase2a03/transaction.test.ts\n"
+  },
+  "implement01Reconciliation": {
+    "recordedManifestHashes": 381,
+    "externalJsonHash": "61755965d8122c7421bb4bc857922c1ea639ab31a6978447bec352f07ec2edb5",
+    "externalReceipt": ".phase2a03-implement01.local/final-validation.json",
+    "unexpectedUntracked": [],
+    "missing": [],
+    "mismatches": []
+  },
+  "preservation": {
+    "checked": 382,
+    "changed": [],
+    "missing": [],
+    "preexistingSha256": {
+      "PHASE2A_02_GIT_CHECKPOINT_REPORT.md": "742e3fcdee20922783221c0591e6c4a3ecd4d5522279a1b73b1fd0863cd7fe60",
+      "docs/PHASE2A_03_ARCHITECTURE_REVIEW.md": "63d8b2f3c7c18743c719745a8cb7517678287bef2d100dc741ec2ee882bec106",
+      "docs/PHASE2A_03_DECISION_REGISTER.md": "215b1ed7b5052b5a8d1d9a7e49d65da79e37aeebc5f51f8ffd3fad70b61733d4",
+      "docs/PHASE2A_03_IMPLEMENTATION_READINESS.md": "25783c1115abe091f7aec515a08ebefa26da5f018edfedab8270760ee87b7b94",
+      "docs/PHASE2A_03_IMPLEMENT_01_CHECKLIST.md": "c1de124f1e372051414da3048cefe6ef05ff59f9689b2c9522371434378a1c88",
+      "docs/PHASE2A_03_IMPLEMENT_01_REPORT.md": "0a1afbd8ef27606e29ca46c9e262694138515a81127b77b144213467ca9070b8",
+      "docs/PHASE2A_03_INTERFACE_PROPOSAL.md": "1ea22608c1a42b6725bc70a39071f4851cf76a73b8e0ca78be64bcdc1ffa034f",
+      "docs/PHASE2A_03_TRANSACTION_DESIGN.md": "8384bfd41f23e96de61f2042bf89b16abdcf0df12abfed4404014a7847b015fe",
+      "docs/phase2a03-implement01-results.json": "61755965d8122c7421bb4bc857922c1ea639ab31a6978447bec352f07ec2edb5",
+      "src/lib/location/canonical.ts": "d5dbbcc0ac0029481d8f4a584dd1e8f449c32bee8b795bf6bfdd6aac100decc0",
+      "src/lib/location/contracts.ts": "d84c2c053d513fdc9092eac7c28e4926cc9c221eda5a200ce13d5f9a053d5c2e",
+      "src/lib/location/errors.ts": "1b7437ec810f73c009d38410d18c80002bc4c8b78c1c53a0ceacf36780bb2943",
+      "src/lib/location/primitives.ts": "5f272ccec373840802448e0b3d08afc379b0e6e453d2c5e37ab5ffa47c45b029",
+      "src/lib/location/providers.ts": "10ad1019d180fa306c4088506570437c6363fef15e058eff697dd09d484184f4",
+      "src/lib/location/read-eligibility.ts": "51e7897b424ece3216c3b947830f8ad2aff86444b71c0f2445cfa870af47f136",
+      "tests/database-types/phase2a03.ts": "e8a595aae104b8c05f81787f1e8329ab1740a94d3d161596230d0dc2b22cfa7c",
+      "tests/database-types/tsconfig.phase2a03.json": "a721420f8194834e7e5388832377f07e1c822d6469c54f04c383d96e19bc4736",
+      "tests/phase2a03/canonical.test.ts": "fb7ea179b49def0d480b917322bd4e572a9212193ab0204b47944c1364eb59d9",
+      "tests/phase2a03/contracts.test.ts": "27e69bd023c81d3be9a0edcf18a7e17d8013b1150d70bc4785b609989717a331",
+      "tests/phase2a03/fixtures.ts": "e2558e0809c8ee021f3712f9068276227bcc45638f88cbd3fe644b1be82ed72a",
+      "tests/phase2a03/primitives.test.ts": "52322d06d1a49b79ec695d73b7abe22ea7d2813db730aee7a72690e9f43fc64a",
+      "tests/phase2a03/read-eligibility.test.ts": "ff10bf468ee10b424499153bea6be320fcf9a7cb329fa52e73c18ff9b019fe0d",
+      ".gitignore": "110d0f83af80a95f4dfc58010f4db86c9e67da73e6bf7902943414774b3b8fa2",
+      ".lovable/plan/switch-the-app-to-your-own-supabase-project-viddikrrhogcebpb-2026-09-20.md": "b84bbecb8c7dbf46d8b67b16faff9df4318176d4e29d48cdf35d74f0ded771c6",
+      ".lovable/project.json": "8e97f8220cac452d78fd1715cd7713a32da9f225fba6d419717bdc256a498258",
+      ".prettierignore": "a0ab34b9cd9654dc9e1c96d95d129fe6748eb530bfaf271761098a08d429470a",
+      ".prettierrc": "5d5a35a48e29a64d5238282be6e588318229f3b897ef088c369a76dee283f5d4",
+      "AGENTS.md": "f5b162a27132a2e9fc8a316e52fc98fcd407a0b6077221f92cdc991c417807bc",
+      "PROJECT_RULES.md": "509ce8fbb9fa332a5f50af5ef783367868e70b1afca90ceaab101c6237c4eaa2",
+      "README.md": "98c33ce28fb33979751b9ad9859caec67229b2ae940b14081f83366e13ff256b",
+      "acquisition-costs-schema.sql": "f9efb2ad1ab010506b8d2f7d3ef735178340414b610eff00a075100b1a73dee1",
+      "bun.lock": "b678764d4d1b188c581fff306301a9526c1ca39fce5d28377a4e37d991cf25b7",
+      "bunfig.toml": "3cd5dca91fe64781ccf8da435a0ed88f441347a5934c7222db520e663af20fcd",
+      "components.json": "4587d143275ee744003e8f9814dcc735c7fb8c56ea198db773fe2c27fdfcb53d",
+      "docs/MPIA_OWNER_SUPPLIED_Q1_Q8_SQL_RESULTS_COMPILED.md": "5258b0e5682a499fcaaf2666e4bbab78e96a5ccbb9df4355d623e052ad696def",
+      "docs/PHASE1_ARCHITECTURE_FREEZE.md": "9c37285e19e61ddd9231c555e76f31e5b394621066634ae5a1ad8c4ca2cd9b06",
+      "docs/PHASE2A_00B_DATABASE_VERIFICATION_REPORT.md": "1d5e57c0ecb37324d0482a8d5fc637a4b89e9b26101ea83dd4b4ca9283f46cad",
+      "docs/PHASE2A_00B_DECISION_REGISTER.md": "6908e4882d28779bdc822da0933553c42ba06ea6dd52139f756cc605b4025e31",
+      "docs/PHASE2A_00C_VERIFICATION_CLOSURE_REPORT.md": "d8bfdd8a4325918b27878612ca1c5719cc6b128f37e978d7741b7440d3aed4e6",
+      "docs/PHASE2A_01_FINAL_ACCEPTANCE_REPORT.md": "ee11bc7eec5b7d58e512ffc7a1299237ff172a0fbaa34a3262ecd4ea0f8f3933",
+      "docs/PHASE2A_01_FINAL_READINESS_REPORT.md": "2fb1161be6d432cbdfd377d50c79ecdf57bd9c39ab31bd8179df598375bd0ceb",
+      "docs/PHASE2A_01_FOUNDATION_SCHEMA_SPEC.md": "9cbfaf8e648de68244ca917adc0df484c55b89497f63038cbadb7c0929376804",
+      "docs/PHASE2A_01_GITHUB_SYNC_REPORT.md": "4aaf16d4a784cdd1436e97c4492ac10d4298704217b491bbf62e5684ff980678",
+      "docs/PHASE2A_01_GIT_CHECKPOINT_REPORT.md": "ed188e629454f632f3d55490590b7f22250818b17efdc9ed9085e160aa1a4a4a",
+      "docs/PHASE2A_01_IMPLEMENTATION_CHECKLIST.md": "4fb447ec06b0416027c2f46f43e30490670c9dceaed0944ea4c9a3a882e41d91",
+      "docs/PHASE2A_01_IMPLEMENTATION_REPORT.md": "bc2c3fd924a4503e587fd0f7ccc738e5052f96c9ef72079533d2dede2f52804b",
+      "docs/PHASE2A_01_TEST_SETUP_01B_SAFETY_REVIEW.md": "20b02a96827516ebcb0c8b71bd168e5922066305930f200ca1f9a47c20a1b2b1",
+      "docs/PHASE2A_01_TEST_SETUP_01_REPORT.md": "f3114eafb88714ffc3d275d54b19f9e462511391b1f09ecc8100a6a6ca7f3746",
+      "docs/PHASE2A_01_TEST_SETUP_02A_RECOVERY_RUNBOOK.md": "8223f8d7f0e07cb0841aeeb703bc20067212199c5692b994a61a968226e94cbc",
+      "docs/PHASE2A_01_TEST_SETUP_02A_ROOT_CAUSE_REVIEW.md": "8e3bd5d9be100bf83bafdcfb2ec2c98ccf9b8df19dcdf77e3e7a2da5e0cf2316",
+      "docs/PHASE2A_01_TEST_SETUP_02B_PREPARATION_REPORT.md": "672752c0d9f188fdd97713a2e6066f2debb96ef767aa1fcf001fc2c4d0a159b7",
+      "docs/PHASE2A_01_TEST_SETUP_02_RUNTIME_VERIFICATION_REPORT.md": "219d077f80d407cb04cdde39c7c1654a243537b30d736b3e3fa4c25a581ac79a",
+      "docs/PHASE2A_02_ARCHITECTURE_REVIEW.md": "504aa8f1620a8176babaf62b7b7e30adcb0e9514b1a2337d325b2b44f2903db1",
+      "docs/PHASE2A_02_DECISION_REGISTER.md": "148731607f2a1c142a1aec0d5b3895e416ce834a3afbe046382b3582da251915",
+      "docs/PHASE2A_02_FINAL_ACCEPTANCE_CHECKLIST.md": "e7d54bfa0b3f480b11ff775fe80a074842d6cdd5828976fd97f9f0b5826bc03a",
+      "docs/PHASE2A_02_FINAL_ACCEPTANCE_REPORT.md": "8248f6ddc96c8b36e6d51da10079819d2aabe99d5d8f38833f73533b1ed4aadc",
+      "docs/PHASE2A_02_IMPLEMENTATION_CHECKLIST.md": "3e678fa30f538c8f0a396246761f8af724befcf26875424b0030c4eb0030eea0",
+      "docs/PHASE2A_02_IMPLEMENTATION_READINESS.md": "2bc55499c8caa49981a9ec06feac3d3af1aaf4654ab7cd7078ae8496d283dd25",
+      "docs/PHASE2A_02_IMPLEMENTATION_REPORT.md": "1d2762bfb585248315c5ab2f9bb315d0b5678264f790d15167ddf558d8b1d1ab",
+      "docs/PHASE2A_02_SCHEMA_PROPOSAL.md": "b572f0392da82ff91d8ecb1acc20403d993eda15b76807f0eea17e027dd30ca8",
+      "docs/PHASE2A_02_TEST_HARNESS_REPAIR_REPORT.md": "f5d7fb194cea3a61364d91feebd62848502c78dd8a65dcf3788ad22fdee6712d",
+      "docs/PHASE2A_02_TRANSACTION_CLOSURE_01_REPORT.md": "a6aa9d68485266b02f51383892e563a6f3f7b13a19a255b9149fe2278ba53870",
+      "docs/PHASE2A_02_TRANSACTION_CLOSURE_REPORT.md": "2badbb96b8f262c79ba8ba5241e3755c037cb2ef8660e1635006e1f2e0f4f4ba",
+      "docs/PHASE2_ARCHITECTURE_PLAN.md": "a46064abcc76a901ac48e7cb9824d89786597f7f28395b5710d1b3aed44c2f58",
+      "docs/RELEASE_NOTES_v0.1_PHASE1.md": "28a6ec11140737f4a01cc7e17b2cf3e22b862010641222aa9bb79bfdae2492a7",
+      "docs/financial-engine-audit.md": "bc8e859b15eaa2a286da51bf1ce5a034524f6acbcda7709b2db489cc664de6a7",
+      "docs/financial-engine-before.json": "2b70ddc43cf6a2cfa9890312a4e9cf5f15af32db2cd1e0d4a7e5770714ea3c7e",
+      "docs/financial-engine-results.json": "49918db24346a184877cb456fc1cb19499ceb5615a3158365fb384f6e1912712",
+      "docs/financial-engine-tests.json": "354d29508486900571fe70183a0b42913efd9ebb75f55242d718858ba28f6080",
+      "docs/financial-engine.patch": "c00a2163ecbd335d61a8f77a8a8e787dc59f824c41a8c705b687f811cbf0c802",
+      "docs/financing-math.patch": "7e1bbb93cc43d18afc9c8f8da6a764ca42633f0201f7f710bafdf3d736e31eef",
+      "docs/financing-mathematical-audit.md": "13c06eacd970c5297ca84b1e48ee57cbc1e53ee131e418c4d0410ba222f02cbd",
+      "docs/implementation-audit-results.json": "4c099df49e32bb4bf3989fd9c2278da4fc15d302a534eee6d59f0835d5a60ba8",
+      "docs/implementation-audit.md": "db85ce5be70108834d96612e6534ef15e8df89c51662980130f6750882a4d327",
+      "docs/phase-1-architecture.md": "b7476ce5b761c7d4563c3b791e45d655014eaf88161c5d6026dea4f8f1d8684a",
+      "docs/phase-1-baseline-tests.json": "6277219b51dca928d820762515357856b4d6fce896ef0a85f9ba8d81951c5b81",
+      "docs/phase-1-database-results.json": "ddf8a80200a03a1a727b27d5f255382e481207c0f95f8002bc3457cd57758834",
+      "docs/phase-1-database-types.md": "b4c459c5b1a19af74e2fd8ce269039fcf9661f049f8824e9bd12e6657a097f89",
+      "docs/phase-1-engine-fixes-tests.json": "3c18e8dded06f615cc852e290153638869251cc6c30c0581c16515c45326eee4",
+      "docs/phase-1-engine-fixes.md": "3f53f35a5670636ee0532b518fbf19814986dd24ab03fd927f7ec1e9bd3ffa18",
+      "docs/phase-1-engineering-audit.md": "a43f65c05de553a0d44795c2c63dcd7af7ee7584a885d8bbefb90fe155877200",
+      "docs/phase-1-f7-validation-tests.json": "a2e29f6f6b718b8abcb691cce5b8baba3eca681ffa0804cc066cb9dd76f6cfab",
+      "docs/phase-1-f7-validation.md": "6e4a63445c77f4a69e058de7a57c75c130dd18a737b8dd5e6c6542a85b1ea276",
+      "docs/phase-1-final-acceptance-build.txt": "a2adf7a5737a24b75c9f11fdd7946b6396b19ea5f155b62692883f4ba221d177",
+      "docs/phase-1-final-acceptance-database.txt": "e9414b9a14c348f00245e50e99779a8cdb064f04f140225a352a357ee1244457",
+      "docs/phase-1-final-acceptance-security.txt": "ea723a7e03eb2e31e7fe70f20db61672020760357e865ece4c8fe4838208c80b",
+      "docs/phase-1-final-acceptance-tests.json": "7aaa7449d6b8ec22e60b4ce2077f092d059b5e5e2fd797f9b5370f7790524b93",
+      "docs/phase-1-final-acceptance-typescript.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "docs/phase-1-final-engine-acceptance-report.md": "f1beb05d53031018d9a7fade1ebb1484a3d67c01bd1b32a268b9da5ca0819905",
+      "docs/phase-1-focused-baseline-tests.json": "5580a27b0b2b973d3cbd4aa09e029074deba73df256326fd0a3a0afb9cf8279f",
+      "docs/phase-1-focused-engine-audit.md": "ebb1b7cd6c6ca4fa9db161085f2c3c40c2e1a8d198e5afa9c12dad8fe24a05ad",
+      "docs/phase-1-focused-engine-reaudit.md": "37736bc0e952a21312387bf6a5d177edc6960ab7a55188de78a3e2f9fd34b10e",
+      "docs/phase-1-focused-reaudit-baseline-tests.json": "a05ce25a1a664d74b38b39b861fe90805c4a1e93aacdc36ab31ea72b07830eac",
+      "docs/phase-1-focused-reaudit-build.txt": "5af13ac46ded7b0d890192427918eb6d45d2b8b770f87156a63fbe5588d94071",
+      "docs/phase-1-focused-reaudit-database.txt": "3fb6d26957f57e8790b3f52bb52532dfa0f51cee95923b72564dd9ba99e87ce7",
+      "docs/phase-1-focused-reaudit-security.txt": "647dd59613563e7a3335f4e7e5ff78d701c519f4763c9773556701c8b75e38b8",
+      "docs/phase-1-focused-reaudit-tests.json": "3575585deda435e45547b11276adf416fa9c5878517f3117627f6e8d8ec0a082",
+      "docs/phase-1-focused-reaudit-typescript.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "docs/phase-1-focused-tests.json": "27c40c21a86184dcc505d688a36e11b25fb5e4e45d2b9eaf5ab4479eeeb51d70",
+      "docs/phase-1-independent-reaudit-tests.json": "993021d4ccc0f04d65f61b9429250dc867a0131f25afa63146be3f74788b73a5",
+      "docs/phase-1-ownership-results.txt": "7ea50e1fe3576f8a1b79e39a2fe9bdec9f84de0b6f468354c74001c5182e0199",
+      "docs/phase-1-pre-dashboard-build.txt": "e141d169ddb8162ff91c2082a7fc4ca7e090070e01f1761d79a9dc3a4ae78294",
+      "docs/phase-1-pre-dashboard-engineering-audit.md": "6f04d775d4775f7a5f13516c73b8e1ff5726b1210cbf640e6c9b98034adb4c85",
+      "docs/phase-1-pre-dashboard-reproduction.json": "84fbc6d39132273da2ac28d028f915848362b7122db30e915cf416d2bad87854",
+      "docs/phase-1-pre-dashboard-security.txt": "3da0b08509d10d1287f3b8998de2dc5675721372ef36512c71a3b3142750a365",
+      "docs/phase-1-pre-dashboard-tests.json": "c70d49a3d67ecd7169de7681a1726d3a8bda8886d281f2141ea3942856e2bec1",
+      "docs/phase-1-pre-dashboard-typescript.txt": "6aa724309b712ac31347589e2d4cb5588762fb349b86aa7de08475446fa1534d",
+      "docs/phase-1-release-audit-results.json": "6843a8c8d0dbf527e28f583e259acd691acf51c5ff1a52ee36743bddec0b958c",
+      "docs/phase-1-release-audit.md": "0a644bc370ddd6b420f1a1529f2f9e813d026c6d5d0b9d89b02d604f932cd2e9",
+      "docs/phase-1-release-checkpoint.md": "43531b0cea824bbb476590613f83ca48fc09fe4d0507de98a3680ed2bc1428b0",
+      "docs/phase-1-tests.json": "d39bdaf3012fabe761eda9c5afcb7750703bd400dc15f3bd01fcc7871db6e4d7",
+      "docs/phase2a01-database-results.json": "73e894f5b815b64e12368ebd03f02c8b7c03d9b092eae034714de106b86a725f",
+      "docs/phase2a01-final-verification.json": "5eb84aaf768347d0aff6bac1b7eb1cb3155cce35446b41055de529a69ff48f90",
+      "docs/phase2a01-fixture-comparison.json": "092e50536f3ec13dba039165e58e7f641cbabc356067df787b4c944de776ee30",
+      "docs/phase2a01-phase1-database-results.json": "eadf14a8dd561b2fa0e62a0992499c1e3b42babd04e1e1dcbaea50da003d4112",
+      "docs/phase2a01-phase1-ownership-results.txt": "a930563280c2472271d60d1b69d083144983d96fd49c6ece4418ce881ced33ab",
+      "docs/phase2a01-quality-followup-results.json": "194e2330bbf02db00f78ecaea01c873373b3b22b1a3afdc68c448d2dd9df4fe3",
+      "docs/phase2a01-schema-verification.json": "7a95560a9596978ab020977c5e2ad665737b5c9877957646a41ce0c0d4000076",
+      "docs/phase2a01-type-generation.json": "46de460a63577bbdb7f3339d921d0793129323e7c28e0ee40f64b423b55a1a0f",
+      "docs/phase2a02-commit-results.json": "679122a55dc0fc068c085d5e45d6eaffba7f111277869d989cd38866877f7555",
+      "docs/phase2a02-database-results.json": "9d2daba355bc32c2d1cddb31360e5d5e3d9d459a02529f22f56d111392fafeb3",
+      "docs/phase2a02-final-verification.json": "047dbeb17aaf75763aab7cba3ac99b677b87a39fd8e66e8a71786f8179df17d4",
+      "docs/phase2a02-fixture-comparison.json": "ea83278d79b64f58a64fa89b0f37e7d9b16161b0735bf9cdf194cfa59242717d",
+      "docs/phase2a02-foundation-regression-results.json": "10827f93e7ded5a4a216fe1075977011e7ff4a28c7126129071f38eb3fe1d86e",
+      "docs/phase2a02-harness-safety-results.json": "a63b4459c4d6df05e0637fd77aa8dce4b65cd220e8dc800865ccae0d5b8ef1f4",
+      "docs/phase2a02-installation-results.json": "e1ec19f4358cae279ec04809dff48a9cd46100d1dc9d6d64f3069234165cc19e",
+      "docs/phase2a02-postgis-installation.json": "3b04575951017f6f16d0cee50f870cd34f856e3624cea49263b296eeafddac71",
+      "docs/phase2a02-prerequisite-results.json": "b4d7926cbcf78e683782836d14194a5c4825be386bbe9a4eb0cb869fd1353885",
+      "docs/phase2a02-regression-results.json": "fbc0d7e27dd6a7ff4299cdc3670b763cf728f0c9e176b3863845e39afd08f092",
+      "docs/phase2a02-schema-verification.json": "b7e4446cc0e21e30b8393f2b781df808c1093f6471a6d070cc295fd86986497c",
+      "docs/phase2a02-test-closure-git-results.json": "d2524d772482ca894c23de667350a826a6e0a0170965d56326065fafe22a9402",
+      "docs/phase2a02-test-closure-regression-results.json": "3cadac6b66534143ffbfec14f41de562a7d11bdcad74ae31f21fa56e3d87f5dd",
+      "docs/phase2a02-test-inventory.json": "978bb0c2464bdb7a318148e22aff06ea44f808f768a2381305099fe7aac5ecc1",
+      "docs/phase2a02-transaction-attempt-history.json": "d6107a1d93baac36aa22df097bdfe55852057347ce2bde7e0fb82415c68c640f",
+      "docs/phase2a02-transaction-results-closure-01.json": "f238bc14c13fe30406a19f7addd53f149aa2fa492641d2eaf91cbec22ac6c08c",
+      "docs/phase2a02-transaction-results.json": "5e2560274c96902536a0fd8aa547aec914de3c54a36d51483078df47d4b3173c",
+      "docs/phase2a02-type-generation.json": "073b73692bd2c4d297e09903d0548ad00aa6942a8fb23f249775eaa5c087c7a1",
+      "docs/phase2a02-user-postgis-results.json": "c3d1661bb5250d12d964640e90f468164a14013253acdf3ab120e7750786a21e",
+      "docs/phase2a02-verification-manifest.json": "f7b6480d78ee24df9f5eea1cebf350e1052c15c25405d4ceffa7480222320531",
+      "docs/property-cost-integrity.patch": "1e14f9af3e14594c539e50aededc050bf7792027a4eedf916a2fa3af1968f414",
+      "docs/scenario-engine-audit.md": "dbb11ae6f22800ca6739845682eeb4c956533d10a6bc420c003663edc930504f",
+      "docs/security-audit-results-20260921.json": "2f92f8435b1caac6ddc4ed90aa86b2af03d3898e033db4f1c90759e6807ef538",
+      "docs/security-audit-results.json": "0832530be6d93c3a0c9b617308e8739a63b6043a034223d59c32f85a5fa7b5ea",
+      "docs/security-audit.md": "0d5581ffdd58eb267753364b365d18583e8e2c747c66cf12b55c37f7ef395d5d",
+      "docs/supabase-configuration-repair.md": "83ab08fe5a0300298c62e8a2f1d047d5e6ad4755cf5c6cef8475dfc03e70f617",
+      "docs/supabase-deployment-preflight-data.sql": "48eaf97af6abd408d967c0ae8253828caffd1f6aabc02e7080e8fd3467186f98",
+      "docs/supabase-deployment-preflight-evidence.json": "09bb707aaa63bed806341b6e07af7ad5f3f497da2c550ea72bc9fb310ae2afd3",
+      "docs/supabase-deployment-preflight-metadata.sql": "85b45a5f1ab767bd298dbf2ff58468cb94cdde3f9243c8ab2d6320f02e4a568b",
+      "docs/supabase-deployment-preflight.md": "79eb814728a1f479e7daabccbd7e61bdcfebb0e95dde17ad765f13b0f17fba36",
+      "docs/supabase-deployment-results.json": "7836fd1be79371d74ec549463c9ef32fa512e80e4ec9dfff30a2e2a15837f74f",
+      "docs/supabase-deployment-results.md": "7f028c07ff5d9f5caec154c045b41882de8105e8f7df4a7e96dec2663d7ad11e",
+      "eslint.config.js": "8dc219908ac50e457ad084979ce5396fe288343a856f6b6be9f56d175baf4825",
+      "financing-schema.sql": "8340afff9c84557c8a92a572d1076a3335edf606ce96033e1d413c6ed408e9bf",
+      "operating-expenses-schema.sql": "59ed298fb8f62713c82cebdbf6d1a0ddce2afb28d77f30213190c9ae80ae1356",
+      "package.json": "295d8050332da19c85980694750151d2e8ecb5cfb3bd07124db860b4a3d21f69",
+      "public/favicon.ico": "dd821076a9b03adc2173c93956226aea3d92482d7578fc4339c5d3a2e9c24586",
+      "public/robots.txt": "52710c261d851bc1ad35604017862f2a8444e7a0f02cd7b8b49e3ba92e6d4cea",
+      "src/components/common/MetricCard.tsx": "3b5ad1a8a125c13f31b553b5fe839f475712d1c140b113c492985760184c775f",
+      "src/components/common/PlaceholderSection.tsx": "4a99aaa7f9b87d78653079a72d5161ae757f0cfd906113f64b121bf095ff5182",
+      "src/components/common/StatusBadge.tsx": "4b62ab0da9915ad2effa36b81ce4fb19a7634c4a45e14665459e9b3e6a741d91",
+      "src/components/layout/AppShell.tsx": "65f21bfc862172d0eb60fcbeec9af25e1fb972826b992a60672082038a791c18",
+      "src/components/layout/AuthLayout.tsx": "039a602434e677660355d620163d2d444824c890d231be0a6dfbdafd589aeb37",
+      "src/components/property/AcquisitionCostsPanel.tsx": "3c711d6dcf7a5866a318a0f7b986ad9e04e448142d1e2ce161c5007ac4e292b6",
+      "src/components/property/DeletePropertyDialog.tsx": "af70266c984e29d25c072ad5d5773ef876df5ffbbb1698b68590c6d0ed761eb6",
+      "src/components/property/FinancingPanel.tsx": "72b25dec38d8360e547e6199916cbb97d74cfe2f14e7246ad2f9460e055a8c30",
+      "src/components/property/OperatingExpensesPanel.tsx": "01743d3d19685e6907ce5a06f356a31ad8ad13e18317b9c4d5b501cf9cf008ae",
+      "src/components/property/PropertiesTable.tsx": "81c53b899160f1ef66807152ff4e003c7496fe0707d4efafa25238a163a9b192",
+      "src/components/property/PropertyForm.tsx": "0dfa370de66ae4d46e98422cbd4909b908cdd2a4e7370e34dc931254f4dafd9c",
+      "src/components/property/PropertyStatusBadge.tsx": "3cfb4311bd4ae97779175b8f8d033801f417a34b3210564b6b80e78f3c1e0054",
+      "src/components/property/PropertySummaryDashboard.tsx": "3f5e3d5e400cf147b316d85a2de6f706ee1e743914e75ee72e52780768820eb9",
+      "src/components/property/RedFlagsPanel.tsx": "28fc58433e17652662e416bbd49cb990b5463ec5163dca8700627cd0af331c2d",
+      "src/components/property/ScenariosPanel.tsx": "d632f767bc9c5a07bc3267671c1f8914555ac2e752d78ac954ac49d719fe80f6",
+      "src/components/property/ScoresPanel.tsx": "eef19329229aee05e69b3fae10b589993fb454b30612c60f4c2784afd2114c32",
+      "src/components/ui/accordion.tsx": "0de02bb71ec1739e64a2fc2af0848458f204490719bad8e51c3fbe2bcb31d3a8",
+      "src/components/ui/alert-dialog.tsx": "7b92eace677b37b106e83baeebc3be6ef396ed7ebce0b20967990ddb83271549",
+      "src/components/ui/alert.tsx": "aef6ee0b3672f312e6906461273d8135f11f0f56e2f9b115d92262b7946dd6f9",
+      "src/components/ui/aspect-ratio.tsx": "67c60b91df6dc9fc729390742b04c02d40c19f51f7a2d4f79110911a061266bb",
+      "src/components/ui/avatar.tsx": "a2077be3cb2702c55b3ff024e28a2d19e426bb5827e366d03a6bf756dbf8221c",
+      "src/components/ui/badge.tsx": "c57030b62760166ab4c3a36a220a45c7699d375f10671dbd54d8156fec04fd1c",
+      "src/components/ui/breadcrumb.tsx": "d70a97e46e4d0846be2d22b546632e55ab3335a3c82804c0160b45a7abdc760d",
+      "src/components/ui/button.tsx": "2c8aae724f8effc35a91f833f9c0e8dee010f5cb0b8698441001dac93e8811bf",
+      "src/components/ui/calendar.tsx": "ddb9eac5ba02b90c81e14baf906fa50dd6e8ae0e1367c4df0ff8f77e7a4bb6fe",
+      "src/components/ui/card.tsx": "c6e182e038df4994615be337e682910a3835594f12d7bf61ab0909e6518477b2",
+      "src/components/ui/carousel.tsx": "bdf6f1be424fa2d49cf82d09b219d6613d6bc83340df1105d88ddc328034ede2",
+      "src/components/ui/chart.tsx": "d816f293d915c86968a16100f50df23fc20f9cd0bc6f5a1e8fcadea50a1d58f0",
+      "src/components/ui/checkbox.tsx": "d2c880d1a7de1633a5eb6f4d09977f203d737de24fe3d7e8ba959b851fd18145",
+      "src/components/ui/collapsible.tsx": "0be1d5082be6ce6a06e0f67accb38ef50e981f111187e3954d0a1bca062f52e1",
+      "src/components/ui/command.tsx": "5f15a9b4aeec3f848264322c65798e92f9af0cb3777ca075796bdfce56deaf54",
+      "src/components/ui/context-menu.tsx": "aa47df69152c464a586878b1f35cc19442c4d3778eb58cc3e1d6fa9ba79df9b4",
+      "src/components/ui/dialog.tsx": "a5b691c73830e0eab35b93a0ff08703cf7b1dd42a7acd435f1a4ebb9a2e232e9",
+      "src/components/ui/drawer.tsx": "096c508d4ebbe9ed00647588e8077cd65970938b773c0e1d252723b903bd620e",
+      "src/components/ui/dropdown-menu.tsx": "15f01555648d666df9e3f6ddc7474e85c815624d765adaf166e66329e69991d4",
+      "src/components/ui/form.tsx": "e4da338bd60483f6facadf68cd22eac13bd1ae5f6417d6142f14930a614fc334",
+      "src/components/ui/hover-card.tsx": "989e3074c71555f2f3a1e8ba3ff23652309dc44bef9ce17705d241aa1ccf5e2f",
+      "src/components/ui/input-otp.tsx": "9fff71c84c444efe593891c0323cac7c4b3b59e58d02e32db1006f19b5f902c3",
+      "src/components/ui/input.tsx": "4ee1c239851691038ddef07a1cac8f3d348a35ff5816ecc296d20c9803b1c3de",
+      "src/components/ui/label.tsx": "c33a02e76ac4dfd8e328026ca068ec184aae5b00dc454955865edf5f90f403e0",
+      "src/components/ui/menubar.tsx": "522d76827b02db048a67d991bce2975c734f295a062b13c77bc699e1f7154c76",
+      "src/components/ui/navigation-menu.tsx": "e9cc8001c5444e4bca8abcaff2f9ed5e27fe40201127f6c170d149462c313362",
+      "src/components/ui/pagination.tsx": "4ddeedce9ba3119fd105649f27502cdadd036966323c4cfb6bd6686656e7ddf8",
+      "src/components/ui/popover.tsx": "5b57bee5769e87ab533a8326c6a25fc1940b5a8fbe1c5276f25ba89615cc7030",
+      "src/components/ui/progress.tsx": "61646ebf88d17e251bafd69784b40af978e4a5e8311a5651288b203410a9b107",
+      "src/components/ui/radio-group.tsx": "2e71f118a77c7adf6c5cc35923576632d0db62c1db4a4aa2b16acad7a841a43d",
+      "src/components/ui/resizable.tsx": "3c3fdec6f7cca80a152bc861a313758bf28703170cdd322ce4ec9da5f0b67a2f",
+      "src/components/ui/scroll-area.tsx": "c9f69c09fada3c8653fb4122988a43f6bf49a0b71e8be5ffeeca94e0d87ca266",
+      "src/components/ui/select.tsx": "27b85948433560e1d1792037dafac2fa4d0dc38e72977464271ceae1bac60a1d",
+      "src/components/ui/separator.tsx": "0f833b4b3a11bdb561f10b704902cb1533d2119bb0c2c7b81fbb47955b621224",
+      "src/components/ui/sheet.tsx": "b78b82c5e0e83ac972ae96ff489ed1d5c0ae792c77c9cec67d201f0c76d3b098",
+      "src/components/ui/sidebar.tsx": "09b6531101dd8ed24570c565e485b66b9749c49d903939c7d2780879a369c1f2",
+      "src/components/ui/skeleton.tsx": "020954b8c6a47e7584eefee6af278bf8ce482b8152585b70052cf196b6fd79a5",
+      "src/components/ui/slider.tsx": "5ee4156c0e9a0bfb12fbbdd80a881e5b957e4e4801e7c9082b5d6f7062a7dbbf",
+      "src/components/ui/sonner.tsx": "be303e32fe6688cdf44ba42466aed162d4d6341eb279317d1fbeb3b4ae4cbe8b",
+      "src/components/ui/switch.tsx": "194d3554933df8573ef1bf84584e1acb9b255f55e73b24b2076c36cca116c5e6",
+      "src/components/ui/table.tsx": "14849bacd517394129565a2736f367a2dc218dee044e9dbc4c37ede9ae56e22b",
+      "src/components/ui/tabs.tsx": "a33395479355fc3cb0127e8731359830ceb29cb137b4090b65a8a9818c2a093d",
+      "src/components/ui/textarea.tsx": "5af8d497b7b1c4f77399bf5b9f1861230d9950d0c2c5fe1bdbf8b3bdb6eab1e0",
+      "src/components/ui/toggle-group.tsx": "868ca1dc957db5b9eb0b8784c170a5dc39e880234747e127a690bfd6628bcb53",
+      "src/components/ui/toggle.tsx": "537f16e684e49fe17451d7cab1b7dbf60a594a4f7698b84277fe374f3aca1f59",
+      "src/components/ui/tooltip.tsx": "657bfcea60e04adf0d5385ae4aabede6158b718206c4b8a91452a728acb9ad00",
+      "src/config/README.md": "692db87d44759976a29ca96e4932fb75f270561c4d7d75d677ba13543f06f31b",
+      "src/config/confidence.ts": "df1fb890bd6d4ced2d3a0524940f23634cd1701656a3078fdfe85b59e7458795",
+      "src/config/recommendation.ts": "2de8750e77e3256dbb81ad2c9eab0856e0b434d17bd9b47ee4cfcb552d5071d8",
+      "src/config/red-flags.ts": "9ee2fa4f405c817661ac857e3640adad85035c3bab39029fa26b880e3e8175d2",
+      "src/config/scenarios.ts": "5e9886699ab26aa30ad02ee1e7e6844176ccbec07bf73585a8b638a9804bea43",
+      "src/config/scoring.ts": "1543168bf0a1e429ab5bcec0edd3adca36d4c8fb88ba6dd8a9e702bad38cf60a",
+      "src/hooks/use-auth.ts": "ceb47b07d7a1e323fe84155729a71a77ee0cfdc77af0afa8f9efae808d6abe39",
+      "src/hooks/use-mobile.tsx": "f6f7a7643d4607721c57e2b8c4081a8f84aefbb0a240f4b9dd1fc20d8d7a61e6",
+      "src/hooks/use-property-analysis.ts": "6f77457d6f13603e129829196800360e3d65420c4b4f60bba80b25a746efa875",
+      "src/integrations/supabase/auth-attacher.ts": "6179e11cc21695eb66f712351561a368a4b8cbf2b593b67425200a84ae8eb98b",
+      "src/integrations/supabase/auth-middleware.ts": "9f12d625913590b7d9e22ba5f35ef9576c5213e140b0007bafb4053785800e22",
+      "src/integrations/supabase/client.server.ts": "5962ea2fc4c3e41040defdccb21c7c6fd37ac633bbbbe5993df0e49bcfec3756",
+      "src/integrations/supabase/client.ts": "050a436c96265fd699ba573218e8d596e3700ce2f759da6c57116bf0de447130",
+      "src/integrations/supabase/cron-auth.ts": "51d0cbae889c6a0091d1861d47c064689a908f3951390396affbd1a0fbca95e2",
+      "src/integrations/supabase/external-client.ts": "4ad4066ebac064db8baa40077a957a898d3aed9b6ca3eea05c0b1e864a8d81c6",
+      "src/integrations/supabase/external-config.ts": "fddd31b23a7eef2d68e1b697e5dde3f8a8a0a1d83e5a5e9fd51e8a7f754dddb9",
+      "src/integrations/supabase/previewAuthStorage.ts": "4df0b0a49878c3948da6eb2f96ed55c96350c8c1fe053f4dec2772be7b786b9b",
+      "src/integrations/supabase/types.ts": "ffcbec32309a369926843a99ec2b1a65ad8cf0ee500b43eee982ec105ae55347",
+      "src/lib/auth-isolation.ts": "b11846329573415f679791171bdb31b40df01539e5b63267c2ea787dae602c81",
+      "src/lib/error-capture.ts": "a590666534b54955f12909cb9abcfc7793750e3b52408b26518e93cdd8289709",
+      "src/lib/error-page.ts": "b070f0586e5d17c818700024c9dff021b7e7ffb40cd8e7f7e7bc19ea82efd1b5",
+      "src/lib/finance/README.md": "ea3939eb93382ba860ab970238b11db83738749a0680f2cbda8f49d1a12b854a",
+      "src/lib/finance/acquisition.ts": "310832f2d76cc60ce2bb01d7246cfbba365711b1089ac0a3b0de56b1d7a771e8",
+      "src/lib/finance/financing.ts": "b1ae31b08b38f9c3c0079f608090a1c4495ee6642cf968e837cedaed4d3c8273",
+      "src/lib/finance/operating-expenses.ts": "f81eccc66dddb3d86f79f7560b15d8499ada8707cccd1a7c234d5f496f1ca3f1",
+      "src/lib/finance/returns.ts": "c37c646da802a534553ffbee66bd4c94b3845c231c66f85c2300116e27d14bc4",
+      "src/lib/finance/rounding.ts": "c1721ae6f751aece7ea34401736e97623d071a63c4f2bdd97858fd945c4e38c5",
+      "src/lib/lovable-error-reporting.ts": "87f9bd3d169f0814e751fd6a3c5911f049ca23e962007877d9e7240565fa45a7",
+      "src/lib/phase1-validation.ts": "3804943d8defa243b55c4c71777ff0177558746e77bf24c974a8829c17fc2cd9",
+      "src/lib/property/acquisition-api.ts": "86bd12e10b95124a850111f60982184715b40218be134e8ec9416774619e49e1",
+      "src/lib/property/acquisition-fields.ts": "3ea403deadbf00e8ca174c24bccacd0e49da9331c30dad0823cc2f135ce0decd",
+      "src/lib/property/financing-api.ts": "0d5da30239a11547a35b1cba43296b983c844ea93fca776f603c1b16956d7871",
+      "src/lib/property/financing-fields.ts": "63d63f260160f24d2b42ec45c45a40d3698a1146c1c003cebf1c4112996201d6",
+      "src/lib/property/operating-expense-fields.ts": "07b2bd515774dc7dc25d038abe15aac6aa39c7dce791e03d44759f9f3cab16bb",
+      "src/lib/property/operating-expenses-api.ts": "90ec94dbab7b81b43859c2b21a91e5bdd11dc8aff8b85d4deeffbfc5a8e9e57d",
+      "src/lib/property/property-api.ts": "86afde9084526ed6d8c3f442fc4c1cbd752a2dd68d9bda66dcdd0c903f5c7b6c",
+      "src/lib/property/property-fields.ts": "fe89119db00655b8261a151e884594e629b1d960c41110f9c9118db96d3a18dd",
+      "src/lib/recommendations/README.md": "bd166694f0481220ce2ab5f6aa173b4b2948f85320851209585c150325341544",
+      "src/lib/recommendations/recommendation.ts": "985bd05fe06a8b44ff47e55f06c0c3b0c4a3e7f3df9aec0f95a04846982bd08b",
+      "src/lib/risk/red-flags.ts": "f985ffdab7b0c7dc5fb9a3bad59e8bd6a7c0b40cc339ac9507dc1cec76009683",
+      "src/lib/scenarios/scenario-engine.ts": "569302a742614b4b4cc7b76f90c45d738df2123954cd6873da907acb23cf1f2e",
+      "src/lib/scoring/README.md": "c4d06625438daa6cb48af102bd29c5cb9ea2cb131c53ad05b9d94a5da0a208c2",
+      "src/lib/scoring/band-validation.ts": "ada886f5f04dcce04ab32a98586f4967a3ca4a314192955ee93d1c2a41b77aaf",
+      "src/lib/scoring/data-confidence.ts": "bec163dc153024c3eacf488d9f96c5ba5a9ad38d1fa372900a57cc99b4bb1454",
+      "src/lib/scoring/investment-score.ts": "297982557fc078c11638fb17ecde04adf19ce7060964b30b42d959dbdf350670",
+      "src/lib/utils.ts": "c0adf27efbfa148d5abcf99e860f8e3e6c8fc77a1f99e023c08ef4f12e6ece29",
+      "src/routeTree.gen.ts": "762a852e65d2647eb787112c53b2a7eb399e9f97d8a57e32006da11c90b44337",
+      "src/router.tsx": "7e3481892de4073ba86e9a6c3a52f1cc6c0d8ab8668df1b14a3ce9f7658edc4a",
+      "src/routes/README.md": "73feb3fc6b8f1e203baef0a8cc6199530846f459e670943ae2fbb481b0bffb12",
+      "src/routes/__root.tsx": "cf525d94c9a0ff9afaa695065e25ad850dfa491bc5cd7ac4fef2970c8e8de66b",
+      "src/routes/_authenticated/dashboard.tsx": "dafb3f2f4bd98289849ebdcf63a3ba551c1985ee00623f9cf9ee5e895e8c3b9d",
+      "src/routes/_authenticated/profile.tsx": "5657c4fd159bd4afd634f4ad9cbd5f6e7044a5de3140981fe64347929cd194cf",
+      "src/routes/_authenticated/properties/$id.edit.tsx": "f77055b805534cf77ac122f4d4988ad30fa249338f354c1bde11c5ca0a414240",
+      "src/routes/_authenticated/properties/$id.index.tsx": "d40f405b14aa38c8e1b3993a63e5f258cd5a0f0d3fffb249785a816afee96e1d",
+      "src/routes/_authenticated/properties/index.tsx": "6e3d4f53c841cb5f2e4bc97b6508b4afecd2803a4366aaea699caea4d3663efb",
+      "src/routes/_authenticated/properties/new.tsx": "cf3f3cb16576eca9f41fb445bc7f1a6b57586b017932256544cda6a6c6b97cc9",
+      "src/routes/_authenticated/route.tsx": "f2b27f8d929641c7a7976fc129e58eb269418c9b4ab11715e459f3e58687b1e5",
+      "src/routes/_authenticated/settings.tsx": "0bf5731c448bbb62d7d4a3b7a92018f809737bbfd8704152d5b851be057f3b03",
+      "src/routes/forgot-password.tsx": "8c4dc4eb4d073f36587c080266415d9753c7ca5058305e3c0d2fb13b18703ada",
+      "src/routes/index.tsx": "ed7dcbd1da2fdc41d99bb5483829d4d7e391de1b7eed35cd4b1fcec2958dae09",
+      "src/routes/login.tsx": "23abffbf3214c62e8b40d5531d2a3018c72b76b5237fdb73571e1d7217a82313",
+      "src/routes/reset-password.tsx": "78cc54200f36bbd567c59f18a6d6b31575ca98fa3d0de45eef0656818cb61e5e",
+      "src/routes/signup.tsx": "39c5afc264f0cda49836c73e4ff8843eb155bf67ee1b534f531eb3a62ae472e4",
+      "src/server.ts": "4200dda605d3af5b6ba95e79022fdd40d3075cb39ee0d8bacd769ec2312baa92",
+      "src/start.ts": "b12784e243f6984fbb080d1be0eee9446eadf6c3876105a15b2a85865c831585",
+      "src/styles.css": "09844223532fc0bb206c60225fd07322daf2bb1644d01406f4118cf7beadf4fd",
+      "supabase/.gitignore": "507699eb91144818edf61d3a079212cacf31d8db520eae428e3b48fcf0d6919c",
+      "supabase/config.toml": "e9da35d2879ce61056a9f8011e7f4e5580b0656545639a6ade8a72520464a5d8",
+      "supabase/migrations/20260919043352_7772cf3d-825c-4ac1-8812-fcd953b116b8.sql": "e4866959224287f3a51455fc8c7e96135119961e3b24bd2e985460bb0fdd5543",
+      "supabase/migrations/20260919043419_c5274c00-7154-486e-ac66-4048fbc8df1b.sql": "36bb353c95fdc63510540c9a3b02ffd07dc89ea672153093fab0ec9b074b3826",
+      "supabase/migrations/20260921000000_restrict_application_table_privileges.sql": "0e485124f24be25fc55d859bb26d3db74b47863ccffa39fd6d57d85842af1cd3",
+      "supabase/migrations/20260921010000_reconcile_property_cost_columns.sql": "fdbdca9335c65d24d73d56b50287f4049f628d15366dee808d09abad38152284",
+      "supabase/migrations/20260924000000_phase1_financing_integrity.sql": "30afeed7313afe57d6652600a82cf34bb39d99e30de5a681651094fc108a1a3f",
+      "supabase/migrations/20261016000000_phase2a01_foundation.sql": "33a36f5890ce75bc3d2a035482d828224fce28a4c585911539b4856e77875393",
+      "supabase/migrations/20261017000000_phase2a02_property_locations.sql": "bebe96e843b5e8198fe6ec4e59d9091aea5bbec71a63e555e717cc645ca23e40",
+      "tests/PHASE2A01_README.md": "7dcfaeb44dffa3c184b82594822f6db64887d98dab87cead93ce5f797fdeece9",
+      "tests/PHASE2A02_README.md": "303ed3cc3464239cfb2d03cc240054af51655dc63e4562c6fd837021f084bb8e",
+      "tests/README.md": "e0e422f937793419803005b20b1f610546367f3eb0d2a9c92c0d498f7c9526f9",
+      "tests/acquisition-cost.test.ts": "f70ddcee7b9ad7616833f5138ebfce5787d76ec4c41bd5ed51db239de2cca5b3",
+      "tests/authentication-busy-state.test.ts": "8fedc86120e16b6786c8ad481fe779adaba72f41707328849433a2d1a8b4bbc1",
+      "tests/authentication.test.ts": "2d009a5e8ac98a7d22378d084e393d4738edd2853371a838084ba8cc436f9c9e",
+      "tests/band-order-validation.test.ts": "926d697d2ef53dae416c360a5784f97ed84853495d996a54418b3ee01db534e7",
+      "tests/build-module-schema-audit.mjs": "65794043888d0e9c149a4eb68626b146071fbe1156d1d6252e5c95d2709d2bb7",
+      "tests/build-phase2a02-manifest.mjs": "bb6de283ded86627b5f34bb4a2f71413f1f5c4616fd87e484b00f2400d77bcb3",
+      "tests/build-reconciliation-audit.mjs": "7afd7e416b500f8c5b01ca91bcb0cedf88dadbbbd3a310dd1b336e6c78492d95",
+      "tests/build-supabase-audit.mjs": "b6cd48616ee9c98ec3fe3b5c408333fdb1ee748b61f21ea894196dbe308715e0",
+      "tests/confidence-focused-audit.test.ts": "f02fa11485e991f2da6773df09f5a33aa7be7fcf8cfb2b0289b0394b74fe6739",
+      "tests/cost-panel-read-safety.test.ts": "dd57a266753c57ae18b989917061a66581b70d15d448677275c8015cfdd7990c",
+      "tests/data-confidence.test.ts": "492ced76ecaf1e097f2bcf61d426dc983cd1ad76fe46c62835a383dcc13de18d",
+      "tests/database-types/phase1.ts": "d2557a262d381cc03a3415b813a0869bd3de8a13605737ac8aaebddb7c46dfe7",
+      "tests/database-types/phase2a01.ts": "6e8bbfba6605bc46da3ba80346a93cbdaf1f59b1e8674a8f051507ff612bfa0d",
+      "tests/database-types/phase2a02.ts": "2f0f002d9eaffc1f894bea9a0dfda5a205e747abd3389833b829763506e8f8f5",
+      "tests/database-types/tsconfig.json": "3eb70caac9c49ff3644eb2ce9a7cad173b160dab8da4d9f491ab76db9912f038",
+      "tests/database-types/tsconfig.phase2a01.json": "ffe8bf28974957040fe99c40c107bdd96d48afc7811a4b50518a7824b04dfd5b",
+      "tests/database-types/tsconfig.phase2a02.json": "09c961e16e9402a94a3e2b2bd26a089b3d2cb474bfbca7edc2e1d168d985eeda",
+      "tests/engine-fixes-regressions.test.ts": "63efe0ee0543cf8d5a0827d9daec0abc4482749e4f0006f2688273b4dcb9005a",
+      "tests/financial-engine-audit.test.ts": "dd43537b24dbb97f36aad6858e121be9ce26ff4f9cc96c7cd7fa7cd314eea7bd",
+      "tests/financial-input-integrity.test.ts": "3bc451cfff885aeb1ee9e2f2cff0b9d7ca69b4645161d09278cdf66d143cd5cd",
+      "tests/financial-write-boundary.test.ts": "da7206d98c9f566caa81a2e3b753636022744b3e425f466b0bc5a00edb6f29b0",
+      "tests/financing-audit.test.ts": "6b11199e43681467690b8c88392a0ed90ee13bce1e5a2207935473645b10aa4d",
+      "tests/financing.test.ts": "22bd05f49bea706a4e9613b4324da3cd8907ecd62c2a7985ff379578f7939459",
+      "tests/fixtures/README.md": "cf51904e94babfdcac85721a96965ed8fb4ba6ae2d195184b5c352cd91947288",
+      "tests/fixtures/analyze-phase1-property.ts": "02dc089532a1f1ae171793fbfa02f6d92f3d46d8c5905bde357d588bea46a6a8",
+      "tests/fixtures/phase1-properties.ts": "8d9b8881869d05361362ff63f76045be94c13376c486360ceda0362a4cd700da",
+      "tests/fixtures/tsconfig.json": "ebd420e80242d3fde2207ff13733f1f70a06f6b985d382f56d662c22dac931c6",
+      "tests/generate-phase2a02-types.mjs": "34e1b93434ce30cef5e576a08f3eb105161bc2ec2b943c93d330d5787fd68d0c",
+      "tests/inspect-phase2a02-prerequisites.mjs": "808ed4c9974cae6a89a0e95bd6997800d372adecffce7cf90d31400305399e58",
+      "tests/inspect-phase2a02-user-postgis.mjs": "8731f7cf1e5f5459af4fa7e5888753d7a9f72c324a74746b2eb859255d10ea15",
+      "tests/operating-expenses.test.ts": "26c8550ee955abbff2a5d3f6ce4efaf17573700772fd531ed0a75aaf00bb2d0d",
+      "tests/phase1-database.sql": "33192ce31cdfa07a07342e0c7de6344b1f3a52e33c94603b33684ed98a8bf95c",
+      "tests/phase1-f7-validation.test.ts": "b297d1c804802262b3387b9448e33eb575c198209d3a62075599d59738794f55",
+      "tests/phase1-final-acceptance.test.ts": "2142d5737c000e4830520477c21606179d336b7a21dea082d9038d2f8e143e0a",
+      "tests/phase1-independent-query-reaudit.test.ts": "dcca792e735834fdb1c5022e840febecde6218291a326f0a24829f00d6bcbc12",
+      "tests/phase1-independent-reaudit.test.ts": "fe0a4b67e7a32eaf8ceb781a2fc79afad9113568b4f78f9ec3fcb07acc6b5d4f",
+      "tests/phase1-property-fixtures-integration.test.ts": "0af2dc38c01ee411cd835e0833749db24a9c5b7da2df73e485778c7937e85df1",
+      "tests/phase1-property-fixtures.test.ts": "8a4e233b48e58890fd52dcd115823e408372a516ef5b8be109d41760070bdef7",
+      "tests/phase1-regressions.test.ts": "7ee4093e2dd167fc97f887f969e333a588975406de16a20555a22bb8dce9244e",
+      "tests/phase2a01-contract-fixtures.mjs": "47dc1824be78361606975ba17bdee0bee6a6d69f2de5b4ba022f4128cf56ca4f",
+      "tests/phase2a01-foundation.sql": "1deb923dbd0f8925230268ac81ece9234717616b7cdbb5a34ea43000f6101c71",
+      "tests/phase2a01-quality-followup.mjs": "3e912a4159296c6d14570e26195170b229d0c13a216971440f23497f236c20ff",
+      "tests/phase2a01-security-cases.mjs": "9710a18cef95e9579a67feec345bf0530f0b8ed6cc7bfa987b75b1c3615dd6c3",
+      "tests/phase2a02-baseline-snapshot.mjs": "780614e02da50b9eed41e9d7462d378545423857037e582b663065086f69b5cb",
+      "tests/phase2a02-catalog-query.mjs": "75b8c983f6c6597f083af4a00c7217c42d8917d8f73ad3d21bcbc718ed58edd2",
+      "tests/phase2a02-command-contract.mjs": "c5945a84cb10f5c1fe19cbc36e9a2da33e4827e095f3d9e36c7bfe7be5314eb7",
+      "tests/phase2a02-contention.mjs": "b22d3b91f1716734063c09dcd909b3535e3dd7d31ee370a3cd57738527ee3d36",
+      "tests/phase2a02-contract.test.mjs": "ce894ab7bb079dec9eff6e2ddf6b82ea41b1447d8473c59830ce0e9ed096cf7e",
+      "tests/phase2a02-final-acceptance.mjs": "cf9b64ad5062594180fa793e4378db001945bbe382127bd4d59e93ae4f37daa8",
+      "tests/phase2a02-harness-safety.test.mjs": "ba3477f76667bef8997d47fa95eb2da99f0f4f8c0d1dc2022c5b4fb807cf880c",
+      "tests/phase2a02-local-target.mjs": "94657bfed33b2140625d16181c472a34ce92629a6470b6ba9c41a81e02376500",
+      "tests/phase2a02-location-cases.mjs": "524ba3c95ffc8b18f18e2dd809a2cad17bff10d70eb7b4306e3915e77f9754d0",
+      "tests/phase2a02-sql-helpers.mjs": "dec6a48b1391edcea8fa2f5782bc6e5dbc80893e11ae62c47060d1b4b6099a53",
+      "tests/phase2a02-transaction-qualification.mjs": "5251285cb1e7deaf488fffe72d8d8f022e08c794b4ad4aa4d5c9c53b3eddac09",
+      "tests/phase2a02-transaction-runtime.mjs": "aa1218ee2202e5a961c061dbe064b99d660f95fcbfef278499b519e30e1b09b8",
+      "tests/phase2a02-transaction-writer.mjs": "19c9d238f82e1d27c82ab40c61cda0fcbfa209c0aefccc8fa5e76c93c647f9fe",
+      "tests/prepare-phase2a02-postgis.mjs": "9f608ec13c9b3ab908d91e5dd95b360cde3ab5764fd0e9f61d0ab4520d123a4c",
+      "tests/property-analysis-focused-audit.test.ts": "9baf52cecf60962b12d883a2bbce608eaaf16b77a3b311a44eab73fa5bae48e1",
+      "tests/property-fields.test.ts": "93bfd29ea52d68bb94508185cc464e2cda1a580a09041470443f5a334e724d45",
+      "tests/recommendation-focused-audit.test.ts": "43b325c3e0244112b383ae0231196259cd7a3b6ef761243da57869db406d1279",
+      "tests/recommendation.test.ts": "d98aa289e66432c2e3545eaa212fba0841b180e8dce8072b53016c021d811748",
+      "tests/red-flags-focused-audit.test.ts": "6b2ceed9c82172a4733fa2f985b059802b969f3c4ebbb386f86d5af15881398a",
+      "tests/red-flags.test.ts": "fb2f4b1463e389736b96426944cf90e3170f224c6691ec28056e8c03580e62d8",
+      "tests/returns.test.ts": "0d3b768083772afb51d1cb64aeba635d3a17280f21895bf198be66431b0874a3",
+      "tests/run-phase1-database-audit.mjs": "7e6b3904a45fd0a025fe8929ddde385be8d1db65d7ef03527411daf4247eb360",
+      "tests/run-phase2a01-database-audit.mjs": "9be0ee073bdf0255bdd1e0907d178b91acf38f9d3f5aa5b5dd5f4b811b7642ca",
+      "tests/run-phase2a02-commit-cascades.mjs": "39b5c229ab2674a794355395887cc49a75864f742a06ffe9002eca41677ec38e",
+      "tests/run-phase2a02-database-audit.mjs": "938ebdfe38fa4cb8999dc6ec2b54987867005a0f2648cb699acf4845ea682987",
+      "tests/run-phase2a02-foundation-regression.mjs": "fb0a884d2386ad9ac7e443347acb8b9f0641fde534b83552a2fece0e68e79bb3",
+      "tests/run-phase2a02-installation.mjs": "f2ef63023495e4d9de089ac47f3bd80bc4134c0c5e1ccc5392034c292b2444d4",
+      "tests/run-phase2a02-regressions.mjs": "cac8e1e7568682c58ff953926f75c61f83046660fb2e2a37115aee9ad3a969fb",
+      "tests/run-phase2a02-transactions.mjs": "8b5aca9ae7ecd7ab8c1e59a1a35d4dc7dfc344b4a2dc8d1a025a3bee700a88ba",
+      "tests/scenario-audit.test.ts": "fd784c91b036fd4e0c24b304b7ad0225c1bc79b0a921fd4641d356b70e87c5f9",
+      "tests/scenario-panel.test.ts": "fcc45c4235f5d01d75da82c8d05dd743a59b4f79b0810ea7d9f64b0d609df141",
+      "tests/scenarios.test.ts": "f56ad7ed06e7589465a95736dc86bf0cc4b805b18ab294beff2d7c17408054ca",
+      "tests/scoring-focused-audit.test.ts": "de5ebb298605199820db39bcfe00c200a0b7f30a8e70ef1eec901d6f182bd5f1",
+      "tests/scoring.test.ts": "f785e5542a3a2021b14688fd66f6a99e446f3f924f68dd97c160971898bcf15c",
+      "tests/security.test.mjs": "ef11f5c2ce4d3ea49aadab7a1b3793ee04ed42c3294b6a4b638e73574509806d",
+      "tests/supabase-ownership.sql": "eea2d5c4761b5ead357ca530ed4f6ae725ffa1325f4432570d41a18332d33f6b",
+      "tests/supabase-preflight.mjs": "0536fdd7c4780249c349e569f948c0a849f19f98ef1421b1819c3a3b83497d90",
+      "tests/verify-phase2a01-schema.mjs": "433797e919ff7cd707fc647ab4561d25f61c2d39b30c17fa22a0a41b4db5216d",
+      "tests/verify-phase2a02-schema.mjs": "cdc5ac43a5a876d1453125ae5f67c3d50a44cdee380ae45583b7e89c27197fd1",
+      "tsconfig.json": "953a0152bfc557bae1aaed3d5ada6b3895eb5499881e8c9796114a248bc54303",
+      "vite.config.ts": "a1c369f516f02aacb4bde1be0856bd97d46a5192a6cfb2f1ae7ceb82e7fee9ab",
+      "vitest.config.ts": "b2b6be4b9fda90b924c2923391196291bd2cc5c82dd4b8d3fc452ee43c26d0ac"
+    }
+  },
+  "inventory": {
+    "created": [
+      "src/server/location/ports.server.ts",
+      "src/server/location/command-builder.server.ts",
+      "src/server/location/transaction.server.ts",
+      "src/server/location/diagnostics.server.ts",
+      "tests/phase2a03/transaction-fake.ts",
+      "tests/phase2a03/transaction.test.ts",
+      "tests/phase2a03/redaction.test.ts",
+      "tests/database-types/tsconfig.phase2a03-transaction.json",
+      "docs/PHASE2A_03_IMPLEMENT_02_REPORT.md",
+      "docs/PHASE2A_03_IMPLEMENT_02_CHECKLIST.md",
+      "docs/phase2a03-implement02-results.json"
+    ],
+    "modified": [],
+    "deleted": [],
+    "sha256": {
+      "src/server/location/ports.server.ts": "1bcfdcac19f3e5e95764f98d11a618f7b429775a4d81eb037aa40580db0e66bb",
+      "src/server/location/command-builder.server.ts": "0a892b7a19f02f1ee9cc1ab675b5c452a1536f645290ffba289b21cad9c939be",
+      "src/server/location/transaction.server.ts": "8fab08beecd0fe29edc70dd2b2dacf84aa692fa60afbd6dd01ef4e6417a21ad7",
+      "src/server/location/diagnostics.server.ts": "1d750a3b5966ebbf5b50196442bd1cb65073b43d7a19f14223cea09f5a507959",
+      "tests/phase2a03/transaction-fake.ts": "e2f989e77b7662ace3bd6bf1eb247f3b970c97fa21e4a53c1b1684ac493f86ad",
+      "tests/phase2a03/transaction.test.ts": "6fb5fc3177412d94c26bf8c8bfde231214d6ad3c5054a5dc5044f9b9cf693c3c",
+      "tests/phase2a03/redaction.test.ts": "42225b0ef9ddee07b114c4cc34b3c90edef0e1dd5dfc1259ffebb2c4038bc851",
+      "tests/database-types/tsconfig.phase2a03-transaction.json": "fa29a160361d1236d64f081ebed5d6757ab8e1598730acceb4a3bd8f34e8b000",
+      "docs/PHASE2A_03_IMPLEMENT_02_REPORT.md": "06ffe1055e8fc774267d5efcb834eb9747b91a240c6fe7ed029abfee051d8bd9",
+      "docs/PHASE2A_03_IMPLEMENT_02_CHECKLIST.md": "86d7cbfcbd870636e4afe2db9ecf96844946b4a57b64948422430850a40d34ca"
+    },
+    "ignoredLocalEvidence": ".phase2a03-implement02.local",
+    "selfHashPolicy": "JSON digest is in the ignored final-validation.json receipt, not inside itself."
+  },
+  "counts": {
+    "transaction": 110,
+    "redaction": 20,
+    "newTotal": 130,
+    "implement01": 249,
+    "application": 1452,
+    "applicationFiles": 39,
+    "frozen": 53,
+    "legacy": 5,
+    "typeProjects": 7,
+    "securitySource": {
+      "pass": 5,
+      "fail": 0,
+      "skip": 1
+    },
+    "securityBuilt": {
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "executions": [
+    {
+      "name": "protocol",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "tests/phase2a03/transaction.test.ts",
+        "tests/phase2a03/redaction.test.ts",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=.phase2a03-implement02.local/protocol.json"
+      ],
+      "startedAt": "2026-10-20T03:09:11.194Z",
+      "endedAt": "2026-10-20T03:09:12.440Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/protocol.log",
+      "counts": {
+        "pass": 130,
+        "fail": 0,
+        "skip": 0,
+        "files": 2
+      },
+      "logSha256": "9e2842579ceae0a1ac37cd8e2bffe859863203fc84e8b848fdce60b499bd9277"
+    },
+    {
+      "name": "implement01",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "tests/phase2a03/primitives.test.ts",
+        "tests/phase2a03/contracts.test.ts",
+        "tests/phase2a03/canonical.test.ts",
+        "tests/phase2a03/read-eligibility.test.ts",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=.phase2a03-implement02.local/implement01.json"
+      ],
+      "startedAt": "2026-10-20T03:09:16.094Z",
+      "endedAt": "2026-10-20T03:09:18.361Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/implement01.log",
+      "counts": {
+        "pass": 249,
+        "fail": 0,
+        "skip": 0,
+        "files": 4
+      },
+      "logSha256": "a02d7df80505c8eec80ecc1d9657209aed5328e6c1de27cb548517ce352c9abc"
+    },
+    {
+      "name": "application",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=.phase2a03-implement02.local/application.json"
+      ],
+      "startedAt": "2026-10-20T03:09:16.107Z",
+      "endedAt": "2026-10-20T03:09:21.968Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/application.log",
+      "counts": {
+        "pass": 1452,
+        "fail": 0,
+        "skip": 0,
+        "files": 39
+      },
+      "logSha256": "cae59c4984c767419d2842950f6998e22420a7378355b848089e129a46573974"
+    },
+    {
+      "name": "frozen",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "tests/phase1-property-fixtures.test.ts",
+        "tests/phase1-property-fixtures-integration.test.ts",
+        "--no-cache",
+        "--reporter=json",
+        "--outputFile=.phase2a03-implement02.local/frozen.json"
+      ],
+      "startedAt": "2026-10-20T03:09:16.115Z",
+      "endedAt": "2026-10-20T03:09:19.298Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/frozen.log",
+      "counts": {
+        "pass": 53,
+        "fail": 0,
+        "skip": 0,
+        "files": 2
+      },
+      "logSha256": "010dce3beedb9c74e85fec41476af6cca221a8f96cb242a08101687fa4442400"
+    },
+    {
+      "name": "legacy",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests/phase2a02-contract.test.mjs"
+      ],
+      "startedAt": "2026-10-20T03:09:16.123Z",
+      "endedAt": "2026-10-20T03:09:16.418Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/legacy.log",
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "skipped": 0
+      },
+      "logSha256": "51aca1ecbe7a84c17bb3f5b604bbde1bbe2b21fb1131d3076e5edc97b287bfdb"
+    },
+    {
+      "name": "security-source",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests/security.test.mjs"
+      ],
+      "startedAt": "2026-10-20T03:09:21.978Z",
+      "endedAt": "2026-10-20T03:09:22.727Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/security-source.log",
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "skipped": 1
+      },
+      "logSha256": "7256dc94c07bf8f71132adff6412964b69d1b95a316cf5d79f6f27b3cc3e839c"
+    },
+    {
+      "name": "type-app",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "startedAt": "2026-10-20T03:09:21.991Z",
+      "endedAt": "2026-10-20T03:09:31.850Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-app.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-0",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.json"
+      ],
+      "startedAt": "2026-10-20T03:09:22.002Z",
+      "endedAt": "2026-10-20T03:09:24.891Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-0.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a01.json"
+      ],
+      "startedAt": "2026-10-20T03:09:22.014Z",
+      "endedAt": "2026-10-20T03:09:24.898Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-1.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-2",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a02.json"
+      ],
+      "startedAt": "2026-10-20T03:09:31.851Z",
+      "endedAt": "2026-10-20T03:09:35.607Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-2.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-3",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a03.json"
+      ],
+      "startedAt": "2026-10-20T03:09:31.863Z",
+      "endedAt": "2026-10-20T03:09:37.003Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-3.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-4",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/database-types/tsconfig.phase2a03-transaction.json"
+      ],
+      "startedAt": "2026-10-20T03:09:31.874Z",
+      "endedAt": "2026-10-20T03:09:35.775Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-4.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "type-fixtures",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tests/fixtures/tsconfig.json"
+      ],
+      "startedAt": "2026-10-20T03:09:31.882Z",
+      "endedAt": "2026-10-20T03:09:36.724Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/type-fixtures.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "startedAt": "2026-10-20T03:09:43.930Z",
+      "endedAt": "2026-10-20T03:09:54.245Z",
+      "exitCode": 0,
+      "env": {},
+      "log": ".phase2a03-implement02.local/build.log",
+      "logSha256": "5b3e157f9a2430f03e9caba678e584b67cb4901d41e3881ca4ca3c0ef8ab4eb8"
+    },
+    {
+      "name": "security-built",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests/security.test.mjs"
+      ],
+      "startedAt": "2026-10-20T03:11:19.134Z",
+      "endedAt": "2026-10-20T03:11:19.589Z",
+      "exitCode": 0,
+      "env": {
+        "SECURITY_AUDIT_BROWSER_ROOT": ".output/public"
+      },
+      "log": ".phase2a03-implement02.local/security-built.log",
+      "counts": {
+        "pass": 6,
+        "fail": 0,
+        "skipped": 0
+      },
+      "logSha256": "fcc3e338f2380a2cb4596396e32f0ab3485b8ae9489627985117fe6437b044ca"
+    }
+  ],
+  "earlierExecutions": [
+    {
+      "name": "protocol-initial",
+      "pass": 114,
+      "fail": 3,
+      "skip": 0,
+      "report": ".phase2a03-implement02.local/protocol-initial.json",
+      "sha256": "bf4e68adec72a1d7d15b7d96f76c3c87491457924c4a43ee63e21fc90a2f8f58"
+    },
+    {
+      "name": "protocol-second",
+      "pass": 117,
+      "fail": 0,
+      "skip": 0,
+      "report": ".phase2a03-implement02.local/protocol-second.json",
+      "sha256": "c7d3f0b4d5d0fdb1ac6d90fd2f66b058671eca2677a9d10a2ccd571b2733ae39"
+    },
+    {
+      "name": "protocol-pre-final",
+      "pass": 129,
+      "fail": 1,
+      "skip": 0,
+      "report": ".phase2a03-implement02.local/protocol-pre-final.json",
+      "sha256": "d8f9abd7fab8fe299136a106ddcc268f0c25435f715cd2dc9b1368103047c29f"
+    }
+  ],
+  "initialTypeDiagnostics": {
+    "code": "TS2367",
+    "reason": "TypeScript did not track stage/certainty union assignments in awaited callbacks; corrected with runtime snapshots",
+    "finalAllProjects": "PASS"
+  },
+  "earlierCorrections": [
+    "New assertion matcher spreading/transcript-await mistakes corrected",
+    "Expanded cancellation test now distinguishes uncertain in-flight CAS from independent rollback cancellation",
+    "Spec-reporter count parser corrected from raw unchanged logs"
+  ],
+  "sourceAndBrowserAudit": {
+    "status": "PASS",
+    "preservation": {
+      "checked": 382,
+      "mismatches": []
+    },
+    "sourceFiles": 132,
+    "coreFiles": 4,
+    "imports": [
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/lib/location/contracts",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/lib/location/contracts",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/lib/location/canonical",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/command-builder.server.ts",
+        "to": "src/server/location/ports.server",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/diagnostics.server.ts",
+        "to": "src/lib/location/errors",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/diagnostics.server.ts",
+        "to": "src/lib/location/errors",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/diagnostics.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/diagnostics.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/diagnostics.server.ts",
+        "to": "src/server/location/ports.server",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/ports.server.ts",
+        "to": "src/lib/location/contracts",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/ports.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/ports.server.ts",
+        "to": "src/server/location/diagnostics.server",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/contracts",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/contracts",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/canonical",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/errors",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/errors",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/lib/location/primitives",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/server/location/command-builder.server",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/server/location/command-builder.server",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/server/location/diagnostics.server",
+        "typeOnly": false
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/server/location/diagnostics.server",
+        "typeOnly": true
+      },
+      {
+        "from": "src/server/location/transaction.server.ts",
+        "to": "src/server/location/ports.server",
+        "typeOnly": true
+      }
+    ],
+    "incoming": [],
+    "dangerous": [],
+    "browser": {
+      "files": 33,
+      "markers": [
+        "createDormantTransactionCore",
+        "buildFrozenOperation",
+        "BEGIN ISOLATION LEVEL READ COMMITTED",
+        "SET LOCAL ROLE service_role",
+        "mpia-location-command-v1",
+        "mpia-property-location-input-v1",
+        "property_location_versions WHERE property_id"
+      ],
+      "findings": []
+    },
+    "frozen": {
+      "cases": 53,
+      "previousNameOutcomeParity": true
+    },
+    "implement01": {
+      "cases": 1322,
+      "previousNameOutcomeParity": true
+    },
+    "protectedPhase1DiffBytes": 0,
+    "originalMigrationDiffBytes": 0
+  },
+  "retryCommitMatrix": [
+    {
+      "condition": "Validation/Auth/ownership/input/expected/operation/provider rejection",
+      "certainty": "NOT_COMMITTED",
+      "cleanup": "No reservation or acknowledged rollback/release; otherwise discard",
+      "next": "Follow closed error advice; no automatic retry or new ID"
+    },
+    {
+      "condition": "40001/40P01 before COMMIT with acknowledged rollback",
+      "certainty": "NOT_COMMITTED",
+      "cleanup": "Release only after rollback acknowledgement",
+      "next": "SAME_ID_AFTER_BACKOFF; no automatic retry"
+    },
+    {
+      "condition": "Pool/lock/statement/application timeout or cancellation before COMMIT",
+      "certainty": "NOT_COMMITTED",
+      "cleanup": "No connection, rollback if safely idle, or quarantine/discard in-flight work",
+      "next": "Stage-aware controlled failure; same frozen ID only, no automatic retry"
+    },
+    {
+      "condition": "Other statement/constraint or lifecycle error",
+      "certainty": "NOT_COMMITTED",
+      "cleanup": "Rollback acknowledgement or discard",
+      "next": "TRANSACTION_FAILED / INTEGRITY_FAILURE; no blind constraint retry"
+    },
+    {
+      "condition": "Explicit COMMIT REJECTED or ROLLED_BACK acknowledgement",
+      "certainty": "NOT_COMMITTED",
+      "cleanup": "Bounded rollback for rejection; already-idle ROLLED_BACK can release",
+      "next": "COMMIT_FAILED / DO_NOT_RETRY"
+    },
+    {
+      "condition": "COMMIT throw, UNKNOWN response, cancellation/deadline after dispatch",
+      "certainty": "UNKNOWN",
+      "cleanup": "Quarantine/discard; never assert rollback",
+      "next": "COMMIT_OUTCOME_UNKNOWN / RECONCILE_SAME_ID"
+    },
+    {
+      "condition": "Actual COMMITTED acknowledgement for created/duplicate result",
+      "certainty": "COMMITTED",
+      "cleanup": "Release, or discard after release fault",
+      "next": "COMMITTED CREATED/DUPLICATE; cleanup/logging cannot undo success"
+    }
+  ],
+  "automaticRetries": 0,
+  "cases": [
+    {
+      "file": "tests/phase2a03/redaction.test.ts",
+      "assertions": [
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic diagnosticId without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic stage without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic outcome without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic certainty without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic cleanup without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction drops an invalid diagnostic sqlState without throwing or logging",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 0",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 1",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 2",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 3",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 4",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 5",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 6",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 7",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 8",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not expose raw/nested/aggregate/accessor exception 9",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction does not traverse nested SQLSTATEs or prototype fields or invoke getters",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction sync diagnostic sink failure preserves confirmed success and primary failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction async diagnostic sink failure preserves confirmed success and primary failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 diagnostics closed projection/redaction known commit survives release and logging errors without rollback claim",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "tests/phase2a03/transaction.test.ts",
+      "assertions": [
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) a newly verified synthetic owner cannot replay the previous actor's operation",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) preserves the original provider receipt on replay despite equivalent SQL timestamp rendering",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) duplicate COMMIT rejection still reports failure and never mutates storage",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) caller cancellation during rollback cannot cancel the independent cleanup signal",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) release failure following rollback cannot mask the original stale-state outcome",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) overall transaction deadline bounds COMMIT even when each preceding statement met its own limit",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) uses one reservation, fixed setup, parent before state, immutable append, pointer CAS and acknowledged COMMIT",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) binds hostile private text as data, never identifiers/SQL; generated columns and timestamps are omitted",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects arbitrary authentication evidence null before reservation",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects arbitrary authentication evidence {} before reservation",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects arbitrary authentication evidence {\"userId\":\"f2000000-0000-0000-0000-000000000001\"} before reservation",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects arbitrary authentication evidence \"unverified.jwt.value\" before reservation",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) sanitizes verifier outage",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates constructed commands before acquisition {\"expected\":{}}",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates constructed commands before acquisition {\"operationId\":\"bad\"}",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates constructed commands before acquisition {\"position\":\"EWKT\"}",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates constructed commands before acquisition {\"payload\":{\"input_address\":null,\"normalized_address\":null,\"normalization_version\":null,\"longitude\":101.6869,\"latitude\":3.139,\"coordinate_source\":\"USER_PIN\",\"source_crs\":\"EPSG:4326\",\"provider_version_id\":null,\"provider_candidate_id\":null,\"retrieved_at\":null,\"coordinate_precision\":\"USER_PIN\",\"accuracy_m\":null,\"geocode_confidence\":\"UNKNOWN\",\"confidence_mapping_version\":null,\"confirmation_status\":\"REVIEW_REQUIRED\",\"confirmed_by\":\"f9000000-0000-0000-0000-000000000009\",\"change_reason\":\"INITIAL_INPUT\"}}",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) freezes actor, expected tokens, identity, provider receipt and payload before acquisition",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) distinguishes ABSENT from existing inert revision-zero state",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) distinguishes EXACT from existing inert revision-zero state",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) EXACT zero is stale when state is absent",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) exact duplicate returns original row/current observation without insert, update, allocation or restamp",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) append uses exact pointer/revision and allocates next history version",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects stale exact revision without rebasing",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects stale exact pointer without rebasing",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) same ID conflicting payload is rejected before fresh-state checking",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) same ID conflicting expected is rejected before fresh-state checking",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) same ID conflicting actor is rejected before fresh-state checking",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) synthetic two-user denial takes precedence over duplicate=false",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) synthetic two-user denial takes precedence over duplicate=true",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) deleted parent fails before replay; duplicate=false",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) deleted parent fails before replay; duplicate=true",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current project_name change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current full_address change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current city change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current district change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current state change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current postcode change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) locked current country change rejects even an exact replay",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) financial-only edit preserves applicability",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) publishes latest intent status REVIEW_REQUIRED",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) publishes latest intent status CONFIRMED",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) publishes latest intent status UNCONFIRMED",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) publishes latest intent status CLEARED",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects version overflow before history INSERT",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rejects revision overflow before history INSERT",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) duplicates remain readable at revision ceiling",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) INITIAL_INPUT cannot be used after first history",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rechecks provider registry and injected reviewed field policy: denied",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rechecks provider registry and injected reviewed field policy: allowed",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rechecks provider registry and injected reviewed field policy: withdrawn",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at acquire preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at begin preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at setup0 preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at setup1 preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at setup2 preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at setup3 preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at setup4 preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at parent preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at state preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at prior preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at createState preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at latest preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at insert preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) statement/acquisition failure at cas preserves storage and reports failure",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) CAS affected-row count 0 is integrity failure with whole-attempt rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) CAS affected-row count 2 is integrity failure with whole-attempt rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) invalid CAS RETURNING fails closed 0",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) invalid CAS RETURNING fails closed 1",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) invalid CAS RETURNING fails closed 2",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) invalid CAS RETURNING fails closed 3",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) corrupt state pointer lineage is rejected",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field id",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field property_id",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field created_by",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field operation_id",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field operation_hash",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field property_input_hash",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field version_number",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field longitude",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field created_at",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) validates INSERT RETURNING field confirmed_at",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) known COMMIT REJECTED is not success",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) known COMMIT ROLLED_BACK is not success",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) lost COMMIT acknowledgement, applied=false, is unknown without rollback and recovered by SAME identity",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) lost COMMIT acknowledgement, applied=true, is unknown without rollback and recovered by SAME identity",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) UNKNOWN normal completion is unknown; even a SQLSTATE exception at COMMIT is not assumed to be a server rejection",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) quarantined connection cannot be reused for a repeated call",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) rollback failure discards; release failure after confirmed commit preserves success",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 40001 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 40P01 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 55P03 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 57014 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 23505 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 23503 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) SQLSTATE 23514 uses controlled stage-aware advice, no automatic retry",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) no transient retry advice when rollback was not acknowledged",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) no successful response before pending COMMIT acknowledgement",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) cancellation during parent discards without false rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) cancellation during insert discards without false rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) cancellation during cas discards without false rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) cancellation during commit discards without false rollback",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) pre-cancelled invocation acquires nothing",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) acquisition timeout discards a late acquired client",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) bounded parent timeout preserves certainty and cleanup",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) bounded commit timeout preserves certainty and cleanup",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) bounded rollback timeout preserves certainty and cleanup",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) bounded release timeout preserves certainty and cleanup",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) bounded discard timeout preserves certainty and cleanup",
+          "status": "passed"
+        },
+        {
+          "name": "I05 synthetic protocol only (not PostgreSQL, authenticated security or concurrency proof) overall deadline stops later statements; numeric budgets are only fake-tested",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "buildWarnings": [
+    "Redundant vite-tsconfig-paths plugin",
+    "Chunk over 500 kB",
+    "inlineDynamicImports/codeSplitting conflict",
+    "Dependency use-client directive semantics"
+  ],
+  "limitations": [
+    "No real PostgreSQL or database access, driver, Auth integration, live provider, endpoint or deployment. Fake tests are protocol evidence only.",
+    "Real locking/concurrency, RLS/grants, actual authenticated two-user security, deferred FK rejection and exact driver COMMIT/ROLLBACK tags remain unverified in I06.",
+    "Adapter must prove parameter and binary64/microsecond mapping, target identity/TLS, bootstrap/SET authority, backend affinity and no pipelining/prepared-statement incompatibility.",
+    "Timeouts are provisional. AbortSignal racing and WeakSet quarantine do not prove server-side cancellation/lock release, pool eviction, or process-loss cleanup. discard must synchronously quarantine before async close, including late acquisition/release.",
+    "No automatic retry scheduler or reconciliation endpoint is supplied. Caller must preserve original command/actor/receipt/operation identity across calls. Re-verification occurs per invocation; new actor/expected tokens/payload produce conflict.",
+    "A retry after current address/input changes, ownership transfer or parent deletion can be denied even after an unknown successful COMMIT. Separate historical reconciliation is deferred; absence after deletion proves no historical certainty.",
+    "Provider registry snapshot plus synchronous injected reviewed-field policy is required for new ingestion; no policy implementation, receipt construction, live terms review, withdrawal serialization, revocation/purge or candidate persistence is included.",
+    "Diagnostics use a closed validated projection and never expose raw errors; driver/server/APM logging configuration remains unqualified.",
+    "Extensionless import/Deno packaging, exact runtime/driver qualification, clean installation/platform matrix and all eight inherited T15 browser cases remain deferred.",
+    "Existing local dependencies were reused (some resolve through the retained .security-audit.local installation); no dependency install, package/lock or configuration edit occurred."
+  ],
+  "notExecuted": [
+    "Real database/PostgreSQL/driver operations",
+    "Actual Auth verification/two-user sessions",
+    "Live provider calls/rights/receipt integration",
+    "Real concurrency/RLS/deferred FK/connection cancellation/pool/commit behavior",
+    "I06",
+    "Clean installation/platform qualification/T15 interactive browser cases",
+    "Deployment"
+  ],
+  "noDatabaseOperation": true,
+  "noGitWriteAction": true,
+  "gitActions": "Read-only inspection only; no stage/commit/push/merge/rebase/deploy",
+  "ownerAcceptance": "Pending independent review",
+  "historicalEvidencePolicy": "Earlier results preserved unchanged and not represented as fresh PostgreSQL/Auth evidence"
+}

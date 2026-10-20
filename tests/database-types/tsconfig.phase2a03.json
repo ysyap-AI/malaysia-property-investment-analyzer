@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": { "strict": true, "types": ["node"] },
+  "include": [
+    "./phase1.ts",
+    "./phase2a01.ts",
+    "./phase2a02.ts",
+    "./phase2a03.ts",
+    "../phase2a03/**/*.ts"
+  ]
+}
