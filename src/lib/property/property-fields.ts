@@ -2,6 +2,7 @@
 // No financial calculation lives here — this file only describes the fields,
 // their allowed values and how a form value is turned into a stored value.
 import { z } from "zod";
+import { propertySaveTextSchema, type PropertyTextField } from "./property-save-policy";
 import type { Tables } from "@/integrations/supabase/types";
 
 import type { DataStatus } from "@/components/common/StatusBadge";
@@ -125,22 +126,35 @@ const optionalEnum = <T extends string>(values: readonly T[]) =>
     .union([z.enum(values as unknown as [T, ...T[]]), z.literal(""), z.null(), z.undefined()])
     .transform((v) => (v === "" || v === undefined ? null : (v as T | null)));
 
+/** Entry transformations apply only to a new or deliberately changed field. */
+const propertyEntryText = (field: PropertyTextField) =>
+  z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v === undefined || v === "" ? null : v))
+    .pipe(propertySaveTextSchema(field));
+
 export const propertySchema = z.object({
-  project_name: z.string().trim().min(1, { message: "Project name is required" }).max(200),
-  full_address: optionalText,
+  project_name: z
+    .string()
+    .trim()
+    .min(1, { message: "Project name is required" })
+    .pipe(propertySaveTextSchema("project_name").refine((v): v is string => v !== null)),
+  full_address: propertyEntryText("full_address"),
   postcode: z
     .string()
     .trim()
-    .max(10)
     .optional()
     .transform((v) => (v === undefined || v === "" ? null : v))
+    .pipe(propertySaveTextSchema("postcode"))
     .refine((v) => v === null || /^[0-9]{5}$/.test(v), {
       message: "Malaysian postcodes have 5 digits",
     }),
-  city: optionalText,
-  district: optionalText,
-  state: optionalEnum(MALAYSIAN_STATES),
-  country: optionalText,
+  city: propertyEntryText("city"),
+  district: propertyEntryText("district"),
+  state: optionalEnum(MALAYSIAN_STATES).pipe(propertySaveTextSchema("state")),
+  country: propertyEntryText("country"),
   property_type: optionalEnum(PROPERTY_TYPES),
   title_type: optionalEnum(TITLE_TYPES),
   tenure: optionalEnum(TENURES.map((t) => t.value)),

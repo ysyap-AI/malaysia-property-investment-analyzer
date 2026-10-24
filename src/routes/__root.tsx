@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -40,9 +41,10 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const isShowcase = useIsShowcase();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+    if (!isShowcase) reportLovableError(error, { boundary: "tanstack_root_error_component" });
+  }, [error, isShowcase]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -118,10 +120,28 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
+  // The client modules are lazy proxies: importing them is inert, but reading
+  // supabase.auth starts session storage/refresh. Never mount that effect here.
+  // Match the actual route, so unknown showcase-like URLs keep normal behavior.
+  const isShowcase = useIsShowcase();
+  return isShowcase ? <Outlet /> : <ApplicationProviders />;
+}
+
+function useIsShowcase() {
+  return useRouterState({
+    select: (state) => state.matches.some((match) => match.routeId === "/showcase"),
+  });
+}
+
+function ApplicationProviders() {
   const { queryClient } = Route.useRouteContext();
-  useEffect(() => watchAuthIsolation(supabase.auth, queryClient, (nextUserId) => {
-    window.location.replace(nextUserId ? "/properties" : "/login");
-  }), [queryClient]);
+  useEffect(
+    () =>
+      watchAuthIsolation(supabase.auth, queryClient, (nextUserId) => {
+        window.location.replace(nextUserId ? "/properties" : "/login");
+      }),
+    [queryClient],
+  );
 
   return (
     <QueryClientProvider client={queryClient}>

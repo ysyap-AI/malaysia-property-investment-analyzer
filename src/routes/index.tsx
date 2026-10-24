@@ -60,6 +60,12 @@ function LandingPage() {
           </Button>
         </div>
 
+        <p className="mt-5 text-sm text-muted-foreground">
+          <a className="underline underline-offset-4" href="/showcase">
+            Explore the synthetic demonstration
+          </a>
+        </p>
+
         <div className="mt-16 grid gap-4 md:grid-cols-3">
           <Feature
             icon={<ShieldCheck className="size-5" />}
@@ -69,7 +75,7 @@ function LandingPage() {
           <Feature
             icon={<Calculator className="size-5" />}
             title="Deterministic figures"
-            body="Financial calculations arrive in the next phase — no invented numbers in the meantime."
+            body="Explore rental yields, cash flow, financing and rule-based recommendations using the shared financial engines."
           />
           <Feature
             icon={<Database className="size-5" />}

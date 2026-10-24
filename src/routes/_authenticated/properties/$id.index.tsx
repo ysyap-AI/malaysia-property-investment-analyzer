@@ -5,7 +5,6 @@ import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { AppShell } from "@/components/layout/AppShell";
-import { PlaceholderSection } from "@/components/common/PlaceholderSection";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPanel";
 import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
@@ -206,10 +205,7 @@ function PropertyDetailsPage() {
               <AcquisitionCostsPanel propertyId={id} />
               <OperatingExpensesPanel propertyId={id} />
               <FinancingPanel propertyId={id} />
-              <PlaceholderSection
-                title="Still to come"
-                items={["Net operating income", "Cash-on-cash return"]}
-              />
+              <p className="text-sm text-muted-foreground">Review net operating income, cash-on-cash return and other calculated metrics in the Summary and Scenarios tabs.</p>
             </TabsContent>
 
             <TabsContent value="scenarios" className="mt-4">

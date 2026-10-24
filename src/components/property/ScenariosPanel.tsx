@@ -161,7 +161,7 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
             </p>
           ) : null}
           <p className="text-xs text-muted-foreground">
-            Changes apply instantly and are not saved yet — reloading the page restores the defaults.
+            Changes apply here only and are not saved. The summary and recommendation use default assumptions; reloading restores these defaults.
             Repair changes adjust the annual repair reserve only.
           </p>
         </CardContent>

@@ -35,7 +35,7 @@ function DashboardPage() {
   return (
     <AppShell
       title="Dashboard"
-      description="Portfolio overview. Calculation modules are not implemented yet, so figures below are placeholders."
+      description="Review your saved properties. Open a property for financial analysis; portfolio aggregates below are not yet available."
       actions={
         <Button asChild>
           <Link to="/properties/new">
@@ -54,18 +54,18 @@ function DashboardPage() {
         <MetricCard
           label="Average Net Yield"
           status="missing"
-          hint="Awaiting calculation engine"
+          hint="Portfolio aggregation not available"
           icon={<Wallet className="size-4" />}
         />
         <MetricCard
           label="Average Investment Score"
           status="missing"
-          hint="Awaiting scoring engine"
+          hint="Portfolio aggregation not available"
         />
         <MetricCard
           label="Open Risk Flags"
           status="missing"
-          hint="Awaiting risk module"
+          hint="Portfolio aggregation not available"
           icon={<ShieldAlert className="size-4" />}
         />
       </div>

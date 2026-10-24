@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "vitest run && npm run test:security"
+    "test": "vitest run && npm run test:security",
+    "dev:showcase": "vite --config vite.showcase.config.ts",
+    "build:showcase": "vite build --config vite.showcase.config.ts",
+    "preview:showcase": "vite preview --config vite.showcase.config.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -158,7 +158,7 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
       </Section>
 
       {/* SCENARIOS */}
-      <Section title="Scenarios" subtitle="Default assumptions. Edit them on the Scenarios tab.">
+      <Section title="Scenarios" subtitle="Summary uses default assumptions. Temporary edits on the Scenarios tab do not change this summary or recommendation.">
         <Card>
           <CardContent className="overflow-x-auto p-0">
             <table className="w-full min-w-[560px] text-sm">
