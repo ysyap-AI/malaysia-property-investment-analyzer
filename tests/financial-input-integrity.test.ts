@@ -62,18 +62,18 @@ describe("overflow must not become a total or an unknown saved amount", () => {
   });
   it("rejects invalid acquisition writes before reaching the database", async () => {
     const values = acquisitionCostsSchema.parse({ purchase_price: 1 });
-    await expect(saveAcquisitionCosts("fixture", { ...values, purchase_price: Infinity })).rejects.toThrow();
+    await expect(saveAcquisitionCosts("fixture", { ...values, purchase_price: Infinity }, () => true, 1)).rejects.toThrow();
     expect(from).not.toHaveBeenCalled();
   });
   it("rejects invalid annualised writes before JSON can turn Infinity into null", async () => {
     const values = operatingExpensesSchema.parse({ annual_maintenance_fee: 1 });
-    await expect(saveOperatingExpenses("fixture", { ...values, annual_maintenance_fee: Infinity })).rejects.toThrow();
+    await expect(saveOperatingExpenses("fixture", { ...values, annual_maintenance_fee: Infinity }, () => true, 1)).rejects.toThrow();
     expect(from).not.toHaveBeenCalled();
   });
   it("rejects overflow introduced after otherwise valid monthly input", async () => {
     const values = operatingExpensesSchema.parse({ annual_maintenance_fee: 1e13 });
     const annual = annualiseInput(values, { ...defaultOperatingExpenseBases, annual_maintenance_fee: "monthly" });
-    await expect(saveOperatingExpenses("fixture", annual)).rejects.toThrow();
+    await expect(saveOperatingExpenses("fixture", annual, () => true, 1)).rejects.toThrow();
     expect(from).not.toHaveBeenCalled();
   });
   it("round-trips a normal monthly value once, preserving zero and unknown separately", () => {

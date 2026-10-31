@@ -6,8 +6,9 @@ import { StatusBadge, type DataStatus } from "@/components/common/StatusBadge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SCENARIO_LABELS, SCENARIO_ORDER } from "@/config/scenarios";
 import { usePropertyAnalysis } from "@/hooks/use-property-analysis";
+import { financialInputLabel } from "@/lib/property/saved-analysis-presentation";
 import type { MetricResult } from "@/lib/finance/returns";
-import { displayMoney, displayText, rentStatusToDataStatus } from "@/lib/property/property-fields";
+import { displayMoney, displayText } from "@/lib/property/property-fields";
 import { cn } from "@/lib/utils";
 
 type Kind = "pct" | "money";
@@ -24,7 +25,7 @@ function metricStatus(r: MetricResult): DataStatus {
 }
 
 function missingNote(r: MetricResult): string | null {
-  if (r.status === "incomplete") return `Needs: ${r.missingInputs.join(", ").replaceAll("_", " ")}`;
+  if (r.status === "incomplete") return `Needs: ${r.missingInputs.map(financialInputLabel).join(", ")}`;
   if (r.status === "invalid") return r.reason;
   return null;
 }
@@ -38,9 +39,10 @@ const REC_STYLE: Record<string, string> = {
 };
 
 export function PropertySummaryDashboard({ propertyId }: { propertyId: string }) {
-  const { property: p, invest, confidence, redFlags, recommendation: rec, scenarios, isLoading } =
+  const { property: p, invest, confidence, redFlags, recommendation: rec, scenarios, isLoading, availability } =
     usePropertyAnalysis(propertyId);
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading…</p>;
+  if (!availability.current) return <p role="status">Current financial summary and recommendation unavailable. {availability.reason}</p>;
 
   const base = scenarios.base.returns;
   const critical = redFlags.flags.filter((f) => f.severity === "critical");
@@ -88,7 +90,7 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
           <CardContent className="grid gap-4 sm:grid-cols-3">
             <Fact label="Asking price" value={displayMoney(p?.asking_price)} status={p?.asking_price == null ? "missing" : "listing-data"} />
             <Fact label="Target purchase price" value={displayMoney(p?.target_purchase_price)} status={p?.target_purchase_price == null ? "missing" : "user-entered"} />
-            <Fact label="Expected monthly rent" value={displayMoney(p?.expected_monthly_rent)} status={p?.expected_monthly_rent == null ? "missing" : rentStatusToDataStatus(p?.rent_verification_status ?? null)} />
+            <Fact label="Expected monthly rent (recorded assessment declaration)" value={displayMoney(p?.expected_monthly_rent)} status={p?.expected_monthly_rent == null ? "missing" : "user-entered"} />
           </CardContent>
         </Card>
 
@@ -140,7 +142,7 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
       ) : null}
 
       {/* FINANCIAL CARDS */}
-      <Section title="Financial results" subtitle="Base case. Calculated from the figures you entered.">
+      <Section title="Financial results" subtitle="Base case. Calculated from qualified saved inputs; open unsaved drafts are excluded.">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {financial.map((m) => (
             <Card key={m.label}>
@@ -196,15 +198,15 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
           <Card>
             <CardContent className="space-y-3 pt-5 text-sm">
               {confidence.factors.filter((f) => f.status !== "not-available-in-phase").map((f) => (
-                <div key={f.key} className="flex items-start justify-between gap-3 border-b border-border pb-2 last:border-0">
-                  <div>
+                <div key={f.key} className="flex flex-col items-start justify-between gap-3 border-b border-border pb-2 last:border-0 sm:flex-row">
+                  <div className="min-w-0 break-words">
                     <p className="font-medium">{f.label}</p>
                     <p className="text-xs text-muted-foreground">{f.explanation}</p>
                   </div>
-                  <StatusBadge status={f.deduction > 0 ? "missing" : "verified"} />
+                  <span className="shrink-0 text-xs text-muted-foreground">{f.deduction > 0 ? "Evidence or completeness gap" : "No confidence deduction"}</span>
                 </div>
               ))}
-              <p className="text-xs text-muted-foreground">Labels: Verified · User Entered · Estimated · Missing / Not Verified.</p>
+              <p className="text-xs text-muted-foreground">Confidence reflects recorded evidence and completeness. A populated field or no deduction does not independently verify market evidence.</p>
             </CardContent>
           </Card>
         </Section>
@@ -217,7 +219,7 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
                   {missing.map((m) => (
                     <li key={m} className="flex items-start gap-2">
                       <HelpCircle className="mt-0.5 size-4 shrink-0 text-warning" />
-                      <span><span className="sr-only">Missing: </span>{m}</span>
+                      <span className="min-w-0 break-words"><span className="sr-only">Missing: </span>{m}</span>
                     </li>
                   ))}
                 </ul>
@@ -234,7 +236,7 @@ export function PropertySummaryDashboard({ propertyId }: { propertyId: string })
 
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
   return (
-    <section className="space-y-3">
+    <section className="min-w-0 space-y-3">
       <div>
         <h2 className="text-base font-semibold">{title}</h2>
         {subtitle ? <p className="text-xs text-muted-foreground">{subtitle}</p> : null}

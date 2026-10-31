@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "types": ["vite/client", "node"] },
+  "include": [
+    "../src/**/*.ts",
+    "../src/**/*.tsx",
+    "./strategies.test.ts",
+    "./strategies-fixtures.ts",
+    "./strategy-api.test.ts",
+    "./strategy-ui.test.ts"
+  ]
+}

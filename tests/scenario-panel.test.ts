@@ -15,11 +15,13 @@ vi.mock("react", async (importOriginal) => {
   };
 });
 vi.mock("@/integrations/supabase/external-client", () => ({ supabase: {} }));
+vi.mock("@/hooks/use-auth", () => ({ useAuth: () => ({ user: { id: "test-owner" }, loading: false }) }));
 vi.mock("@tanstack/react-query", () => ({
+  useQueryClient: () => ({ getQueryState: () => undefined, getQueryCache: () => ({ subscribe: () => () => {} }) }),
   useQuery: ({ queryKey }: { queryKey: string[] }) => ({
     isLoading: false,
     isError: state.error,
-    data: queryKey[0] === "properties" ? { expected_monthly_rent: 2000 } : queryKey[0] === "acquisition-costs" ? state.acquisition : null,
+    data: queryKey[0] === "properties" ? { user_id: "test-owner", expected_monthly_rent: 2000 } : queryKey[0] === "acquisition-costs" ? state.acquisition : null,
   }),
 }));
 

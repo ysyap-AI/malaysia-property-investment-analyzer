@@ -20,7 +20,7 @@ import { supabase } from "@/integrations/supabase/external-client";
 
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/properties/new", label: "New Analysis", icon: FilePlus2 },
+  { to: "/properties/new", label: "New Property", icon: FilePlus2 },
   { to: "/properties", label: "Properties", icon: Table2 },
   { to: "/settings", label: "Settings", icon: SlidersHorizontal },
   { to: "/profile", label: "Profile", icon: UserRound },
@@ -109,23 +109,24 @@ export function AppShell({
           >
             <LogOut className="size-4" /> Sign out
           </Button>
-          <p className="text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+          <p className="text-xs text-sidebar-foreground/50">Malaysian property research</p>
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex flex-col gap-4 border-b border-border bg-card px-6 py-5 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-3">
+          <div className="flex min-w-0 items-start gap-3">
             <Button
               variant="outline"
               size="icon"
               className="lg:hidden"
               aria-label="Toggle navigation"
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
               <Menu className="size-4" />
             </Button>
-            <div>
+            <div className="min-w-0 break-words">
               <h1 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
               {description ? (
                 <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{description}</p>
@@ -149,7 +150,7 @@ export function AppShell({
           </div>
         ) : null}
 
-        <main className="flex-1 px-6 py-6">{children}</main>
+        <main className="min-w-0 flex-1 px-4 py-6 sm:px-6">{children}</main>
       </div>
     </div>
   );

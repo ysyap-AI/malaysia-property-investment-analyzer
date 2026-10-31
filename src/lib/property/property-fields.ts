@@ -173,8 +173,21 @@ export const propertySchema = z.object({
   target_purchase_price: optionalNumber({ min: 0 }),
   bank_valuation: optionalNumber({ min: 0 }),
   expected_monthly_rent: optionalNumber({ min: 0 }),
-  rent_verification_status: z.enum(["verified", "user-entered", "estimated", "listing-data", "missing"]),
-  property_status: z.enum(["prospect", "analysing", "watchlist", "shortlisted", "purchased", "rejected"]),
+  rent_verification_status: z.enum([
+    "verified",
+    "user-entered",
+    "estimated",
+    "listing-data",
+    "missing",
+  ]),
+  property_status: z.enum([
+    "prospect",
+    "analysing",
+    "watchlist",
+    "shortlisted",
+    "purchased",
+    "rejected",
+  ]),
   analysis_status: z.enum(["not_started", "in_progress", "completed", "archived"]),
   listing_url: optionalText,
   notes: z
@@ -189,6 +202,31 @@ export const propertySchema = z.object({
 export type PropertyFormValues = z.input<typeof propertySchema>;
 /** What gets written to the database (unknown values are null). */
 export type PropertyInput = z.output<typeof propertySchema>;
+export type PropertyPatch = Partial<PropertyInput> & { evidence_metadata?: import("./investment-evidence").SectionEvidence | null };
+
+/** Omitted fields bypass their entry transformations and all validation. */
+export const propertyUpdateFormSchema = propertySchema
+  .partial()
+  .strict()
+  .transform(
+    (values) =>
+      Object.fromEntries(
+        Object.entries(values).filter(([, value]) => value !== undefined),
+      ) as PropertyPatch,
+  );
+
+/** Reverted display edits are omitted too; raw stored null/empty values stay separate. */
+export function propertyFormPatch(
+  values: PropertyFormValues,
+  initial: PropertyFormValues,
+  modified: ReadonlySet<keyof PropertyFormValues>,
+): Partial<PropertyFormValues> {
+  return Object.fromEntries(
+    [...modified]
+      .filter((key) => !Object.is(values[key], initial[key]))
+      .map((key) => [key, values[key]]),
+  );
+}
 
 /**
  * Stored rows follow database nullability. Supabase generates TEXT CHECK columns
@@ -236,10 +274,13 @@ export function recordToForm(record: PropertyRecord): PropertyFormValues {
   const out = { ...emptyPropertyForm } as Record<string, unknown>;
   for (const key of Object.keys(emptyPropertyForm)) {
     const value = (record as Record<string, unknown>)[key];
-    out[key] = value === null || value === undefined ? (emptyPropertyForm as Record<string, unknown>)[key] : value;
+    out[key] =
+      value === null || value === undefined
+        ? (emptyPropertyForm as Record<string, unknown>)[key]
+        : value;
   }
   // Text defaults must not be reintroduced when the stored value is genuinely empty.
-  if (record.country === null) out['country'] = "";
+  if (record.country === null) out["country"] = "";
   return out as PropertyFormValues;
 }
 
@@ -252,7 +293,13 @@ export function labelFor(
 }
 
 export function rentStatusToDataStatus(value: string | null): DataStatus {
-  const allowed: DataStatus[] = ["verified", "user-entered", "estimated", "listing-data", "missing"];
+  const allowed: DataStatus[] = [
+    "verified",
+    "user-entered",
+    "estimated",
+    "listing-data",
+    "missing",
+  ];
   return allowed.includes(value as DataStatus) ? (value as DataStatus) : "missing";
 }
 

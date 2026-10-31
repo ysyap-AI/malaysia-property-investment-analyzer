@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       acquisition_costs: {
         Row: {
+          evidence_metadata?: Json | null
           acquisition_agent_fee: number | null
           agent_fee: number | null
           contingency_cost: number | null
@@ -40,6 +41,7 @@ export type Database = {
           valuation_fee: number | null
         }
         Insert: {
+          evidence_metadata?: Json | null
           acquisition_agent_fee?: number | null
           agent_fee?: number | null
           contingency_cost?: number | null
@@ -64,6 +66,7 @@ export type Database = {
           valuation_fee?: number | null
         }
         Update: {
+          evidence_metadata?: Json | null
           acquisition_agent_fee?: number | null
           agent_fee?: number | null
           contingency_cost?: number | null
@@ -99,6 +102,7 @@ export type Database = {
       }
       financing: {
         Row: {
+          evidence_metadata?: Json | null
           annual_interest_rate_percent: number | null
           bank_quote_verified: boolean
           calculated_monthly_instalment: number | null
@@ -120,6 +124,7 @@ export type Database = {
           user_provided_monthly_instalment: number | null
         }
         Insert: {
+          evidence_metadata?: Json | null
           annual_interest_rate_percent?: number | null
           bank_quote_verified?: boolean
           calculated_monthly_instalment?: number | null
@@ -141,6 +146,7 @@ export type Database = {
           user_provided_monthly_instalment?: number | null
         }
         Update: {
+          evidence_metadata?: Json | null
           annual_interest_rate_percent?: number | null
           bank_quote_verified?: boolean
           calculated_monthly_instalment?: number | null
@@ -221,6 +227,7 @@ export type Database = {
       }
       operating_expenses: {
         Row: {
+          evidence_metadata?: Json | null
           annual_assessment_tax: number | null
           annual_bad_debt_allowance: number | null
           annual_cleaning_cost: number | null
@@ -249,6 +256,7 @@ export type Database = {
           utilities_monthly: number | null
         }
         Insert: {
+          evidence_metadata?: Json | null
           annual_assessment_tax?: number | null
           annual_bad_debt_allowance?: number | null
           annual_cleaning_cost?: number | null
@@ -277,6 +285,7 @@ export type Database = {
           utilities_monthly?: number | null
         }
         Update: {
+          evidence_metadata?: Json | null
           annual_assessment_tax?: number | null
           annual_bad_debt_allowance?: number | null
           annual_cleaning_cost?: number | null
@@ -340,6 +349,9 @@ export type Database = {
       }
       properties: {
         Row: {
+          investment_strategy_assumptions?: Json | null
+          evidence_metadata?: Json | null
+          revision: number
           analysis_status: string | null
           asking_price: number | null
           bank_valuation: number | null
@@ -376,6 +388,9 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          investment_strategy_assumptions?: Json | null
+          evidence_metadata?: Json | null
+          revision?: number
           analysis_status?: string | null
           asking_price?: number | null
           bank_valuation?: number | null
@@ -412,6 +427,9 @@ export type Database = {
           user_id: string
         }
         Update: {
+          investment_strategy_assumptions?: Json | null
+          evidence_metadata?: Json | null
+          revision?: number
           analysis_status?: string | null
           asking_price?: number | null
           bank_valuation?: number | null
@@ -817,6 +835,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      m4_property_snapshot: { Args: { p_id: string }; Returns: Json }
+      m4_write_property: {
+        Args: { p_id: string; p_revision: number; p_table: string; p_values: Json; p_delete?: boolean }
+        Returns: Json
+      }
       owns_property: { Args: { _property_id: string }; Returns: boolean }
     }
     Enums: {

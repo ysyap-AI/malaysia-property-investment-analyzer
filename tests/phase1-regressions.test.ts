@@ -3,9 +3,10 @@ import { DEFAULT_SCENARIOS } from "@/config/scenarios";
 import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 import { runScenario, type ScenarioBaseInputs } from "@/lib/scenarios/scenario-engine";
 import { financingSchema, emptyFinancingForm } from "@/lib/property/financing-fields";
+import { financingRecord } from "./financing-save-fixtures";
 
-const { from } = vi.hoisted(() => ({ from: vi.fn() }));
-vi.mock("@/integrations/supabase/external-client", () => ({ supabase: { from } }));
+const { from, rpc } = vi.hoisted(() => ({ from: vi.fn(), rpc: vi.fn() }));
+vi.mock("@/integrations/supabase/external-client", () => ({ supabase: { from, rpc } }));
 import { saveFinancing } from "@/lib/property/financing-api";
 beforeEach(() => from.mockReset());
 
@@ -22,11 +23,12 @@ describe("Phase 1 high severity regressions", () => {
     const chain = {
       select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(),
       update: vi.fn().mockReturnThis(), insert: vi.fn().mockReturnThis(),
-      maybeSingle: vi.fn().mockResolvedValue({ data: existing ? { id: "fixture" } : null, error: null }),
-      single: vi.fn().mockResolvedValue({ data: null, error: { message: "Write rejected" } }),
+      maybeSingle: vi.fn().mockResolvedValue({ data: existing ? financingRecord(200, "fixture") : null, error: null }),
+      single: vi.fn().mockResolvedValue({ data: null, error: { code: "23514", message: "Write rejected" } }),
     };
     from.mockReturnValue(chain);
-    await expect(saveFinancing("fixture", { ...financingSchema.parse(emptyFinancingForm), down_payment: null, calculated_monthly_instalment: null })).rejects.toThrow("Write rejected");
+    rpc.mockImplementation(() => chain.single());
+    await expect(saveFinancing("fixture", { ...financingSchema.parse(emptyFinancingForm), down_payment: null, calculated_monthly_instalment: null }, () => true, 1)).rejects.toMatchObject({ outcome: "rejected", message: "The financing save was rejected. Review the draft and saved values before trying again." });
     expect(chain.single).toHaveBeenCalledOnce();
   });
   it("withholds returns when even one expense is unknown", () => {
@@ -56,7 +58,7 @@ describe("Phase 1 high severity regressions", () => {
   });
   it.each([NaN, Infinity, -1])("rejects invalid financing writes before database access: %s", async (amount) => {
     const valid = financingSchema.parse(emptyFinancingForm);
-    await expect(saveFinancing("fixture", { ...valid, down_payment: amount, calculated_monthly_instalment: null })).rejects.toThrow();
+    await expect(saveFinancing("fixture", { ...valid, down_payment: amount, calculated_monthly_instalment: null }, () => true, 1)).rejects.toThrow();
     expect(from).not.toHaveBeenCalled();
   });
 });

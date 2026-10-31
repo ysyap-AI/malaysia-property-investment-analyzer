@@ -1,0 +1,7 @@
+{
+  "extends": "./m7-tsconfig.json",
+  "include": [
+    "../src/**/*.ts", "../src/**/*.tsx", "./m7-*.test.ts", "./m7-demo/*.ts",
+    "./property-save-*.test.ts", "./phase2a03/canon-poc/reference-model.mjs"
+  ]
+}

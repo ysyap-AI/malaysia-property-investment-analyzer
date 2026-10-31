@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useFinancialAvailability } from "@/hooks/use-financial-confirmation";
 
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import {
 import { calculateTotalAcquisitionCost } from "@/lib/finance/acquisition";
 import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 import type { MetricResult } from "@/lib/finance/returns";
+import { financialInputLabel } from "@/lib/property/saved-analysis-presentation";
 import { runScenario, type ScenarioBaseInputs } from "@/lib/scenarios/scenario-engine";
 import { acquisitionKeys, getAcquisitionCosts } from "@/lib/property/acquisition-api";
 import { financingKeys, getFinancing } from "@/lib/property/financing-api";
@@ -45,7 +47,7 @@ function Metric({ r, kind }: { r: MetricResult; kind: "money" | "pct" }) {
   if (r.status === "ok") return <span>{kind === "money" ? displayMoney(r.value) : `${r.value.toFixed(2)}%`}</span>;
   if (r.status === "invalid") return <span className="text-destructive" title={r.reason}>Invalid</span>;
   return (
-    <span className="text-muted-foreground" title={`Missing: ${r.missingInputs.join(", ")}`}>
+    <span className="text-muted-foreground" title={`Missing: ${r.missingInputs.map(financialInputLabel).join(", ")}`}>
       Missing / Not Verified
     </span>
   );
@@ -66,6 +68,7 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
   const acq = useQuery({ queryKey: acquisitionKeys.detail(propertyId), queryFn: () => getAcquisitionCosts(propertyId) });
   const opex = useQuery({ queryKey: operatingExpenseKeys.detail(propertyId), queryFn: () => getOperatingExpenses(propertyId) });
   const fin = useQuery({ queryKey: financingKeys.detail(propertyId), queryFn: () => getFinancing(propertyId) });
+  const availability = useFinancialAvailability(propertyId, [property, acq, opex, fin], property.data?.user_id);
 
   const base: ScenarioBaseInputs = useMemo(() => {
     const a = acq.data ?? null;
@@ -108,6 +111,7 @@ export function ScenariosPanel({ propertyId }: { propertyId: string }) {
   if (property.isError || acq.isError || opex.isError || fin.isError) {
     return <p role="alert" className="text-sm text-destructive">Unable to load scenario inputs. Reload the page to try again.</p>;
   }
+  if (!availability.current) return <p role="status">Current scenario analysis unavailable. {availability.reason}</p>;
 
   return (
     <div className="space-y-6">
