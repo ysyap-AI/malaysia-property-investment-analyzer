@@ -1,3 +1,5 @@
+import { EvidenceFields } from "./EvidenceFields";
+import { evidenceEqual, type SectionEvidence } from "@/lib/property/investment-evidence";
 import { useState, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -45,7 +47,9 @@ type Errors = Partial<Record<keyof PropertyFormValues, string>>;
 type PropertyFormProps = {
   submitLabel: string;
   busy?: boolean;
+  readOnly?: boolean;
   onCancel?: () => void;
+  onDraftChange?: (values: PropertyFormValues) => void;
 } & (
   | {
       originalProperty: PropertyRecord;
@@ -60,19 +64,27 @@ type PropertyFormProps = {
 );
 
 export function PropertyForm(props: PropertyFormProps) {
-  const { submitLabel, busy, onCancel } = props;
+  const { submitLabel, busy, readOnly, onCancel } = props;
   // Background query refreshes must never replace the baseline of an open draft.
   const [original] = useState(() =>
     props.originalProperty ? Object.freeze({ ...props.originalProperty }) : undefined,
   );
-  const [initial] = useState<PropertyFormValues>(() =>
-    original ? recordToForm(original) : { ...(props.initialValues ?? emptyPropertyForm) },
-  );
+  const [initial] = useState<PropertyFormValues>(() => {
+    const display = original ? recordToForm(original) : (props.initialValues ?? emptyPropertyForm);
+    // Inputs display strings, including stored numbers. Reverting a number's
+    // displayed spelling must compare with that exact original display string.
+    return Object.fromEntries(
+      Object.entries(display).map(([key, value]) => [key, String(value ?? "")]),
+    ) as PropertyFormValues;
+  });
   const [values, setValues] = useState<PropertyFormValues>(initial);
   const [modified, setModified] = useState<ReadonlySet<keyof PropertyFormValues>>(() => new Set());
+  const [evidence, setEvidence] = useState<SectionEvidence | null | undefined>(undefined);
+  const evidenceDirty = evidence !== undefined && !evidenceEqual(evidence, original?.evidence_metadata);
   const [errors, setErrors] = useState<Errors>({});
 
   function set<K extends keyof PropertyFormValues>(key: K, value: PropertyFormValues[K]) {
+    props.onDraftChange?.({ ...values, [key]: value });
     setValues((prev) => ({ ...prev, [key]: value }));
     setModified((prev) => new Set([...prev, key]));
     const result = propertySchema.shape[key].safeParse(value);
@@ -86,7 +98,7 @@ export function PropertyForm(props: PropertyFormProps) {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (busy) return;
+    if (busy || readOnly) return;
     const patch = propertyFormPatch(values, initial, modified);
     const result = props.originalProperty
       ? propertyUpdateFormSchema.safeParse(patch)
@@ -98,11 +110,14 @@ export function PropertyForm(props: PropertyFormProps) {
         if (key && !next[key]) next[key] = issue.message;
       }
       setErrors(next);
+      const first = result.error.issues[0]?.path[0];
+      if (typeof first === "string" && typeof document !== "undefined")
+        document.getElementById(first)?.focus();
       return;
     }
     setErrors({});
     if (props.originalProperty && original) {
-      if (Object.keys(patch).length > 0) props.onSubmit(result.data, original);
+      if (Object.keys(patch).length > 0 || evidenceDirty) props.onSubmit({ ...result.data, ...(evidenceDirty ? { evidence_metadata: evidence } : {}) }, original);
     } else if (!props.originalProperty) {
       // Parse separately to keep creation's required-field type distinct from PATCH.
       props.onSubmit(propertySchema.parse(values));
@@ -218,93 +233,109 @@ export function PropertyForm(props: PropertyFormProps) {
   const plain = (items: readonly string[]) => items.map((i) => ({ value: i, label: i }));
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <Section
-        title="1. Identification"
-        description="What the property is called and who built it."
-      >
-        {field("project_name", "Project name *", { placeholder: "e.g. Residensi Sentral Suite" })}
-        {field("developer", "Developer")}
-        {field("completion_year", "Completion year", { inputMode: "numeric" })}
-        {field("listing_url", "Listing link")}
-      </Section>
+    <form
+      data-property-form
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      aria-label="Property details edit"
+    >
+      <fieldset disabled={busy || readOnly} className="min-w-0 space-y-6">
+        <Section
+          title="1. Identification"
+          description="What the property is called and who built it."
+        >
+          {field("project_name", "Project name *", { placeholder: "e.g. Residensi Sentral Suite" })}
+          {field("developer", "Developer")}
+          {field("completion_year", "Completion year", { inputMode: "numeric" })}
+          {field("listing_url", "Listing link")}
+        </Section>
 
-      <Section title="2. Location" description="Address details only. No maps or lookups are used.">
-        {field("full_address", "Full address")}
-        {field("postcode", "Postcode", { placeholder: "50470", inputMode: "numeric" })}
-        {field("city", "City")}
-        {field("district", "District")}
-        {select("state", "State", plain(MALAYSIAN_STATES))}
-        {field("country", "Country")}
-      </Section>
+        <Section
+          title="2. Location"
+          description="Address details only. No maps or lookups are used."
+        >
+          {field("full_address", "Full address")}
+          {field("postcode", "Postcode", { placeholder: "50470", inputMode: "numeric" })}
+          {field("city", "City")}
+          {field("district", "District")}
+          {select("state", "State", plain(MALAYSIAN_STATES))}
+          {field("country", "Country")}
+        </Section>
 
-      <Section title="3. Property & title" description="Type of property and how it is held.">
-        {select("property_type", "Property type", plain(PROPERTY_TYPES))}
-        {select("title_type", "Title type", plain(TITLE_TYPES))}
-        {select("tenure", "Tenure", TENURES)}
-        {field("lease_expiry_year", "Lease expiry year", {
-          inputMode: "numeric",
-          hint: "Leasehold only. Leave blank if freehold or unknown.",
-        })}
-      </Section>
+        <Section title="3. Property & title" description="Type of property and how it is held.">
+          {select("property_type", "Property type", plain(PROPERTY_TYPES))}
+          {select("title_type", "Title type", plain(TITLE_TYPES))}
+          {select("tenure", "Tenure", TENURES)}
+          {field("lease_expiry_year", "Lease expiry year", {
+            inputMode: "numeric",
+            hint: "Leasehold only. Leave blank if freehold or unknown.",
+          })}
+        </Section>
 
-      <Section title="4. Unit details" description="Physical facts about the unit.">
-        {field("built_up_sqft", "Built-up size (sq ft)", { inputMode: "decimal" })}
-        {field("bedrooms", "Bedrooms", { inputMode: "numeric" })}
-        {field("bathrooms", "Bathrooms", { inputMode: "numeric" })}
-        {field("car_parks", "Car parks", { inputMode: "numeric" })}
-        {field("floor_level", "Floor level", { placeholder: "e.g. 12 or Ground" })}
-        {field("total_floors", "Total floors in building", { inputMode: "numeric" })}
-        {select("furnishing_status", "Furnishing status", plain(FURNISHING_STATUSES))}
-        {select("unit_condition", "Unit condition", plain(UNIT_CONDITIONS))}
-      </Section>
+        <Section title="4. Unit details" description="Physical facts about the unit.">
+          {field("built_up_sqft", "Built-up size (sq ft)", { inputMode: "decimal" })}
+          {field("bedrooms", "Bedrooms", { inputMode: "numeric" })}
+          {field("bathrooms", "Bathrooms", { inputMode: "numeric" })}
+          {field("car_parks", "Car parks", { inputMode: "numeric" })}
+          {field("floor_level", "Floor level", { placeholder: "e.g. 12 or Ground" })}
+          {field("total_floors", "Total floors in building", { inputMode: "numeric" })}
+          {select("furnishing_status", "Furnishing status", plain(FURNISHING_STATUSES))}
+          {select("unit_condition", "Unit condition", plain(UNIT_CONDITIONS))}
+        </Section>
 
-      <Section
-        title="5. Price & rent inputs"
-        description="Figures are stored exactly as entered. Nothing is calculated in this phase, and a blank stays Missing / Not Verified."
-      >
-        {field("asking_price", "Asking price (RM)", {
-          inputMode: "decimal",
-          hint: "An asking price is not a confirmed transaction.",
-        })}
-        {field("target_purchase_price", "Target purchase price (RM)", { inputMode: "decimal" })}
-        {field("bank_valuation", "Bank valuation (RM)", { inputMode: "decimal" })}
-        {field("expected_monthly_rent", "Expected monthly rent (RM)", { inputMode: "decimal" })}
-        {select("rent_verification_status", "Rent evidence", RENT_VERIFICATION_STATUSES, {
-          allowBlank: false,
-          hint: "How the rent figure was obtained.",
-        })}
-      </Section>
+        <Section
+          title="5. Price & rent inputs"
+          description="Blank fields stay Missing / Not Verified. Acquisition costs and financing are saved separately; changing a target price does not rewrite those confirmed inputs."
+        >
+          {field("asking_price", "Asking price (RM)", {
+            inputMode: "decimal",
+            hint: "An asking price is not a confirmed transaction.",
+          })}
+          {field("target_purchase_price", "Target purchase price (RM)", { inputMode: "decimal" })}
+          {field("bank_valuation", "Bank valuation (RM)", { inputMode: "decimal" })}
+          {field("expected_monthly_rent", "Expected monthly rent (RM)", { inputMode: "decimal" })}
+          {select("rent_verification_status", "Recorded assessment declaration - rent", RENT_VERIFICATION_STATUSES, {
+            allowBlank: false,
+            hint: "How the rent figure was obtained.",
+          })}
+        </Section>
 
-      <Section title="6. Workflow" description="Where this property sits in your process.">
-        {select("property_status", "Property status", PROPERTY_STATUSES, { allowBlank: false })}
-        {select("analysis_status", "Analysis status", ANALYSIS_STATUSES, { allowBlank: false })}
-        <div className="space-y-2 md:col-span-2">
-          <Label htmlFor="notes">Notes</Label>
-          <Textarea
-            id="notes"
-            rows={4}
-            value={text("notes")}
-            aria-invalid={Boolean(errors.notes)}
-            aria-describedby={describedBy("notes")}
-            onChange={(e) => set("notes", e.target.value)}
-            placeholder="Anything you want to remember about this property."
-          />
-          {feedback("notes")}
-        </div>
-      </Section>
-
+        <Section title="6. Workflow" description="Where this property sits in your process.">
+          {select("property_status", "Property status", PROPERTY_STATUSES, { allowBlank: false })}
+          {select("analysis_status", "Analysis status", ANALYSIS_STATUSES, { allowBlank: false })}
+          <div className="space-y-2 md:col-span-2">
+            <Label htmlFor="notes">Notes</Label>
+            <Textarea
+              id="notes"
+              rows={4}
+              value={text("notes")}
+              aria-invalid={Boolean(errors.notes)}
+              aria-describedby={describedBy("notes")}
+              onChange={(e) => set("notes", e.target.value)}
+              placeholder="Anything you want to remember about this property."
+            />
+            {feedback("notes")}
+          </div>
+        </Section>
+      {original ? <EvidenceFields section="properties" values={Object.fromEntries(["expected_monthly_rent", "asking_price", "target_purchase_price", "bank_valuation", "full_address"].map(field => {
+        const key = field as keyof PropertyFormValues;
+        if (!modified.has(key) || Object.is(values[key], initial[key])) return [field, original[key]];
+        const parsed = propertySchema.shape[key].safeParse(values[key]);
+        return [field, parsed.success ? parsed.data : null];
+      }))} metadata={evidence === undefined ? original.evidence_metadata : evidence} onChange={setEvidence} disabled={busy || readOnly} /> : null}
+      </fieldset>
       <div className="flex flex-wrap gap-3">
         <Button
           type="submit"
           disabled={
             busy ||
+            readOnly ||
             Boolean(
-              original && Object.keys(propertyFormPatch(values, initial, modified)).length === 0,
+              original && !evidenceDirty && Object.keys(propertyFormPatch(values, initial, modified)).length === 0,
             )
           }
         >
-          {busy ? "Saving…" : submitLabel}
+          {busy ? "Saving…" : evidenceDirty ? (Object.keys(propertyFormPatch(values, initial, modified)).length ? "Save values and evidence" : "Save evidence") : submitLabel}
         </Button>
         {onCancel ? (
           <Button type="button" variant="outline" onClick={onCancel} disabled={busy}>

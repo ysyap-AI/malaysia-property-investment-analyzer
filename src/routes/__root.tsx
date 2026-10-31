@@ -8,7 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
@@ -135,18 +135,28 @@ function useIsShowcase() {
 
 function ApplicationProviders() {
   const { queryClient } = Route.useRouteContext();
+  const [authInitialized, setAuthInitialized] = useState(false);
+  const protectedRoute = useRouterState({
+    select: (state) => state.matches.some((match) => match.routeId === "/_authenticated"),
+  });
   useEffect(
     () =>
-      watchAuthIsolation(supabase.auth, queryClient, (nextUserId) => {
-        window.location.replace(nextUserId ? "/properties" : "/login");
-      }),
+      watchAuthIsolation(
+        supabase.auth,
+        queryClient,
+        (nextUserId) => {
+          setAuthInitialized(false);
+          window.location.replace(nextUserId ? "/properties" : "/login");
+        },
+        () => setAuthInitialized(true),
+      ),
     [queryClient],
   );
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      {!protectedRoute || authInitialized ? <Outlet /> : <p role="status">Checking session…</p>}
       <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );

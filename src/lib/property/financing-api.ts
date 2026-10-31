@@ -1,29 +1,54 @@
+import { parseEvidence, evidenceEqual, type SectionEvidence } from "./investment-evidence";
+import { writeFinancialRevision, RevisionWriteError } from "./property-revision";
 // Data access for financing. Ownership is enforced by the database (RLS).
 import { supabase } from "@/integrations/supabase/external-client";
 import type { FinancingRecord, FinancingRow } from "./financing-fields";
-import { financingSchema } from "./financing-fields";
-import { isSafeFinancialNumber } from "@/lib/finance/rounding";
+import {
+  FinancingSaveError,
+  isFinancingRecord,
+  isFinancingRow,
+  matchesFinancingRow,
+} from "./financing-editor";
 
 const TABLE = "financing";
 
 export async function getFinancing(propertyId: string): Promise<FinancingRecord | null> {
-  const { data, error } = await supabase.from(TABLE).select("*").eq("property_id", propertyId).maybeSingle();
-  if (error) throw new Error(error.message);
-  return data ?? null;
+  try {
+    const { data, error } = await supabase
+      .from(TABLE)
+      .select("*")
+      .eq("property_id", propertyId)
+      .maybeSingle();
+    if (error || (data !== null && !isFinancingRecord(data, propertyId)))
+      throw new Error("Read failed");
+    return data;
+  } catch {
+    throw new Error("Unable to load financing. Review the draft and try loading again.");
+  }
 }
 
-export async function saveFinancing(propertyId: string, values: FinancingRow): Promise<void> {
-  financingSchema.parse(values);
-  for (const amount of [values.down_payment, values.calculated_monthly_instalment]) {
-    if (amount !== null && (!isSafeFinancialNumber(amount) || amount < 0)) {
-      throw new Error("Invalid financing amount");
-    }
+export async function saveFinancing(
+  propertyId: string,
+  values: FinancingRow,
+  canDispatch: () => boolean,
+  revision: number | null,
+  evidence?: SectionEvidence | null,
+): Promise<FinancingRecord> {
+  let metadata: SectionEvidence | null | undefined;
+  try { metadata = evidence === undefined ? undefined : parseEvidence("financing", evidence); }
+  catch { throw new FinancingSaveError("not-sent"); }
+  const submitted = Object.freeze({ ...values });
+  if (!isFinancingRow(submitted)) throw new FinancingSaveError("not-sent");
+  try {
+    const { record: data } = await writeFinancialRevision(propertyId, "financing", { ...submitted, ...(metadata !== undefined ? { evidence_metadata: metadata } : {}) }, revision, canDispatch);
+    if (!(matchesFinancingRow(data, propertyId, submitted))) throw new FinancingSaveError("uncertain");
+    if (metadata !== undefined && !evidenceEqual((data as { evidence_metadata?: unknown }).evidence_metadata, metadata)) throw new FinancingSaveError("uncertain");
+    return data as FinancingRecord;
+  } catch (error) {
+    if (error instanceof FinancingSaveError) throw error;
+    if (error instanceof RevisionWriteError) throw new FinancingSaveError(error.outcome);
+    throw new FinancingSaveError("uncertain");
   }
-  const existing = await getFinancing(propertyId);
-  const { error } = existing
-    ? await supabase.from(TABLE).update(values).eq("id", existing.id).select("id").single()
-    : await supabase.from(TABLE).insert({ ...values, property_id: propertyId }).select("id").single();
-  if (error) throw new Error(error.message);
 }
 
 export const financingKeys = {

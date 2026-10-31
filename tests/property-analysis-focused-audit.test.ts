@@ -7,7 +7,9 @@ import { OPERATING_EXPENSE_FIELDS } from "@/lib/finance/operating-expenses";
 
 const state = vi.hoisted(() => ({ data: {} as Record<string, unknown>, error: false, errorKey: "", loading: false }));
 vi.mock("@/integrations/supabase/external-client", () => ({ supabase: {} }));
+vi.mock("@/hooks/use-auth", () => ({ useAuth: () => ({ user: { id: "test-owner" }, loading: false }) }));
 vi.mock("@tanstack/react-query", () => ({
+  useQueryClient: () => ({ getQueryState: () => undefined, getQueryCache: () => ({ subscribe: () => () => {} }) }),
   useQuery: ({ queryKey }: { queryKey: string[] }) => ({
     data: state.data[queryKey[0]!], isLoading: state.loading, isError: state.error || state.errorKey === queryKey[0],
     error: state.error || state.errorKey === queryKey[0] ? new Error("Input retrieval failed") : null,
@@ -29,7 +31,7 @@ beforeEach(() => {
   state.errorKey = "";
   state.loading = false;
   state.data = {
-    properties: { expected_monthly_rent: 6000, rent_verification_status: "verified", bank_valuation: 500000, target_purchase_price: 500000 },
+    properties: { user_id: "test-owner", expected_monthly_rent: 6000, rent_verification_status: "verified", bank_valuation: 500000, target_purchase_price: 500000 },
     "acquisition-costs": { ...Object.fromEntries(ACQUISITION_COST_FIELDS.map((key) => [key, 0])), purchase_price: 500000 },
     "operating-expenses": Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((key) => [key, 0])),
     financing: { loan_to_value_percent: 80, loan_amount: null, annual_interest_rate_percent: 4,

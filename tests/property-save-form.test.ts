@@ -113,6 +113,19 @@ beforeEach(() => {
 });
 
 describe("property form feedback and deliberate edits", () => {
+  it("reverting a stored number to its original display spelling produces no PATCH", () => {
+    const save = vi.fn();
+    const form = harness({
+      originalProperty: { ...legacy(), asking_price: 500000 },
+      submitLabel: "Save",
+      onSubmit: save,
+    });
+    form.fill("asking_price", "600000");
+    form.fill("asking_price", "500000");
+    expect(form.submitButton().props.disabled).toBe(true);
+    form.submit();
+    expect(save).not.toHaveBeenCalled();
+  });
   it("shows scalar counters, allows oversized paste, associates errors, and prevents submit", () => {
     const save = vi.fn();
     const form = harness({ submitLabel: "Save", onSubmit: save });

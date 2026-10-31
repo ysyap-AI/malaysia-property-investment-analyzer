@@ -202,7 +202,7 @@ export const propertySchema = z.object({
 export type PropertyFormValues = z.input<typeof propertySchema>;
 /** What gets written to the database (unknown values are null). */
 export type PropertyInput = z.output<typeof propertySchema>;
-export type PropertyPatch = Partial<PropertyInput>;
+export type PropertyPatch = Partial<PropertyInput> & { evidence_metadata?: import("./investment-evidence").SectionEvidence | null };
 
 /** Omitted fields bypass their entry transformations and all validation. */
 export const propertyUpdateFormSchema = propertySchema

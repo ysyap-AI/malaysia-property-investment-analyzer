@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Building2, FilePlus2, ShieldAlert, Wallet } from "lucide-react";
+import { FilePlus2 } from "lucide-react";
 
 import { AppShell } from "@/components/layout/AppShell";
-import { MetricCard } from "@/components/common/MetricCard";
-import { PlaceholderSection } from "@/components/common/PlaceholderSection";
+import { PropertyListState } from "@/components/property/PropertyListState";
 import { PropertiesTable } from "@/components/property/PropertiesTable";
 import { Button } from "@/components/ui/button";
 import { listProperties, propertyKeys } from "@/lib/property/property-api";
@@ -16,7 +15,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
       {
         name: "description",
         content:
-          "Overview of your saved Malaysian rental property analyses, portfolio metrics and data confidence.",
+          "Review saved Malaysian properties, financial results, evidence and next steps.",
       },
       { property: "og:title", content: "Dashboard — Malaysia Property Investment Analyzer" },
       {
@@ -29,13 +28,12 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function DashboardPage() {
-  const { data } = useQuery({ queryKey: propertyKeys.all, queryFn: listProperties });
-  const properties = data ?? [];
+  const { data, isLoading, error, refetch } = useQuery({ queryKey: propertyKeys.all, queryFn: listProperties });
 
   return (
     <AppShell
       title="Dashboard"
-      description="Review your saved properties. Open a property for financial analysis; portfolio aggregates below are not yet available."
+      description="Open a saved property to continue your research, or start with New Property."
       actions={
         <Button asChild>
           <Link to="/properties/new">
@@ -44,46 +42,11 @@ function DashboardPage() {
         </Button>
       }
     >
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard
-          label="Properties Saved"
-          value={String(properties.length)}
-          status="user-entered"
-          icon={<Building2 className="size-4" />}
-        />
-        <MetricCard
-          label="Average Net Yield"
-          status="missing"
-          hint="Portfolio aggregation not available"
-          icon={<Wallet className="size-4" />}
-        />
-        <MetricCard
-          label="Average Investment Score"
-          status="missing"
-          hint="Portfolio aggregation not available"
-        />
-        <MetricCard
-          label="Open Risk Flags"
-          status="missing"
-          hint="Portfolio aggregation not available"
-          icon={<ShieldAlert className="size-4" />}
-        />
-      </div>
-
-      <div className="mt-6 grid gap-6 xl:grid-cols-3">
-        <div className="xl:col-span-2">
-          <PropertiesTable rows={properties.slice(0, 5)} caption="Recent properties" />
-        </div>
-        <PlaceholderSection
-          title="Portfolio Insights"
-          items={[
-            "Yield distribution chart",
-            "Cash flow summary",
-            "Data confidence breakdown",
-            "Risk flag summary",
-          ]}
-        />
-      </div>
+      <PropertyListState loading={isLoading} error={!!error} data={data} onRetry={() => void refetch()}>
+        <PropertiesTable rows={(data ?? []).slice(0, 5)} caption="Recently edited properties" />
+      </PropertyListState>
+      {data && !error && !isLoading && data.length > 0 ? <Button asChild variant="link" className="mt-3"><Link to="/properties">View all {data.length} saved properties</Link></Button> : null}
+      <p className="mt-6 text-xs text-muted-foreground">Portfolio summaries are not available. Open a property for its saved financial results, evidence and independent investment strategies.</p>
     </AppShell>
   );
 }

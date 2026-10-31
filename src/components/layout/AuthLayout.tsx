@@ -31,11 +31,11 @@ export function AuthLayout({
             Evidence-based property decisions.
           </h2>
           <p className="mt-3 text-sm text-sidebar-foreground/70">
-            Every figure carries a data status, so you always know what is verified, what is
-            estimated, and what is still missing.
+            Review saved assumptions, estimates and missing information. Recorded sources are
+            distinct from independently authenticated evidence.
           </p>
         </div>
-        <p className="text-xs text-sidebar-foreground/50">Phase 1 — application shell</p>
+        <p className="text-xs text-sidebar-foreground/50">Malaysian property research</p>
       </div>
 
       <div className="flex flex-1 items-center justify-center px-6 py-12">

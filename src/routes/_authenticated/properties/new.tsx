@@ -1,14 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
 
 import { AppShell } from "@/components/layout/AppShell";
-import { PropertyForm } from "@/components/property/PropertyForm";
+import { PropertyCreateSession } from "@/components/property/PropertyCreateSession";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
-import { createProperty, propertyKeys } from "@/lib/property/property-api";
-import type { PropertyInput } from "@/lib/property/property-fields";
 
 export const Route = createFileRoute("/_authenticated/properties/new")({
   head: () => ({
@@ -31,21 +27,6 @@ export const Route = createFileRoute("/_authenticated/properties/new")({
 function NewPropertyPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const save = useMutation({
-    mutationFn: (values: PropertyInput) => {
-      if (!user) throw new Error("You need to be signed in.");
-      return createProperty(values, user.id);
-    },
-    onSuccess: async (record) => {
-      toast.success("Property saved");
-      await queryClient.invalidateQueries({ queryKey: propertyKeys.all });
-      void navigate({ to: "/properties/$id", params: { id: record.id } });
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
-
   return (
     <AppShell
       title="New Property"
@@ -58,12 +39,16 @@ function NewPropertyPage() {
         </Button>
       }
     >
-      <PropertyForm
-        submitLabel="Save property"
-        busy={save.isPending}
-        onSubmit={(values) => save.mutate(values)}
-        onCancel={() => void navigate({ to: "/properties" })}
-      />
+      {user ? (
+        <PropertyCreateSession
+          key={user.id}
+          owner={user.id}
+          onOpen={(id) => navigate({ to: "/properties/$id", params: { id } })}
+          onCancel={() => void navigate({ to: "/properties" })}
+        />
+      ) : (
+        <p>Sign in to create a property.</p>
+      )}
     </AppShell>
   );
 }

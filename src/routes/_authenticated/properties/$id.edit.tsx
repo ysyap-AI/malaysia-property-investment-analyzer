@@ -1,13 +1,10 @@
 import { createFileRoute, Link, useNavigate, useParams } from "@tanstack/react-router";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/use-auth";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
 
 import { AppShell } from "@/components/layout/AppShell";
-import { PropertyForm } from "@/components/property/PropertyForm";
+import { PropertyEditSession } from "@/components/property/PropertyEditSession";
 import { Button } from "@/components/ui/button";
-import { getProperty, propertyKeys, updateProperty } from "@/lib/property/property-api";
-import type { PropertyPatch } from "@/lib/property/property-fields";
 
 export const Route = createFileRoute("/_authenticated/properties/$id/edit")({
   head: () => ({
@@ -30,33 +27,11 @@ export const Route = createFileRoute("/_authenticated/properties/$id/edit")({
 function EditPropertyPage() {
   const { id } = useParams({ from: "/_authenticated/properties/$id/edit" });
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: propertyKeys.detail(id),
-    queryFn: () => getProperty(id),
-  });
-
-  const save = useMutation({
-    mutationFn: ({
-      values,
-      expectedUpdatedAt,
-    }: {
-      values: PropertyPatch;
-      expectedUpdatedAt: string;
-    }) => updateProperty(id, values, expectedUpdatedAt),
-    onSuccess: async () => {
-      toast.success("Changes saved");
-      await queryClient.invalidateQueries({ queryKey: propertyKeys.all });
-      await queryClient.invalidateQueries({ queryKey: propertyKeys.detail(id) });
-      void navigate({ to: "/properties/$id", params: { id } });
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
+  const { user, loading } = useAuth();
 
   return (
     <AppShell
-      title={data ? `Edit ${data.project_name}` : "Edit Property"}
+      title="Edit Property"
       description="Blank fields stay Missing / Not Verified."
       actions={
         <Button asChild variant="outline">
@@ -66,25 +41,16 @@ function EditPropertyPage() {
         </Button>
       }
     >
-      {error ? <p className="text-sm text-destructive">{(error as Error).message}</p> : null}
-      {isLoading ? <p className="text-sm text-muted-foreground">Loading…</p> : null}
-      {!isLoading && !data ? (
-        <p className="text-sm text-muted-foreground">
-          This property was not found, or it does not belong to your account.
-        </p>
-      ) : null}
-      {data ? (
-        <PropertyForm
-          key={id}
-          originalProperty={data}
-          submitLabel="Save changes"
-          busy={save.isPending}
-          onSubmit={(values, original) =>
-            save.mutate({ values, expectedUpdatedAt: original.updated_at })
-          }
+      {!loading && user ? (
+        <PropertyEditSession
+          key={`${user.id}:${id}`}
+          id={id}
+          owner={user.id}
           onCancel={() => void navigate({ to: "/properties/$id", params: { id } })}
         />
-      ) : null}
+      ) : (
+        <p>Loading account…</p>
+      )}
     </AppShell>
   );
 }

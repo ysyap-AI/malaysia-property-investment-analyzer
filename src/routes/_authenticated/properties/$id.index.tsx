@@ -1,13 +1,21 @@
+import { SourceNavigationProvider, type SourceRequest, revealAndFocus } from "@/hooks/use-source-navigation";
+import { SourcesAndAssumptions } from "@/components/property/SourcesAndAssumptions";
+import { InvestmentStrategies } from "@/components/property/InvestmentStrategies";
+import { EvidenceSummary } from "@/components/property/EvidenceSummary";
 import { createFileRoute, Link, useNavigate, useParams } from "@tanstack/react-router";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
-import { useState, type ReactNode } from "react";
-import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowLeft, Pencil } from "lucide-react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
+import { SavedDraftDisclosure } from "@/hooks/use-saved-draft-disclosure";
+import { SavedAnalysisOverview } from "@/components/property/SavedAnalysisOverview";
+import { useAuth } from "@/hooks/use-auth";
+import { usePropertyDeletion } from "@/hooks/use-property-deletion";
+import { deletionBlocksProperty } from "@/lib/property/property-delete";
 
 import { AppShell } from "@/components/layout/AppShell";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { AcquisitionCostsPanel } from "@/components/property/AcquisitionCostsPanel";
-import { DeletePropertyDialog } from "@/components/property/DeletePropertyDialog";
+import { PropertyDeleteControl } from "@/components/property/PropertyDeleteControl";
 import { OperatingExpensesPanel } from "@/components/property/OperatingExpensesPanel";
 import { FinancingPanel } from "@/components/property/FinancingPanel";
 import { RedFlagsPanel } from "@/components/property/RedFlagsPanel";
@@ -22,7 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deleteProperty, getProperty, propertyKeys } from "@/lib/property/property-api";
+import { getProperty, propertyKeys } from "@/lib/property/property-api";
 import {
   ANALYSIS_STATUSES,
   PROPERTY_STATUSES,
@@ -56,22 +64,27 @@ export const Route = createFileRoute("/_authenticated/properties/$id/")({
 function PropertyDetailsPage() {
   const { id } = useParams({ from: "/_authenticated/properties/$id/" });
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  const { user } = useAuth();
+  const deletion = usePropertyDeletion(user?.id ?? null, id);
+  const deletionBlocked = deletionBlocksProperty(deletion.outcome);
+  const [tab, setTab] = useState("summary");
+  const [request, setRequest] = useState<SourceRequest | null>(null);
+  const [inputTarget, setInputTarget] = useState<{ id: string; sequence: number } | null>(null);
+  const navigationSequence = useRef(0);
+  useEffect(() => {
+    if (inputTarget) revealAndFocus(document.getElementById(inputTarget.id));
+  }, [tab, inputTarget]);
+  function reviewInput(section: "property" | "financials" | "acquisition" | "financing" | "expenses", field?: string) {
+    setTab(section === "property" ? "overview" : "financials");
+    setInputTarget(field ? null : { id: section === "property" ? "property-inputs" : `inputs-${section === "financials" ? "acquisition" : section}`, sequence: ++navigationSequence.current });
+    setRequest(field ? { section: "properties", field, sequence: ++navigationSequence.current } : null);
+  }
+  const detailsTab = useRef<HTMLButtonElement>(null);
 
   const { data: property, isLoading, error } = useQuery({
     queryKey: propertyKeys.detail(id),
     queryFn: () => getProperty(id),
-  });
-
-  const remove = useMutation({
-    mutationFn: () => deleteProperty(id),
-    onSuccess: async () => {
-      toast.success("Property deleted");
-      await queryClient.invalidateQueries({ queryKey: propertyKeys.all });
-      void navigate({ to: "/properties" });
-    },
-    onError: (e: Error) => toast.error(e.message),
+    enabled: !!user && !deletionBlocked,
   });
 
   return (
@@ -89,51 +102,53 @@ function PropertyDetailsPage() {
               <ArrowLeft className="size-4" /> Back
             </Link>
           </Button>
-          <Button asChild>
+          <Button asChild disabled={deletionBlocked}>
             <Link to="/properties/$id/edit" params={{ id }}>
               <Pencil className="size-4" /> Edit
             </Link>
           </Button>
-          <Button
-            variant="outline"
-            className="text-destructive hover:text-destructive"
-            onClick={() => setConfirmDelete(true)}
-            disabled={!property}
-          >
-            <Trash2 className="size-4" /> Delete
-          </Button>
+          <PropertyDeleteControl key={JSON.stringify([user?.id, id])} id={id} property={property}
+            onDeleted={() => void navigate({ to: "/properties" })} />
         </div>
       }
     >
       {error ? <p className="text-sm text-destructive">{(error as Error).message}</p> : null}
       {isLoading ? <p className="text-sm text-muted-foreground">Loading…</p> : null}
-      {!isLoading && !property ? (
+      {!isLoading && !error && !property ? (
         <p className="text-sm text-muted-foreground">
           This property was not found, or it does not belong to your account.
         </p>
       ) : null}
 
-      {property ? (
+      {property && property.user_id === user?.id && !deletionBlocked ? (
         <>
           <div className="mb-6 flex flex-wrap items-center gap-2">
             <PropertyStatusBadge status={property.property_status} />
             <AnalysisStatusBadge status={property.analysis_status} />
             <span className="text-xs text-muted-foreground">
-              Rent evidence: <StatusBadge status={rentStatusToDataStatus(property.rent_verification_status)} />
+              Recorded assessment declaration - rent: <StatusBadge status={rentStatusToDataStatus(property.rent_verification_status)} />
             </span>
           </div>
 
-          <Tabs defaultValue="summary">
-            <TabsList>
+          <SavedDraftDisclosure key={JSON.stringify([user.id, id])}>
+          <SourceNavigationProvider request={request}>
+          <Tabs value={tab} onValueChange={(value) => { setTab(value); setRequest(null); setInputTarget(null); }} className="min-w-0 [overflow-wrap:anywhere] [&_fieldset]:min-w-0 [&_select]:min-w-0 [&_button]:max-w-full [&_button]:whitespace-normal [&_button]:h-auto [&_button]:min-h-9">
+            <SavedAnalysisOverview propertyId={id} onReview={reviewInput} />
+            <TabsList className="h-auto max-w-full flex-wrap justify-start">
               <TabsTrigger value="summary">Summary</TabsTrigger>
-              <TabsTrigger value="overview">Details</TabsTrigger>
+              <TabsTrigger ref={detailsTab} value="overview">Details</TabsTrigger>
               <TabsTrigger value="financials">Financials</TabsTrigger>
               <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
+              <TabsTrigger value="strategies">Strategies</TabsTrigger>
               <TabsTrigger value="scores">Scores</TabsTrigger>
               <TabsTrigger value="risk">Risk</TabsTrigger>
             </TabsList>
 
             <TabsContent value="summary" className="mt-4">
+              <EvidenceSummary propertyId={id} onReview={(section, field) => {
+                setTab(section === "properties" ? "overview" : "financials");
+                setRequest({ section, field, sequence: ++navigationSequence.current });
+              }} />
               <PropertySummaryDashboard propertyId={id} />
             </TabsContent>
 
@@ -172,6 +187,7 @@ function PropertyDetailsPage() {
                 <Row label="Unit condition" value={displayText(property.unit_condition)} />
               </Block>
 
+              <div id="property-inputs" tabIndex={-1} className="xl:col-span-2"><SourcesAndAssumptions propertyId={id} section="properties" record={property} /></div>
               <Block title="Price & rent inputs">
                 <Row label="Asking price" value={displayMoney(property.asking_price)} />
                 <Row
@@ -202,34 +218,37 @@ function PropertyDetailsPage() {
             </TabsContent>
 
             <TabsContent value="financials" className="mt-4 space-y-6">
-              <AcquisitionCostsPanel propertyId={id} />
-              <OperatingExpensesPanel propertyId={id} />
-              <FinancingPanel propertyId={id} />
+              <p className="text-sm">Save acquisition costs, financing and expenses independently. For M3 loan fees, save financing first, then return to the acquisition estimator to review and apply its suggestions.</p>
+              <section id="inputs-acquisition" tabIndex={-1} aria-label="Acquisition costs"><AcquisitionCostsPanel propertyId={id} /></section>
+              <section id="inputs-financing" tabIndex={-1} aria-label="Financing"><FinancingPanel propertyId={id} /></section>
+              <section id="inputs-expenses" tabIndex={-1} aria-label="Operating expenses"><OperatingExpensesPanel propertyId={id} /></section>
               <p className="text-sm text-muted-foreground">Review net operating income, cash-on-cash return and other calculated metrics in the Summary and Scenarios tabs.</p>
             </TabsContent>
 
             <TabsContent value="scenarios" className="mt-4">
+              <p className="mb-3 text-sm">Scenarios vary rental sensitivity assumptions. Strategies are independent Keep, Flip and Hybrid investment plans with their own horizons and targets.</p>
               <ScenariosPanel propertyId={id} />
             </TabsContent>
 
+            <TabsContent value="strategies" className="mt-4">
+              <InvestmentStrategies propertyId={id} onReview={reviewInput} />
+            </TabsContent>
+
             <TabsContent value="scores" className="mt-4">
+              <p className="mb-3 text-sm">Review supporting inputs in <Button variant="link" className="px-0" onClick={() => detailsTab.current?.click()}>Sources &amp; assumptions</Button>. Recorded sources do not change the existing score rules.</p>
               <ScoresPanel propertyId={id} />
             </TabsContent>
 
             <TabsContent value="risk" className="mt-4">
+              <p className="mb-3 text-sm">Review supporting inputs in <Button variant="link" className="px-0" onClick={() => detailsTab.current?.click()}>Sources &amp; assumptions</Button>. Evidence reminders are separate from these risk checks.</p>
               <RiskTab propertyId={id} />
             </TabsContent>
           </Tabs>
+          </SourceNavigationProvider>
+          </SavedDraftDisclosure>
         </>
       ) : null}
 
-      <DeletePropertyDialog
-        open={confirmDelete}
-        propertyName={property?.project_name ?? ""}
-        busy={remove.isPending}
-        onOpenChange={setConfirmDelete}
-        onConfirm={() => remove.mutate()}
-      />
     </AppShell>
   );
 }
@@ -249,13 +268,14 @@ function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-4 border-b border-border pb-2 last:border-0">
       <span className="text-muted-foreground">{label}</span>
-      <span className="text-right font-medium text-foreground break-words">{value}</span>
+      <span className="min-w-0 text-right font-medium text-foreground break-words">{value}</span>
     </div>
   );
 }
 
 function RiskTab({ propertyId }: { propertyId: string }) {
-  const { redFlags, isLoading, isError } = usePropertyAnalysis(propertyId);
+  const { redFlags, isLoading, isError, availability } = usePropertyAnalysis(propertyId);
   if (isError) return <p role="alert" className="text-sm text-destructive">Analysis inputs could not be loaded. Current risk checks are unavailable. Please retry.</p>;
+  if (!availability.current && !isLoading) return <p role="status">Current risk assessment unavailable. {availability.reason}</p>;
   return <RedFlagsPanel report={redFlags} isLoading={isLoading} />;
 }

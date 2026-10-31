@@ -9,9 +9,10 @@ import { ScoresPanel } from "@/components/property/ScoresPanel";
 
 // Real TanStack Query cache, hook and engines; only the external DB client is stubbed.
 vi.mock("@/integrations/supabase/external-client", () => ({ supabase: {} }));
+vi.mock("@/hooks/use-auth", () => ({ useAuth: () => ({ user: { id: "test-owner" }, loading: false }) }));
 const id = "independent-audit";
 let client: QueryClient;
-let rows: Record<string, any>;
+let rows: Record<string, Record<string, unknown>>;
 let result: ReturnType<typeof usePropertyAnalysis>;
 function Probe() { result = usePropertyAnalysis(id); return null; }
 function render(component = Probe) {
@@ -20,7 +21,7 @@ function render(component = Probe) {
 beforeEach(() => {
   client = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: Infinity, gcTime: Infinity } } });
   rows = {
-    properties: { expected_monthly_rent: 6000, rent_verification_status: "verified", bank_valuation: 500000, target_purchase_price: 500000 },
+    properties: { user_id: "test-owner", expected_monthly_rent: 6000, rent_verification_status: "verified", bank_valuation: 500000, target_purchase_price: 500000 },
     "acquisition-costs": { ...Object.fromEntries(ACQUISITION_COST_FIELDS.map((k) => [k, 0])), purchase_price: 500000 },
     "operating-expenses": Object.fromEntries(OPERATING_EXPENSE_FIELDS.map((k) => [k, 0])),
     financing: { loan_to_value_percent: 80, loan_amount: null, annual_interest_rate_percent: 4, loan_tenure_years: 35,

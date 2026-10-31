@@ -1,6 +1,8 @@
+import { withoutEvidenceMetadata } from "@/lib/property/investment-evidence";
 // Query loading/error gating stays on the authenticated path.
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
+import { useFinancialAvailability } from "@/hooks/use-financial-confirmation";
 import { analyzeProperty } from "@/lib/analysis/analyze-property";
 import { acquisitionKeys, getAcquisitionCosts } from "@/lib/property/acquisition-api";
 import { financingKeys, getFinancing } from "@/lib/property/financing-api";
@@ -27,22 +29,45 @@ export function usePropertyAnalysis(propertyId: string) {
   const isLoading = property.isLoading || acq.isLoading || opex.isLoading || fin.isLoading;
   const isError = property.isError || acq.isError || opex.isError || fin.isError;
   const error = property.error ?? acq.error ?? opex.error ?? fin.error ?? null;
+  const availability = useFinancialAvailability(
+    propertyId,
+    [property, acq, opex, fin],
+    property.data?.user_id,
+  );
 
+  const unavailable = !availability.current;
   const analysis = useMemo(() => {
-    const unavailable = isError || isLoading;
     return analyzeProperty({
-      property: unavailable ? null : (property.data ?? null),
-      acquisition: unavailable ? null : (acq.data ?? null),
-      operating: unavailable ? null : (opex.data ?? null),
-      financing: unavailable ? null : (fin.data ?? null),
+      property: unavailable ? null : legacyProperty(property.data),
+      acquisition: unavailable ? null : withoutEvidenceMetadata(acq.data),
+      operating: unavailable ? null : withoutEvidenceMetadata(opex.data),
+      financing: unavailable ? null : withoutEvidenceMetadata(fin.data),
     });
-  }, [property.data, acq.data, opex.data, fin.data, isError, isLoading]);
+  }, [property.data, acq.data, opex.data, fin.data, unavailable]);
 
   return {
     ...analysis,
     isLoading,
     isError,
     error,
-    loadState: isError ? ("error" as const) : isLoading ? ("loading" as const) : ("ready" as const),
+    availability,
+    savedReads: { property, acquisition: acq, expenses: opex, financing: fin },
+    loadState: isError
+      ? ("error" as const)
+      : isLoading
+        ? ("loading" as const)
+        : !availability.current
+          ? ("unavailable" as const)
+          : ("ready" as const),
   };
+}
+
+// Strategy plans never enter the frozen financial/scoring engines.
+function legacyProperty(
+  row: import("@/lib/property/property-fields").PropertyRecord | null | undefined,
+) {
+  const clean = withoutEvidenceMetadata(row);
+  if (!clean) return null;
+  const { investment_strategy_assumptions: _strategy, ...values } = clean;
+  return values;
 }

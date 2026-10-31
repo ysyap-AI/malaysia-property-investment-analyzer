@@ -1,190 +1,84 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  createProperty,
-  updateProperty,
-  PropertySaveConflictError,
-} from "@/lib/property/property-api";
-import {
-  emptyPropertyForm,
-  propertySchema,
-  type PropertyPatch,
-} from "@/lib/property/property-fields";
-import { PropertyValidationError } from "@/lib/property/property-save-validation";
+import { beforeEach, expect, it, vi } from "vitest";
+import { createProperty, updateProperty } from "@/lib/property/property-api";
+import { makePropertyAttempt } from "@/lib/property/property-edit";
+import { emptyPropertyForm, propertySchema, type PropertyPatch, type PropertyRecord } from "@/lib/property/property-fields";
 
-const mock = vi.hoisted(() => ({
-  from: vi.fn(),
-  payload: undefined as Record<string, unknown> | undefined,
-  filters: [] as [string, unknown][],
-  row: null as Record<string, unknown> | null,
-  error: null as { message: string } | null,
+// Primary runtime-boundary cases ported from timestamp UPDATE to M4's RPC.
+const mock = vi.hoisted(() => ({ from: vi.fn(), rpc: vi.fn(), getUser: vi.fn(), insert: vi.fn(), row: {} as PropertyRecord }));
+vi.mock("@/integrations/supabase/external-client", () => ({
+  supabase: { from: mock.from, rpc: mock.rpc, auth: { getUser: mock.getUser } },
 }));
-vi.mock("@/integrations/supabase/external-client", () => ({ supabase: { from: mock.from } }));
-const version = "2026-10-22T10:00:00.000001+00:00";
-const later = "2026-10-22T10:01:00.000002+00:00";
-const base = () => propertySchema.parse({ ...emptyPropertyForm, project_name: "Sample" });
-
+const values = () => propertySchema.parse({ ...emptyPropertyForm, project_name: "Sample" });
 beforeEach(() => {
-  mock.payload = undefined;
-  mock.filters = [];
-  mock.row = { ...base(), id: "p1", updated_at: version };
-  mock.error = null;
-  mock.from.mockReset();
+  vi.clearAllMocks();
+  mock.row = { ...values(), id: "b0510000-0000-4000-8000-000000000004", user_id: "owner1", revision: 1,
+    created_at: "2026-10-31T00:00:00Z", updated_at: "2026-10-31T00:00:00Z" } as PropertyRecord;
+  mock.getUser.mockResolvedValue({ data: { user: { id: "owner1" } }, error: null });
   mock.from.mockImplementation(() => {
-    const query = {
-      insert(payload: Record<string, unknown>) {
-        mock.payload = payload;
-        return query;
-      },
-      update(payload: Record<string, unknown>) {
-        mock.payload = payload;
-        return query;
-      },
-      eq(key: string, value: unknown) {
-        mock.filters.push([key, value]);
-        return query;
-      },
-      select() {
-        return query;
-      },
-      async single() {
-        return { data: { ...mock.row, ...mock.payload }, error: mock.error };
-      },
-      async maybeSingle() {
-        const current = mock.row;
-        const matches = current && mock.filters.every(([key, value]) => current[key] === value);
-        if (!matches || mock.error) return { data: null, error: mock.error };
-        mock.row = { ...mock.row, ...mock.payload, updated_at: later };
-        return { data: mock.row, error: null };
-      },
-    };
-    return query;
+    const q = { insert: (p: object) => { mock.insert(p); return q; }, select: () => q,
+      single: async () => ({ data: { ...mock.row, ...mock.insert.mock.lastCall?.[0] }, error: null }) };
+    return q;
+  });
+  mock.rpc.mockImplementation(async (_name, args) => {
+    if (args.p_revision !== mock.row.revision) return { data: null, error: { code: "PT409" } };
+    mock.row = { ...mock.row, ...args.p_values, revision: args.p_revision + 1 };
+    return { data: { record: mock.row, revision: mock.row.revision }, error: null };
   });
 });
-
-describe("application property API runtime boundary (mock Supabase only)", () => {
-  it("validates creation, stamps the existing owner argument, and preserves null", async () => {
-    const value = { ...base(), full_address: "😀".repeat(500), country: null };
-    const saved = await createProperty(value, "owner1");
-    expect(mock.from).toHaveBeenCalledWith("properties");
-    expect(mock.payload).toEqual({ ...value, user_id: "owner1" });
-    expect(saved.country).toBeNull();
-  });
-  it.each([
-    { project_name: "x".repeat(201) },
-    { full_address: "x".repeat(501) },
-    { city: "x".repeat(101) },
-    { district: "x".repeat(101) },
-    { state: "x".repeat(101) },
-    { postcode: "1".repeat(21) },
-    { country: "x".repeat(101) },
-    { full_address: "\ud800" },
-    { project_name: "\u0000" },
-    { asking_price: -1 },
-  ])("rejects invalid creation and update before any request: %j", async (patch) => {
-    await expect(createProperty({ ...base(), ...patch }, "owner1")).rejects.toBeInstanceOf(
-      PropertyValidationError,
-    );
-    await expect(updateProperty("p1", patch, version)).rejects.toBeInstanceOf(
-      PropertyValidationError,
-    );
-    expect(mock.from).not.toHaveBeenCalled();
-  });
-  it("sends one changed field and the original timestamp as a database predicate", async () => {
-    await updateProperty("p1", { city: "Ipoh" }, version);
-    expect(mock.payload).toEqual({ city: "Ipoh" });
-    expect(mock.filters).toEqual([
-      ["id", "p1"],
-      ["updated_at", version],
-    ]);
-  });
-  it("an unrelated price edit preserves current legacy text, null and empty", async () => {
-    mock.row = {
-      ...mock.row,
-      full_address: "x".repeat(501),
-      state: "Legacy",
-      postcode: "OLD",
-      city: "  bytes  ",
-      district: "",
-      country: null,
-    };
-    const original = { ...mock.row };
-    const saved = await updateProperty("p1", { target_purchase_price: 600000 }, version);
-    expect(mock.payload).toEqual({ target_purchase_price: 600000 });
-    for (const field of ["full_address", "state", "postcode", "city", "district", "country"])
-      expect(saved[field as keyof typeof saved]).toBe(original[field]);
-  });
-  it("allows correction from oversized to compliant and an intentional null clear", async () => {
-    mock.row!["full_address"] = "x".repeat(501);
-    const saved = await updateProperty("p1", { full_address: "Fixed", country: null }, version);
-    expect(saved).toMatchObject({ full_address: "Fixed", country: null });
-    expect(mock.payload).toEqual({ full_address: "Fixed", country: null });
-  });
-  it.each([undefined, "", "not a timestamp"])(
-    "rejects a missing/invalid edit baseline %j without sending",
-    async (baseline) => {
-      await expect(
-        updateProperty("p1", { city: "Ipoh" }, baseline as string),
-      ).rejects.toBeInstanceOf(PropertyValidationError);
-      expect(mock.from).not.toHaveBeenCalled();
-    },
-  );
-  it("rejects an empty patch, undefined, unknown ownership and invalid enums without sending", async () => {
-    for (const patch of [
-      {},
-      { city: undefined },
-      { user_id: "other" },
-      { property_status: "private status" },
-    ]) {
-      await expect(
-        updateProperty("p1", patch as unknown as PropertyPatch, version),
-      ).rejects.toBeInstanceOf(PropertyValidationError);
-    }
-    expect(mock.from).not.toHaveBeenCalled();
-  });
-  it("two editors with distinct timestamp versions: stale save fails without retry", async () => {
-    await updateProperty("p1", { city: "Ipoh" }, version);
-    mock.filters = [];
-    await expect(updateProperty("p1", { city: "Old draft" }, version)).rejects.toMatchObject({
-      code: "PROPERTY_SAVE_CONFLICT",
-    });
-    expect(mock.row!["city"]).toBe("Ipoh");
-    expect(mock.from).toHaveBeenCalledTimes(2);
-  });
-  it("a patch never reintroduces omitted fields changed by another editor", async () => {
-    mock.row!["city"] = "Other editor's city";
-    await updateProperty("p1", { asking_price: 500000 }, version);
-    expect(mock.row!["city"]).toBe("Other editor's city");
-  });
-  it("zero visible/matching rows is a generic conflict without an existence claim", async () => {
-    mock.row = null;
-    await expect(updateProperty("p1", { city: "Ipoh" }, version)).rejects.toBeInstanceOf(
-      PropertySaveConflictError,
-    );
-  });
-  it("surfaces a Supabase failure without a fallback write", async () => {
-    mock.error = { message: "Request unavailable" };
-    await expect(updateProperty("p1", { city: "Ipoh" }, version)).rejects.toThrow(
-      "Request unavailable",
-    );
-    expect(mock.from).toHaveBeenCalledOnce();
-  });
-  it("documents the timestamp collision limitation instead of claiming revision protection", async () => {
-    // Model another writer changing a field while reusing the same timestamp.
-    // The current application predicate cannot detect this; future DB revision required.
-    mock.row!["city"] = "Concurrent value";
-    await updateProperty("p1", { city: "Draft value" }, version);
-    expect(mock.row!["city"]).toBe("Draft value");
-  });
-  it.todo(
-    "DATABASE QUALIFICATION: real PostgREST conditional UPDATE under concurrent row locks, RLS and deletion/transfer",
-  );
-  it.todo(
-    "DATABASE DEPENDENCY: database-owned monotonic revision, stale-token collisions, direct/old-client write coverage",
-  );
-  it.todo(
-    "DATABASE ENFORCEMENT: exact final-row unchanged-byte grandfathering, trigger ordering and direct authenticated REST writes",
-  );
-  it.todo(
-    "DATABASE QUALIFICATION: UTF8 scalar differential boundaries, clean install, upgrade, rollback and owner-supplied inventory",
-  );
+const edit = (patch: unknown, original = mock.row) => updateProperty(
+  makePropertyAttempt("owner1", original, patch as PropertyPatch), () => true,
+);
+it("preserves the primary Unicode scalar boundary, owner stamp and null creation", async () => {
+  const input = { ...values(), full_address: "😀".repeat(500), country: null };
+  const saved = await createProperty({ owner: "owner1", values: input, draft: { ...emptyPropertyForm, project_name: "Sample" } }, () => true);
+  expect(mock.insert).toHaveBeenCalledWith({ ...input, user_id: "owner1" });
+  expect(saved.country).toBeNull();
+});
+it.each([
+  { project_name: "x".repeat(201) }, { full_address: "x".repeat(501) },
+  { city: "x".repeat(101) }, { district: "x".repeat(101) }, { state: "x".repeat(101) },
+  { postcode: "1".repeat(21) }, { country: "x".repeat(101) },
+  { full_address: "\ud800" }, { project_name: "\u0000" }, { asking_price: -1 },
+])("rejects primary invalid create/update case before dispatch: %j", async (patch) => {
+  await expect(createProperty({ owner: "owner1", values: { ...values(), ...patch }, draft: emptyPropertyForm }, () => true)).rejects.toMatchObject({ outcome: "not-sent" });
+  await expect(edit(patch)).rejects.toMatchObject({ outcome: "not-sent" });
+  expect(mock.from).not.toHaveBeenCalled();
+  expect(mock.rpc).not.toHaveBeenCalled();
+});
+it("sends only the changed field with the database revision, preserving legacy bytes/null/empty", async () => {
+  mock.row = { ...mock.row, full_address: "x".repeat(501), state: "Legacy", postcode: "OLD", city: "  bytes  ", district: "", country: null };
+  const original = { ...mock.row };
+  const saved = await edit({ target_purchase_price: 600000 });
+  expect(mock.rpc).toHaveBeenCalledWith("m4_write_property", { p_id: original.id, p_revision: 1, p_table: "properties", p_values: { target_purchase_price: 600000 } });
+  for (const field of ["full_address", "state", "postcode", "city", "district", "country"] as const)
+    expect(saved[field]).toBe(original[field]);
+  expect(mock.from).not.toHaveBeenCalled();
+});
+it("corrects oversized text and deliberately clears null through RPC", async () => {
+  mock.row.full_address = "x".repeat(501);
+  await expect(edit({ full_address: "Fixed", country: null })).resolves.toMatchObject({ full_address: "Fixed", country: null });
+});
+it.each([undefined, 0, -1, 1.5, Number.MAX_SAFE_INTEGER + 1])("rejects invalid database revision %j", async (revision) => {
+  await expect(edit({ city: "Ipoh" }, { ...mock.row, revision } as PropertyRecord)).rejects.toMatchObject({ outcome: "not-sent" });
+  expect(mock.rpc).not.toHaveBeenCalled();
+});
+it.each([{}, { city: undefined }, { user_id: "other" }, { property_status: "private status" }])("rejects invalid partial patch %j", async (patch) => {
+  await expect(edit(patch)).rejects.toMatchObject({ outcome: "not-sent" });
+  expect(mock.rpc).not.toHaveBeenCalled();
+});
+it("rejects a stale editor even when the timestamp is identical; never retries", async () => {
+  const original = { ...mock.row };
+  await edit({ city: "Ipoh" }, original);
+  expect(mock.row.updated_at).toBe(original.updated_at);
+  await expect(edit({ city: "Old draft" }, original)).rejects.toMatchObject({ outcome: "conflict" });
+  expect(mock.row.city).toBe("Ipoh");
+  expect(mock.rpc).toHaveBeenCalledTimes(2);
+});
+it("does not overwrite omitted fields and classifies an unknown transport failure as uncertain", async () => {
+  mock.row.city = "Other editor's city";
+  await edit({ asking_price: 500000 });
+  expect(mock.row.city).toBe("Other editor's city");
+  mock.rpc.mockRejectedValueOnce(Error("Request unavailable"));
+  await expect(edit({ city: "Draft" })).rejects.toMatchObject({ outcome: "uncertain" });
+  expect(mock.rpc).toHaveBeenCalledTimes(2);
 });

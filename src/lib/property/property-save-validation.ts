@@ -1,3 +1,4 @@
+import { parseEvidence } from "./investment-evidence";
 import { z } from "zod";
 import { MALAYSIAN_STATES, propertySchema, type PropertyPatch } from "./property-fields";
 import { PROPERTY_SAVE_POLICY, propertySaveTextSchema } from "./property-save-policy";
@@ -94,5 +95,10 @@ function parse<S extends z.ZodTypeAny>(schema: S, values: unknown): z.output<S> 
 export const validatePropertyCreate = (values: unknown) => parse(createSchema, values);
 export function validatePropertyUpdate(values: unknown): PropertyPatch {
   // parse rejects every explicit undefined; Zod's partial output type still includes it.
+  if (values && typeof values === "object" && Object.hasOwn(values, "evidence_metadata")) {
+    const { evidence_metadata, ...rest } = values as Record<string, unknown>;
+    if (evidence_metadata === undefined) throw new PropertyValidationError([{ field: "payload", code: "UNDEFINED_VALUE", message: "Evidence must be explicit." }]);
+    return { ...parse(updateSchema, rest), evidence_metadata: parseEvidence("properties", evidence_metadata) } as PropertyPatch;
+  }
   return parse(updateSchema, values) as PropertyPatch;
 }

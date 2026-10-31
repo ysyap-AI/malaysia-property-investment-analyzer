@@ -9,7 +9,9 @@ import { createPropertyFixture, PROPERTY_FIXTURE_IDS } from "./fixtures/phase1-p
 // Only the query boundary is mocked. The production hook and all engines run.
 const query = vi.hoisted(() => ({ rows: {} as Record<string, unknown> }));
 vi.mock("@/integrations/supabase/external-client", () => ({ supabase: {} }));
+vi.mock("@/hooks/use-auth", () => ({ useAuth: () => ({ user: { id: "test-owner" }, loading: false }) }));
 vi.mock("@tanstack/react-query", () => ({
+  useQueryClient: () => ({ getQueryState: () => undefined, getQueryCache: () => ({ subscribe: () => () => {} }) }),
   useQuery: ({ queryKey }: { queryKey: string[] }) => ({
     data: query.rows[queryKey[0]!], isLoading: false, isError: false, error: null,
   }),
@@ -19,7 +21,7 @@ describe("property fixture integration with the existing analysis hook", () => {
   it.each(PROPERTY_FIXTURE_IDS)("%s feeds saved financial inputs into the real analysis path", id => {
     const fixture = createPropertyFixture(id);
     query.rows = {
-      properties: fixture.property,
+      properties: { ...fixture.property, user_id: "test-owner" },
       "acquisition-costs": fixture.acquisitionCosts,
       "operating-expenses": fixture.operatingExpenses,
       financing: fixture.financing,
