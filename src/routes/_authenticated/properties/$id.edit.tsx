@@ -7,7 +7,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { PropertyForm } from "@/components/property/PropertyForm";
 import { Button } from "@/components/ui/button";
 import { getProperty, propertyKeys, updateProperty } from "@/lib/property/property-api";
-import { recordToForm, type PropertyInput } from "@/lib/property/property-fields";
+import type { PropertyPatch } from "@/lib/property/property-fields";
 
 export const Route = createFileRoute("/_authenticated/properties/$id/edit")({
   head: () => ({
@@ -38,7 +38,13 @@ function EditPropertyPage() {
   });
 
   const save = useMutation({
-    mutationFn: (values: PropertyInput) => updateProperty(id, values),
+    mutationFn: ({
+      values,
+      expectedUpdatedAt,
+    }: {
+      values: PropertyPatch;
+      expectedUpdatedAt: string;
+    }) => updateProperty(id, values, expectedUpdatedAt),
     onSuccess: async () => {
       toast.success("Changes saved");
       await queryClient.invalidateQueries({ queryKey: propertyKeys.all });
@@ -69,10 +75,13 @@ function EditPropertyPage() {
       ) : null}
       {data ? (
         <PropertyForm
-          initialValues={recordToForm(data)}
+          key={id}
+          originalProperty={data}
           submitLabel="Save changes"
           busy={save.isPending}
-          onSubmit={(values) => save.mutate(values)}
+          onSubmit={(values, original) =>
+            save.mutate({ values, expectedUpdatedAt: original.updated_at })
+          }
           onCancel={() => void navigate({ to: "/properties/$id", params: { id } })}
         />
       ) : null}

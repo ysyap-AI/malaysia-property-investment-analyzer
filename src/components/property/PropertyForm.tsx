@@ -23,38 +23,74 @@ import {
   TITLE_TYPES,
   UNIT_CONDITIONS,
   emptyPropertyForm,
+  recordToForm,
+  propertyFormPatch,
   propertySchema,
+  propertyUpdateFormSchema,
   type PropertyFormValues,
   type PropertyInput,
+  type PropertyPatch,
+  type PropertyRecord,
 } from "@/lib/property/property-fields";
+import {
+  isPropertyTextField,
+  measurePropertyText,
+  PROPERTY_SCALAR_LIMITS,
+} from "@/lib/property/property-save-policy";
 
 const BLANK_OPTION = "__blank__";
 
 type Errors = Partial<Record<keyof PropertyFormValues, string>>;
 
-export function PropertyForm({
-  initialValues,
-  submitLabel,
-  busy,
-  onSubmit,
-  onCancel,
-}: {
-  initialValues?: PropertyFormValues;
+type PropertyFormProps = {
   submitLabel: string;
   busy?: boolean;
-  onSubmit: (values: PropertyInput) => void;
   onCancel?: () => void;
-}) {
-  const [values, setValues] = useState<PropertyFormValues>(initialValues ?? emptyPropertyForm);
+} & (
+  | {
+      originalProperty: PropertyRecord;
+      initialValues?: never;
+      onSubmit: (values: PropertyPatch, original: PropertyRecord) => void;
+    }
+  | {
+      originalProperty?: never;
+      initialValues?: PropertyFormValues;
+      onSubmit: (values: PropertyInput) => void;
+    }
+);
+
+export function PropertyForm(props: PropertyFormProps) {
+  const { submitLabel, busy, onCancel } = props;
+  // Background query refreshes must never replace the baseline of an open draft.
+  const [original] = useState(() =>
+    props.originalProperty ? Object.freeze({ ...props.originalProperty }) : undefined,
+  );
+  const [initial] = useState<PropertyFormValues>(() =>
+    original ? recordToForm(original) : { ...(props.initialValues ?? emptyPropertyForm) },
+  );
+  const [values, setValues] = useState<PropertyFormValues>(initial);
+  const [modified, setModified] = useState<ReadonlySet<keyof PropertyFormValues>>(() => new Set());
   const [errors, setErrors] = useState<Errors>({});
 
   function set<K extends keyof PropertyFormValues>(key: K, value: PropertyFormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
+    setModified((prev) => new Set([...prev, key]));
+    const result = propertySchema.shape[key].safeParse(value);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (result.success || (original && Object.is(value, initial[key]))) delete next[key];
+      else next[key] = result.error.issues[0]?.message ?? "Invalid value";
+      return next;
+    });
   }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const result = propertySchema.safeParse(values);
+    if (busy) return;
+    const patch = propertyFormPatch(values, initial, modified);
+    const result = props.originalProperty
+      ? propertyUpdateFormSchema.safeParse(patch)
+      : propertySchema.safeParse(values);
     if (!result.success) {
       const next: Errors = {};
       for (const issue of result.error.issues) {
@@ -65,10 +101,52 @@ export function PropertyForm({
       return;
     }
     setErrors({});
-    onSubmit(result.data);
+    if (props.originalProperty && original) {
+      if (Object.keys(patch).length > 0) props.onSubmit(result.data, original);
+    } else if (!props.originalProperty) {
+      // Parse separately to keep creation's required-field type distinct from PATCH.
+      props.onSubmit(propertySchema.parse(values));
+    }
   }
 
   const text = (key: keyof PropertyFormValues) => String(values[key] ?? "");
+
+  const feedback = (key: keyof PropertyFormValues, hint?: string) => {
+    const raw = text(key);
+    const preserved = original && !Object.hasOwn(propertyFormPatch(values, initial, modified), key);
+    const measured = measurePropertyText(preserved ? raw : raw.trim());
+    return (
+      <>
+        {isPropertyTextField(key) ? (
+          <p id={`${key}-counter`} className="text-xs text-muted-foreground" aria-live="polite">
+            {measured.error === "INVALID_UNICODE"
+              ? "Invalid Unicode"
+              : `${measured.count} / ${PROPERTY_SCALAR_LIMITS[key]} Unicode characters`}
+            {preserved
+              ? ". Existing value is preserved until changed."
+              : ". Count after trimming; blank optional text saves as Missing / Not Verified."}
+          </p>
+        ) : null}
+        {errors[key] ? (
+          <p id={`${key}-error`} role="alert" className="text-xs text-destructive">
+            {errors[key]}
+          </p>
+        ) : hint ? (
+          <p id={`${key}-hint`} className="text-xs text-muted-foreground">
+            {hint}
+          </p>
+        ) : null}
+      </>
+    );
+  };
+
+  const describedBy = (key: keyof PropertyFormValues, hint?: string) =>
+    [
+      isPropertyTextField(key) ? `${key}-counter` : null,
+      errors[key] ? `${key}-error` : hint ? `${key}-hint` : null,
+    ]
+      .filter(Boolean)
+      .join(" ") || undefined;
 
   const field = (
     key: keyof PropertyFormValues,
@@ -80,15 +158,13 @@ export function PropertyForm({
       <Input
         id={key}
         value={text(key)}
+        aria-invalid={Boolean(errors[key])}
+        aria-describedby={describedBy(key, opts.hint)}
         placeholder={opts.placeholder ?? "Leave blank if unknown"}
         {...(opts.inputMode ? { inputMode: opts.inputMode } : {})}
         onChange={(e) => set(key, e.target.value as PropertyFormValues[typeof key])}
       />
-      {errors[key] ? (
-        <p className="text-xs text-destructive">{errors[key]}</p>
-      ) : opts.hint ? (
-        <p className="text-xs text-muted-foreground">{opts.hint}</p>
-      ) : null}
+      {feedback(key, opts.hint)}
     </div>
   );
 
@@ -100,20 +176,33 @@ export function PropertyForm({
   ) => {
     const allowBlank = opts.allowBlank ?? true;
     const current = text(key);
+    // An old stored value can equal our UI sentinel; keep its display distinct.
+    const blankOption = current === BLANK_OPTION ? `${BLANK_OPTION}_option` : BLANK_OPTION;
     return (
       <div className="space-y-2">
         <Label htmlFor={key}>{label}</Label>
         <Select
-          value={current === "" ? BLANK_OPTION : current}
+          value={current === "" ? blankOption : current}
           onValueChange={(v) =>
-            set(key, (v === BLANK_OPTION ? "" : v) as PropertyFormValues[typeof key])
+            set(key, (v === blankOption ? "" : v) as PropertyFormValues[typeof key])
           }
         >
-          <SelectTrigger id={key}>
+          <SelectTrigger
+            id={key}
+            aria-invalid={Boolean(errors[key])}
+            aria-describedby={describedBy(key, opts.hint)}
+          >
             <SelectValue placeholder="Not known yet" />
           </SelectTrigger>
           <SelectContent>
-            {allowBlank ? <SelectItem value={BLANK_OPTION}>Missing / Not Verified</SelectItem> : null}
+            {allowBlank ? (
+              <SelectItem value={blankOption}>Missing / Not Verified</SelectItem>
+            ) : null}
+            {current && !options.some((o) => o.value === current) ? (
+              <SelectItem value={current} disabled>
+                {current} (existing value; choose a listed replacement)
+              </SelectItem>
+            ) : null}
             {options.map((o) => (
               <SelectItem key={o.value} value={o.value}>
                 {o.label}
@@ -121,11 +210,7 @@ export function PropertyForm({
             ))}
           </SelectContent>
         </Select>
-        {errors[key] ? (
-          <p className="text-xs text-destructive">{errors[key]}</p>
-        ) : opts.hint ? (
-          <p className="text-xs text-muted-foreground">{opts.hint}</p>
-        ) : null}
+        {feedback(key, opts.hint)}
       </div>
     );
   };
@@ -200,14 +285,25 @@ export function PropertyForm({
             id="notes"
             rows={4}
             value={text("notes")}
+            aria-invalid={Boolean(errors.notes)}
+            aria-describedby={describedBy("notes")}
             onChange={(e) => set("notes", e.target.value)}
             placeholder="Anything you want to remember about this property."
           />
+          {feedback("notes")}
         </div>
       </Section>
 
       <div className="flex flex-wrap gap-3">
-        <Button type="submit" disabled={busy}>
+        <Button
+          type="submit"
+          disabled={
+            busy ||
+            Boolean(
+              original && Object.keys(propertyFormPatch(values, initial, modified)).length === 0,
+            )
+          }
+        >
           {busy ? "Saving…" : submitLabel}
         </Button>
         {onCancel ? (
